@@ -3,6 +3,9 @@
 
 #include "Constante.h"
 
+/**
+  Nombre implémente le Design Pattern Template/Methode
+  **/
 namespace Calculatrice{
     class Nombre: public Constante {
         private:
@@ -23,6 +26,16 @@ namespace Calculatrice{
             //Méthodes virtuelles pures hérité de la class "Expression"
             void EVAL() =0;
 
+            //Implémentation du Template/Methode
+            virtual Nombre& addition(const Nombre& nb) =0;
+            virtual Nombre& soustraction(const Nombre& nb) =0;
+            virtual Nombre& multiplication(const Nombre& nb) =0;
+            virtual Nombre& division(const Nombre& nb) =0;
+
+            Nombre& operator+(const Nombre& nb){ return this->addition(nb); }
+            Nombre& operator-(const Nombre& nb){ return this->soustraction(nb); }
+            Nombre& operator*(const Nombre& nb){ return this->multiplication(nb); }
+            Nombre& operator/(const Nombre& nb){ return this->division(nb); }
     };
 
 }

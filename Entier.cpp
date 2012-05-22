@@ -14,5 +14,28 @@ void Calculatrice::Entier::INV(){}
 void Calculatrice::Entier::SQRT(){}
 void Calculatrice::Entier::POW(){}
 
+
+Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb){
+    std::cout << typeid(nb).name();
+
+    return *this;
+}
+
+Calculatrice::Nombre& Calculatrice::Entier::soustraction(const Nombre& nb){
+
+    return *this;
+}
+Calculatrice::Nombre& Calculatrice::Entier::multiplication(const Nombre& nb){
+
+    return *this;
+}
+Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb){
+
+    return *this;
+}
+
 //Implementation des méthodes vituelles pures de la class "Expression"
 void Calculatrice::Entier::EVAL(){}
+
+//Constructeurs
+

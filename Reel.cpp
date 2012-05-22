@@ -13,5 +13,25 @@ void Calculatrice::Reel::INV(){}
 void Calculatrice::Reel::SQRT(){}
 void Calculatrice::Reel::POW(){}
 
+
+Calculatrice::Nombre& Calculatrice::Reel::addition(const Nombre& nb){
+    std::cout << typeid(nb).name();
+
+    return *this;
+}
+
+Calculatrice::Nombre& Calculatrice::Reel::soustraction(const Nombre& nb){
+
+    return *this;
+}
+Calculatrice::Nombre& Calculatrice::Reel::multiplication(const Nombre& nb){
+
+    return *this;
+}
+Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb){
+
+    return *this;
+}
+
 //Implementation des méthodes vituelles pures de la class "Expression"
 void Calculatrice::Reel::EVAL(){}
