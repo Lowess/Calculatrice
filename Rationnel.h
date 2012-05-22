@@ -1,6 +1,8 @@
 #ifndef RATIONNEL_H
 #define RATIONNEL_H
 
+#include <iostream>
+
 #include "Nombre.h"
 #include "Entier.h"
 
@@ -28,8 +30,14 @@ namespace Calculatrice{
             Nombre& multiplication(const Nombre& nb);
             Nombre& division(const Nombre& nb);
 
+            QString toString() const;
+
             //Implementation des méthodes virtuelles pures de la class "Expression"
             void EVAL();
+
+            //Constructeur
+            Rationnel(const Entier& x, const Entier& y):_n(x),_d(y){}
+            Rationnel(unsigned int x, unsigned int y):_n(Entier(x)),_d(Entier(y)){}
 
 
 

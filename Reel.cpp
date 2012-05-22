@@ -15,7 +15,6 @@ void Calculatrice::Reel::POW(){}
 
 
 Calculatrice::Nombre& Calculatrice::Reel::addition(const Nombre& nb){
-    std::cout << typeid(nb).name();
 
     return *this;
 }
@@ -31,6 +30,12 @@ Calculatrice::Nombre& Calculatrice::Reel::multiplication(const Nombre& nb){
 Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb){
 
     return *this;
+}
+
+QString Calculatrice::Reel::toString() const{
+    QString str;
+    str.setNum(_x);
+    return str;
 }
 
 //Implementation des méthodes vituelles pures de la class "Expression"

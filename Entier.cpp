@@ -34,6 +34,12 @@ Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb){
     return *this;
 }
 
+QString Calculatrice::Entier::toString() const{
+    QString str;
+    str.setNum(_x);
+    return str;
+}
+
 //Implementation des méthodes vituelles pures de la class "Expression"
 void Calculatrice::Entier::EVAL(){}
 

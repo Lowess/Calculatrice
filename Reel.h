@@ -1,6 +1,8 @@
 #ifndef REEL_H
 #define REEL_H
 
+#include <iostream>
+
 #include "Nombre.h"
 
 namespace Calculatrice{
@@ -26,6 +28,7 @@ namespace Calculatrice{
             Nombre& multiplication(const Nombre& nb);
             Nombre& division(const Nombre& nb);
 
+            QString toString() const;
 
             //Implementation des méthodes virtuelles pures de la class "Expression"
             void EVAL();

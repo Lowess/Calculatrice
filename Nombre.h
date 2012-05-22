@@ -1,6 +1,9 @@
 #ifndef NOMBRE_H
 #define NOMBRE_H
 
+#include <QTextStream>
+#include <QString>
+
 #include "Constante.h"
 
 /**
@@ -23,6 +26,9 @@ namespace Calculatrice{
             virtual void INV() =0;
             virtual void SQRT() =0;
             virtual void POW() =0;
+
+            virtual QString toString() const =0;
+
             //Méthodes virtuelles pures hérité de la class "Expression"
             void EVAL() =0;
 
@@ -36,6 +42,11 @@ namespace Calculatrice{
             Nombre& operator-(const Nombre& nb){ return this->soustraction(nb); }
             Nombre& operator*(const Nombre& nb){ return this->multiplication(nb); }
             Nombre& operator/(const Nombre& nb){ return this->division(nb); }
+
+            void afficher() const{
+                QTextStream cout(stdout, QIODevice::WriteOnly);
+                cout << this->toString();
+            }
     };
 
 }

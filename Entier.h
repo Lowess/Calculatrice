@@ -29,6 +29,8 @@ namespace Calculatrice{
             Nombre& multiplication(const Nombre& nb);
             Nombre& division(const Nombre& nb);
 
+            QString toString() const;
+
             //Implementation des méthodes virtuelles pures de la class "Expression"
             void EVAL();
 
@@ -36,8 +38,11 @@ namespace Calculatrice{
             void MOD();
             void FACTORIELLE();
 
+            unsigned int get_x() const{ return _x;}
+
             //Constructeurs
             Entier(unsigned int x=0):Reel(x),_x(x){}
+
     };
 }
 
