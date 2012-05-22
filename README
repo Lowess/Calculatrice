@@ -5,3 +5,25 @@ Auteurs:
 	- DAMBRINE Florian
 
 
+Lancement Git:
+	1) Cloner le répertoire en local:
+		git clone git@github.com:Lowess/Calculatrice.git
+	2) Travailler dans la branche
+		git checkout [Olivia|Florian]
+	3) Modifier et travailler sur ses fichier
+
+	4) Valider les modifications de son travail
+		git add [<filename>|<*>]
+
+	5) Réaliser le commit
+		git commit -m "Commentaire sur les modifications apportés
+
+	6) Pousser vers le serveur distant qui et DANS SA BRANCHE!!!
+		git push origin [Olivia|Florian]
+
+		--> Si erreur lié à non-fast-forward réaliser la commande suivante:
+			git pull origin [Olivia|Florian]
+
+	7) Enjoy puisque l'on travail chacun de notre coté...
+	Il faudra juste réaliser des fusions à chaque fois que l'on aura
+	avancé sur notre projet...
