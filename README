@@ -20,8 +20,8 @@ Lancement Git:
 	5) Réaliser le commit
 		git commit -m "Commentaire sur les modifications apportés"
 
-	6) Pousser vers le serveur distant qui et DANS SA BRANCHE!!!
-		git push origin [Olivia|Florian]
+	6) Pousser vers le serveur distant et DANS SA BRANCHE!!!
+		git push origin origin/[Olivia|Florian]
 
 		--> Si erreur lié à non-fast-forward réaliser la commande suivante:
 			git pull origin [Olivia|Florian]
