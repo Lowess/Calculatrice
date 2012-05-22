@@ -1,0 +1,4 @@
+#ifndef CALCULATRICE_H
+#define CALCULATRICE_H
+
+#endif // CALCULATRICE_H
