@@ -2,10 +2,15 @@
 #define REEL_H
 
 #include <iostream>
+#include <math.h>
+
+#include <QString>
+#include <QStringList>
 
 #include "Nombre.h"
 
 namespace Calculatrice{
+    class Rationnel;
     class Reel: public Nombre{
         private:
             float _x;
@@ -34,6 +39,8 @@ namespace Calculatrice{
             void EVAL();
 
             //Méthodes
+            Rationnel toRationnel() const;
+
             //Setter Getter
 
             float get_x() const{ return _x; }

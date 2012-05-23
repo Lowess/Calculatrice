@@ -39,10 +39,14 @@ namespace Calculatrice{
             virtual Nombre& multiplication(const Nombre& nb) =0;
             virtual Nombre& division(const Nombre& nb) =0;
 
+            //virtual Nombre& affectation(const Nombre& nb) =0;
+
             Nombre& operator+(const Nombre& nb){ return this->addition(nb); }
             Nombre& operator-(const Nombre& nb){ return this->soustraction(nb); }
             Nombre& operator*(const Nombre& nb){ return this->multiplication(nb); }
             Nombre& operator/(const Nombre& nb){ return this->division(nb); }
+
+            //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
 
             void afficher() const{
                 QTextStream cout(stdout, QIODevice::WriteOnly);

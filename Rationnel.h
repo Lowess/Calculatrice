@@ -7,6 +7,7 @@
 #include "Entier.h"
 
 namespace Calculatrice{
+
     class Rationnel: public Nombre {
         private:
             Calculatrice::Entier _n;
@@ -37,21 +38,32 @@ namespace Calculatrice{
 
             //Méthodes
 
+
             //Setter Getter
             const Entier& get_n() const{ return _n; }
             const Entier& get_d() const{ return _d; }
 
-            //Constructeur
-            Rationnel(const Entier& x, const Entier& y):_n(x),_d(y){}
-            Rationnel(unsigned int x, unsigned int y):_n(Entier(x)),_d(Entier(y)){}
+            //Constructeurs
+            Rationnel(const Entier& x, const Entier& y){
+                _n=x;
+                if(y.get_x()==0)
+                    throw CalculatriceException(typeid(this).name(),MATHS,"Denominateur nul");
+                _d=y;
+            }
+            Rationnel(unsigned int x=0, unsigned int y=1){
+                _n=Entier(x);
+                if(y==0)
+                    throw CalculatriceException(typeid(this).name(),MATHS,"Denominateur nul");
+                _d=Entier(y);
+            }
 
 
 
 
     };
+    //Fonctions
+    Entier pgcd(const Entier& a, const Entier& b);
+    Entier ppcm(const Entier& a, const Entier& b);
 }
-//Fonctions
-
-Calculatrice::Entier pgcd(const Calculatrice::Entier& a, const Calculatrice::Entier& b) const;
 
 #endif // RATIONNEL_H

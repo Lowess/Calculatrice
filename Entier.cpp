@@ -3,6 +3,7 @@
 #include "CalculatriceException.h"
 
 using namespace Calculatrice;
+
 //Implementation des méthodes vituelles pures de la class "Nombre"
 
 void Calculatrice::Entier::SIN(){}

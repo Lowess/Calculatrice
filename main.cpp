@@ -23,21 +23,24 @@ int main(int argc, char *argv[])
     
     return a.exec();
     */
+    try{
 
     cout << endl << endl << "Début programme" << endl;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
-    Entier e1(3);
+    Entier e1(10);
 
-    Entier e2(1);
+    Entier e2(3);
     Reel r1(1.55);
-    Rationnel r2(8,4);
+    Rationnel r2(6,10);
+    Rationnel r3(6,e1);
 
     Nombre& a=e1;
     Nombre& b=e2;
     Nombre& c=r1;
     Nombre& d=r2;
+    Nombre& e=r3;
 
     cout << "ref b Entier: " << endl;
     b.afficher();
@@ -50,6 +53,11 @@ int main(int argc, char *argv[])
     cout << "ref d Rationnel " << endl;
     d.afficher();
     cout << endl;
+
+    cout << "ref e Rationnel " << endl;
+    e.afficher();
+    cout << endl;
+
     /*
     //Additions ENTIER
     cout << "### Additions: " << endl;
@@ -146,7 +154,7 @@ int main(int argc, char *argv[])
     }
     */
     /////////////////////////////////////////////////////////
-
+    /*
     //Additions REEL
     cout << "### Additions: " << endl;
     {
@@ -240,6 +248,19 @@ int main(int argc, char *argv[])
         cout << c << endl;
         cout << endl;
     }
+    */
+    //cout << "PGCD" << pgcd(e1,e2) << endl;
+    //cout << "PPCM" << ppcm(e1,e2) << endl;
+
+    d+b;
+
+    cout << " d après addition" << d << endl;
+
+    cout << "PGCD" << pgcd(r2.get_n(),r2.get_d()) << endl;
+
+
+
+    }catch (exception& e){ cout << e.what(); }
 
     cout << endl;
 }
