@@ -35,13 +35,23 @@ namespace Calculatrice{
             //Implementation des méthodes virtuelles pures de la class "Expression"
             void EVAL();
 
+            //Méthodes
+
+            //Setter Getter
+            const Entier& get_n() const{ return _n; }
+            const Entier& get_d() const{ return _d; }
+
             //Constructeur
             Rationnel(const Entier& x, const Entier& y):_n(x),_d(y){}
             Rationnel(unsigned int x, unsigned int y):_n(Entier(x)),_d(Entier(y)){}
 
 
 
+
     };
 }
+//Fonctions
+
+Calculatrice::Entier pgcd(const Calculatrice::Entier& a, const Calculatrice::Entier& b) const;
 
 #endif // RATIONNEL_H

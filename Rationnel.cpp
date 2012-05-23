@@ -42,3 +42,8 @@ QString Calculatrice::Rationnel::toString() const{
 
 //Implementation des méthodes vituelles pures de la class "Expression"
 void Calculatrice::Rationnel::EVAL(){}
+
+/*
+ * Fonctions
+ *
+*/

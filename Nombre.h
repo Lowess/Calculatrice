@@ -5,6 +5,7 @@
 #include <QString>
 
 #include "Constante.h"
+#include "CalculatriceException.h"
 
 /**
   Nombre implémente le Design Pattern Template/Methode
@@ -48,7 +49,10 @@ namespace Calculatrice{
                 cout << this->toString();
             }
     };
-
 }
+
+//operator<<
+
+QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n);
 
 #endif // NOMBRE_H

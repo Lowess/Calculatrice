@@ -33,6 +33,11 @@ namespace Calculatrice{
             //Implementation des méthodes virtuelles pures de la class "Expression"
             void EVAL();
 
+            //Méthodes
+            //Setter Getter
+
+            float get_x() const{ return _x; }
+
             //Constructeurs
             Reel(const float x=0):_x(x){}
     };
