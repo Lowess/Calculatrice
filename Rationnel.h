@@ -26,10 +26,10 @@ namespace Calculatrice{
             void SQRT();
             void POW();
 
-            Nombre& addition(const Nombre& nb);
-            Nombre& soustraction(const Nombre& nb);
-            Nombre& multiplication(const Nombre& nb);
-            Nombre& division(const Nombre& nb);
+            Nombre& addition(const Nombre& nb) const;
+            Nombre& soustraction(const Nombre& nb) const;
+            Nombre& multiplication(const Nombre& nb) const;
+            Nombre& division(const Nombre& nb) const;
 
             QString toString() const;
 

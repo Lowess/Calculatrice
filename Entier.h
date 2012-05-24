@@ -116,7 +116,7 @@ namespace Calculatrice{
              *
              *  \param nb: le nombre à ajouter à l'entier
              */
-            Nombre& addition(const Nombre& nb);
+            Nombre& addition(const Nombre& nb) const;
             /*!
              *  \brief Soustraction d'un entier
              *
@@ -125,9 +125,9 @@ namespace Calculatrice{
              *
              *  \param nb: le nombre effectuant la soustraction sur l'entier
              */
-            Nombre& soustraction(const Nombre& nb);
-            Nombre& multiplication(const Nombre& nb);
-            Nombre& division(const Nombre& nb);
+            Nombre& soustraction(const Nombre& nb) const;
+            Nombre& multiplication(const Nombre& nb) const;
+            Nombre& division(const Nombre& nb) const;
 
             QString toString() const;
 
@@ -145,5 +145,6 @@ namespace Calculatrice{
 
     };
 }
+
 
 #endif // ENTIER_H

@@ -19,7 +19,7 @@ void Calculatrice::Entier::SQRT(){}
 void Calculatrice::Entier::POW(){}
 
 //Réalise l'addition d'un Entier avec un Nombre (Entier,Reel,Rationnel)
-Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -30,25 +30,28 @@ Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb){
                 throw;
             }
             else{ //Si succès on réalise l'addition Entier + Rationnel
-                float num=(this->_x * tmp_ra->get_d().get_x() + tmp_ra->get_n().get_x()); //mise au même dénominateur et addition des numérateurs
-                float den=tmp_ra->get_d().get_x();
-                this->_x=(num/den);
-                return (*this);
+                Entier num=(this->_x * tmp_ra->get_d().get_x() + tmp_ra->get_n().get_x()); //mise au même dénominateur et addition des numérateurs
+                Entier den=tmp_ra->get_d().get_x();
+                Rationnel* res=new Rationnel(num,den);
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise l'addition Entier + Reel
-            this->_x+=tmp_re->get_x();
-            return (*this);
+            Reel* res=new Reel(this->_x + tmp_re->get_x());
+            Nombre& ref=*res;
+            return (ref);
         }
     }
     else{ //Si succès on réalise l'addition Entier + Entier
-        this->_x+=tmp_en->_x;
-        return (*this);
+            Entier* res=new Entier(this->_x + tmp_en->_x);
+            Nombre& ref=*res;
+            return (ref);
     }
 }
 
 //Réalise la soustraction d'un Entier avec un Nombre (Entier,Reel,Rationnel)
-Calculatrice::Nombre& Calculatrice::Entier::soustraction(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Entier::soustraction(const Nombre& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -59,25 +62,28 @@ Calculatrice::Nombre& Calculatrice::Entier::soustraction(const Nombre& nb){
                 throw;
             }
             else{ //Si succès on réalise la soustraction Entier - Rationnel
-                float num=(this->_x * tmp_ra->get_d().get_x() - tmp_ra->get_n().get_x()); //mise au même dénominateur et soustraction des numérateurs
-                float den=tmp_ra->get_d().get_x();
-                this->_x=(num/den);
-                return (*this);
+                Entier num(this->_x * tmp_ra->get_d().get_x() - tmp_ra->get_n().get_x()); //mise au même dénominateur et soustraction des numérateurs
+                Entier den(tmp_ra->get_d().get_x());
+                Rationnel* res=new Rationnel(num,den);
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise la soustraction Entier - Reel
-            this->_x-=tmp_re->get_x();
-            return (*this);
+            Reel* res=new Reel(this->_x - tmp_re->get_x());
+            Nombre& ref=*res;
+            return (ref);
         }
     }
     else{ //Si succès on réalise la soustraction Entier - Entier
-        this->_x-=tmp_en->_x;
-        return (*this);
+        Entier* res=new Entier(this->_x - tmp_en->_x);
+        Nombre& ref=*res;
+        return (ref);
     }
 }
 
 //Réalise la multiplication d'un Entier avec un Nombre (Entier,Reel,Rationnel)
-Calculatrice::Nombre& Calculatrice::Entier::multiplication(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Entier::multiplication(const Nombre& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -88,23 +94,27 @@ Calculatrice::Nombre& Calculatrice::Entier::multiplication(const Nombre& nb){
                 throw;
             }
             else{ //Si succès on réalise la multiplication Entier * Rationnel
-                this->_x=((this->_x  * tmp_ra->get_n().get_x()) / tmp_ra->get_d().get_x()); // x*num/den
-                return (*this);
+                // x*num/den
+                Rationnel* res=new Rationnel( (this->_x  * tmp_ra->get_n().get_x()) , tmp_ra->get_d().get_x());
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise la multiplication Entier * Reel
-            this->_x*=tmp_re->get_x();
-            return (*this);
+            Reel* res=new Reel(this->_x * tmp_re->get_x());
+            Nombre& ref=*res;
+            return (ref);
         }
     }
     else{ //Si succès on réalise la multiplication Entier * Entier
-        this->_x*=tmp_en->_x;
-        return (*this);
+        Entier* res=new Entier(this->_x * tmp_en->_x);
+        Nombre& ref=*res;
+        return (ref);
     }
 }
 
 //Réalise la division d'un Entier par un Nombre (Entier,Reel,Rationnel)
-Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -117,22 +127,30 @@ Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb){
             else{ //Si succès on réalise la division Entier / Rationnel
                 if(tmp_ra->get_n().get_x()/tmp_ra->get_d().get_x()==0) //Si division par 0 Exception
                     throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
-                this->_x=(this->_x  / (tmp_ra->get_n().get_x() / tmp_ra->get_d().get_x())); // x/(num/den)
-                return (*this);
+
+                Rationnel* res=new Rationnel( (this->_x  * tmp_ra->get_d().get_x()) ,tmp_ra->get_n().get_x());
+                Nombre& ref=*res;
+                return (ref);
+                 // x/(num/den)
+
             }
         }
         else{ //Si succès on réalise la division Entier / Reel
             if(tmp_re->get_x()==0) //Si division par 0 Exception
                 throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
-            this->_x/=tmp_re->get_x();
-            return (*this);
+
+            Reel* res=new Reel(this->_x / tmp_re->get_x());
+            Nombre& ref=*res;
+            return (ref);
         }
     }
     else{ //Si succès on réalise la division Entier / Entier
         if(tmp_en->get_x()==0) //Si division par 0 Exception
             throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
-        this->_x/=tmp_en->_x;
-        return (*this);
+
+        Reel* res=new Reel(this->_x / tmp_en->_x);
+        Nombre& ref=*res;
+        return (ref);
     }
 }
 

@@ -13,7 +13,7 @@ namespace Calculatrice{
     class Rationnel;
     class Reel: public Nombre{
         private:
-            float _x;
+            double _x;
         public:
             //Implémentation des méthodes virtuelles pures de la class "Nombre"
             void SIN();
@@ -28,10 +28,10 @@ namespace Calculatrice{
             void SQRT();
             void POW();
 
-            Nombre& addition(const Nombre& nb);
-            Nombre& soustraction(const Nombre& nb);
-            Nombre& multiplication(const Nombre& nb);
-            Nombre& division(const Nombre& nb);
+            Nombre& addition(const Nombre& nb) const;
+            Nombre& soustraction(const Nombre& nb) const;
+            Nombre& multiplication(const Nombre& nb) const;
+            Nombre& division(const Nombre& nb) const;
 
             QString toString() const;
 
@@ -46,7 +46,7 @@ namespace Calculatrice{
             float get_x() const{ return _x; }
 
             //Constructeurs
-            Reel(const float x=0):_x(x){}
+            Reel(const double x=0.):_x(x){}
     };
 }
 

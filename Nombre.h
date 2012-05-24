@@ -34,10 +34,10 @@ namespace Calculatrice{
             void EVAL() =0;
 
             //Implémentation du Template/Methode
-            virtual Nombre& addition(const Nombre& nb) =0;
-            virtual Nombre& soustraction(const Nombre& nb) =0;
-            virtual Nombre& multiplication(const Nombre& nb) =0;
-            virtual Nombre& division(const Nombre& nb) =0;
+            virtual Nombre& addition(const Nombre& nb) const=0;
+            virtual Nombre& soustraction(const Nombre& nb) const=0;
+            virtual Nombre& multiplication(const Nombre& nb) const=0;
+            virtual Nombre& division(const Nombre& nb) const=0;
 
             //virtual Nombre& affectation(const Nombre& nb) =0;
 

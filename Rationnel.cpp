@@ -21,7 +21,7 @@ void Calculatrice::Rationnel::SQRT(){}
 void Calculatrice::Rationnel::POW(){}
 
 //Réalise l'addition d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -32,33 +32,32 @@ Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb){
                 throw;
             }
             else{ //Si succès on réalise l'addition Rationnel + Rationnel
-                if(this->_d.get_x() != tmp_ra->_d.get_x()){//Si dénominateurs différents: a/b + c/d = (ad+bc)/(bd)
-                    this->_n=( (this->_n.get_x() * tmp_ra->_d.get_x()) + (tmp_ra->_n.get_x() * this->_d.get_x()) );
-                    this->_d * tmp_ra->_d;
-                }
-                else //Dénominateurs identiques
-                    this->_n + tmp_ra->_n;
+                const Entier* p_num=dynamic_cast<const Entier*>(&_n.multiplication(tmp_ra->_d).addition(_d.multiplication(tmp_ra->_n)));
+                const Entier* p_den=dynamic_cast<const Entier*>(&_d.multiplication(tmp_ra->_d));
+
+                if(p_num==0 || p_den==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(this->_n,this->_d);
-                this->_n / vpgcd;
-                this->_d / vpgcd;
-
-                return (*this);
+                Entier vpgcd=pgcd(*p_num,*p_den);
+                Rationnel* res= new Rationnel(p_num->division(vpgcd), p_den->division(vpgcd));
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise l'addition Rationnel + Reel
-            return (*this+tmp_re->toRationnel());
+            Nombre& ref=tmp_re->addition(*this);
+            return (ref);
         }
     }
     else{ //Si succès on réalise l'addition Rationnel + Entier
-        Rationnel tmp(tmp_en->get_x());
-        return (*this+tmp);
+        Nombre& ref=tmp_en->addition(*this);
+        return (ref);
     }
 }
 
 //Réalise la soustraction d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -69,33 +68,29 @@ Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb){
                 throw;
             }
             else{ //Si succès on réalise la soustraction Rationnel - Rationnel
-                if(this->_d.get_x() != tmp_ra->_d.get_x()){//Si dénominateurs différents: a/b - c/d = (ad-bc)/(bd)
-                    this->_n=( (this->_n.get_x() * tmp_ra->_d.get_x()) - (tmp_ra->_n.get_x() * this->_d.get_x()) );
-                    this->_d * tmp_ra->_d;
-                }
-                else //Dénominateurs identiques
-                    this->_n - tmp_ra->_n;
+                Entier num( (this->_n.get_x() * tmp_ra->_d.get_x()) - (tmp_ra->_n.get_x() * this->_d.get_x()) );
+                Entier den(this->_d * tmp_ra->_d);
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(this->_n,this->_d);
-                this->_n / vpgcd;
-                this->_d / vpgcd;
-
-                return (*this);
+                Entier vpgcd=pgcd(num,den);
+                Rationnel* res= new Rationnel(num / vpgcd, den / vpgcd);
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise la soustraction Rationnel - Reel
-            return (*this-tmp_re->toRationnel());
+            Nombre& ref=tmp_re->soustraction(*this);
+            return (ref);
         }
     }
     else{ //Si succès on réalise la soustraction Rationnel - Entier
-        Rationnel tmp(tmp_en->get_x());
-        return (*this-tmp);
+        Nombre& ref=tmp_en->soustraction(*this);
+        return (ref);
     }
 }
 
 //Réalise la multiplication d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -105,30 +100,30 @@ Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb){
             if(tmp_ra==0){ //Si echec erreur
                 throw;
             }
-            else{ //Si succès on réalise la multiplication Rationnel * Rationnel //a/b * c/d = (a*c)/(b*d))
-                this->_n * tmp_ra->_n;
-                this->_d * tmp_ra->_d;
+            else{ //Si succès on réalise la multiplication Rationnel * Rationnel
+                Entier num(this->_n * tmp_ra->_n);
+                Entier den(this->_d * tmp_ra->_d);
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(this->_n,this->_d);
-                this->_n / vpgcd;
-                this->_d / vpgcd;
-
-                return (*this);
+                Entier vpgcd=pgcd(num,den);
+                Rationnel* res= new Rationnel(num / vpgcd, den / vpgcd);
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise la multiplication Rationnel * Reel
-            return (*this*tmp_re->toRationnel());
+            Nombre& ref=tmp_re->multiplication(*this);
+            return (ref);
         }
     }
     else{ //Si succès on réalise la multiplication Rationnel * Entier
-        Rationnel tmp(tmp_en->get_x());
-        return (*this*tmp);
+        Nombre& ref=tmp_en->multiplication(*this);
+        return (ref);
     }
 }
 
 //Réalise la division d'un Rationnel par un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb){
+Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -138,25 +133,25 @@ Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb){
             if(tmp_ra==0){ //Si echec erreur
                 throw;
             }
-            else{ //Si succès on réalise la division Rationnel / Rationnel: a/b / c/d <=> a/b * d/c
-                this->_n * tmp_ra->_d;
-                this->_d * tmp_ra->_n;
+            else{ //Si succès on réalise la division Rationnel / Rationnel
+                Rationnel* res=new Rationnel(*this * nb.INV());
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(this->_n,this->_d);
-                this->_n / vpgcd;
-                this->_d / vpgcd;
-
-                return (*this);
+                Entier vpgcd=pgcd(num,den);
+                res->_n / vpgcd;
+                res->_d / vpgcd;
+                Nombre& ref=*res;
+                return (ref);
             }
         }
         else{ //Si succès on réalise la division Rationnel / Reel
-            return (*this/tmp_re->toRationnel());
+            Nombre& ref=tmp_re->division(*this);
+            return (ref);
         }
     }
-    else{ //Si succès on réalise la multiplication Rationnel / Entier
-        Rationnel tmp(tmp_en->get_x());
-        return (*this/tmp);
+    else{ //Si succès on réalise la division Rationnel / Entier
+        Nombre& ref=tmp_en->division(*this);
+        return (ref);
     }
 }
 
