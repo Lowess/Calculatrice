@@ -5,17 +5,17 @@
 using namespace Calculatrice;
 
 //Implementation des méthodes vituelles pures de la class "Nombre"
-void Calculatrice::Reel::SIN(){}
-void Calculatrice::Reel::COS(){}
-void Calculatrice::Reel::TAN(){}
-void Calculatrice::Reel::SINH(){}
-void Calculatrice::Reel::COSH(){}
-void Calculatrice::Reel::TANH(){}
-void Calculatrice::Reel::LN(){}
-void Calculatrice::Reel::LOG(){}
-void Calculatrice::Reel::INV(){}
-void Calculatrice::Reel::SQRT(){}
-void Calculatrice::Reel::POW(){}
+Nombre& Calculatrice::Reel::SIN() const{}
+Nombre& Calculatrice::Reel::COS() const{}
+Nombre& Calculatrice::Reel::TAN() const{}
+Nombre& Calculatrice::Reel::SINH() const{}
+Nombre& Calculatrice::Reel::COSH() const{}
+Nombre& Calculatrice::Reel::TANH() const{}
+Nombre& Calculatrice::Reel::LN() const{}
+Nombre& Calculatrice::Reel::LOG() const{}
+//Nombre& Calculatrice::Reel::INV() const{}
+Nombre& Calculatrice::Reel::SQRT() const{}
+Nombre& Calculatrice::Reel::POW() const{}
 
 
 //Réalise l'addition d'un Reel avec un Nombre (Entier, Reel, Rationnel)
@@ -57,19 +57,19 @@ Calculatrice::Nombre& Calculatrice::Reel::soustraction(const Nombre& nb) const{
             if(tmp_ra==0){ //Si echec erreur
                 throw;
             }
-            else{ //Si succès on réalise la soustraction Reel + Rationnel
+            else{ //Si succès on réalise la soustraction Reel - Rationnel
                 Nombre& ref=toRationnel().soustraction(*tmp_ra);
                 return (ref);
             }
         }
-        else{ //Si succès on réalise la soustraction Reel + Reel
+        else{ //Si succès on réalise la soustraction Reel - Reel
             Reel* res= new Reel(_x - tmp_re->get_x());
             Nombre& ref=*res;
             return (ref);
         }
     }
-    else{ //Si succès on réalise la soustraction Reel + Entier
-        Nombre& ref=tmp_en->soustraction(*this);
+    else{ //Si succès on réalise la soustraction Reel - Entier
+        Nombre& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel à Entier - Reel
         return (ref);
     }
 }
@@ -86,7 +86,8 @@ Calculatrice::Nombre& Calculatrice::Reel::multiplication(const Nombre& nb) const
                 throw;
 
             else{ //Si succès on réalise la multiplication Reel * Rationnel
-                Nombre& ref=toRationnel().multiplication(*tmp_ra);
+                Reel res(_x * tmp_ra->get_n().get_x());
+                Nombre& ref=res.toRationnel();
                 return (ref);
             }
         }
@@ -127,7 +128,7 @@ Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb) const{
         }
     }
     else{ //Si succès on réalise la division Reel / Entier
-        Nombre& ref=tmp_en->division(*this);
+        Nombre& ref=tmp_en->division(*this).INV();
         return (ref);
     }
 }
@@ -147,7 +148,8 @@ void Calculatrice::Reel::EVAL(){}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Calculatrice::Rationnel Calculatrice::Reel::toRationnel() const{
+Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
+
     //Conversion du réel en rationnel 3.31 = 331/100
     QString str;
     str.setNum(_x); //Création d'un QString depuis le Reel
@@ -155,6 +157,19 @@ Calculatrice::Rationnel Calculatrice::Reel::toRationnel() const{
     QStringList list=str.split("."); //Séparation partie entiere et decimale
     int nbdec=list.value(1).count(); //Compte le nombre de décimale
 
-    return (new Rationnel(_x * pow(10,nbdec) + 1, pow(10,nbdec))); //Construction du Rationnel correspondant au Reel +1 car valeur tronquée
+    Rationnel* res= new Rationnel(_x * pow(10,nbdec), pow(10,nbdec));
+    Rationnel& ref=*res;
+    return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquée
 }
 
+
+
+Calculatrice::Entier& Calculatrice::Reel::toEntier() const{
+
+    //Conversion du réel en entier 3.0 = 3
+
+    Entier* res= new Entier(_x);
+
+    Entier& ref=*res;
+    return (ref);
+}

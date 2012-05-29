@@ -6,17 +6,17 @@ using namespace Calculatrice;
 
 //Implementation des méthodes vituelles pures de la class "Nombre"
 
-void Calculatrice::Entier::SIN(){}
-void Calculatrice::Entier::COS(){}
-void Calculatrice::Entier::TAN(){}
-void Calculatrice::Entier::SINH(){}
-void Calculatrice::Entier::COSH(){}
-void Calculatrice::Entier::TANH(){}
-void Calculatrice::Entier::LN(){}
-void Calculatrice::Entier::LOG(){}
-void Calculatrice::Entier::INV(){}
-void Calculatrice::Entier::SQRT(){}
-void Calculatrice::Entier::POW(){}
+Nombre& Calculatrice::Entier::SIN() const{}
+Nombre& Calculatrice::Entier::COS() const{}
+Nombre& Calculatrice::Entier::TAN() const{}
+Nombre& Calculatrice::Entier::SINH() const{}
+Nombre& Calculatrice::Entier::COSH() const{}
+Nombre& Calculatrice::Entier::TANH() const{}
+Nombre& Calculatrice::Entier::LN() const{}
+Nombre& Calculatrice::Entier::LOG() const{}
+//Nombre& Calculatrice::Entier::INV() const{}
+Nombre& Calculatrice::Entier::SQRT() const{}
+Nombre& Calculatrice::Entier::POW() const{}
 
 //Réalise l'addition d'un Entier avec un Nombre (Entier,Reel,Rationnel)
 Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb) const{
@@ -32,7 +32,12 @@ Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb) const{
             else{ //Si succès on réalise l'addition Entier + Rationnel
                 Entier num=(this->_x * tmp_ra->get_d().get_x() + tmp_ra->get_n().get_x()); //mise au même dénominateur et addition des numérateurs
                 Entier den=tmp_ra->get_d().get_x();
-                Rationnel* res=new Rationnel(num,den);
+
+                //Simplification par le PGCD
+                Entier vpgcd=pgcd(num,den);
+                num._x = num._x / vpgcd._x;
+                den._x = den._x / vpgcd._x;
+                Rationnel* res=new Rationnel(num, den);
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -131,7 +136,6 @@ Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb) const{
                 Rationnel* res=new Rationnel( (this->_x  * tmp_ra->get_d().get_x()) ,tmp_ra->get_n().get_x());
                 Nombre& ref=*res;
                 return (ref);
-                 // x/(num/den)
 
             }
         }

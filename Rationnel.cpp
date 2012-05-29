@@ -8,17 +8,17 @@ using namespace Calculatrice;
 
 //Implementation des méthodes vituelles pures de la class "Nombre"
 
-void Calculatrice::Rationnel::SIN(){}
-void Calculatrice::Rationnel::COS(){}
-void Calculatrice::Rationnel::TAN(){}
-void Calculatrice::Rationnel::SINH(){}
-void Calculatrice::Rationnel::COSH(){}
-void Calculatrice::Rationnel::TANH(){}
-void Calculatrice::Rationnel::LN(){}
-void Calculatrice::Rationnel::LOG(){}
-void Calculatrice::Rationnel::INV(){}
-void Calculatrice::Rationnel::SQRT(){}
-void Calculatrice::Rationnel::POW(){}
+Nombre& Calculatrice::Rationnel::SIN() const{}
+Nombre& Calculatrice::Rationnel::COS() const{}
+Nombre& Calculatrice::Rationnel::TAN() const{}
+Nombre& Calculatrice::Rationnel::SINH() const{}
+Nombre& Calculatrice::Rationnel::COSH() const{}
+Nombre& Calculatrice::Rationnel::TANH() const{}
+Nombre& Calculatrice::Rationnel::LN() const{}
+Nombre& Calculatrice::Rationnel::LOG() const{}
+//Nombre& Calculatrice::Rationnel::INV() const{}
+Nombre& Calculatrice::Rationnel::SQRT() const{}
+Nombre& Calculatrice::Rationnel::POW() const{}
 
 //Réalise l'addition d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
 Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
@@ -40,7 +40,13 @@ Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
 
                 //Simplification par le PGCD
                 Entier vpgcd=pgcd(*p_num,*p_den);
-                Rationnel* res= new Rationnel(p_num->division(vpgcd), p_den->division(vpgcd));
+                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
+                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
+
+                if(p_num_div==0 || p_den_div==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
+
+                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -68,23 +74,32 @@ Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb) co
                 throw;
             }
             else{ //Si succès on réalise la soustraction Rationnel - Rationnel
-                Entier num( (this->_n.get_x() * tmp_ra->_d.get_x()) - (tmp_ra->_n.get_x() * this->_d.get_x()) );
-                Entier den(this->_d * tmp_ra->_d);
+                const Reel* p_num=dynamic_cast<const Reel *>(&this->_n.multiplication(tmp_ra->_d).soustraction(tmp_ra->_n.multiplication(this->_d)));
+                const Reel* p_den=dynamic_cast<const Reel *>(&this->_d.multiplication(tmp_ra->_d));
+
+                if(p_num==0 || p_den==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(num,den);
-                Rationnel* res= new Rationnel(num / vpgcd, den / vpgcd);
+                Entier vpgcd=pgcd(p_num->toEntier(), p_den->toEntier());
+                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
+                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
+
+                if(p_num_div==0 || p_den_div==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
+
+                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
                 Nombre& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succès on réalise la soustraction Rationnel - Reel
-            Nombre& ref=tmp_re->soustraction(*this);
+        else{ //Si succès on réalise la soustraction :Rationnel - Reel
+            Nombre& ref=tmp_re->soustraction(*this).SIGN(); //Inversion de signe car appel à Reel - Rationnel
             return (ref);
         }
     }
     else{ //Si succès on réalise la soustraction Rationnel - Entier
-        Nombre& ref=tmp_en->soustraction(*this);
+        Nombre& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel à Entier - Rationnel
         return (ref);
     }
 }
@@ -101,12 +116,21 @@ Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb) 
                 throw;
             }
             else{ //Si succès on réalise la multiplication Rationnel * Rationnel
-                Entier num(this->_n * tmp_ra->_n);
-                Entier den(this->_d * tmp_ra->_d);
+                const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra->_n));
+                const Entier* p_den=dynamic_cast<const Entier *>(&this->_d.multiplication(tmp_ra->_d));
+
+                if(p_num==0 || p_den==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(num,den);
-                Rationnel* res= new Rationnel(num / vpgcd, den / vpgcd);
+                Entier vpgcd=pgcd(p_num->toEntier(), p_den->toEntier());
+                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
+                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
+
+                if(p_num_div==0 || p_den_div==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
+
+                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -134,23 +158,33 @@ Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb) const{
                 throw;
             }
             else{ //Si succès on réalise la division Rationnel / Rationnel
-                Rationnel* res=new Rationnel(*this * nb.INV());
+                const Rationnel* tmp_ra_inv=dynamic_cast<const Rationnel*>(&tmp_ra->INV());
+                const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra_inv->_n));
+                const Entier* p_den=dynamic_cast<const Entier *>(&this->_d.multiplication(tmp_ra_inv->_d));
+
+                if(p_num==0 || p_den==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
                 //Simplification par le PGCD
-                Entier vpgcd=pgcd(num,den);
-                res->_n / vpgcd;
-                res->_d / vpgcd;
+                Entier vpgcd=pgcd(p_num->toEntier(), p_den->toEntier());
+                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
+                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
+
+                if(p_num_div==0 || p_den_div==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
+
+                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
                 Nombre& ref=*res;
                 return (ref);
             }
         }
         else{ //Si succès on réalise la division Rationnel / Reel
-            Nombre& ref=tmp_re->division(*this);
+            Nombre& ref=tmp_re->division(*this).INV();
             return (ref);
         }
     }
     else{ //Si succès on réalise la division Rationnel / Entier
-        Nombre& ref=tmp_en->division(*this);
+        Nombre& ref=tmp_en->division(*this).INV();
         return (ref);
     }
 }

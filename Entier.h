@@ -36,77 +36,77 @@ namespace Calculatrice{
              *
              */
             //Méthodes virtuelles pures de la class "Nombre"
-            void SIN();
+            Nombre& SIN() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul le cosinus de l'entier
              *
              */
-            void COS();
+            Nombre& COS() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul la tangente de l'entier
              *
              */
-            void TAN();
+            Nombre& TAN() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul le sinus hyberbolique de l'entier
              *
              */
-            void SINH();
+            Nombre& SINH() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul le cosinus hyperbolique de l'entier
              *
              */
-            void COSH();
+            Nombre& COSH() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul la tangente hyperbolique de l'entier
              *
              */
-            void TANH();
+            Nombre& TANH() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul le logarithme népérien de l'entier
              *
              */
-            void LN();
+            Nombre& LN() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcul le log base X de l'entier
              *
              */
-            void LOG();
+            Nombre& LOG() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Inverse l'entier
              *
              */
-            void INV();
+            //Nombre& INV() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Calcule la racine carrée de l'entier
              *
              */
-            void SQRT();
+            Nombre& SQRT() const;
             /*!
              *  \brief Trigonométrie Sinus
              *
              *  Eléve au carré l'entier
              *
              */
-            void POW();
+            Nombre& POW() const;
 
             /*!
              *  \brief Addition d'un entier

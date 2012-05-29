@@ -14,17 +14,17 @@ namespace Calculatrice{
             Calculatrice::Entier _d;
         public:
             //Implémentation des méthodes virtuelles pures de la class "Nombre"
-            void SIN();
-            void COS();
-            void TAN();
-            void SINH();
-            void COSH();
-            void TANH();
-            void LN();
-            void LOG();
-            void INV();
-            void SQRT();
-            void POW();
+            Nombre& SIN() const;
+            Nombre& COS() const;
+            Nombre& TAN() const;
+            Nombre& SINH() const;
+            Nombre& COSH() const;
+            Nombre& TANH() const;
+            Nombre& LN() const;
+            Nombre& LOG() const;
+            //Nombre& INV() const;
+            Nombre& SQRT() const;
+            Nombre& POW() const;
 
             Nombre& addition(const Nombre& nb) const;
             Nombre& soustraction(const Nombre& nb) const;

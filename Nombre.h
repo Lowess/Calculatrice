@@ -7,6 +7,9 @@
 #include "Constante.h"
 #include "CalculatriceException.h"
 
+
+using namespace Calculatrice;
+
 /**
   Nombre implémente le Design Pattern Template/Methode
   **/
@@ -16,19 +19,21 @@ namespace Calculatrice{
 
         public:
             //Méthodes virtuelles pures
-            virtual void SIN() =0;
-            virtual void COS() =0;
-            virtual void TAN() =0;
-            virtual void SINH() =0;
-            virtual void COSH() =0;
-            virtual void TANH() =0;
-            virtual void LN() =0;
-            virtual void LOG() =0;
-            virtual void INV() =0;
-            virtual void SQRT() =0;
-            virtual void POW() =0;
+            virtual Nombre& SIN() const = 0;
+            virtual Nombre& COS() const = 0;
+            virtual Nombre& TAN() const = 0;
+            virtual Nombre& SINH() const = 0;
+            virtual Nombre& COSH() const = 0;
+            virtual Nombre& TANH() const = 0;
+            virtual Nombre& LN() const = 0;
+            virtual Nombre& LOG() const = 0;
+            virtual Nombre& INV() const;
+            virtual Nombre& SQRT() const = 0;
+            virtual Nombre& POW() const = 0;
 
             virtual QString toString() const =0;
+
+            Nombre& SIGN() const;
 
             //Méthodes virtuelles pures hérité de la class "Expression"
             void EVAL() =0;

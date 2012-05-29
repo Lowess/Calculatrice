@@ -23,244 +23,92 @@ int main(int argc, char *argv[])
     
     return a.exec();
 */
-    try{
-
-    cout << endl << endl << "Début programme" << endl;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
-    Entier e1(10);
+    cout << endl << endl << "Début programme" << endl;
 
-    Entier e2(3);
-    Reel r1(1.55);
-    Rationnel r2(6,10);
-    Rationnel r3(6,e1);
 
-    Nombre& a=e1;
-    Nombre& b=e2;
-    Nombre& c=r1;
-    Nombre& d=r2;
-    Nombre& e=r3;
+
+    Nombre* a=new Entier(3);
+    Nombre* b=new Reel(4.5);
+    Nombre* c=new Rationnel(12,10);
+
+    cout << "ref a Entier: " << endl;
+    cout << *a << endl;
 
     cout << "ref b Entier: " << endl;
-    b.afficher();
-    cout << endl;
+    cout << *b << endl;
 
     cout << "ref c Reel " << endl;
-    c.afficher();
-    cout << endl;
+    cout << *c << endl;
 
-    cout << "ref d Rationnel " << endl;
-    d.afficher();
-    cout << endl;
-
-    cout << "ref e Rationnel " << endl;
-    e.afficher();
-    cout << endl;
+    Nombre* tab_ref[3]={a,b,c};
 
     /*
-    //Additions ENTIER
-    cout << "### Additions: " << endl;
-    {
-        cout << a << "+" << b << "=" << endl;
-        a+b;
-
-        cout << a << endl;
-        cout << endl;
-
-        cout << a << "+" << c << "=" << endl;
-        a+c;
-
-        cout << a << endl;
-        cout << endl;
-
-        cout << a << "+" << d << "=" << endl;
-        a+d;
-
-        cout << a << endl;
-        cout << endl;
-    }
-
-    //Soustractions
-    cout << "### Soustractions: " << endl;
-    {
-        cout << a << "-" << b << "=" << endl;
-        a-b;
-
-        cout << a << endl;
-        cout << endl;
-
-        cout << a << "-" << c << "=" << endl;
-        a-c;
-
-        cout << a << endl;
-        cout << endl;
-
-        cout << a << "-" << d << "=" << endl;
-        a-d;
-
-        cout << a << endl;
-        cout << endl;
-    }
-
-    //Multiplications
-    cout << "### Multiplications: " << endl;
-    {
-        cout << a << "*" << b << "=" << endl;
-        a*b;
-
-        cout << a << endl;
-        cout << endl;
-
-        cout << a << "*" << c << "=" << endl;
-        a*c;
-
-        cout << a << endl;
-        cout << endl;
-
-        cout << a << "*" << d << "=" << endl;
-        a*d;
-
-        cout << a << endl;
-        cout << endl;
-    }
-
-    //Divisions
-    cout << "### Divisions: " << endl;
-    {
-        try{
-            cout << a << "/" << b << "=" << endl;
-            a/b;
-        }catch (exception& e){ cout << e.what() << endl; }
-
-        cout << a << endl;
-        cout << endl;
-
-        try{
-            cout << a << "/" << c << "=" << endl;
-            a/c;
-        }catch (exception& e){ cout << e.what() << endl; }
-
-        cout << a << endl;
-        cout << endl;
-
-        try{
-            cout << a << "/" << d << "=" << endl;
-            a/d;
-        }catch (exception& e){ cout << e.what() << endl; }
-
-        cout << a << endl;
-        cout << endl;
-    }
+    cout << a->SIGN() << endl;
+    cout << b->SIGN() << endl;
+    cout << c->SIGN() << endl;
     */
-    /////////////////////////////////////////////////////////
-    /*
-    //Additions REEL
-    cout << "### Additions: " << endl;
-    {
-        cout << c << "+" << b << "=" << endl;
-        c+b;
 
-        cout << c << endl;
-        cout << endl;
 
-        cout << c << "+" << c << "=" << endl;
-        c+c;
+    cout << a->INV() << endl;
+    cout << b->INV() << endl;
+    cout << c->INV() << endl;
 
-        cout << c << endl;
-        cout << endl;
+/*
+    //Additions
+    cout << '---- Additions ----' << endl;
+    for(int i=0; i < 3; i++){
+        for(int j=0; j < 3; j++){
+            try{
+                cout << *tab_ref[i] << endl << " + " << endl << *tab_ref[j] << endl << " = " << endl << *tab_ref[i]+ *tab_ref[j] << endl << "-----------" << endl;
+            }catch (exception& e){ cout << e.what() << " i=" << i << "j=" << j << endl; }
+        }
 
-        cout << c << "+" << d << "=" << endl;
-        c+d;
-
-        cout << c << endl;
-        cout << endl;
     }
-
+    cout << endl;
+    cout << endl;
+*/
+/*
+    cout << '---- Soustractions ----' << endl;
     //Soustractions
-    cout << "### Soustractions: " << endl;
-    {
-        cout << c << "-" << b << "=" << endl;
-        c-b;
+    for(int i=0; i < 3; i++){
+        for(int j=0; j < 3; j++){
+            try{
+                cout << *tab_ref[i] << endl << " - " << endl << *tab_ref[j] << endl << " = " << endl << *tab_ref[i]-*tab_ref[j] << endl << "-----------" << endl;
+            }catch (exception& e){ cout << e.what() << " i=" << i << "j=" << j << endl; }
+        }
 
-        cout << c << endl;
-        cout << endl;
-
-        cout << c << "-" << c << "=" << endl;
-        c-c;
-
-        cout << c << endl;
-        cout << endl;
-
-        cout << c << "-" << d << "=" << endl;
-        c-d;
-
-        cout << c << endl;
-        cout << endl;
     }
 
+    cout << endl;
+    cout << endl;
+*/
+/*
+    cout << '---- Multiplications ----' << endl;
     //Multiplications
-    cout << "### Multiplications: " << endl;
-    {
-        cout << c << "*" << b << "=" << endl;
-        c*b;
-
-        cout << c << endl;
-        cout << endl;
-
-        cout << c << "*" << c << "=" << endl;
-        c*c;
-
-        cout << c << endl;
-        cout << endl;
-
-        cout << c << "*" << d << "=" << endl;
-        c*d;
-
-        cout << c << endl;
-        cout << endl;
+    for(int i=0; i < 3; i++){
+        for(int j=0; j < 3; j++){
+            try{
+                cout << *tab_ref[i] << endl << " * " << endl << *tab_ref[j] << endl << " = " << endl << *tab_ref[i]* *tab_ref[j] << endl << "-----------" << endl;
+            }catch (exception& e){ cout << e.what() << " i=" << i << "j=" << j << endl; }
+        }
     }
 
+    cout << endl;
+    cout << endl;
+*/
+    cout << '---- Divisions ----' << endl;
     //Divisions
-    cout << "### Divisions: " << endl;
-    {
-        try{
-            cout << c << "/" << b << "=" << endl;
-            c/b;
-        }catch (exception& e){ cout << e.what() << endl; }
-
-        cout << c << endl;
-        cout << endl;
-
-        try{
-            cout << c << "/" << c << "=" << endl;
-            c/c;
-        }catch (exception& e){ cout << e.what() << endl; }
-
-        cout << c << endl;
-        cout << endl;
-
-        try{
-            cout << c << "/" << d << "=" << endl;
-            c/d;
-        }catch (exception& e){ cout << e.what() << endl; }
-
-        cout << c << endl;
-        cout << endl;
+    for(int i=0; i < 3; i++){
+        for(int j=0; j < 3; j++){
+            try{
+                cout << *tab_ref[i] << endl << " / " << endl << *tab_ref[j] << endl << " = " << endl << *tab_ref[i] / *tab_ref[j] << endl << "-----------" << endl;
+            }catch (exception& e){ cout << e.what() << " i=" << i << "j=" << j << endl; }
+        }
     }
-    */
-    //cout << "PGCD" << pgcd(e1,e2) << endl;
-    //cout << "PPCM" << ppcm(e1,e2) << endl;
 
-    d+b;
-
-    cout << " d après addition" << d << endl;
-
-    cout << "PGCD" << pgcd(r2.get_n(),r2.get_d()) << endl;
-
-
-
-    }catch (exception& e){ cout << e.what(); }
 
     cout << endl;
 }
