@@ -69,7 +69,16 @@ Calculatrice::Nombre& Calculatrice::Entier::soustraction(const Nombre& nb) const
             else{ //Si succès on réalise la soustraction Entier - Rationnel
                 Entier num(this->_x * tmp_ra->get_d().get_x() - tmp_ra->get_n().get_x()); //mise au même dénominateur et soustraction des numérateurs
                 Entier den(tmp_ra->get_d().get_x());
-                Rationnel* res=new Rationnel(num,den);
+
+                //Simplification par le PGCD
+                Entier vpgcd=pgcd(num, den);
+                const Reel* p_num_div=dynamic_cast<const Reel*>(&num.division(vpgcd));
+                const Reel* p_den_div=dynamic_cast<const Reel*>(&den.division(vpgcd));
+
+                if(p_num_div==0 || p_den_div==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
+
+                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -133,10 +142,20 @@ Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb) const{
                 if(tmp_ra->get_n().get_x()/tmp_ra->get_d().get_x()==0) //Si division par 0 Exception
                     throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
 
-                Rationnel* res=new Rationnel( (this->_x  * tmp_ra->get_d().get_x()) ,tmp_ra->get_n().get_x());
+                Entier num=Entier(this->_x  * tmp_ra->get_d().get_x());
+                Entier den=Entier(tmp_ra->get_n().get_x());
+
+                //Simplification par le PGCD
+                Entier vpgcd=pgcd(num, den);
+                const Reel* p_num_div=dynamic_cast<const Reel*>(&num.division(vpgcd));
+                const Reel* p_den_div=dynamic_cast<const Reel*>(&den.division(vpgcd));
+
+                if(p_num_div==0 || p_den_div==0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
+
+                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
                 Nombre& ref=*res;
                 return (ref);
-
             }
         }
         else{ //Si succès on réalise la division Entier / Reel

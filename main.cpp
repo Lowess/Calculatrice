@@ -51,14 +51,14 @@ int main(int argc, char *argv[])
     cout << c->SIGN() << endl;
     */
 
-
+    /*
     cout << a->INV() << endl;
     cout << b->INV() << endl;
     cout << c->INV() << endl;
+    */
 
-/*
     //Additions
-    cout << '---- Additions ----' << endl;
+    cout << "---- Additions ----" << endl;
     for(int i=0; i < 3; i++){
         for(int j=0; j < 3; j++){
             try{
@@ -69,9 +69,9 @@ int main(int argc, char *argv[])
     }
     cout << endl;
     cout << endl;
-*/
-/*
-    cout << '---- Soustractions ----' << endl;
+
+
+    cout << "---- Soustractions ----" << endl;
     //Soustractions
     for(int i=0; i < 3; i++){
         for(int j=0; j < 3; j++){
@@ -84,9 +84,9 @@ int main(int argc, char *argv[])
 
     cout << endl;
     cout << endl;
-*/
-/*
-    cout << '---- Multiplications ----' << endl;
+
+
+    cout << "---- Multiplications ----" << endl;
     //Multiplications
     for(int i=0; i < 3; i++){
         for(int j=0; j < 3; j++){
@@ -98,8 +98,8 @@ int main(int argc, char *argv[])
 
     cout << endl;
     cout << endl;
-*/
-    cout << '---- Divisions ----' << endl;
+
+    cout << "---- Divisions ----" << endl;
     //Divisions
     for(int i=0; i < 3; i++){
         for(int j=0; j < 3; j++){
