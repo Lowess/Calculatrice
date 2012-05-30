@@ -18,19 +18,6 @@ namespace Calculatrice{
         private:
             double _x;
         public:
-            //Implémentation des méthodes virtuelles pures de la class "Nombre"
-            Nombre& SIN() const;
-            Nombre& COS() const;
-            Nombre& TAN() const;
-            Nombre& SINH() const;
-            Nombre& COSH() const;
-            Nombre& TANH() const;
-            Nombre& LN() const;
-            Nombre& LOG() const;
-            //Nombre& INV() const;
-            Nombre& SQRT() const;
-            Nombre& POW() const;
-
             Nombre& addition(const Nombre& nb) const;
             Nombre& soustraction(const Nombre& nb) const;
             Nombre& multiplication(const Nombre& nb) const;

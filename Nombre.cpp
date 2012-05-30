@@ -11,6 +11,7 @@ QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n){
     return s;
 }
 
+//Implémentation issu de la classe Pile
 Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
@@ -41,6 +42,16 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     }
 }
 
+//Méthodes de classes
+
+Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::COS() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::TAN() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::SINH() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::COSH() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::TANH() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::LN() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::LOG() const{}
 
 Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
     //On essaye le cast en Entier
@@ -59,14 +70,21 @@ Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
             }
         }
         else{ //Si succès on réalise INV Reel
-            Reel* res=new Reel(1/tmp_re->get_x());
-            Nombre& ref=*res;
+            const Rationnel* res=dynamic_cast<const Rationnel *>(&tmp_re->toRationnel());
+
+            Rationnel* res2= new Rationnel(res->get_d(), res->get_n()); // On inverse num et den pour réaliser le INV
+            res2->simplifier();
+            Nombre& ref=*res2;
             return (ref);
         }
     }
-    else{ //Si succès on réalise SIGN Entier
-        Reel* res=new Reel(1/tmp_en->get_x());
+    else{ //Si succès on réalise INV Entier
+        Rationnel* res=new Rationnel(1,tmp_en->get_x());
         Nombre& ref=*res;
         return (ref);
     }
 }
+
+Calculatrice::Nombre& Calculatrice::Nombre::SQRT() const{}
+
+Calculatrice::Nombre& Calculatrice::Nombre::POW() const{}

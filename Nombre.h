@@ -18,18 +18,18 @@ namespace Calculatrice{
         private:
 
         public:
-            //Méthodes virtuelles pures
-            virtual Nombre& SIN() const = 0;
-            virtual Nombre& COS() const = 0;
-            virtual Nombre& TAN() const = 0;
-            virtual Nombre& SINH() const = 0;
-            virtual Nombre& COSH() const = 0;
-            virtual Nombre& TANH() const = 0;
-            virtual Nombre& LN() const = 0;
-            virtual Nombre& LOG() const = 0;
+            //Méthodes virtuelles
+            virtual Nombre& SIN() const;
+            virtual Nombre& COS() const;
+            virtual Nombre& TAN() const;
+            virtual Nombre& SINH() const;
+            virtual Nombre& COSH() const;
+            virtual Nombre& TANH() const;
+            virtual Nombre& LN() const;
+            virtual Nombre& LOG() const;
             virtual Nombre& INV() const;
-            virtual Nombre& SQRT() const = 0;
-            virtual Nombre& POW() const = 0;
+            virtual Nombre& SQRT() const;
+            virtual Nombre& POW() const;
 
             virtual QString toString() const =0;
 

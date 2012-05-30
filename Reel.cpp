@@ -4,20 +4,6 @@
 
 using namespace Calculatrice;
 
-//Implementation des méthodes vituelles pures de la class "Nombre"
-Nombre& Calculatrice::Reel::SIN() const{}
-Nombre& Calculatrice::Reel::COS() const{}
-Nombre& Calculatrice::Reel::TAN() const{}
-Nombre& Calculatrice::Reel::SINH() const{}
-Nombre& Calculatrice::Reel::COSH() const{}
-Nombre& Calculatrice::Reel::TANH() const{}
-Nombre& Calculatrice::Reel::LN() const{}
-Nombre& Calculatrice::Reel::LOG() const{}
-//Nombre& Calculatrice::Reel::INV() const{}
-Nombre& Calculatrice::Reel::SQRT() const{}
-Nombre& Calculatrice::Reel::POW() const{}
-
-
 //Réalise l'addition d'un Reel avec un Nombre (Entier, Reel, Rationnel)
 Calculatrice::Nombre& Calculatrice::Reel::addition(const Nombre& nb) const{
     //On essaye le cast en Reel
@@ -158,6 +144,7 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
     int nbdec=list.value(1).count(); //Compte le nombre de décimale
 
     Rationnel* res= new Rationnel(_x * pow(10,nbdec), pow(10,nbdec));
+    res->simplifier();
     Rationnel& ref=*res;
     return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquée
 }

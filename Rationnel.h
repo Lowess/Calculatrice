@@ -13,19 +13,6 @@ namespace Calculatrice{
             Calculatrice::Entier _n;
             Calculatrice::Entier _d;
         public:
-            //Implémentation des méthodes virtuelles pures de la class "Nombre"
-            Nombre& SIN() const;
-            Nombre& COS() const;
-            Nombre& TAN() const;
-            Nombre& SINH() const;
-            Nombre& COSH() const;
-            Nombre& TANH() const;
-            Nombre& LN() const;
-            Nombre& LOG() const;
-            //Nombre& INV() const;
-            Nombre& SQRT() const;
-            Nombre& POW() const;
-
             Nombre& addition(const Nombre& nb) const;
             Nombre& soustraction(const Nombre& nb) const;
             Nombre& multiplication(const Nombre& nb) const;
@@ -37,11 +24,14 @@ namespace Calculatrice{
             void EVAL();
 
             //Méthodes
+            void simplifier();
 
 
             //Setter Getter
             const Entier& get_n() const{ return _n; }
             const Entier& get_d() const{ return _d; }
+            //void set_n(const Entier& e) { _n=e; }
+            //void set_d(const Entier& e) { _d=e; }
 
             //Constructeurs
             Rationnel(const Entier& x, const Entier& y){
@@ -56,8 +46,14 @@ namespace Calculatrice{
                     throw CalculatriceException(typeid(this).name(),MATHS,"Denominateur nul");
                 _d=Entier(y);
             }
+/*
+            //Recopie et operator=
+            Rationnel(const Rationnel& e);
+            Rationnel& operator=(const Rationnel& e);
 
-
+            //Destructeur
+            ~Rationnel(){}
+*/
 
 
     };

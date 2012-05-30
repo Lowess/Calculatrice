@@ -6,20 +6,6 @@
 
 using namespace Calculatrice;
 
-//Implementation des méthodes vituelles pures de la class "Nombre"
-
-Nombre& Calculatrice::Rationnel::SIN() const{}
-Nombre& Calculatrice::Rationnel::COS() const{}
-Nombre& Calculatrice::Rationnel::TAN() const{}
-Nombre& Calculatrice::Rationnel::SINH() const{}
-Nombre& Calculatrice::Rationnel::COSH() const{}
-Nombre& Calculatrice::Rationnel::TANH() const{}
-Nombre& Calculatrice::Rationnel::LN() const{}
-Nombre& Calculatrice::Rationnel::LOG() const{}
-//Nombre& Calculatrice::Rationnel::INV() const{}
-Nombre& Calculatrice::Rationnel::SQRT() const{}
-Nombre& Calculatrice::Rationnel::POW() const{}
-
 //Réalise l'addition d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
 Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
     //On essaye le cast en Rationnel
@@ -38,15 +24,8 @@ Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
                 if(p_num==0 || p_den==0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
-                //Simplification par le PGCD
-                Entier vpgcd=pgcd(*p_num,*p_den);
-                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
-                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
-
-                if(p_num_div==0 || p_den_div==0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
-
-                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
+                Rationnel* res= new Rationnel(*p_num, *p_den);
+                res->simplifier();
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -80,15 +59,8 @@ Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb) co
                 if(p_num==0 || p_den==0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
-                //Simplification par le PGCD
-                Entier vpgcd=pgcd(p_num->toEntier(), p_den->toEntier());
-                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
-                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
-
-                if(p_num_div==0 || p_den_div==0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
-
-                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
+                Rationnel* res= new Rationnel(p_num->toEntier(), p_den->toEntier());
+                res->simplifier();
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -122,15 +94,8 @@ Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb) 
                 if(p_num==0 || p_den==0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
-                //Simplification par le PGCD
-                Entier vpgcd=pgcd(p_num->toEntier(), p_den->toEntier());
-                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
-                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
-
-                if(p_num_div==0 || p_den_div==0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
-
-                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
+                Rationnel* res= new Rationnel(*p_num, *p_den);
+                res->simplifier();
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -165,15 +130,8 @@ Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb) const{
                 if(p_num==0 || p_den==0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
 
-                //Simplification par le PGCD
-                Entier vpgcd=pgcd(p_num->toEntier(), p_den->toEntier());
-                const Reel* p_num_div=dynamic_cast<const Reel*>(&p_num->division(vpgcd));
-                const Reel* p_den_div=dynamic_cast<const Reel*>(&p_den->division(vpgcd));
-
-                if(p_num_div==0 || p_den_div==0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*> ici");
-
-                Rationnel* res= new Rationnel(p_num_div->toEntier(), p_den_div->toEntier());
+                Rationnel* res= new Rationnel(*p_num, *p_den);
+                res->simplifier();
                 Nombre& ref=*res;
                 return (ref);
             }
@@ -199,6 +157,36 @@ QString Calculatrice::Rationnel::toString() const{
 //Implementation des méthodes vituelles pures de la class "Expression"
 void Calculatrice::Rationnel::EVAL(){}
 
+
+//Constructeurs
+/*
+//Recopie et operator=
+Calculatrice::Rationnel::Rationnel(const Entier& e){
+
+}
+
+Calculatrice::Rationnel& Calculatrice::Rationnel::operator=(const Entier& e){
+
+    return *this;
+}
+*/
+
+/*
+ * Méthodes
+ *
+*/
+void Calculatrice::Rationnel::simplifier(){
+    //Simplification par le PGCD
+    Entier vpgcd=pgcd(get_n(), get_d());
+    const Reel* p_num_div=dynamic_cast<const Reel*>(&get_n().division(vpgcd));
+    const Reel* p_den_div=dynamic_cast<const Reel*>(&get_d().division(vpgcd));
+
+    if(p_num_div==0 || p_den_div==0)
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
+
+    _n=p_num_div->toEntier();
+    _d=p_den_div->toEntier();
+}
 /*
  * Fonctions
  *

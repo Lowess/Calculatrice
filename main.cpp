@@ -51,11 +51,11 @@ int main(int argc, char *argv[])
     cout << c->SIGN() << endl;
     */
 
-    /*
+/*
     cout << a->INV() << endl;
     cout << b->INV() << endl;
     cout << c->INV() << endl;
-    */
+*/
 
     //Additions
     cout << "---- Additions ----" << endl;
