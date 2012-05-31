@@ -15,7 +15,7 @@ Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise l'addition Rationnel + Rationnel
                 const Entier* p_num=dynamic_cast<const Entier*>(&_n.multiplication(tmp_ra->_d).addition(_d.multiplication(tmp_ra->_n)));
@@ -50,7 +50,7 @@ Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb) co
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la soustraction Rationnel - Rationnel
                 const Reel* p_num=dynamic_cast<const Reel *>(&this->_n.multiplication(tmp_ra->_d).soustraction(tmp_ra->_n.multiplication(this->_d)));
@@ -85,7 +85,7 @@ Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb) 
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la multiplication Rationnel * Rationnel
                 const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra->_n));
@@ -120,7 +120,7 @@ Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la division Rationnel / Rationnel
                 const Rationnel* tmp_ra_inv=dynamic_cast<const Rationnel*>(&tmp_ra->INV());
@@ -187,6 +187,29 @@ void Calculatrice::Rationnel::simplifier(){
     _n=p_num_div->toEntier();
     _d=p_den_div->toEntier();
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Calculatrice::Reel& Calculatrice::Rationnel::toReel() const{
+    //Conversion du rationnel en reel 3/2 = 1.5
+    double n=(double)_n.get_x();
+    double d=(double)_d.get_x();
+
+    Reel* res= new Reel(n / d);
+    Reel& ref=*res;
+    return (ref);
+}
+
+
+
+Calculatrice::Entier& Calculatrice::Rationnel::toEntier() const{
+    //Conversion du rationnel en entier 3/2 = 1
+    Entier* res= new Entier(_n.get_x() / _d.get_x());
+    Entier& ref=*res;
+    return (ref);
+}
+
 /*
  * Fonctions
  *

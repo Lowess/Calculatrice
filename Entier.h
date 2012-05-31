@@ -62,6 +62,9 @@ namespace Calculatrice{
             void EVAL();
 
             //Méthodes
+            Rationnel& toRationnel() const;
+            Reel& toReel() const;
+
             void MOD();
             void FACTORIELLE();
 

@@ -7,13 +7,16 @@
 #include "Constante.h"
 #include "CalculatriceException.h"
 
-
 using namespace Calculatrice;
 
 /**
   Nombre implémente le Design Pattern Template/Methode
   **/
 namespace Calculatrice{
+    class Entier;
+    class Reel;
+    class Rationnel;
+
     class Nombre: public Constante {
         private:
 
@@ -30,6 +33,10 @@ namespace Calculatrice{
             virtual Nombre& INV() const;
             virtual Nombre& SQRT() const;
             virtual Nombre& POW() const;
+
+            virtual Entier& toEntier() const;
+            virtual Reel& toReel() const;
+            virtual Rationnel& toRationnel() const;
 
             virtual QString toString() const =0;
 

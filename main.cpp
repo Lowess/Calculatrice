@@ -45,6 +45,23 @@ int main(int argc, char *argv[])
 
     Nombre* tab_ref[3]={a,b,c};
 
+    cout << a->toEntier() << endl;
+    cout << b->toEntier() << endl;
+    cout << c->toEntier() << endl;
+
+    cout << endl;
+
+    cout << a->toReel() << endl;
+    cout << b->toReel() << endl;
+    cout << c->toReel() << endl;
+
+    cout << endl;
+
+    cout << a->toRationnel() << endl;
+    cout << b->toRationnel() << endl;
+    cout << c->toRationnel() << endl;
+
+    cout << endl;
     /*
     cout << a->SIGN() << endl;
     cout << b->SIGN() << endl;

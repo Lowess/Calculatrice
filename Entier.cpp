@@ -13,7 +13,7 @@ Calculatrice::Nombre& Calculatrice::Entier::addition(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise l'addition Entier + Rationnel
                 Entier num=(this->_x * tmp_ra->get_d().get_x() + tmp_ra->get_n().get_x()); //mise au même dénominateur et addition des numérateurs
@@ -47,7 +47,7 @@ Calculatrice::Nombre& Calculatrice::Entier::soustraction(const Nombre& nb) const
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la soustraction Entier - Rationnel
                 Entier num(this->_x * tmp_ra->get_d().get_x() - tmp_ra->get_n().get_x()); //mise au même dénominateur et soustraction des numérateurs
@@ -81,7 +81,7 @@ Calculatrice::Nombre& Calculatrice::Entier::multiplication(const Nombre& nb) con
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la multiplication Entier * Rationnel
                 // x*num/den
@@ -112,7 +112,7 @@ Calculatrice::Nombre& Calculatrice::Entier::division(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la division Entier / Rationnel
                 if(tmp_ra->get_n().get_x()/tmp_ra->get_d().get_x()==0) //Si division par 0 Exception
@@ -155,3 +155,23 @@ QString Calculatrice::Entier::toString() const{
 void Calculatrice::Entier::EVAL(){}
 
 //Constructeurs
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Calculatrice::Rationnel& Calculatrice::Entier::toRationnel() const{
+    //Conversion de l'entier en rationnel 3 = 3/1
+    Rationnel* res= new Rationnel(_x,1);
+    Rationnel& ref=*res;
+    return (ref);
+}
+
+
+
+Calculatrice::Reel& Calculatrice::Entier::toReel() const{
+    //Conversion d'un entier en reel 3.0 = 3
+    Reel* res= new Reel(_x);
+    Reel& ref=*res;
+    return (ref);
+}

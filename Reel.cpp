@@ -13,7 +13,7 @@ Calculatrice::Nombre& Calculatrice::Reel::addition(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0) //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
 
             else{ //Si succès on réalise l'addition Reel + Rationnel
                 Nombre& ref=toRationnel().addition(*tmp_ra);
@@ -41,7 +41,7 @@ Calculatrice::Nombre& Calculatrice::Reel::soustraction(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la soustraction Reel - Rationnel
                 Nombre& ref=toRationnel().soustraction(*tmp_ra);
@@ -69,7 +69,7 @@ Calculatrice::Nombre& Calculatrice::Reel::multiplication(const Nombre& nb) const
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0) //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
 
             else{ //Si succès on réalise la multiplication Reel * Rationnel
                 Reel res(_x * tmp_ra->get_n().get_x());
@@ -98,7 +98,7 @@ Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb) const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec erreur
-                throw;
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succès on réalise la division Reel / Rationnel
                 Nombre& ref=toRationnel().division(*tmp_ra);
@@ -135,7 +135,6 @@ void Calculatrice::Reel::EVAL(){}
 
 
 Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
-
     //Conversion du réel en rationnel 3.31 = 331/100
     QString str;
     str.setNum(_x); //Création d'un QString depuis le Reel
@@ -152,11 +151,8 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
 
 
 Calculatrice::Entier& Calculatrice::Reel::toEntier() const{
-
     //Conversion du réel en entier 3.0 = 3
-
     Entier* res= new Entier(_x);
-
     Entier& ref=*res;
     return (ref);
 }

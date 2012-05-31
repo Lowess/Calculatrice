@@ -26,6 +26,8 @@ namespace Calculatrice{
             //Méthodes
             void simplifier();
 
+            Reel& toReel() const;
+            Entier& toEntier() const;
 
             //Setter Getter
             const Entier& get_n() const{ return _n; }
