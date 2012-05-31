@@ -1,6 +1,8 @@
 #ifndef CONSTANTE_H
 #define CONSTANTE_H
 
+#include <QDebug>
+
 #include "Expression.h"
 
 namespace Calculatrice{
