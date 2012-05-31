@@ -30,20 +30,50 @@ int main(int argc, char *argv[])
 
     Fabrique& factory=Fabrique::getInstance();
 
-    Expression* a=factory.creer(ENTIER,"3");
-    Expression* b=factory.creer(REEL,"4.85");
-    Expression* c=factory.creer(RATIONNEL,"3","5");
+    Expression* a=factory.creer("3 4.2 + 3/4 *");
 
-    cout << *a << endl;
-    cout << *b << endl;
-    cout << *c << endl;
+    cout << endl;
 
-
-
+    cout << isComplexe("22/22$") << endl;
 /*
     Nombre* a=new Entier(3);
-    Nombre* b=new Reel(4.5);
-    Nombre* c=new Rationnel(12,10);
+    Nombre* b=new Reel(3.0);
+    Nombre* c=new Rationnel(3,1);
+*/
+/*
+    cout << a->SIN() << endl;
+    cout << b->SIN() << endl;
+    cout << c->SIN() << endl;
+
+    cout << endl;
+
+    cout << a->COS() << endl;
+    cout << b->COS() << endl;
+    cout << c->COS() << endl;
+
+    cout << endl;
+
+    cout << a->TAN() << endl;
+    cout << b->TAN() << endl;
+    cout << c->TAN() << endl;
+
+    cout << endl;
+
+    cout << a->SINH() << endl;
+    cout << b->SINH() << endl;
+    cout << c->SINH() << endl;
+
+    cout << endl;
+
+    cout << a->COSH() << endl;
+    cout << b->COSH() << endl;
+    cout << c->COSH() << endl;
+
+    cout << endl;
+
+    cout << a->TANH() << endl;
+    cout << b->TANH() << endl;
+    cout << c->TANH() << endl;
 */
 
 /*

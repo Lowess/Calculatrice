@@ -41,15 +41,55 @@ Calculatrice::Nombre& Calculatrice::Nombre::CUBE() const{}
 
 
 //Méthodes de classes
+Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(sin(reel->get_x())));
+    return (ref);
+}
 
-Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::COS() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::TAN() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::SINH() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::COSH() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::TANH() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::LN() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::LOG() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::COS() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(cos(reel->get_x())));
+    return (ref);
+}
+Calculatrice::Nombre& Calculatrice::Nombre::TAN() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(tan(reel->get_x())));
+    return (ref);
+}
+Calculatrice::Nombre& Calculatrice::Nombre::SINH() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(sinh(reel->get_x())));
+    return (ref);
+}
+Calculatrice::Nombre& Calculatrice::Nombre::COSH() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(cosh(reel->get_x())));
+    return (ref);
+}
+Calculatrice::Nombre& Calculatrice::Nombre::TANH() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(tanh(reel->get_x())));
+    return (ref);
+}
+Calculatrice::Nombre& Calculatrice::Nombre::LN() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(log(reel->get_x())));
+    return (ref);
+}
+Calculatrice::Nombre& Calculatrice::Nombre::LOG() const{
+    const Reel* reel=dynamic_cast<const Reel*>(&toReel());
+    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    Nombre& ref=*(new Reel(log(reel->get_x())));
+    return (ref);
+}
 
 Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
     //On essaye le cast en Entier
