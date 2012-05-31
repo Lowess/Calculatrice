@@ -1,3 +1,4 @@
+/*
 #ifndef DIVISION_H
 #define DIVISION_H
 
@@ -17,3 +18,4 @@ namespace Calculatrice{
 }
 
 #endif // DIVISION_H
+*/

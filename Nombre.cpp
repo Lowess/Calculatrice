@@ -5,12 +5,6 @@
 #include "Rationnel.h"
 
 
-
-QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n){
-    n.afficher();
-    return s;
-}
-
 //Implémentation issu de la classe Constante
 Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     //On essaye le cast en Entier

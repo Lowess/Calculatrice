@@ -11,14 +11,14 @@ namespace Calculatrice{
             unsigned int _length;
 
         public:
-            Operateur(unsigned int length_nb = 1, QString sign = "");
+            //Operateur(const unsigned int length_nb = 1, const QString& sign = "");
 
-            virtual string getOperator() = 0;
+            virtual QString getOperator() = 0;
 
-            Expression& Calculatrice::EVAL();
+            //Expression& EVAL();
+            void EVAL();
 
     };
-
 }
 
 #endif // OPERATEUR_H

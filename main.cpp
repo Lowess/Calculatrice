@@ -28,15 +28,25 @@ int main(int argc, char *argv[])
 
     cout << endl << endl << "Début programme" << endl;
 
+    Fabrique& factory=Fabrique::getInstance();
+
+    Expression* a=factory.creer(ENTIER,"3");
+    Expression* b=factory.creer(REEL,"4.85");
+    Expression* c=factory.creer(RATIONNEL,"3","5");
+
+    cout << *a << endl;
+    cout << *b << endl;
+    cout << *c << endl;
 
 
+
+/*
     Nombre* a=new Entier(3);
     Nombre* b=new Reel(4.5);
     Nombre* c=new Rationnel(12,10);
+*/
 
-    Fabrique& factory=Fabrique::getInstance();
-
-
+/*
     cout << "ref a Entier: " << endl;
     cout << *a << endl;
 
@@ -76,7 +86,7 @@ int main(int argc, char *argv[])
     cout << b->INV() << endl;
     cout << c->INV() << endl;
 */
-
+/*
     //Additions
     cout << "---- Additions ----" << endl;
     for(int i=0; i < 3; i++){
@@ -128,7 +138,7 @@ int main(int argc, char *argv[])
             }catch (exception& e){ cout << e.what() << " i=" << i << "j=" << j << endl; }
         }
     }
-
+*/
 
     cout << endl;
 }

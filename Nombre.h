@@ -1,7 +1,6 @@
 #ifndef NOMBRE_H
 #define NOMBRE_H
 
-#include <QTextStream>
 #include <QString>
 
 #include "Constante.h"
@@ -38,7 +37,7 @@ namespace Calculatrice{
             virtual Reel& toReel() const;
             virtual Rationnel& toRationnel() const;
 
-            virtual QString toString() const =0;
+            QString toString() const =0;
 
             Nombre& SIGN() const;
             Nombre& SQR() const;
@@ -62,15 +61,6 @@ namespace Calculatrice{
 
             //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
 
-            void afficher() const{
-                QTextStream cout(stdout, QIODevice::WriteOnly);
-                cout << this->toString();
-            }
     };
 }
-
-//operator<<
-
-QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n);
-
 #endif // NOMBRE_H
