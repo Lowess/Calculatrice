@@ -6,8 +6,12 @@
 namespace Calculatrice{
     class Soustraction: public Operateur {
         private:
+            static char op;
 
         public:
+            string getOperateur() const {
+                return op;
+            }
 
     };
 

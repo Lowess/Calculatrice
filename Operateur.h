@@ -6,9 +6,15 @@
 namespace Calculatrice{
     class Operateur: public Expression {
         private:
-            char _sign;
-            Calculatrice::Expression* _exp;
+            Calculatrice::Expression** _exp;
+            unsigned int _length;
+
         public:
+            Calculatrice::Operateur(unsigned int length_nb = 1, string sign = '');
+
+            virtual string getOperator() = 0;
+
+            Expression& Calculatrice::EVAL();
 
     };
 
