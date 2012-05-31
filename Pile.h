@@ -19,12 +19,6 @@ namespace Calculatrice{
             //Méthodes de sauvegarde et de chargement
             void sauvegarder();
             void charger();
-
-            //Méthodes spécifique
-            void SIGN();
-            void SQR();
-            void CUBE();
-
     };
 
 }

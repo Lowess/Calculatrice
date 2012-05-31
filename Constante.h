@@ -6,33 +6,15 @@
 #include "Expression.h"
 
 namespace Calculatrice{
-    class Constante{
+    class Constante : public Expression{
         private:
-            /*Partie réelle*/
-            int _entierR;
-            float _decimalR;
-            int _denominateurR;
-
-            /*Partie imaginaire*/
-            int _entierI;
-            float _decimalI;
-            int _denominateurI;
 
         public:
-            Calculatrice::Constante();
+            //Méthodes spécifique
 
-            QString Calculatrice::toString(){
-                return QString(this->_a + "+" + this->_b + "i");
-            }
-
-            //Implémentation des méthodes virtuelles pures de la class "Expression"
-            void EVAL();
-
-            //Méthodes publiques
-            Constante& addition(const Constante& c) const;
-            Constante& soustraction(const Constante& c) const;
-            Constante& multiplication(const Constante& c) const;
-            Constante& division(const Constante& c) const;
+            virtual Constante& SIGN() const =0;
+            virtual Constante& SQR() const =0;
+            virtual Constante& CUBE() const =0;
 
     };
 }

@@ -11,7 +11,7 @@ QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n){
     return s;
 }
 
-//Implémentation issu de la classe Pile
+//Implémentation issu de la classe Constante
 Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
@@ -41,6 +41,10 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
         return (ref);
     }
 }
+
+Calculatrice::Nombre& Calculatrice::Nombre::SQR() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::CUBE() const{}
+
 
 //Méthodes de classes
 
@@ -88,6 +92,7 @@ Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
 Calculatrice::Nombre& Calculatrice::Nombre::SQRT() const{}
 
 Calculatrice::Nombre& Calculatrice::Nombre::POW() const{}
+
 
 
 

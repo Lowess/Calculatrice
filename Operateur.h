@@ -2,6 +2,7 @@
 #define OPERATEUR_H
 
 #include "Expression.h"
+#include <QString>
 
 namespace Calculatrice{
     class Operateur: public Expression {
@@ -10,7 +11,7 @@ namespace Calculatrice{
             unsigned int _length;
 
         public:
-            Calculatrice::Operateur(unsigned int length_nb = 1, string sign = '');
+            Operateur(unsigned int length_nb = 1, QString sign = "");
 
             virtual string getOperator() = 0;
 

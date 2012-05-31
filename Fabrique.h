@@ -21,12 +21,13 @@ namespace Calculatrice{
                     _f=new Fabrique();
                 }
                 else
-
+                    return *_f;
             }
             static Fabrique& libereInstance(){
-                if(_f==0){
-
+                if(_f!=0){
+                    delete _f;
                 }
+                _f=0;
             }
 
             void creer(QString obj);

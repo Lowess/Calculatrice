@@ -1,16 +1,17 @@
 #include "Complexe.h"
+#include "Reel.h"
 
-//Implementation des méthodes de la class "Complexe"
+//Implementation des mÃ©thodes de la class "Complexe"
 
 using namespace Calculatrice;
-
+/*
 void Complexe::conjugue(){
-    this->_b.SIGN();
+    this->_b->SIGN();
 }
 
 Constante& Complexe::module() const{
-    Nombre* res = new Nombre(this->_a.SQR() + this->_b.SQR());
-    res.SQRT();
+    Reel* res = new Reel(this->_a->SQR() + this->_b->SQR());
+    res->SQRT();
     Constante& ref = *res;
     return(ref);
 }
@@ -47,3 +48,4 @@ Constante& Complexe::division(const Complexe& c) const {
     Constante& ref = *res;
     return(ref);
 }
+*/

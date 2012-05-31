@@ -41,9 +41,11 @@ namespace Calculatrice{
             virtual QString toString() const =0;
 
             Nombre& SIGN() const;
+            Nombre& SQR() const;
+            Nombre& CUBE() const;
 
             //Méthodes virtuelles pures hérité de la class "Expression"
-            void EVAL() =0;
+            void EVAL(){};
 
             //Implémentation du Template/Methode
             virtual Nombre& addition(const Nombre& nb) const=0;

@@ -4,17 +4,19 @@
 #include "Constante.h"
 #include "Nombre.h"
 
+#include <QString>
+
 namespace Calculatrice{
     class Complexe: public Constante{
         private:
-            Calculatrice::Nombre* _a;
-            Calculatrice::Nombre* _b;
+            Nombre* _a;
+            Nombre* _b;
 
         public:
-            Calculatrice::Complexe();
+            Complexe();
 
-            QString Calculatrice::toString(){
-                return QString(this->_a + "+" + this->_b + "i");
+            QString toString(){
+                return (QString(_a->toString() + "+" + _b->toString() + "i"));
             }
 
             //Implémentation des méthodes virtuelles pures de la class "Expression"

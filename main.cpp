@@ -8,7 +8,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
-
+#include "Fabrique.h"
 
 using namespace std;
 using namespace Calculatrice;
@@ -34,6 +34,9 @@ int main(int argc, char *argv[])
     Nombre* b=new Reel(4.5);
     Nombre* c=new Rationnel(12,10);
 
+    Fabrique& factory=Fabrique::getInstance();
+
+
     cout << "ref a Entier: " << endl;
     cout << *a << endl;
 
@@ -44,7 +47,7 @@ int main(int argc, char *argv[])
     cout << *c << endl;
 
     Nombre* tab_ref[3]={a,b,c};
-
+/*
     cout << a->toEntier() << endl;
     cout << b->toEntier() << endl;
     cout << c->toEntier() << endl;
@@ -60,7 +63,7 @@ int main(int argc, char *argv[])
     cout << a->toRationnel() << endl;
     cout << b->toRationnel() << endl;
     cout << c->toRationnel() << endl;
-
+*/
     cout << endl;
     /*
     cout << a->SIGN() << endl;
