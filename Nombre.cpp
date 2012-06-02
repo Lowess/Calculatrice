@@ -11,7 +11,7 @@ QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n){
     return s;
 }
 
-//Implémentation issu de la classe Pile
+//ImplÃ©mentation issu de la classe Pile
 Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
@@ -22,27 +22,27 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise SIGN Rationnel
+            else{ //Si succÃ¨s on rÃ©alise SIGN Rationnel
                 const Entier* inv=dynamic_cast<const Entier*>(&tmp_ra->get_n().SIGN());
                 Rationnel* res=new Rationnel(inv->get_x(),tmp_ra->get_d());
                 Nombre& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succès on réalise SIGN Reel
+        else{ //Si succÃ¨s on rÃ©alise SIGN Reel
             Reel* res=new Reel(-tmp_re->get_x());
             Nombre& ref=*res;
             return (ref);
         }
     }
-    else{ //Si succès on réalise SIGN Entier
+    else{ //Si succÃ¨s on rÃ©alise SIGN Entier
         Entier* res=new Entier(-tmp_en->get_x());
         Nombre& ref=*res;
         return (ref);
     }
 }
 
-//Méthodes de classes
+//MÃ©thodes de classes
 
 Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{}
 Calculatrice::Nombre& Calculatrice::Nombre::COS() const{}
@@ -63,22 +63,22 @@ Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise INV Rationnel
+            else{ //Si succÃ¨s on rÃ©alise INV Rationnel
                 Rationnel* res=new Rationnel(tmp_ra->get_d(),tmp_ra->get_n());
                 Nombre& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succès on réalise INV Reel
+        else{ //Si succÃ¨s on rÃ©alise INV Reel
             const Rationnel* res=dynamic_cast<const Rationnel *>(&tmp_re->toRationnel());
 
-            Rationnel* res2= new Rationnel(res->get_d(), res->get_n()); // On inverse num et den pour réaliser le INV
+            Rationnel* res2= new Rationnel(res->get_d(), res->get_n()); // On inverse num et den pour rÃ©aliser le INV
             res2->simplifier();
             Nombre& ref=*res2;
             return (ref);
         }
     }
-    else{ //Si succès on réalise INV Entier
+    else{ //Si succÃ¨s on rÃ©alise INV Entier
         Rationnel* res=new Rationnel(1,tmp_en->get_x());
         Nombre& ref=*res;
         return (ref);
@@ -101,11 +101,11 @@ Calculatrice::Entier& Calculatrice::Nombre::toEntier() const{
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise la conversion rationnel en entier
+            else{ //Si succÃ¨s on rÃ©alise la conversion rationnel en entier
                 return (tmp_ra->toEntier());
             }
         }
-        else{ //Si succès on réalise la conversion reel en entier
+        else{ //Si succÃ¨s on rÃ©alise la conversion reel en entier
             return (tmp_re->toEntier());
         }
     }
@@ -121,12 +121,12 @@ Calculatrice::Reel& Calculatrice::Nombre::toReel() const{
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise la conversion rationnel en reel
+            else{ //Si succÃ¨s on rÃ©alise la conversion rationnel en reel
                 return (tmp_ra->toReel());
             }
         }
     }
-    else{ //Si succès on réalise la conversion entier en reel
+    else{ //Si succÃ¨s on rÃ©alise la conversion entier en reel
         return (tmp_en->toReel());
     }
 }
@@ -142,11 +142,11 @@ Calculatrice::Rationnel& Calculatrice::Nombre::toRationnel() const{
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
         }
-        else{ //Si succès on réalise la conversion rationnel en entier
+        else{ //Si succÃ¨s on rÃ©alise la conversion rationnel en entier
             return (tmp_re->toRationnel());
         }
     }
-    else{ //Si succès on réalise la conversion reel en entier
+    else{ //Si succÃ¨s on rÃ©alise la conversion reel en entier
         return (tmp_en->toRationnel());
     }
 }

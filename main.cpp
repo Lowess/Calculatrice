@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
-    cout << endl << endl << "Début programme" << endl;
+    cout << endl << endl << "DÃ©but programme" << endl;
 
 
 

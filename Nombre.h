@@ -10,7 +10,7 @@
 using namespace Calculatrice;
 
 /**
-  Nombre implémente le Design Pattern Template/Methode
+  Nombre implÃ©mente le Design Pattern Template/Methode
   **/
 namespace Calculatrice{
     class Entier;
@@ -21,7 +21,7 @@ namespace Calculatrice{
         private:
 
         public:
-            //Méthodes virtuelles
+            //MÃ©thodes virtuelles
             virtual Nombre& SIN() const;
             virtual Nombre& COS() const;
             virtual Nombre& TAN() const;
@@ -42,10 +42,10 @@ namespace Calculatrice{
 
             Nombre& SIGN() const;
 
-            //Méthodes virtuelles pures hérité de la class "Expression"
+            //MÃ©thodes virtuelles pures hÃ©ritÃ© de la class "Expression"
             void EVAL() =0;
 
-            //Implémentation du Template/Methode
+            //ImplÃ©mentation du Template/Methode
             virtual Nombre& addition(const Nombre& nb) const=0;
             virtual Nombre& soustraction(const Nombre& nb) const=0;
             virtual Nombre& multiplication(const Nombre& nb) const=0;

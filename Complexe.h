@@ -7,20 +7,20 @@
 namespace Calculatrice{
     class Complexe: public Constante{
         private:
-            Calculatrice::Nombre* _a;
-            Calculatrice::Nombre* _b;
+            Nombre* _a;
+            Nombre* _b;
 
         public:
-            Calculatrice::Complexe();
+            Complexe();
 
-            QString Calculatrice::toString(){
-                return QString(this->_a + "+" + this->_b + "i");
+            QString toString(){
+                return QString(this->_a->toString() + "+" + this->_b->toString() + "i");
             }
 
-            //Impl�mentation des m�thodes virtuelles pures de la class "Expression"
+            //ImplÃ©mentation des mÃ©thodes virtuelles pures de la class "Expression"
             void EVAL();
 
-            //M�thodes publiques
+            //MÃ©thodes publiques
             void conjugue();
             Constante& module() const;
             Constante& addition(const Constante& c) const;

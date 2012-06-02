@@ -6,7 +6,7 @@ namespace Calculatrice{
         private:
 
         public:
-            //Méthodes virtuelles pures
+            //MÃ©thodes virtuelles pures
             virtual void EVAL() =0;
     };
 

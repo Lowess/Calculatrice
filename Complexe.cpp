@@ -1,6 +1,6 @@
 #include "Complexe.h"
 
-//Implementation des m�thodes de la class "Complexe"
+//Implementation des mÃ©thodes de la class "Complexe"
 
 using namespace Calculatrice;
 
