@@ -30,11 +30,11 @@ int main(int argc, char *argv[])
 
     Fabrique& factory=Fabrique::getInstance();
 
-    Expression* a=factory.creer("3 4.2 + 3/4 *");
+    Expression* a=factory.creer("3 4 +");
 
     cout << endl;
 
-    cout << isComplexe("22/22$") << endl;
+    cout << *a << endl;
 /*
     Nombre* a=new Entier(3);
     Nombre* b=new Reel(3.0);

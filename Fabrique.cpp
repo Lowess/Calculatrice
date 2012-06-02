@@ -13,7 +13,7 @@ Calculatrice::Fabrique& Calculatrice::Fabrique::getInstance(){
         return *_f;
 }
 
-Calculatrice::Fabrique& Calculatrice::Fabrique::libereInstance(){
+void Calculatrice::Fabrique::libereInstance(){
     if(_f!=0){
         delete _f;
     }
@@ -22,41 +22,55 @@ Calculatrice::Fabrique& Calculatrice::Fabrique::libereInstance(){
 
 
 Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) const{
-    QTextStream cout(stdout, QIODevice::WriteOnly);
+    Expression* res=0;
 
+    QTextStream cout(stdout, QIODevice::WriteOnly);
 
     QList<QString> list=text.split(" "); //Séparation des constantes et opérateur de la lineEdit
     QList<QString>:: iterator it;
-    for(it=list.begin(); it!=list.end(); ++it){
+    for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
+        switch (getTypeSousChaine(*it)){
+            case ENTIER:
+                res=new Entier(QString(*it).toInt());
+                break;
+            case REEL:
+                res=new Reel(QString(*it).toDouble());
+                break;
 
-    }
+            case RATIONNEL:
+                //QString tmp=*it;
+                //QStringList tmpl=tmp.split("/"); //Séparation num / den
+                //res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+                break;
 
-    Expression* res=0;
+            case COMPLEXE:
 /*
-    switch(type){
-        case ENTIER:
-            res=new Entier(param1.toInt());
-            break;
-        case REEL:
-            res=new Reel(param1.toDouble());
-            break;
-        case RATIONNEL:
-            res=new Rationnel(param1.toInt(), param2.toInt());
-            break;
-        default:
-            throw CalculatriceException(typeid(this).name(),OTHER,"Construction d'objet invalide");
-    }
+                QString tmp(*it);
+                QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
+                Nombre* re=dynamic_cast<Nombre*>(&creer(tmpl.value(0)));
+                Nombre* im=dynamic_cast<Nombre*>(&creer(tmpl.value(1)));
+                res=new Complexe(re, im);
 */
+                res=new Rationnel();
+                break;
+
+            case OPERATEUR:
+                res=new Rationnel();
+                break;
+            default:
+                throw CalculatriceException(typeid(this).name(),OTHER,"Construction d'objet invalide");
+        }
+    }
     return (res);
-
-
 }
 
-/******************
+/*
+ ******************
  * Fonctions
  ******************
 */
+
 bool Calculatrice::isEntier(const QString& s){
     QRegExp regexp("^[\\d]+$");
     return (s.contains(regexp));

@@ -28,7 +28,7 @@ namespace Calculatrice{
             Fabrique& operator=(const Fabrique& f){}
         public:
             static Fabrique& getInstance();
-            static Fabrique& libereInstance();
+            static void libereInstance();
 
             Expression* creer(const QString& text) const;
 
