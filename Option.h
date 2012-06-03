@@ -1,6 +1,8 @@
 #ifndef OPTION_H
 #define OPTION_H
 
+#include <QString>
+
 /*Template method : singleton*/
 
 enum TypeDiv {ENTIER,REEL,RATIONNEL};
@@ -15,9 +17,11 @@ namespace Calculatrice{
         Option(){
             _complexe = false;
             _degre = false;
+            _typeDiv = ENTIER;
+            //connecter les slots pour le faire apparaître à l'écran
         }
 
-        void changeTypeDiv(string s) {
+        void changeTypeDiv(QString s) {
             switch(s) {
                 case 'entier':
                         _typeDiv = ENTIER;
@@ -44,24 +48,28 @@ namespace Calculatrice{
 
     public:
 
-        /*ExÃƒÂ©cutÃƒÂ© dÃƒÂ¨s le chargement de l'application
-         *Charge le log prÃƒÂ©cÃƒÂ©dent
+        /*Exécuté au chargement de l'application
+         *Charge le log précédent
          */
         Option& getInstance(){
             if(_option==0){
                 _option = new Option();
-                //Quand fait, load le log
+                //try fopen(log.txt)
+                //if fail : créer fichier puis attribuer valeurs de base
             }
             return _option;
         }
 
-        /*ReÃƒÂ§oit signal pour switcher une option
+        /*Recoit signal pour switcher une option
          */
 
         void changeOption(QString option){
 
         }
 
+        void saveOptions(){
+        //à la fermeture du programme, sauver les options courantes dans le fichier log
+        }
 
     };
 }

@@ -1,13 +1,10 @@
 #ifndef NOMBRE_H
 #define NOMBRE_H
 
-#include <QTextStream>
 #include <QString>
 
 #include "Constante.h"
 #include "CalculatriceException.h"
-
-using namespace Calculatrice;
 
 /**
   Nombre implÃ©mente le Design Pattern Template/Methode
@@ -21,7 +18,7 @@ namespace Calculatrice{
         private:
 
         public:
-            //MÃ©thodes virtuelles
+            //M�thodes virtuelles
             virtual Nombre& SIN() const;
             virtual Nombre& COS() const;
             virtual Nombre& TAN() const;
@@ -38,12 +35,11 @@ namespace Calculatrice{
             virtual Reel& toReel() const;
             virtual Rationnel& toRationnel() const;
 
-            virtual QString toString() const =0;
+            QString toString() const =0;
 
             Nombre& SIGN() const;
-
-            //MÃ©thodes virtuelles pures hÃ©ritÃ© de la class "Expression"
-            void EVAL() =0;
+            Nombre& SQR() const;
+            Nombre& CUBE() const;
 
             //ImplÃ©mentation du Template/Methode
             virtual Nombre& addition(const Nombre& nb) const=0;
@@ -60,15 +56,6 @@ namespace Calculatrice{
 
             //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
 
-            void afficher() const{
-                QTextStream cout(stdout, QIODevice::WriteOnly);
-                cout << this->toString();
-            }
     };
 }
-
-//operator<<
-
-QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n);
-
 #endif // NOMBRE_H

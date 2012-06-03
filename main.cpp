@@ -8,7 +8,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
-
+#include "Fabrique.h"
 
 using namespace std;
 using namespace Calculatrice;
@@ -28,12 +28,55 @@ int main(int argc, char *argv[])
 
     cout << endl << endl << "DÃ©but programme" << endl;
 
+    Fabrique& factory=Fabrique::getInstance();
 
+    Expression* a=factory.creer("3 4 +");
 
+    cout << endl;
+
+    cout << *a << endl;
+/*
     Nombre* a=new Entier(3);
-    Nombre* b=new Reel(4.5);
-    Nombre* c=new Rationnel(12,10);
+    Nombre* b=new Reel(3.0);
+    Nombre* c=new Rationnel(3,1);
+*/
+/*
+    cout << a->SIN() << endl;
+    cout << b->SIN() << endl;
+    cout << c->SIN() << endl;
 
+    cout << endl;
+
+    cout << a->COS() << endl;
+    cout << b->COS() << endl;
+    cout << c->COS() << endl;
+
+    cout << endl;
+
+    cout << a->TAN() << endl;
+    cout << b->TAN() << endl;
+    cout << c->TAN() << endl;
+
+    cout << endl;
+
+    cout << a->SINH() << endl;
+    cout << b->SINH() << endl;
+    cout << c->SINH() << endl;
+
+    cout << endl;
+
+    cout << a->COSH() << endl;
+    cout << b->COSH() << endl;
+    cout << c->COSH() << endl;
+
+    cout << endl;
+
+    cout << a->TANH() << endl;
+    cout << b->TANH() << endl;
+    cout << c->TANH() << endl;
+*/
+
+/*
     cout << "ref a Entier: " << endl;
     cout << *a << endl;
 
@@ -44,7 +87,7 @@ int main(int argc, char *argv[])
     cout << *c << endl;
 
     Nombre* tab_ref[3]={a,b,c};
-
+/*
     cout << a->toEntier() << endl;
     cout << b->toEntier() << endl;
     cout << c->toEntier() << endl;
@@ -60,7 +103,7 @@ int main(int argc, char *argv[])
     cout << a->toRationnel() << endl;
     cout << b->toRationnel() << endl;
     cout << c->toRationnel() << endl;
-
+*/
     cout << endl;
     /*
     cout << a->SIGN() << endl;
@@ -73,7 +116,7 @@ int main(int argc, char *argv[])
     cout << b->INV() << endl;
     cout << c->INV() << endl;
 */
-
+/*
     //Additions
     cout << "---- Additions ----" << endl;
     for(int i=0; i < 3; i++){
@@ -125,7 +168,7 @@ int main(int argc, char *argv[])
             }catch (exception& e){ cout << e.what() << " i=" << i << "j=" << j << endl; }
         }
     }
-
+*/
 
     cout << endl;
 }

@@ -1,3 +1,4 @@
+/*
 #ifndef ADDITION_H
 #define ADDITION_H
 
@@ -9,7 +10,7 @@ namespace Calculatrice{
             static char op;
 
         public:
-            string getOperateur() const {
+            QString getOperateur() const {
                 return op;
             }
 
@@ -18,3 +19,4 @@ namespace Calculatrice{
 }
 
 #endif // ADDITION_H
+*/

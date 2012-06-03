@@ -1,3 +1,4 @@
+/*
 #ifndef MULTIPLICATION_H
 #define MULTIPLICATION_H
 
@@ -17,3 +18,4 @@ namespace Calculatrice{
 }
 
 #endif // MULTIPLICATION_H
+*/

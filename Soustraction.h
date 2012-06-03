@@ -1,3 +1,4 @@
+/*
 #ifndef SOUSTRACTION_H
 #define SOUSTRACTION_H
 
@@ -18,3 +19,4 @@ namespace Calculatrice{
 }
 
 #endif // SOUSTRACTION_H
+*/

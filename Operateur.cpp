@@ -1,10 +1,19 @@
 #include "Operateur.h"
 
-Calculatrice::Operateur(unsigned int lengthItems, QString sign):_exp(new Expression* [length_nb]),_length(lengthItems),_firstOp(false){
-    if (lengthItems > 1) {
-        _firstOp = true;
-        for(unsigned int i = 0; i < _length ; ++i) {
-               /*Faire une boucle sur chaque signe pour créer opérateurs ou constantes et les insérer dans exp en fonction de i*/
+Calculatrice::Operateur(const QString& expression, bool first){
+    _expEntiere = first;
+    if (first) {
+        QStringList composants = expression.split(' ');
+        for(unsigned int i = 0; i < composants.count() ; ++i ) {
+            cout << 'i : ' << i << endl;
+            if(composants[i].)
+            _exp[i] = newComposant;
         }
     }
+    else {
+
+    }
+    //On splitte expression avec les espaces
+    //on alloue un tableau de la longueur de QStringList
+    //On fait une boucle pour cr�er chaque operateur
 }

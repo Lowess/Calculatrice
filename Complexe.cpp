@@ -1,16 +1,19 @@
 #include "Complexe.h"
+#include "Reel.h"
 
-//Implementation des mÃ©thodes de la class "Complexe"
+//Implementation des méthodes de la class "Complexe"
 
 using namespace Calculatrice;
 
 void Complexe::conjugue(){
-    this->_b.SIGN();
+    this->_b->SIGN();
 }
 
 Constante& Complexe::module() const{
-    Nombre* res = new Nombre(this->_a.SQR() + this->_b.SQR());
-    res.SQRT();
+    Nombre* tmp = this->_a->SQR() + this->_b->SQR();
+    Reel* res = dynamic_cast<Reel*>(tmp);
+    //Reel* res = new Reel();
+    res->SQRT();
     Constante& ref = *res;
     return(ref);
 }

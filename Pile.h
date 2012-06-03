@@ -19,12 +19,15 @@ namespace Calculatrice{
             //MÃ©thodes de sauvegarde et de chargement
             void sauvegarder();
             void charger();
+<<<<<<< .merge_file_a04364
 
             //MÃ©thodes spÃ©cifique
             void SIGN();
             void SQR();
             void CUBE();
 
+=======
+>>>>>>> .merge_file_a04808
     };
 
 }
