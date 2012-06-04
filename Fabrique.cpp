@@ -21,7 +21,7 @@ void Calculatrice::Fabrique::libereInstance(){
 
 
 Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) const{
-    //Pile* p=&Pile::getInstance();
+    Pile* p=&Pile::getInstance();
     Expression* res=0;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
@@ -57,7 +57,11 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
                 break;
 */
             }
-            case OPERATEUR:{
+            case OPERATEUR_BINAIRE:{
+                //res=new Operateur();
+                break;
+            }
+            case OPERATEUR_UNAIRE:{
                 //res=new Operateur();
                 break;
             }
@@ -66,10 +70,8 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
                 break;
             }
         }
-        //p->push(res);
+        p->push(res);
     }
-    //cout << "Affichage" << endl;
-    //while(!p->isEmpty()){ cout << *p->pop() << endl; }
 
     return (res);
 }
@@ -100,8 +102,13 @@ bool Calculatrice::isComplexe(const QString& s){
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isOperateur(const QString& s){
+bool Calculatrice::isOperateurBinaire(const QString& s){
     QRegExp regexp("^[+|-|*|/]$");
+    return (s.contains(regexp));
+}
+
+bool Calculatrice::isOperateurUnaire(const QString& s){
+    QRegExp regexp("^[\\w]{3,}$");
     return (s.contains(regexp));
 }
 
@@ -110,7 +117,8 @@ Calculatrice::enum_Fabrique Calculatrice::getTypeSousChaine(const QString& ss){
     if(isReel(ss)){ return REEL; }
     if(isRationnel(ss)){ return RATIONNEL; }
     if(isComplexe(ss)){ return COMPLEXE; }
-    if(isOperateur(ss)){ return OPERATEUR; }
+    if(isOperateurBinaire(ss)){ return OPERATEUR_BINAIRE; }
+    if(isOperateurUnaire(ss)){ return OPERATEUR_UNAIRE; }
 }
 
 
@@ -125,8 +133,10 @@ QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef){
             s << "rationnel"; break;
         case COMPLEXE:
             s << "complexe"; break;
-        case OPERATEUR:
-            s << "operateur"; break;
+        case OPERATEUR_BINAIRE:
+            s << "operateur binaire"; break;
+        case OPERATEUR_UNAIRE:
+            s << "operateur unaire"; break;
     }
     return s;
 }

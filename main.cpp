@@ -35,11 +35,11 @@ int main(int argc, char *argv[])
 
     Pile* p=&Pile::getInstance();
 
-    p->push(a);
-
+    while(!p->isEmpty()){
+        cout << *p->pop() << endl;
+    }
     cout << endl;
 
-    cout << *a << endl;
 /*
     Nombre* a=new Entier(3);
     Nombre* b=new Reel(3.0);
