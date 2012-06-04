@@ -1,7 +1,7 @@
 #ifndef PILE_H
 #define PILE_H
 
-#include "QStack"
+#include <QStack>
 
 namespace Calculatrice{
     class Pile: public QStack{

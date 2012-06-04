@@ -3,7 +3,10 @@
 
 #include <QTextStream>
 
-
+/**
+  * DP iterator pour parcourir l'expression
+  *
+**/
 namespace Calculatrice{
     class Expression {
         private:

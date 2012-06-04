@@ -31,36 +31,43 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
     for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
         switch (getTypeSousChaine(*it)){
-            case ENTIER:
+            case ENTIER:{
                 res=new Entier(QString(*it).toInt());
                 break;
-            case REEL:
+            }
+            case REEL:{
                 res=new Reel(QString(*it).toDouble());
                 break;
-
-            case RATIONNEL:
-                //QString tmp=*it;
-                //QStringList tmpl=tmp.split("/"); //Séparation num / den
-                //res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+            }
+            case RATIONNEL:{
+                QString tmp(*it);
+                QStringList tmpl=tmp.split("/"); //Séparation num / den
+                res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
                 break;
-
-            case COMPLEXE:
+            }
+            case COMPLEXE:{
 /*
                 QString tmp(*it);
                 QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
                 Nombre* re=dynamic_cast<Nombre*>(&creer(tmpl.value(0)));
                 Nombre* im=dynamic_cast<Nombre*>(&creer(tmpl.value(1)));
                 res=new Complexe(re, im);
-*/
-                res=new Rationnel();
-                break;
 
-            case OPERATEUR:
                 res=new Rationnel();
                 break;
-            default:
+    */
+            }
+            case OPERATEUR:{
+                res=new Rationnel();
+                break;
+            }
+            default:{
                 throw CalculatriceException(typeid(this).name(),OTHER,"Construction d'objet invalide");
+                break;
+            }
         }
+        cout << "Resultat " << *res << " " << typeid(*res).name() <<  endl;
+
     }
     return (res);
 }

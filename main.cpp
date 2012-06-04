@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
     Fabrique& factory=Fabrique::getInstance();
 
-    Expression* a=factory.creer("3 4 +");
+    Expression* a=factory.creer("3 4 3.2");
 
     cout << endl;
 
