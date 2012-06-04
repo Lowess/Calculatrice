@@ -57,18 +57,24 @@ namespace Calculatrice{
                 //try fopen(log.txt)
                 //if fail : créer fichier puis attribuer valeurs de base
             }
-            return _option;
+            return *_option;
         }
+
 
         /*Recoit signal pour switcher une option
          */
-
         void changeOption(QString option){
 
         }
 
         void saveOptions(){
         //à la fermeture du programme, sauver les options courantes dans le fichier log
+        }
+
+        void libereInstance() {
+            if (_option==0){
+                delete _option;
+            }
         }
 
     };

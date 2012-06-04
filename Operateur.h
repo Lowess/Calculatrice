@@ -2,6 +2,7 @@
 #define OPERATEUR_H
 
 #include "Expression.h"
+#include "Fabrique.h"
 #include <QString>
 #include <QStringList>
 
