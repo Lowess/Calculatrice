@@ -32,7 +32,6 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
     for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
         switch (getTypeSousChaine(*it)){
-<<<<<<< HEAD
             case ENTIER:{
                 res=new Entier(QString(*it).toInt());
                 break;
@@ -63,6 +62,10 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
                 //res=new Operateur();
                 break;
             }
+            case OPERATEUR_UNAIRE:{
+                //res=new Operateur();
+                break;
+            }
             default:{
                 throw CalculatriceException(typeid(this).name(),OTHER,"Construction d'objet invalide");
                 break;
@@ -70,6 +73,7 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
         }
         p->push(res);
     }
+
     return (res);
 }
 
@@ -130,8 +134,10 @@ QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef){
             s << "rationnel"; break;
         case COMPLEXE:
             s << "complexe"; break;
-        case OPERATEUR:
-            s << "operateur"; break;
+        case OPERATEUR_BINAIRE:
+            s << "operateur binaire"; break;
+        case OPERATEUR_UNAIRE:
+            s << "operateur unaire"; break;
     }
     return s;
 }
