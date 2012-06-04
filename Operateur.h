@@ -9,11 +9,14 @@
 namespace Calculatrice{
     class Operateur: public Expression {
         private:
+            unsigned int _nbItems;
             Expression** _exp;
             bool _expEntiere;
 
         public:
             Operateur(const QString& expression, bool first = false);
+
+            QString& afficher();
 
             virtual QString getOperator() = 0;
 

@@ -39,7 +39,9 @@ SOURCES += main.cpp\
     Constante.cpp \
     Complexe.cpp \
     CalculatriceException.cpp \
-    Calculatrice.cpp
+    Calculatrice.cpp \
+    OperateurBinaire.cpp \
+    OperateurUnaire.cpp
 
 HEADERS  += mainwindow.h \
     Expression.h \

@@ -2,19 +2,23 @@
 #define OPERATEURUNAIRE_H
 
 #include "Operateur.h"
+#include "Expression.h"
+#include <QString>
 
 namespace Calculatrice {
 
-enum OpUnaire {COS, SIN, SQR, SQRT, INV, SIGN};
+enum OpUnaire {COS, SIN, COSH, SINH, SQR, CUBE, SQRT, INV, SIGN};
 
 class OperateurUnaire : public Operateur {
     private :
         OpUnaire _operateur;
 
     public:
-        OperateurUnaire(QString op);
+        OperateurUnaire(const QString op);
 
-        QString getOperator();
+        const QString getOperator();
+
+        Expression& eval(const Expression& e);
 
     };
 

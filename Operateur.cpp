@@ -5,8 +5,9 @@ Calculatrice::Operateur(const QString& expression, bool first){
     Fabrique* f = Fabrique::getInstance();
     if (first) {
         QStringList composants = expression.split(' ', QString::SkipEmptyParts);
-        _exp = new Expression*[composants.count()];
-        for(unsigned int i = 0; i < composants.count() ; ++i ) {
+        _nbItems = composants.count();
+        _exp = new Expression*[_nbItems];
+        for(unsigned int i = 0; i < _nbItems ; ++i ) {
             cout << 'i : ' << i << endl;
             if(isOperateur(composants[i]))
                 _exp[i] = new OperateurBinaire(composants[i]);
@@ -24,4 +25,10 @@ Calculatrice::Operateur(const QString& expression, bool first){
     }
 }
 
-QString& Calculatrice::Operateur::afficher();
+QString& Calculatrice::Operateur::afficher() {
+    QString s("");
+    for(unsigned int i = 0; i < __nbItems ; ++i) {
+        s.append(_exp[i]->toString());
+    }
+    return s;
+}

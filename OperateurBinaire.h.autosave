@@ -7,7 +7,7 @@
 
 namespace Calculatrice {
 
-enum OpBinaire {ADD, SOU, MUL, DIV};
+enum OpBinaire {ADD, SOU, MUL, DIV, PWR};
 
     class OperateurBinaire : public Operateur{
 
