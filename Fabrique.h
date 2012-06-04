@@ -25,7 +25,6 @@ namespace Calculatrice{
             Fabrique(){}
             Fabrique(const Fabrique& f){}
             ~Fabrique(){}
-            Fabrique& operator=(const Fabrique& f){}
         public:
             static Fabrique& getInstance();
             static void libereInstance();

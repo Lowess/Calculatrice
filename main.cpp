@@ -9,6 +9,7 @@
 #include "Reel.h"
 #include "Rationnel.h"
 #include "Fabrique.h"
+#include "Pile.h"
 
 using namespace std;
 using namespace Calculatrice;
@@ -31,6 +32,10 @@ int main(int argc, char *argv[])
     Fabrique& factory=Fabrique::getInstance();
 
     Expression* a=factory.creer("3 4 3.2");
+
+    Pile* p=&Pile::getInstance();
+
+    p->push(a);
 
     cout << endl;
 

@@ -1,5 +1,5 @@
 #include "Fabrique.h"
-
+#include "Pile.h"
 using namespace Calculatrice;
 using namespace std;
 
@@ -9,8 +9,7 @@ Calculatrice::Fabrique& Calculatrice::Fabrique::getInstance(){
     if(_f==0){
         _f=new Fabrique();
     }
-    else
-        return *_f;
+    return *_f;
 }
 
 void Calculatrice::Fabrique::libereInstance(){
@@ -22,6 +21,7 @@ void Calculatrice::Fabrique::libereInstance(){
 
 
 Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) const{
+    //Pile* p=&Pile::getInstance();
     Expression* res=0;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
@@ -55,10 +55,10 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
 
                 res=new Rationnel();
                 break;
-    */
+*/
             }
             case OPERATEUR:{
-                res=new Rationnel();
+                //res=new Operateur();
                 break;
             }
             default:{
@@ -66,9 +66,11 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
                 break;
             }
         }
-        cout << "Resultat " << *res << " " << typeid(*res).name() <<  endl;
-
+        //p->push(res);
     }
+    //cout << "Affichage" << endl;
+    //while(!p->isEmpty()){ cout << *p->pop() << endl; }
+
     return (res);
 }
 
