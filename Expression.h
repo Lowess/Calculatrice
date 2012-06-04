@@ -3,16 +3,20 @@
 
 #include <QTextStream>
 
+<<<<<<< HEAD
 /**
   * DP iterator pour parcourir l'expression
   *
 **/
+=======
+
+>>>>>>> 275b14b2101be9e7e4bcc79c86bf928fdd16c288
 namespace Calculatrice{
     class Expression {
         private:
 
         public:
-            //Méthodes virtuelles pures
+            //MÃ©thodes virtuelles pures
             virtual void EVAL() =0;
 
             virtual QString toString() const =0;

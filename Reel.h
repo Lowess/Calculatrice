@@ -24,10 +24,10 @@ namespace Calculatrice{
 
             QString toString() const;
 
-            //Implementation des méthodes virtuelles pures de la class "Expression"
+            //Implementation des mÃ©thodes virtuelles pures de la class "Expression"
             void EVAL();
 
-            //Méthodes
+            //MÃ©thodes
             Rationnel& toRationnel() const;
             Entier& toEntier() const;
 

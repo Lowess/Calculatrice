@@ -40,8 +40,6 @@ namespace Calculatrice{
     bool isOperateurBinaire(const QString& s);
     bool isOperateurUnaire(const QString& s);
 
-
-
 }
 //operator<<
 QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef);

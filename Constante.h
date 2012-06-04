@@ -16,6 +16,8 @@ namespace Calculatrice{
             virtual Constante& SQR() const =0;
             virtual Constante& CUBE() const =0;
 
+            void EVAL();
+
     };
 }
 

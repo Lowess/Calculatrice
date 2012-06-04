@@ -6,10 +6,8 @@
 #include "Constante.h"
 #include "CalculatriceException.h"
 
-using namespace Calculatrice;
-
 /**
-  Nombre implémente le Design Pattern Template/Methode
+  Nombre implÃ©mente le Design Pattern Template/Methode
   **/
 namespace Calculatrice{
     class Entier;
@@ -20,7 +18,7 @@ namespace Calculatrice{
         private:
 
         public:
-            //Méthodes virtuelles
+            //M�thodes virtuelles
             virtual Nombre& SIN() const;
             virtual Nombre& COS() const;
             virtual Nombre& TAN() const;

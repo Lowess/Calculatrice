@@ -20,15 +20,28 @@ SOURCES += main.cpp\
     Expression.cpp \
     Nombre.cpp \
     Operateur.cpp \
-    Addition.cpp \
-    Division.cpp \
-    Multiplication.cpp \
-    Soustraction.cpp \
     Fabrique.cpp \
     Pile.cpp \
     Calculatrice.cpp \
     Option.cpp \
-    CalculatriceException.cpp
+    CalculatriceException.cpp \
+    Reel.cpp \
+    Rationnel.cpp \
+    Pile.cpp \
+    Option.cpp \
+    Operateur.cpp \
+    Nombre.cpp \
+    mainwindow.cpp \
+    main.cpp \
+    Fabrique.cpp \
+    Expression.cpp \
+    Entier.cpp \
+    Constante.cpp \
+    Complexe.cpp \
+    CalculatriceException.cpp \
+    Calculatrice.cpp \
+    OperateurBinaire.cpp \
+    OperateurUnaire.cpp
 
 HEADERS  += mainwindow.h \
     Expression.h \
@@ -39,14 +52,29 @@ HEADERS  += mainwindow.h \
     Entier.h \
     Rationnel.h \
     Operateur.h \
-    Addition.h \
-    Soustraction.h \
-    Division.h \
-    Multiplication.h \
     Fabrique.h \
     Pile.h \
     Calculatrice.h \
     Option.h \
-    CalculatriceException.h
+    CalculatriceException.h \
+    Reel.h \
+    Rationnel.h \
+    Pile.h \
+    Option.h \
+    Operateur.h \
+    Nombre.h \
+    mainwindow.h \
+    Fabrique.h \
+    Expression.h \
+    Entier.h \
+    Constante.h \
+    Complexe.h \
+    CalculatriceException.h \
+    Calculatrice.h \
+    OperateurUnaire.h \
+    OperateurBinaire.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    mainwindow.ui
+
+OTHER_FILES +=

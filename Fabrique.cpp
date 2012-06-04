@@ -1,5 +1,6 @@
 #include "Fabrique.h"
 #include "Pile.h"
+
 using namespace Calculatrice;
 using namespace std;
 
@@ -32,7 +33,6 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
     for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
         switch (getTypeSousChaine(*it)){
-<<<<<<< HEAD
             case ENTIER:{
                 res=new Entier(QString(*it).toInt());
                 break;

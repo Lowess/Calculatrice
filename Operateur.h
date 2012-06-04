@@ -2,20 +2,26 @@
 #define OPERATEUR_H
 
 #include "Expression.h"
+
+#include "Fabrique.h"
 #include <QString>
+#include <QStringList>
 
 namespace Calculatrice{
     class Operateur: public Expression {
         private:
-            Calculatrice::Expression** _exp;
-            unsigned int _length;
+            unsigned int _nbItems;
+            Expression** _exp;
+            bool _expEntiere;
 
         public:
-            //Operateur(const unsigned int length_nb = 1, const QString& sign = "");
+            Operateur(const QString& expression, bool first = false);
+
+            QString& afficher();
 
             virtual QString getOperator() = 0;
 
-            //Expression& EVAL();
+            //Expression EVAL();
             void EVAL();
 
     };

@@ -19,10 +19,10 @@ namespace Calculatrice{
                 return (QString(_a->toString() + "+" + _b->toString() + "i"));
             }
 
-            //Impl�mentation des m�thodes virtuelles pures de la class "Expression"
+            //ImplÃ©mentation des mÃ©thodes virtuelles pures de la class "Expression"
             void EVAL();
 
-            //M�thodes publiques
+            //MÃ©thodes publiques
             void conjugue();
             Constante& module() const;
             Constante& addition(const Constante& c) const;
