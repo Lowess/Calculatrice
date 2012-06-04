@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     Fabrique.cpp \
     Pile.cpp \
     Calculatrice.cpp \
-    Option.cpp
+    Option.cpp \
+    CalculatriceException.cpp
 
 HEADERS  += mainwindow.h \
     Expression.h \
@@ -45,6 +46,7 @@ HEADERS  += mainwindow.h \
     Fabrique.h \
     Pile.h \
     Calculatrice.h \
-    Option.h
+    Option.h \
+    CalculatriceException.h
 
 FORMS    += mainwindow.ui

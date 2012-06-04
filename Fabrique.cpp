@@ -21,7 +21,8 @@ void Calculatrice::Fabrique::libereInstance(){
 
 
 Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) const{
-    //Pile* p=&Pile::getInstance();
+    Pile* p=&Pile::getInstance();
+
     Expression* res=0;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
@@ -31,6 +32,7 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
     for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
         switch (getTypeSousChaine(*it)){
+<<<<<<< HEAD
             case ENTIER:{
                 res=new Entier(QString(*it).toInt());
                 break;
@@ -57,7 +59,7 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
                 break;
 */
             }
-            case OPERATEUR:{
+            case OPERATEUR_BINAIRE:{
                 //res=new Operateur();
                 break;
             }
@@ -66,11 +68,8 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
                 break;
             }
         }
-        //p->push(res);
+        p->push(res);
     }
-    //cout << "Affichage" << endl;
-    //while(!p->isEmpty()){ cout << *p->pop() << endl; }
-
     return (res);
 }
 
