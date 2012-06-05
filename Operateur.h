@@ -5,8 +5,13 @@
 #include "Fabrique.h"
 #include <QString>
 #include <QStringList>
+#include <QStack>
 
 namespace Calculatrice{
+
+    class OperateurUnaire;
+    class OperateurBinaire;
+
     class Operateur: public Expression {
         private:
             unsigned int _nbItems;
@@ -14,14 +19,13 @@ namespace Calculatrice{
             bool _expEntiere;
 
         public:
-            Operateur(const QString& expression, bool first = false);
+            Operateur(const QString expression, bool first = false);
+            Operateur(){}
 
-            QString& afficher();
-
-            virtual QString getOperator() = 0;
+            QString toString() const;
 
             //Expression EVAL();
-            void EVAL();
+            Expression& EVAL();
 
     };
 }

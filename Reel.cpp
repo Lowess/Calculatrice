@@ -128,12 +128,6 @@ QString Calculatrice::Reel::toString() const{
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Implementation des mÃ©thodes vituelles pures de la class "Expression"
-void Calculatrice::Reel::EVAL(){}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
     //Conversion du rÃ©el en rationnel 3.31 = 331/100
     QString str;
@@ -147,7 +141,6 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
     Rationnel& ref=*res;
     return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquÃ©e
 }
-
 
 
 Calculatrice::Entier& Calculatrice::Reel::toEntier() const{

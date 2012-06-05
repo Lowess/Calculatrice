@@ -9,8 +9,7 @@ Calculatrice::Fabrique& Calculatrice::Fabrique::getInstance(){
     if(_f==0){
         _f=new Fabrique();
     }
-    else
-        return *_f;
+    return *_f;
 }
 
 void Calculatrice::Fabrique::libereInstance(){

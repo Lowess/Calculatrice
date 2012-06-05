@@ -1,6 +1,7 @@
 #ifndef COMPLEXE_H
 #define COMPLEXE_H
 
+#include <iostream>
 #include "Constante.h"
 #include "Nombre.h"
 
@@ -9,18 +10,15 @@
 namespace Calculatrice{
     class Complexe: public Constante{
         private:
-            Nombre* _a;
-            Nombre* _b;
+            Nombre& _a;
+            Nombre& _b;
 
         public:
-            Complexe();
+            Complexe(Nombre& a, Nombre& b):_a(a),_b(b){}
 
-            QString toString(){
-                return (QString(_a->toString() + "+" + _b->toString() + "i"));
+            QString toString() const{
+                return (QString(_a.toString() + "+" + _b.toString() + "i"));
             }
-
-            //ImplÃ©mentation des mÃ©thodes virtuelles pures de la class "Expression"
-            void EVAL();
 
             //MÃ©thodes publiques
             void conjugue();
@@ -29,6 +27,10 @@ namespace Calculatrice{
             Constante& soustraction(const Constante& c) const;
             Constante& multiplication(const Constante& c) const;
             Constante& division(const Constante& c) const;
+
+            Constante& SIGN() const;
+            Constante& SQR() const;
+            Constante& CUBE() const;
 
     };
 }

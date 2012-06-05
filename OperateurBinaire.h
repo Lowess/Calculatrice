@@ -3,11 +3,12 @@
 
 #include "Operateur.h"
 #include "Expression.h"
+#include <iostream>
 #include <QString>
 
 namespace Calculatrice {
 
-enum OpBinaire {ADD, SOU, MUL, DIV};
+enum OpBinaire {ADD, SOU, MUL, DIV, LOG, PWR};
 
     class OperateurBinaire : public Operateur{
 
@@ -17,10 +18,13 @@ enum OpBinaire {ADD, SOU, MUL, DIV};
         public:
 
             OperateurBinaire(const QString op);
+            OperateurBinaire(){}
 
-            const QString& getOperator();
+            QString toString() const;
 
-            Expression& eval(const Expression& e1, const Expression &e2);
+            bool isOperateurBinaire();
+
+            Expression& calcul(const Expression& e1, const Expression &e2);
 
     };
 

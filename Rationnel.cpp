@@ -154,10 +154,6 @@ QString Calculatrice::Rationnel::toString() const{
     return QString(str1+"/"+str2);
 }
 
-//Implementation des mÃ©thodes vituelles pures de la class "Expression"
-void Calculatrice::Rationnel::EVAL(){}
-
-
 //Constructeurs
 /*
 //Recopie et operator=

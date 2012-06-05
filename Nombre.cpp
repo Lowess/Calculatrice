@@ -45,8 +45,13 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
 
 //MÃ©thodes de classes
 
-Calculatrice::Nombre& Calculatrice::Nombre::SQR() const{}
-Calculatrice::Nombre& Calculatrice::Nombre::CUBE() const{}
+Calculatrice::Nombre& Calculatrice::Nombre::SQR() const{
+    return (*this) * (*this);
+}
+
+Calculatrice::Nombre& Calculatrice::Nombre::CUBE() const{
+    return (*this) * SQR();
+}
 
 Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
@@ -197,3 +202,14 @@ Calculatrice::Rationnel& Calculatrice::Nombre::toRationnel() const{
     }
 }
 
+bool Calculatrice::Nombre::operator==(const Calculatrice::Nombre& nb){
+    Calculatrice::Rationnel* a = &toRationnel();
+    Calculatrice::Rationnel* b = &nb.toRationnel();
+    return (a->get_n() == b->get_n()) && (a->get_d() == b->get_d());
+}
+
+bool Calculatrice::Nombre::operator==(int nb){
+    Calculatrice::Rationnel* a = &toRationnel();
+    Calculatrice::Rationnel* b = new Rationnel(nb,1);
+    return (a->get_n() == b->get_n()) && (a->get_d() == b->get_d());
+}

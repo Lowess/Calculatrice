@@ -58,9 +58,6 @@ namespace Calculatrice{
 
             QString toString() const;
 
-            //Implementation des mÃ©thodes virtuelles pures de la class "Expression"
-            void EVAL();
-
             //MÃ©thodes
             Rationnel& toRationnel() const;
             Reel& toReel() const;
@@ -72,6 +69,10 @@ namespace Calculatrice{
 
             //Constructeurs
             Entier(int x=0):Reel(x),_x(x){}
+
+            bool operator==(const Entier& e) {
+                return _x == e._x;
+            }
 
     };
 }

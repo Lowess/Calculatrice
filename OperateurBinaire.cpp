@@ -10,24 +10,43 @@ Calculatrice::OperateurBinaire::OperateurBinaire(const QString op){
         _operateur = MUL;
     else if (op == "/")
         _operateur = DIV;
+    else if (op == "LOG")
+        _operateur = LOG;
+    else if (op == "PWR")
+        _operateur = PWR;
     else
         //lancer erreur
-        cout << "Operateur binaire non reconnu" << endl;
+        std::cout << "Operateur binaire non reconnu" << std::endl;
 }
 
-QString& Calculatrice::OperateurBinaire::toString() const{
+QString Calculatrice::OperateurBinaire::toString() const{
     QString s;
     switch(_operateur){
     case ADD: s = "+"; break;
     case SOU: s = "-"; break;
     case MUL: s = "*"; break;
     case DIV: s = "/"; break;
+    case LOG: s = "LOG"; break;
+    case PWR: s = "PWR"; break;
     default: //lancer erreur
-        cout << "ERROR" << endl; break;
+        std::cout << "ERROR" << std::endl; break;
     }
     return s;
 }
 
-Expression& Calculatrice::OperateurBinaire::EVAL(const Expression& e1, const Expression& e2) {
+Calculatrice::Expression& Calculatrice::OperateurBinaire::calcul(const Calculatrice::Expression& e1, const Calculatrice::Expression& e2) {
+    //faire du calcul =D
+    return;
+}
 
+bool Calculatrice::OperateurBinaire::isOperateurBinaire() {
+    switch(_operateur) {
+        case ADD: return true;
+        case SOU: return true;
+        case MUL: return true;
+        case DIV: return true;
+        case LOG: return true;
+        case PWR: return true;
+        default: return false;
+    }
 }

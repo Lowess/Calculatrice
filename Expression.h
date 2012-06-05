@@ -5,12 +5,16 @@
 
 
 namespace Calculatrice{
+
+    class Constante;
+    class Operateur;
+
     class Expression {
         private:
 
         public:
             //Méthodes virtuelles pures
-            virtual void EVAL() =0;
+            virtual Expression& EVAL() =0;
 
             virtual QString toString() const =0;
 

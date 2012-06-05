@@ -151,9 +151,6 @@ QString Calculatrice::Entier::toString() const{
     return str;
 }
 
-//Implementation des mÃ©thodes vituelles pures de la class "Expression"
-void Calculatrice::Entier::EVAL(){}
-
 //Constructeurs
 
 
@@ -166,7 +163,6 @@ Calculatrice::Rationnel& Calculatrice::Entier::toRationnel() const{
     Rationnel& ref=*res;
     return (ref);
 }
-
 
 
 Calculatrice::Reel& Calculatrice::Entier::toReel() const{

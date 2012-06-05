@@ -56,6 +56,9 @@ namespace Calculatrice{
 
             //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
 
+            bool operator==(const Nombre& nb);
+            bool operator==(int nb);
+
     };
 }
 #endif // NOMBRE_H

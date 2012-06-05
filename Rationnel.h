@@ -20,9 +20,6 @@ namespace Calculatrice{
 
             QString toString() const;
 
-            //Implementation des mÃ©thodes virtuelles pures de la class "Expression"
-            void EVAL();
-
             //MÃ©thodes
             void simplifier();
 
