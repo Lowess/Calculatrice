@@ -1,4 +1,5 @@
 #include "Fabrique.h"
+#include "Pile.h"
 
 using namespace Calculatrice;
 using namespace std;
@@ -21,6 +22,8 @@ void Calculatrice::Fabrique::libereInstance(){
 
 
 Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) const{
+    Pile* p=&Pile::getInstance();
+
     Expression* res=0;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
@@ -30,36 +33,42 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
     for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
         switch (getTypeSousChaine(*it)){
-            case ENTIER:
+            case ENTIER:{
                 res=new Entier(QString(*it).toInt());
                 break;
-            case REEL:
+            }
+            case REEL:{
                 res=new Reel(QString(*it).toDouble());
                 break;
-
-            case RATIONNEL:
-                //QString tmp=*it;
-                //QStringList tmpl=tmp.split("/"); //Séparation num / den
-                //res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+            }
+            case RATIONNEL:{
+                QString tmp(*it);
+                QStringList tmpl=tmp.split("/"); //Séparation num / den
+                res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
                 break;
-
-            case COMPLEXE:
+            }
+            case COMPLEXE:{
 /*
                 QString tmp(*it);
                 QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
                 Nombre* re=dynamic_cast<Nombre*>(&creer(tmpl.value(0)));
                 Nombre* im=dynamic_cast<Nombre*>(&creer(tmpl.value(1)));
                 res=new Complexe(re, im);
-*/
-                res=new Rationnel();
-                break;
 
-            case OPERATEUR:
                 res=new Rationnel();
                 break;
-            default:
+*/
+            }
+            case OPERATEUR_BINAIRE:{
+                //res=new Operateur();
+                break;
+            }
+            default:{
                 throw CalculatriceException(typeid(this).name(),OTHER,"Construction d'objet invalide");
+                break;
+            }
         }
+        p->push(res);
     }
     return (res);
 }
@@ -90,8 +99,13 @@ bool Calculatrice::isComplexe(const QString& s){
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isOperateur(const QString& s){
+bool Calculatrice::isOperateurBinaire(const QString& s){
     QRegExp regexp("^[+|-|*|/]$");
+    return (s.contains(regexp));
+}
+
+bool Calculatrice::isOperateurUnaire(const QString& s){
+    QRegExp regexp("^[\\w]{3,}$");
     return (s.contains(regexp));
 }
 
@@ -100,7 +114,8 @@ Calculatrice::enum_Fabrique Calculatrice::getTypeSousChaine(const QString& ss){
     if(isReel(ss)){ return REEL; }
     if(isRationnel(ss)){ return RATIONNEL; }
     if(isComplexe(ss)){ return COMPLEXE; }
-    if(isOperateur(ss)){ return OPERATEUR; }
+    if(isOperateurBinaire(ss)){ return OPERATEUR_BINAIRE; }
+    if(isOperateurUnaire(ss)){ return OPERATEUR_UNAIRE; }
 }
 
 

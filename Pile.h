@@ -1,13 +1,25 @@
 #ifndef PILE_H
 #define PILE_H
 
-#include "QStack"
+#include <QStack>
+#include "Expression.h"
 
+/**
+  * DP Singleton
+  *
+**/
 namespace Calculatrice{
-    class Pile: public QStack{
+    class Pile: public QStack<Expression*>{
         private:
+            static Pile* _pile;
 
+            Pile(){}
+            Pile(const Pile& p);
+            ~Pile(){}
         public:
+            static Pile& getInstance();
+            static void libereInstance();
+
             //MÃ©thodes agissant sur la pile
             void SWAP();
             void SUM();
@@ -19,17 +31,7 @@ namespace Calculatrice{
             //MÃ©thodes de sauvegarde et de chargement
             void sauvegarder();
             void charger();
-<<<<<<< .merge_file_a04364
-
-            //MÃ©thodes spÃ©cifique
-            void SIGN();
-            void SQR();
-            void CUBE();
-
-=======
->>>>>>> .merge_file_a04808
     };
-
 }
 
 #endif // PILE_H

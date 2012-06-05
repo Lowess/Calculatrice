@@ -41,7 +41,10 @@ namespace Calculatrice{
             Nombre& SQR() const;
             Nombre& CUBE() const;
 
-            //ImplÃ©mentation du Template/Methode
+            //Méthodes virtuelles pures hérité de la class "Expression"
+            void EVAL(){};
+
+            //Implémentation du Template/Methode
             virtual Nombre& addition(const Nombre& nb) const=0;
             virtual Nombre& soustraction(const Nombre& nb) const=0;
             virtual Nombre& multiplication(const Nombre& nb) const=0;

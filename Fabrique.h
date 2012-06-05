@@ -16,7 +16,7 @@
 **/
 namespace Calculatrice{
 
-    enum enum_Fabrique {ENTIER, REEL, RATIONNEL, COMPLEXE, OPERATEUR};
+    enum enum_Fabrique {ENTIER, REEL, RATIONNEL, COMPLEXE, OPERATEUR_BINAIRE, OPERATEUR_UNAIRE};
 
     class Fabrique{
         private:
@@ -25,7 +25,7 @@ namespace Calculatrice{
             Fabrique(){}
             Fabrique(const Fabrique& f){}
             ~Fabrique(){}
-            //Fabrique& operator=(const Fabrique& f){}
+
         public:
             static Fabrique& getInstance();
             static void libereInstance();
@@ -38,9 +38,8 @@ namespace Calculatrice{
     bool isReel(const QString& s);
     bool isRationnel(const QString& s);
     bool isComplexe(const QString& s);
-    bool isOperateur(const QString& s);
-
-
+    bool isOperateurBinaire(const QString& s);
+    bool isOperateurUnaire(const QString& s);
 
 }
 //operator<<

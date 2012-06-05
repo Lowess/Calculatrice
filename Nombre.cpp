@@ -5,14 +5,14 @@
 #include "Rationnel.h"
 
 
+//Implémentation issu de la classe Constante
 
 QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n){
     n.afficher();
     return s;
 }
 
-//ImplÃ©mentation issu de la classe Pile
-
+//Implémentation issu de la classe Pile
 Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
