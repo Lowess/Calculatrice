@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         void slotConnection();
         void rafraichirPile();
+
     private slots:
         //Connexion des boutons 0-9
         void num0Pressed();

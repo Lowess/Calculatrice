@@ -15,7 +15,6 @@ MainWindow::~MainWindow()
 //Connexion des slots
 void MainWindow::slotConnection()
 {
-    ui->listStack->addItem("TOTO");
     //Connexion des boutons 0 à 9
     connect(ui->btn0, SIGNAL(clicked()), this, SLOT(num0Pressed()));
     connect(ui->btn1, SIGNAL(clicked()), this, SLOT(num1Pressed()));
