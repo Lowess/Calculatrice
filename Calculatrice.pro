@@ -20,10 +20,6 @@ SOURCES += main.cpp\
     Expression.cpp \
     Nombre.cpp \
     Operateur.cpp \
-    Addition.cpp \
-    Division.cpp \
-    Multiplication.cpp \
-    Soustraction.cpp \
     Fabrique.cpp \
     Pile.cpp \
     Calculatrice.cpp \
@@ -39,10 +35,6 @@ HEADERS  += mainwindow.h \
     Entier.h \
     Rationnel.h \
     Operateur.h \
-    Addition.h \
-    Soustraction.h \
-    Division.h \
-    Multiplication.h \
     Fabrique.h \
     Pile.h \
     Calculatrice.h \

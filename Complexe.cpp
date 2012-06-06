@@ -4,13 +4,15 @@
 //Implementation des méthodes de la class "Complexe"
 
 using namespace Calculatrice;
-/*
+
 void Complexe::conjugue(){
     this->_b->SIGN();
 }
 
 Constante& Complexe::module() const{
-    Reel* res = new Reel(this->_a->SQR() + this->_b->SQR());
+    Nombre* tmp = this->_a->SQR() + this->_b->SQR();
+    Reel* res = dynamic_cast<Reel*>(tmp);
+    //Reel* res = new Reel();
     res->SQRT();
     Constante& ref = *res;
     return(ref);
@@ -48,4 +50,3 @@ Constante& Complexe::division(const Complexe& c) const {
     Constante& ref = *res;
     return(ref);
 }
-*/

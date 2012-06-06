@@ -20,7 +20,7 @@ void Calculatrice::Fabrique::libereInstance(){
 }
 
 
-Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) const{
+void Calculatrice::Fabrique::creer(const QString& text) const{
     Pile* p=&Pile::getInstance();
     Expression* res=0;
 
@@ -72,8 +72,6 @@ Calculatrice::Expression* Calculatrice::Fabrique::creer(const QString& text) con
         }
         p->push(res);
     }
-
-    return (res);
 }
 
 /*

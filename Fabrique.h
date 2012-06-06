@@ -29,7 +29,8 @@ namespace Calculatrice{
             static Fabrique& getInstance();
             static void libereInstance();
 
-            Expression* creer(const QString& text) const;
+            //Permet de parser la chaine et de créer le bon type d'expression pour les empiler
+            void creer(const QString& text) const;
 
     };
     enum_Fabrique getTypeSousChaine(const QString& ss); //Retourne le type de l'ins
