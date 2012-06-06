@@ -1,5 +1,7 @@
 #include "Fabrique.h"
-#include "Pile.h"
+#include "OperateurBinaire.h"
+#include "OperateurUnaire.h"
+
 using namespace Calculatrice;
 using namespace std;
 
@@ -22,7 +24,6 @@ void Calculatrice::Fabrique::libereInstance(){
 
 void Calculatrice::Fabrique::creer(const QString& text) const{
     Pile* p=&Pile::getInstance();
-    Expression* res=0;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
@@ -32,17 +33,20 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
         switch (getTypeSousChaine(*it)){
             case ENTIER:{
-                res=new Entier(QString(*it).toInt());
+                Expression* res=new Entier(QString(*it).toInt());
+                p->push(res);
                 break;
             }
             case REEL:{
-                res=new Reel(QString(*it).toDouble());
+                Expression* res=new Reel(QString(*it).toDouble());
+                p->push(res);
                 break;
             }
             case RATIONNEL:{
                 QString tmp(*it);
                 QStringList tmpl=tmp.split("/"); //Séparation num / den
-                res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+                Expression* res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+                p->push(res);
                 break;
             }
             case COMPLEXE:{
@@ -58,11 +62,14 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
 */
             }
             case OPERATEUR_BINAIRE:{
-                //res=new Operateur();
+                OperateurBinaire* res=new OperateurBinaire(*it);
+                res->appliqueOperateur();
                 break;
             }
             case OPERATEUR_UNAIRE:{
-                //res=new Operateur();
+                OperateurUnaire* res=new OperateurUnaire(*it);
+                res->appliqueOperateur();
+                cout << *res << endl;
                 break;
             }
             default:{
@@ -70,7 +77,6 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
                 break;
             }
         }
-        p->push(res);
     }
 }
 

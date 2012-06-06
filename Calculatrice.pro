@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     Pile.cpp \
     Calculatrice.cpp \
     Option.cpp \
-    CalculatriceException.cpp
+    CalculatriceException.cpp \
+    OperateurUnaire.cpp \
+    OperateurBinaire.cpp
 
 HEADERS  += mainwindow.h \
     Expression.h \
@@ -39,6 +41,8 @@ HEADERS  += mainwindow.h \
     Pile.h \
     Calculatrice.h \
     Option.h \
-    CalculatriceException.h
+    CalculatriceException.h \
+    OperateurUnaire.h \
+    OperateurBinaire.h
 
 FORMS    += mainwindow.ui

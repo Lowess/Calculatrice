@@ -4,26 +4,19 @@
 #include "Operateur.h"
 #include "Expression.h"
 #include <QString>
+#include <typeinfo>
 
 namespace Calculatrice {
-
-enum OpBinaire {ADD, SOU, MUL, DIV};
-
     class OperateurBinaire : public Operateur{
-
-        private:
-            OpBinaire _operateur;
-
         public:
+            OperateurBinaire(const QString& op);
 
-            OperateurBinaire(const QString op);
+            QString& getOperator() const;
 
-            const QString& getOperator();
+            //Expression& eval(const Expression& e1, const Expression &e2);
 
-            Expression& eval(const Expression& e1, const Expression &e2);
-
+            QString toString() const;
     };
-
 }
 
 #endif // OPERATEURBINAIRE_H

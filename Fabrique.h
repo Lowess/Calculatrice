@@ -5,6 +5,8 @@
 #include <QString>
 #include <QList>
 
+#include "Pile.h"
+
 #include "Expression.h"
 #include "Entier.h"
 #include "Reel.h"
@@ -40,10 +42,8 @@ namespace Calculatrice{
     bool isComplexe(const QString& s);
     bool isOperateurBinaire(const QString& s);
     bool isOperateurUnaire(const QString& s);
-
-
-
 }
+
 //operator<<
 QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef);
 

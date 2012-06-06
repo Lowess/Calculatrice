@@ -6,22 +6,18 @@
 #include <QString>
 
 namespace Calculatrice {
+    class OperateurUnaire : public Operateur {
+        public:
+            OperateurUnaire(const QString op);
 
-enum OpUnaire {COS, SIN, COSH, SINH, SQR, CUBE, SQRT, INV, SIGN};
+            QString& getOperator() const;
 
-class OperateurUnaire : public Operateur {
-    private :
-        OpUnaire _operateur;
+            QString toString() const;
 
-    public:
-        OperateurUnaire(const QString op);
 
-        const QString getOperator();
-
-        Expression& eval(const Expression& e);
+            Expression& eval(const Expression& e);
 
     };
-
 }
 
 

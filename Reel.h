@@ -17,10 +17,10 @@ namespace Calculatrice{
         private:
             double _x;
         public:
-            Nombre& addition(const Nombre& nb) const;
-            Nombre& soustraction(const Nombre& nb) const;
-            Nombre& multiplication(const Nombre& nb) const;
-            Nombre& division(const Nombre& nb) const;
+            Constante& addition(const Constante& nb) const;
+            Constante& soustraction(const Constante& nb) const;
+            Constante& multiplication(const Constante& nb) const;
+            Constante& division(const Constante& nb) const;
 
             QString toString() const;
 

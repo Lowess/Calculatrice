@@ -29,32 +29,11 @@ namespace Calculatrice{
         private:
             int _x; /*!< L'entier */
         public:
-            /*!
-             *  \brief Trigonométrie Sinus
-             *
-             *  Calcul le sinus de l'entier
-             *
-             */
-            /*!
-             *  \brief Addition d'un entier
-             *
-             *  Methode qui permet d'additionner un entier
-             *  avec un nombre
-             *
-             *  \param nb: le nombre à ajouter à l'entier
-             */
-            Nombre& addition(const Nombre& nb) const;
-            /*!
-             *  \brief Soustraction d'un entier
-             *
-             *  Methode qui permet de soustraire un nombre
-             *  à un entier
-             *
-             *  \param nb: le nombre effectuant la soustraction sur l'entier
-             */
-            Nombre& soustraction(const Nombre& nb) const;
-            Nombre& multiplication(const Nombre& nb) const;
-            Nombre& division(const Nombre& nb) const;
+
+            Constante& addition(const Constante& nb) const;
+            Constante& soustraction(const Constante& nb) const;
+            Constante& multiplication(const Constante& nb) const;
+            Constante& division(const Constante& nb) const;
 
             QString toString() const;
 

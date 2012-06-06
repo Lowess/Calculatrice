@@ -30,10 +30,11 @@ int main(int argc, char *argv[])
     cout << endl << endl << "Début programme" << endl;
 
     Fabrique& factory=Fabrique::getInstance();
-
-    Expression* a=factory.creer("3 4 3.2");
+    factory.creer("1 +");
 
     Pile* p=&Pile::getInstance();
+
+    cout << endl;
 
     while(!p->isEmpty()){
         cout << *p->pop() << endl;
