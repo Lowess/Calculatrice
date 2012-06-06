@@ -15,6 +15,7 @@ MainWindow::~MainWindow()
 //Connexion des slots
 void MainWindow::slotConnection()
 {
+    ui->listStack->addItem("TOTO");
     //Connexion des boutons 0 à 9
     connect(ui->btn0, SIGNAL(clicked()), this, SLOT(num0Pressed()));
     connect(ui->btn1, SIGNAL(clicked()), this, SLOT(num1Pressed()));
@@ -86,7 +87,10 @@ void MainWindow::num9Pressed(){ ui->lineEdit->setText(ui->lineEdit->text()+"9");
 
 //Connexion des boutons DEL & ENTER
 void MainWindow::delPressed(){ ui->lineEdit->setText(""); }
-void MainWindow::enterPressed(){}
+void MainWindow::enterPressed(){
+    Fabrique::getInstance().creer(ui->lineEdit->text());
+    rafraichirPile();
+}
 
 //Connexion des boutons opérateurs classiques + - * /
 void MainWindow::plusPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" + "); }
@@ -127,3 +131,17 @@ void MainWindow::meanPressed(){}
 void MainWindow::clearPressed(){}
 void MainWindow::dropPressed(){}
 void MainWindow::dupPressed(){}
+
+
+
+void MainWindow::rafraichirPile(){
+    ui->listStack->clear();
+
+    QStack<Expression*>::iterator it;
+
+    Expression* exp=0;
+    for(it=Pile::getInstance().begin(); it!=Pile::getInstance().end(); ++it){ //On parcourt la pile
+        exp=*it;
+        ui->listStack->addItem(exp->toString());
+    }
+}

@@ -17,21 +17,22 @@ using namespace Calculatrice;
 
 int main(int argc, char *argv[])
 {
-/*
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    
+
     return a.exec();
-*/
+
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
     cout << endl << endl << "Début programme" << endl;
-
+/*
     Fabrique& factory=Fabrique::getInstance();
-    factory.creer("1 +");
-
+    factory.creer("1   2 +");
+*/
+    /*
     Pile* p=&Pile::getInstance();
 
     cout << endl;
@@ -40,7 +41,7 @@ int main(int argc, char *argv[])
         cout << *p->pop() << endl;
     }
     cout << endl;
-
+*/
 /*
     Nombre* a=new Entier(3);
     Nombre* b=new Reel(3.0);

@@ -26,8 +26,7 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
     Pile* p=&Pile::getInstance();
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
-
-    QList<QString> list=text.split(" "); //Séparation des constantes et opérateur de la lineEdit
+    QList<QString> list=text.simplified().split(" "); //Séparation des constantes et opérateur de la lineEdit par les espaces
     QList<QString>:: iterator it;
     for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
