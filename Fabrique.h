@@ -5,6 +5,8 @@
 #include <QString>
 #include <QList>
 
+#include "Pile.h"
+
 #include "Expression.h"
 #include "Entier.h"
 #include "Reel.h"
@@ -29,7 +31,8 @@ namespace Calculatrice{
             static Fabrique& getInstance();
             static void libereInstance();
 
-            Expression* creer(const QString& text) const;
+            //Permet de parser la chaine et de créer le bon type d'expression pour les empiler
+            void creer(const QString& text) const;
 
     };
     enum_Fabrique getTypeSousChaine(const QString& ss); //Retourne le type de l'ins
@@ -39,10 +42,8 @@ namespace Calculatrice{
     bool isComplexe(const QString& s);
     bool isOperateurBinaire(const QString& s);
     bool isOperateurUnaire(const QString& s);
-
-
-
 }
+
 //operator<<
 QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef);
 

@@ -4,7 +4,7 @@
 #include "Reel.h"
 #include "Rationnel.h"
 
-
+/*
 //Implémentation issu de la classe Constante
 Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     //On essaye le cast en Entier
@@ -38,7 +38,7 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
 
 Calculatrice::Nombre& Calculatrice::Nombre::SQR() const{}
 Calculatrice::Nombre& Calculatrice::Nombre::CUBE() const{}
-
+*/
 
 //Méthodes de classes
 Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{

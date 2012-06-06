@@ -2,21 +2,35 @@
 #define OPERATEUR_H
 
 #include "Expression.h"
+
+#include "Fabrique.h"
+#include "Pile.h"
 #include <QString>
+#include <QStringList>
 
 namespace Calculatrice{
+    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN};
+
     class Operateur: public Expression {
+        protected:
+            enumOperateurs _operateur;
         private:
-            Calculatrice::Expression** _exp;
-            unsigned int _length;
+            unsigned int _nbItems;
+            Expression** _exp;
+            bool _expEntiere;
 
         public:
-            //Operateur(const unsigned int length_nb = 1, const QString& sign = "");
+            QString& afficher();
 
-            virtual QString getOperator() = 0;
+            QString toString() const =0;
 
-            //Expression& EVAL();
+            virtual QString& getOperator() const = 0 ;
+
+            void appliqueOperateur();
+
+            //Expression EVAL();
             void EVAL();
+
 
     };
 }
