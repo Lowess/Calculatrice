@@ -43,8 +43,6 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     }
 }
 
-//MÃ©thodes de classes
-
 Calculatrice::Nombre& Calculatrice::Nombre::SQR() const{
     return (*this) * (*this);
 }

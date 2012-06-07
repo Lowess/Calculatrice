@@ -4,8 +4,8 @@
 
 using namespace Calculatrice;
 
-//RÃ©alise l'addition d'un Reel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Reel::addition(const Nombre& nb) const{
+//Réalise l'addition d'un Reel avec un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Reel::addition(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -15,25 +15,25 @@ Calculatrice::Nombre& Calculatrice::Reel::addition(const Nombre& nb) const{
             if(tmp_ra==0) //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
 
-            else{ //Si succÃ¨s on rÃ©alise l'addition Reel + Rationnel
-                Nombre& ref=toRationnel().addition(*tmp_ra);
+            else{ //Si succès on réalise l'addition Reel + Rationnel
+                Constante& ref=toRationnel().addition(*tmp_ra);
                 return (ref);
             }
         }
         else{ //Si succÃ¨s on rÃ©alise l'addition Reel + Reel
             Reel* res= new Reel(_x + tmp_re->get_x());
-            Nombre& ref=*res;
+            Constante& ref=*res;
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise l'addition Reel + Entier
-        Nombre& ref=tmp_en->addition(*this);
+    else{ //Si succès on réalise l'addition Reel + Entier
+        Constante& ref=tmp_en->addition(*this);
         return (ref);
     }
 }
 
-//RÃ©alise la soustraction d'un Reel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Reel::soustraction(const Nombre& nb) const{
+//Réalise la soustraction d'un Reel avec un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Reel::soustraction(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -43,25 +43,25 @@ Calculatrice::Nombre& Calculatrice::Reel::soustraction(const Nombre& nb) const{
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succÃ¨s on rÃ©alise la soustraction Reel - Rationnel
-                Nombre& ref=toRationnel().soustraction(*tmp_ra);
+            else{ //Si succès on réalise la soustraction Reel - Rationnel
+                Constante& ref=toRationnel().soustraction(*tmp_ra);
                 return (ref);
             }
         }
         else{ //Si succÃ¨s on rÃ©alise la soustraction Reel - Reel
             Reel* res= new Reel(_x - tmp_re->get_x());
-            Nombre& ref=*res;
+            Constante& ref=*res;
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise la soustraction Reel - Entier
-        Nombre& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel Ã  Entier - Reel
+    else{ //Si succès on réalise la soustraction Reel - Entier
+        Constante& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel �  Entier - Reel
         return (ref);
     }
 }
 
-//RÃ©alise la multiplication d'un Reel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Reel::multiplication(const Nombre& nb) const{
+//Réalise la multiplication d'un Reel avec un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Reel::multiplication(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -73,24 +73,24 @@ Calculatrice::Nombre& Calculatrice::Reel::multiplication(const Nombre& nb) const
 
             else{ //Si succÃ¨s on rÃ©alise la multiplication Reel * Rationnel
                 Reel res(_x * tmp_ra->get_n().get_x());
-                Nombre& ref=res.toRationnel();
+                Constante& ref=res.toRationnel();
                 return (ref);
             }
         }
         else{ //Si succÃ¨s on rÃ©alise la multiplication Reel * Reel
             Reel* res= new Reel(_x * tmp_re->get_x());
-            Nombre& ref=*res;
+            Constante& ref=*res;
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise la multiplication Reel * Entier
-        Nombre& ref=tmp_en->multiplication(*this);
+    else{ //Si succès on réalise la multiplication Reel * Entier
+        Constante& ref=tmp_en->multiplication(*this);
         return (ref);
     }
 }
 
-//RÃ©alise la division d'un Reel par un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb) const{
+//Réalise la division d'un Reel par un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Reel::division(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -100,8 +100,8 @@ Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb) const{
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succÃ¨s on rÃ©alise la division Reel / Rationnel
-                Nombre& ref=toRationnel().division(*tmp_ra);
+            else{ //Si succès on réalise la division Reel / Rationnel
+                Constante& ref=toRationnel().division(*tmp_ra);
                 return (ref);
             }
         }
@@ -109,12 +109,14 @@ Calculatrice::Nombre& Calculatrice::Reel::division(const Nombre& nb) const{
             if(tmp_re->get_x()==0) //Si division par 0 Exception
                 throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
             Reel* res=new Reel(this->_x / tmp_re->get_x());
-            Nombre& ref=*res;
+            Constante& ref=*res;
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise la division Reel / Entier
-        Nombre& ref=tmp_en->division(*this).INV();
+    else{ //Si succès on réalise la division Reel / Entier
+        Constante& pt=tmp_en->division(*this);
+        Nombre* pt2=dynamic_cast<Nombre *>(&pt);
+        Constante& ref=pt2->INV();
         return (ref);
     }
 }
@@ -133,8 +135,8 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
     QString str;
     str.setNum(_x); //CrÃ©ation d'un QString depuis le Reel
 
-    QStringList list=str.split("."); //SÃ©paration partie entiere et decimale
-    int nbdec=list.value(1).count(); //Compte le nombre de dÃ©cimale
+    QStringList list=str.split("."); //Séparation partie entiere et decimale
+    int nbdec=list.value(1).count(); //Compte le Constante de décimale
 
     Rationnel* res= new Rationnel(_x * pow(10,nbdec), pow(10,nbdec));
     res->simplifier();
@@ -148,4 +150,12 @@ Calculatrice::Entier& Calculatrice::Reel::toEntier() const{
     Entier* res= new Entier(_x);
     Entier& ref=*res;
     return (ref);
+}
+
+Calculatrice::Complexe& Calculatrice::Reel::toComplexe() const {
+    //Conversion du r�el en complexe 3.0 = 3.0 + 0.0i
+    Complexe* res = new Complexe(*this, Reel(0));
+    Complexe& ref = *res;
+    return (ref);
+
 }

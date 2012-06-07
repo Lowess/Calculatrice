@@ -36,32 +36,33 @@ namespace Calculatrice{
             virtual Rationnel& toRationnel() const;
 
             QString toString() const =0;
-
-            Nombre& SIGN() const;
-            Nombre& SQR() const;
-            Nombre& CUBE() const;
-
+/*
+            Constante& SIGN() const;
+            Constante& SQR() const;
+            Constante& CUBE() const;
+*/
             //Méthodes virtuelles pures hérité de la class "Expression"
             void EVAL(){};
 
             //Implémentation du Template/Methode
-            virtual Nombre& addition(const Nombre& nb) const=0;
-            virtual Nombre& soustraction(const Nombre& nb) const=0;
-            virtual Nombre& multiplication(const Nombre& nb) const=0;
-            virtual Nombre& division(const Nombre& nb) const=0;
+            virtual Constante& addition(const Constante& nb) const=0;
+            virtual Constante& soustraction(const Constante& nb) const=0;
+            virtual Constante& multiplication(const Constante& nb) const=0;
+            virtual Constante& division(const Constante& nb) const=0;
 
-            //virtual Nombre& affectation(const Nombre& nb) =0;
-
+/*
             Nombre& operator+(const Nombre& nb){ return this->addition(nb); }
             Nombre& operator-(const Nombre& nb){ return this->soustraction(nb); }
             Nombre& operator*(const Nombre& nb){ return this->multiplication(nb); }
             Nombre& operator/(const Nombre& nb){ return this->division(nb); }
+*/
 
             //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
 
-            bool operator==(const Nombre& nb);
+            bool operator==(const Constante& nb);
             bool operator==(int nb);
 
+            //virtual Nombre& affectation(const Nombre& nb) =0;
     };
 }
 #endif // NOMBRE_H

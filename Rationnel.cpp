@@ -6,8 +6,8 @@
 
 using namespace Calculatrice;
 
-//RÃ©alise l'addition d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
+//Réalise l'addition d'un Rationnel avec un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Rationnel::addition(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -26,23 +26,23 @@ Calculatrice::Nombre& Calculatrice::Rationnel::addition(const Nombre& nb) const{
 
                 Rationnel* res= new Rationnel(*p_num, *p_den);
                 res->simplifier();
-                Nombre& ref=*res;
+                Constante& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succÃ¨s on rÃ©alise l'addition Rationnel + Reel
-            Nombre& ref=tmp_re->addition(*this);
+        else{ //Si succès on réalise l'addition Rationnel + Reel
+            Constante& ref=tmp_re->addition(*this);
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise l'addition Rationnel + Entier
-        Nombre& ref=tmp_en->addition(*this);
+    else{ //Si succès on réalise l'addition Rationnel + Entier
+        Constante& ref=tmp_en->addition(*this);
         return (ref);
     }
 }
 
-//RÃ©alise la soustraction d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb) const{
+//Réalise la soustraction d'un Rationnel avec un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Rationnel::soustraction(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -61,23 +61,23 @@ Calculatrice::Nombre& Calculatrice::Rationnel::soustraction(const Nombre& nb) co
 
                 Rationnel* res= new Rationnel(p_num->toEntier(), p_den->toEntier());
                 res->simplifier();
-                Nombre& ref=*res;
+                Constante& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succÃ¨s on rÃ©alise la soustraction :Rationnel - Reel
-            Nombre& ref=tmp_re->soustraction(*this).SIGN(); //Inversion de signe car appel Ã  Reel - Rationnel
+        else{ //Si succès on réalise la soustraction :Rationnel - Reel
+            Constante& ref=tmp_re->soustraction(*this).SIGN(); //Inversion de signe car appel �  Reel - Rationnel
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise la soustraction Rationnel - Entier
-        Nombre& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel Ã  Entier - Rationnel
+    else{ //Si succès on réalise la soustraction Rationnel - Entier
+        Constante& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel �  Entier - Rationnel
         return (ref);
     }
 }
 
-//RÃ©alise la multiplication d'un Rationnel avec un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb) const{
+//Réalise la multiplication d'un Rationnel avec un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Rationnel::multiplication(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -96,23 +96,23 @@ Calculatrice::Nombre& Calculatrice::Rationnel::multiplication(const Nombre& nb) 
 
                 Rationnel* res= new Rationnel(*p_num, *p_den);
                 res->simplifier();
-                Nombre& ref=*res;
+                Constante& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succÃ¨s on rÃ©alise la multiplication Rationnel * Reel
-            Nombre& ref=tmp_re->multiplication(*this);
+        else{ //Si succès on réalise la multiplication Rationnel * Reel
+            Constante& ref=tmp_re->multiplication(*this);
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise la multiplication Rationnel * Entier
-        Nombre& ref=tmp_en->multiplication(*this);
+    else{ //Si succès on réalise la multiplication Rationnel * Entier
+        Constante& ref=tmp_en->multiplication(*this);
         return (ref);
     }
 }
 
-//RÃ©alise la division d'un Rationnel par un Nombre (Entier, Reel, Rationnel)
-Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb) const{
+//Réalise la division d'un Rationnel par un Constante (Entier, Reel, Rationnel)
+Calculatrice::Constante& Calculatrice::Rationnel::division(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -132,17 +132,21 @@ Calculatrice::Nombre& Calculatrice::Rationnel::division(const Nombre& nb) const{
 
                 Rationnel* res= new Rationnel(*p_num, *p_den);
                 res->simplifier();
-                Nombre& ref=*res;
+                Constante& ref=*res;
                 return (ref);
             }
         }
-        else{ //Si succÃ¨s on rÃ©alise la division Rationnel / Reel
-            Nombre& ref=tmp_re->division(*this).INV();
+        else{ //Si succès on réalise la division Rationnel / Reel
+            Constante& pt=tmp_re->division(*this);
+            Nombre* pt2=dynamic_cast<Nombre *>(&pt);
+            Constante& ref=pt2->INV();
             return (ref);
         }
     }
-    else{ //Si succÃ¨s on rÃ©alise la division Rationnel / Entier
-        Nombre& ref=tmp_en->division(*this).INV();
+    else{ //Si succès on réalise la division Rationnel / Entier
+        Constante& pt=tmp_en->division(*this);
+        Nombre* pt2=dynamic_cast<Nombre *>(&pt);
+        Constante& ref=pt2->INV();
         return (ref);
     }
 }
@@ -203,6 +207,13 @@ Calculatrice::Entier& Calculatrice::Rationnel::toEntier() const{
     //Conversion du rationnel en entier 3/2 = 1
     Entier* res= new Entier(_n.get_x() / _d.get_x());
     Entier& ref=*res;
+    return (ref);
+}
+
+Calculatrice::Complexe& Calculatrice::Rationnel::toComplexe() const {
+    //Conversion du rationnel en complexe 3/2 = 3/2 + 0i
+    Complexe* res = new Complexe(*this, Rationnel(0));
+    Complexe& ref= *res;
     return (ref);
 }
 

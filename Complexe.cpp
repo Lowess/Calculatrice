@@ -75,11 +75,6 @@ Calculatrice::Constante& Calculatrice::Complexe::SIGN() const {
     return (ref);
 }
 
-Calculatrice::Constante& Calculatrice::Complexe::SQR() const {
-    Constante& ref = (*this).multiplication(*this);
-    return (ref);
-}
-
 Calculatrice::Constante& Calculatrice::Complexe::CUBE() const {
     Constante& tmp = SQR();
     const Complexe* c = dynamic_cast<const Complexe*>(&tmp);

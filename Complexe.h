@@ -23,10 +23,10 @@ namespace Calculatrice{
             //MÃ©thodes publiques
             void conjugue();
             Constante& module() const;
-            Constante& addition(const Constante& c) const;
-            Constante& soustraction(const Constante& c) const;
-            Constante& multiplication(const Constante& c) const;
-            Constante& division(const Constante& c) const;
+            Constante& addition(const Complexe& c) const;
+            Constante& soustraction(const Complexe& c) const;
+            Constante& multiplication(const Complexe& c) const;
+            Constante& division(const Complexe& c) const;
 
             Constante& SIGN() const;
             Constante& SQR() const;

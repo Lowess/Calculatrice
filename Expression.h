@@ -3,14 +3,6 @@
 
 #include <QTextStream>
 
-<<<<<<< HEAD
-/**
-  * DP iterator pour parcourir l'expression
-  *
-**/
-=======
-
->>>>>>> 275b14b2101be9e7e4bcc79c86bf928fdd16c288
 namespace Calculatrice{
 
     class Constante;

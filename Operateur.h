@@ -4,16 +4,16 @@
 #include "Expression.h"
 
 #include "Fabrique.h"
+#include "Pile.h"
 #include <QString>
 #include <QStringList>
-#include <QStack>
 
 namespace Calculatrice{
-
-    class OperateurUnaire;
-    class OperateurBinaire;
+    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN};
 
     class Operateur: public Expression {
+        protected:
+            enumOperateurs _operateur;
         private:
             unsigned int _nbItems;
             Expression** _exp;
@@ -27,6 +27,15 @@ namespace Calculatrice{
 
             //Expression EVAL();
             Expression& EVAL();
+
+            QString& afficher();
+
+            virtual QString& getOperator() const = 0 ;
+
+            void appliqueOperateur();
+
+            //Expression EVAL();
+            void EVAL();
 
     };
 }

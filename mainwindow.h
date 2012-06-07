@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 
+#include "Fabrique.h"
+#include "Pile.h"
+
+#include "Expression.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,6 +23,7 @@ class MainWindow : public QMainWindow
     private:
         Ui::MainWindow *ui;
         void slotConnection();
+        void rafraichirPile();
 
     private slots:
         //Connexion des boutons 0-9

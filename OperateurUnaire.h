@@ -3,6 +3,7 @@
 
 #include "Operateur.h"
 #include "Expression.h"
+<<<<<<< HEAD
 #include <iostream>
 #include <QString>
 
@@ -26,6 +27,23 @@ class OperateurUnaire : public Operateur {
 
     };
 
+=======
+#include <QString>
+
+namespace Calculatrice {
+    class OperateurUnaire : public Operateur {
+        public:
+            OperateurUnaire(const QString op);
+
+            QString& getOperator() const;
+
+            QString toString() const;
+
+
+            Expression& eval(const Expression& e);
+
+    };
+>>>>>>> d50d9c44f71eff56d4eada027bfcd613b1693de1
 }
 
 
