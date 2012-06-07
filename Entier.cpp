@@ -174,7 +174,7 @@ Calculatrice::Reel& Calculatrice::Entier::toReel() const{
 
 Calculatrice::Entier& Calculatrice::Entier::toComplexe() const{
     //Conversion d'un entier en complexe 3 = 3 + 0i
-    Complexe* res = new Complexe(this, Entier(0));
+    Complexe* res = new Complexe(*this, Entier(0));
     Complexe& ref = *res;
     return (ref);
 }

@@ -212,7 +212,9 @@ Calculatrice::Entier& Calculatrice::Rationnel::toEntier() const{
 
 Calculatrice::Complexe& Calculatrice::Rationnel::toComplexe() const {
     //Conversion du rationnel en complexe 3/2 = 3/2 + 0i
-    Complexe* res = new Complexe(*this, Rationnel(0));
+    Constante& a = *this;
+    Constante& b = Rationnel(0);
+    Complexe* res = new Complexe(a,b);
     Complexe& ref= *res;
     return (ref);
 }

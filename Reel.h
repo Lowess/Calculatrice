@@ -27,7 +27,7 @@ namespace Calculatrice{
             //MÃ©thodes
             Rationnel& toRationnel() const;
             Entier& toEntier() const;
-
+            Complexe& toComplexe() const;
 
             //Setter Getter
 

@@ -25,6 +25,7 @@ namespace Calculatrice{
 
             Reel& toReel() const;
             Entier& toEntier() const;
+            Complexe& toComplexe() const;
 
             //Setter Getter
             const Entier& get_n() const{ return _n; }

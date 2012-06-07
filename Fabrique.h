@@ -43,10 +43,6 @@ namespace Calculatrice{
     bool isComplexe(const QString& s);
     bool isOperateurBinaire(const QString& s);
     bool isOperateurUnaire(const QString& s);
-<<<<<<< HEAD
-
-=======
->>>>>>> d50d9c44f71eff56d4eada027bfcd613b1693de1
 }
 
 //operator<<

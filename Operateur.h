@@ -33,10 +33,6 @@ namespace Calculatrice{
             virtual QString& getOperator() const = 0 ;
 
             void appliqueOperateur();
-
-            //Expression EVAL();
-            void EVAL();
-
     };
 }
 

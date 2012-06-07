@@ -3,31 +3,6 @@
 
 #include "Operateur.h"
 #include "Expression.h"
-<<<<<<< HEAD
-#include <iostream>
-#include <QString>
-
-namespace Calculatrice {
-
-enum OpUnaire {COS, SIN, TAN, COSH, SINH, TANH, LN, SQR, CUBE, SQRT, INV, SIGN};
-
-class OperateurUnaire : public Operateur {
-    private :
-        OpUnaire _operateur;
-
-    public:
-        OperateurUnaire(const QString op);
-        OperateurUnaire(){}
-
-        QString toString() const;
-
-        bool isOperateurUnaire();
-
-        Expression& calcul(const Expression& e);
-
-    };
-
-=======
 #include <QString>
 
 namespace Calculatrice {
@@ -43,7 +18,6 @@ namespace Calculatrice {
             Expression& eval(const Expression& e);
 
     };
->>>>>>> d50d9c44f71eff56d4eada027bfcd613b1693de1
 }
 
 

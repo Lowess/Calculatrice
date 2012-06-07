@@ -41,9 +41,6 @@ namespace Calculatrice{
             Constante& SQR() const;
             Constante& CUBE() const;
 */
-            //Méthodes virtuelles pures hérité de la class "Expression"
-            void EVAL(){};
-
             //Implémentation du Template/Methode
             virtual Constante& addition(const Constante& nb) const=0;
             virtual Constante& soustraction(const Constante& nb) const=0;

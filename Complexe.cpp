@@ -5,12 +5,21 @@
 
 using namespace Calculatrice;
 
+Calculatrice::Complexe(Calculatrice::Constante& a,Calculatrice::Constante& b){
+    Nombre* tmpA = dynamic_cast<Nombre*>(&a);
+    Nombre* tmpB = dynamic_cast<Nombre*>(&b);
+    if(tmpA == 0 || tmpB == 0)
+        throw CalculatriceException(typeid().name(), OTHER, "Creation de complexe impossible : pas de nombre pour instancier");
+    _a = *tmpA;
+    _b = *tmpB;
+}
+
 void Calculatrice::Complexe::conjugue(){
     _b.SIGN();
 }
 
 Calculatrice::Constante& Calculatrice::Complexe::module() const{
-    Nombre& tmp = _a.SQR()+_b.SQR();
+    Constante& tmp = _a.SQR()+_b.SQR();
     Reel* res = dynamic_cast<Reel*>(&tmp);
     //Reel* res = new Reel();
     res->SQRT();
@@ -79,8 +88,7 @@ Calculatrice::Constante& Calculatrice::Complexe::CUBE() const {
     Constante& tmp = SQR();
     const Complexe* c = dynamic_cast<const Complexe*>(&tmp);
     if(c == 0)
-        //throw erreur
-        std::cout << "Erreur" << std::endl;
+        throw CalculatriceException(typeid().name(), OTHER, "Impossible de cast Constante* en Complexe* dans Complexe::CUBE()");
     Constante& ref = *c.multiplication(*this);
     return (ref);
 }
