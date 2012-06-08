@@ -109,7 +109,7 @@ bool Calculatrice::isComplexe(const QString& s){
 }
 
 bool Calculatrice::isOperateurBinaire(const QString& s){
-    QRegExp regexp("^[+|-|*|/]$");
+    QRegExp regexp("^[+|\\-|\\*|/]$");
     return (s.contains(regexp));
 }
 

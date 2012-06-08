@@ -4,7 +4,7 @@
 using namespace Calculatrice;
 using namespace std;
 
-Calculatrice::Operateur::Operateur(const QString expression, bool first){
+/*Calculatrice::Operateur::Operateur(const QString expression, bool first){
     _expEntiere = first;
     if (first) {
         QStringList composants = expression.split(' ', QString::SkipEmptyParts);
@@ -31,7 +31,7 @@ Calculatrice::Operateur::Operateur(const QString expression, bool first){
 
         }
     }
-}
+}*/
 
 QString Calculatrice::Operateur::toString() const {
     QString s;
@@ -48,8 +48,6 @@ QString& Calculatrice::Operateur::afficher() {
     }
     return s;
 }
-
-void Operateur::EVAL(){}
 
 void Calculatrice::Operateur::appliqueOperateur(){
     Pile* p=&Pile::getInstance();

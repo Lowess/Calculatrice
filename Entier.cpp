@@ -6,19 +6,25 @@ using namespace Calculatrice;
 
 //Réalise l'addition d'un Entier avec un Constante (Entier,Reel,Rationnel)
 Calculatrice::Constante& Calculatrice::Entier::addition(const Constante& nb) const{
-    //On essaye le cast en Entier
+    //On essaie le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
-    if(tmp_en==0){ //Si echec on essaye en Reel
+    if(tmp_en==0){ //Si echec on essaie en Reel
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
-        if(tmp_re==0){ //Si echec on essaye en Rationnel
+        if(tmp_re==0){ //Si echec on essaie en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){ //Si echec on essaie en Complexe
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                else {
+                    Constante* res = tmp_c->addition(*this);
+                    Constante& ref = *res;
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise l'addition Entier + Rationnel
                 Entier num=(this->_x * tmp_ra->get_d().get_x() + tmp_ra->get_n().get_x()); //mise au mÃªme dÃ©nominateur et addition des numÃ©rateurs
                 Entier den=tmp_ra->get_d().get_x();
-
                 Rationnel* res=new Rationnel(num, den);
                 res->simplifier();
                 Constante& ref=*res;
@@ -46,8 +52,15 @@ Calculatrice::Constante& Calculatrice::Entier::soustraction(const Constante& nb)
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){ //Si echec on essaie en Complexe
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0) //Si echec on throw une exception
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                else {
+                    Constante* res = tmp_c->soustraction(*this);
+                    Constante& ref = *res;
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise la soustraction Entier - Rationnel
                 Entier num(this->_x * tmp_ra->get_d().get_x() - tmp_ra->get_n().get_x()); //mise au mÃªme dÃ©nominateur et soustraction des numÃ©rateurs
@@ -80,8 +93,15 @@ Calculatrice::Constante& Calculatrice::Entier::multiplication(const Constante& n
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){ //Si echec on essaie en Complexe
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                else {
+                    Constante* res = tmp_c->multiplication(*this);
+                    Constante& ref = *res;
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise la multiplication Entier * Rationnel
                 // x*num/den
@@ -111,8 +131,15 @@ Calculatrice::Constante& Calculatrice::Entier::division(const Constante& nb) con
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){ //Si echec on essaie en Complexe
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0)
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                else {
+                    Constante* res = tmp_c->division(*this);
+                    Constante& ref = *res;
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise la division Entier / Rationnel
                 if(tmp_ra->get_n().get_x()/tmp_ra->get_d().get_x()==0) //Si division par 0 Exception
@@ -172,9 +199,11 @@ Calculatrice::Reel& Calculatrice::Entier::toReel() const{
     return (ref);
 }
 
-Calculatrice::Entier& Calculatrice::Entier::toComplexe() const{
+Calculatrice::Complexe& Calculatrice::Entier::toComplexe() const{
     //Conversion d'un entier en complexe 3 = 3 + 0i
-    Complexe* res = new Complexe(*this, Entier(0));
+    const Constante* a = (const Constante*)this;
+    const Constante& b = new Entier(0);
+    Complexe* res = new Complexe(*a,b);
     Complexe& ref = *res;
     return (ref);
 }

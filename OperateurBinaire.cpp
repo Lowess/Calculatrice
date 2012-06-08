@@ -30,7 +30,9 @@ QString Calculatrice::OperateurBinaire::toString() const{
     return s;
 }
 
-QString& Calculatrice::OperateurBinaire::getOperator() const{}
+Calculatrice::enumOperateurs Calculatrice::OperateurBinaire::getOperator() const{
+    return _operateur;
+}
 
 /*
 Expression& Calculatrice::OperateurBinaire::eval(const Expression& e1, const Expression& e2) {

@@ -43,65 +43,57 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     }
 }
 
-Calculatrice::Nombre& Calculatrice::Nombre::SQR() const{
-    return (*this) * (*this);
-}
-
-Calculatrice::Nombre& Calculatrice::Nombre::CUBE() const{
-    return (*this) * SQR();
-}
-
-Calculatrice::Nombre& Calculatrice::Nombre::SIN() const{
+Calculatrice::Constante& Calculatrice::Nombre::SIN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(sin(reel->get_x())));
+    Constante& ref=*(new Reel(sin(reel->get_x())));
     return (ref);
 }
 
-Calculatrice::Nombre& Calculatrice::Nombre::COS() const{
+Calculatrice::Constante& Calculatrice::Nombre::COS() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(cos(reel->get_x())));
+    Constante& ref=*(new Reel(cos(reel->get_x())));
     return (ref);
 }
-Calculatrice::Nombre& Calculatrice::Nombre::TAN() const{
+Calculatrice::Constante& Calculatrice::Nombre::TAN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(tan(reel->get_x())));
+    Constante& ref=*(new Reel(tan(reel->get_x())));
     return (ref);
 }
-Calculatrice::Nombre& Calculatrice::Nombre::SINH() const{
+Calculatrice::Constante& Calculatrice::Nombre::SINH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(sinh(reel->get_x())));
+    Constante& ref=*(new Reel(sinh(reel->get_x())));
     return (ref);
 }
-Calculatrice::Nombre& Calculatrice::Nombre::COSH() const{
+Calculatrice::Constante& Calculatrice::Nombre::COSH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(cosh(reel->get_x())));
+    Constante& ref=*(new Reel(cosh(reel->get_x())));
     return (ref);
 }
-Calculatrice::Nombre& Calculatrice::Nombre::TANH() const{
+Calculatrice::Constante& Calculatrice::Nombre::TANH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(tanh(reel->get_x())));
+    Constante& ref=*(new Reel(tanh(reel->get_x())));
     return (ref);
 }
-Calculatrice::Nombre& Calculatrice::Nombre::LN() const{
+Calculatrice::Constante& Calculatrice::Nombre::LN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(log(reel->get_x())));
+    Constante& ref=*(new Reel(log(reel->get_x())));
     return (ref);
 }
-Calculatrice::Nombre& Calculatrice::Nombre::LOG() const{
+Calculatrice::Constante& Calculatrice::Nombre::LOG() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Nombre& ref=*(new Reel(log(reel->get_x())));
+    Constante& ref=*(new Reel(log(reel->get_x())));
     return (ref);
 }
 
-Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
+Calculatrice::Constante& Calculatrice::Nombre::INV() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -113,7 +105,7 @@ Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
             }
             else{ //Si succÃ¨s on rÃ©alise INV Rationnel
                 Rationnel* res=new Rationnel(tmp_ra->get_d(),tmp_ra->get_n());
-                Nombre& ref=*res;
+                Constante& ref=*res;
                 return (ref);
             }
         }
@@ -122,22 +114,54 @@ Calculatrice::Nombre& Calculatrice::Nombre::INV() const{
 
             Rationnel* res2= new Rationnel(res->get_d(), res->get_n()); // On inverse num et den pour rÃ©aliser le INV
             res2->simplifier();
-            Nombre& ref=*res2;
+            Constante& ref=*res2;
             return (ref);
         }
     }
     else{ //Si succÃ¨s on rÃ©alise INV Entier
         Rationnel* res=new Rationnel(1,tmp_en->get_x());
-        Nombre& ref=*res;
+        Constante& ref=*res;
         return (ref);
     }
 }
 
-Calculatrice::Nombre& Calculatrice::Nombre::SQRT() const{}
+Calculatrice::Constante& Calculatrice::Nombre::SQRT() const{}
 
-Calculatrice::Nombre& Calculatrice::Nombre::POW() const{}
-
-
+Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& power) const{
+    const Calculatrice::Entier* tmpE = dynamic_cast<const Calculatrice::Entier*>(&this);
+    if (tmpE == 0)
+        throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en entier");
+    else {
+        const Calculatrice::Rationnel* tmpRa = dynamic_cast<const Calculatrice::Rationnel*>(&this);
+        if (tmpRa == 0)
+            throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en rationnel");
+        else {
+            const Calculatrice::Reel* tmpRe = dynamic_cast<const Calculatrice::Reel*>(&this);
+            if (tmpRe == 0)
+                throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en reel");
+            else {
+                Constante* res = new Reel(tmpRe->get_x());
+                for(unsigned int i = 0; i < power-1 ; ++i) {
+                   res = res->multiplication(*tmpRe);
+                }
+                Constante& ref = *res;
+                return ref;
+            }
+        }
+        Constante* res = new Rationnel(tmpRa->get_n(),tmpRa->get_d());
+        for(unsigned int i = 0; i < power-1 ; ++i) {
+           res = res->multiplication(*tmpRa);
+        }
+        Constante& ref = *res;
+        return ref;
+    }
+    Constante* res = new Entier(tmpE->get_x());
+    for(unsigned int i = 0; i < power-1 ; ++i) {
+       res = res->multiplication(*tmpE);
+    }
+    Constante& ref = *res;
+    return ref;
+}
 
 
 Calculatrice::Entier& Calculatrice::Nombre::toEntier() const{
@@ -200,14 +224,14 @@ Calculatrice::Rationnel& Calculatrice::Nombre::toRationnel() const{
     }
 }
 
-bool Calculatrice::Nombre::operator==(const Calculatrice::Nombre& nb){
+bool Calculatrice::Nombre::operator==(const Calculatrice::Nombre& nb) const{
     Calculatrice::Rationnel* a = &toRationnel();
     Calculatrice::Rationnel* b = &nb.toRationnel();
-    return (a->get_n() == b->get_n()) && (a->get_d() == b->get_d());
+    return (a->get_n().get_x() == b->get_n().get_x()) && (a->get_d().get_x() == b->get_d().get_x());
 }
 
-bool Calculatrice::Nombre::operator==(int nb){
+bool Calculatrice::Nombre::operator==(int nb) const{
     Calculatrice::Rationnel* a = &toRationnel();
     Calculatrice::Rationnel* b = new Rationnel(nb,1);
-    return (a->get_n() == b->get_n()) && (a->get_d() == b->get_d());
+    return (a->get_n().get_x() == b->get_n().get_x()) && (a->get_d().get_x() == b->get_d().get_x());
 }

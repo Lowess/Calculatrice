@@ -18,9 +18,9 @@ namespace Calculatrice{
 
             //Méthodes spécifique
 
-            virtual Constante& SIGN() const;
-            virtual Constante& SQR() const;
-            virtual Constante& CUBE() const;
+            Constante& SIGN() const;
+            Constante& SQR() const;
+            Constante& CUBE() const;
 
 
             Constante& operator+(const Constante& nb){ return this->addition(nb); }

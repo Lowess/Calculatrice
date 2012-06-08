@@ -1,6 +1,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
+#include "Complexe.h"
 
 using namespace Calculatrice;
 
@@ -138,7 +139,7 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
     QStringList list=str.split("."); //Séparation partie entiere et decimale
     int nbdec=list.value(1).count(); //Compte le Constante de décimale
 
-    Rationnel* res= new Rationnel(_x * pow(10,nbdec), pow(10,nbdec));
+    Rationnel* res= new Rationnel(_x * pow((int)10,nbdec), pow((int)10,nbdec));
     res->simplifier();
     Rationnel& ref=*res;
     return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquÃ©e
@@ -154,7 +155,9 @@ Calculatrice::Entier& Calculatrice::Reel::toEntier() const{
 
 Calculatrice::Complexe& Calculatrice::Reel::toComplexe() const {
     //Conversion du r�el en complexe 3.0 = 3.0 + 0.0i
-    Complexe* res = new Complexe(*this, Reel(0));
+    const Constante* a = (Constante*)this;
+    const Constante* b = new Reel(0);
+    Complexe* res = new Complexe(*a,*b);
     Complexe& ref = *res;
     return (ref);
 

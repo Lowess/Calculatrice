@@ -3,6 +3,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
+#include "Complexe.h"
 
 using namespace Calculatrice;
 
@@ -212,9 +213,9 @@ Calculatrice::Entier& Calculatrice::Rationnel::toEntier() const{
 
 Calculatrice::Complexe& Calculatrice::Rationnel::toComplexe() const {
     //Conversion du rationnel en complexe 3/2 = 3/2 + 0i
-    Constante& a = *this;
-    Constante& b = Rationnel(0);
-    Complexe* res = new Complexe(a,b);
+    const Constante* a = (const Constante*)this;
+    const Constante* b = new Rationnel(0);
+    Complexe* res = new Complexe(*a,*b);
     Complexe& ref= *res;
     return (ref);
 }

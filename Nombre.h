@@ -19,28 +19,25 @@ namespace Calculatrice{
 
         public:
             //Méthodes virtuelles
-            virtual Nombre& SIN() const;
-            virtual Nombre& COS() const;
-            virtual Nombre& TAN() const;
-            virtual Nombre& SINH() const;
-            virtual Nombre& COSH() const;
-            virtual Nombre& TANH() const;
-            virtual Nombre& LN() const;
-            virtual Nombre& LOG() const;
-            virtual Nombre& INV() const;
-            virtual Nombre& SQRT() const;
-            virtual Nombre& POW() const;
+            virtual Constante& SIN() const;
+            virtual Constante& COS() const;
+            virtual Constante& TAN() const;
+            virtual Constante& SINH() const;
+            virtual Constante& COSH() const;
+            virtual Constante& TANH() const;
+            virtual Constante& LN() const;
+            virtual Constante& LOG() const;
+            virtual Constante& INV() const;
+            virtual Constante& SQRT() const;
+            virtual Constante& POW() const;
 
             virtual Entier& toEntier() const;
             virtual Reel& toReel() const;
             virtual Rationnel& toRationnel() const;
 
             QString toString() const =0;
-/*
-            Constante& SIGN() const;
-            Constante& SQR() const;
-            Constante& CUBE() const;
-*/
+            Nombre& SIGN() const;
+
             //ImplÃ©mentation du Template/Methode
             virtual Constante& addition(const Constante& nb) const=0;
             virtual Constante& soustraction(const Constante& nb) const=0;
@@ -54,11 +51,10 @@ namespace Calculatrice{
             Nombre& operator/(const Nombre& nb){ return this->division(nb); }
 */
 
+            bool operator==(const Nombre& nb) const;
+            bool operator==(int nb) const;
+
             //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
-
-            bool operator==(const Constante& nb);
-            bool operator==(int nb);
-
             //virtual Nombre& affectation(const Nombre& nb) =0;
     };
 }

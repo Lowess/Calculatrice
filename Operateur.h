@@ -9,7 +9,7 @@
 #include <QStringList>
 
 namespace Calculatrice{
-    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN};
+    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN};    
 
     class Operateur: public Expression {
         protected:
@@ -20,8 +20,8 @@ namespace Calculatrice{
             bool _expEntiere;
 
         public:
-            Operateur(const QString expression, bool first = false);
-            Operateur(){}
+            /*Operateur(const QString expression, bool first = false);
+            Operateur(){}*/
 
             QString toString() const;
 
@@ -30,7 +30,7 @@ namespace Calculatrice{
 
             QString& afficher();
 
-            virtual QString& getOperator() const = 0 ;
+            virtual enumOperateurs getOperator() const = 0 ;
 
             void appliqueOperateur();
     };

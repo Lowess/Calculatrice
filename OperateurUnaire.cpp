@@ -28,7 +28,9 @@ Calculatrice::OperateurUnaire::OperateurUnaire(const QString op){
 }
 
 
-QString& Calculatrice::OperateurUnaire::getOperator() const{}
+Calculatrice::enumOperateurs Calculatrice::OperateurUnaire::getOperator() const{
+    return _operateur;
+}
 
 QString Calculatrice::OperateurUnaire::toString() const{
     QString s;

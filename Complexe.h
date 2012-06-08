@@ -4,24 +4,32 @@
 #include <iostream>
 #include "Constante.h"
 #include "Nombre.h"
-
 #include <QString>
 
 namespace Calculatrice{
-    class Complexe: public Constante{
+
+    class Entier;
+    class Reel;
+    class Rationnel;
+    class Constante;
+
+    class Complexe:public Constante{
         private:
-            Nombre& _a;
-            Nombre& _b;
+            const Nombre* _a;
+            const Nombre* _b;
 
         public:
-            Complexe(Constante& a,Constante& b);
+            Complexe(const Constante& a, const Constante& b);
+            ~Complexe() {
+                delete _a;
+                delete _b;
+            }
 
             QString toString() const{
                 return (QString(_a.toString() + "+" + _b.toString() + "i"));
             }
 
             //MÃ©thodes publiques
-            void conjugue();
             Constante& module() const;
             Constante& addition(const Constante& c) const;
             Constante& soustraction(const Constante& c) const;
