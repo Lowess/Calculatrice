@@ -3,6 +3,7 @@
 
 #include "Operateur.h"
 #include "Expression.h"
+#include <iostream>
 #include <QString>
 #include <typeinfo>
 
@@ -11,7 +12,7 @@ namespace Calculatrice {
         public:
             OperateurBinaire(const QString& op);
 
-            QString& getOperator() const;
+            enumOperateurs getOperator() const;
 
             //Expression& eval(const Expression& e1, const Expression &e2);
 

@@ -42,18 +42,18 @@ class MainWindow : public QMainWindow
         void delPressed();
         void enterPressed();
 
-        //Connexion des boutons opérateurs classiques + - * /
+        //Connexion des boutons opÃ©rateurs classiques + - * /
         void plusPressed();
         void moinsPressed();
         void multiplierPressed();
         void diviserPressed();
 
-        //Connexion des boutons opérations spéciales POW MOD SIGN
+        //Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
         void powPressed();
         void modPressed();
         void signPressed();
 
-        //Connexion des opérateurs mathématiques
+        //Connexion des opÃ©rateurs mathÃ©matiques
         //Sin Cos Tan
         void sinPressed();
         void cosPressed();
@@ -74,7 +74,7 @@ class MainWindow : public QMainWindow
         void sqrPressed();
         void cubePressed();
 
-        //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
+        //Connexion des opÃ©rateurs de pile Swap Sum Mean Clear Drop Dup
         void swapPressed();
         void sumPressed();
         void meanPressed();

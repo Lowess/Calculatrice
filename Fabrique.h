@@ -27,6 +27,7 @@ namespace Calculatrice{
             Fabrique(){}
             Fabrique(const Fabrique& f){}
             ~Fabrique(){}
+
         public:
             static Fabrique& getInstance();
             static void libereInstance();

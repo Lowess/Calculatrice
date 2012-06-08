@@ -1,6 +1,5 @@
 #include "Calculatrice.h"
 
-using namespace Calculatrice;
 using namespace std;
 
 //Initialisation des attributs Statics
@@ -11,7 +10,7 @@ Calculatrice::Calculatrice* Calculatrice::Calculatrice::_calc=0;
 //Méthodes publiques
 Calculatrice::Calculatrice& Calculatrice::Calculatrice::getInstance(){
     if(_calc==0){
-        _calc=new Calculatrice();
+        _calc=new Calculatrice::Calculatrice();
     }
     return *_calc;
 }

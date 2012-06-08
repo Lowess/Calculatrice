@@ -28,7 +28,9 @@ Calculatrice::OperateurUnaire::OperateurUnaire(const QString op){
 }
 
 
-QString& Calculatrice::OperateurUnaire::getOperator() const{}
+Calculatrice::enumOperateurs Calculatrice::OperateurUnaire::getOperator() const{
+    return _operateur;
+}
 
 QString Calculatrice::OperateurUnaire::toString() const{
     QString s;
@@ -44,9 +46,6 @@ QString Calculatrice::OperateurUnaire::toString() const{
         case SQRT: s = "SQRT"; break;
         case INV: s = "INV"; break;
         case SIGN: s = "SIGN"; break;
-
-
-
         default: //lancer erreur
             throw CalculatriceException(typeid(this).name(), OTHER, "Erreur affichage opérateur");
             break;

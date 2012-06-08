@@ -6,15 +6,21 @@
 #include "Expression.h"
 
 namespace Calculatrice{
+
+    class Complexe;
+
     class Constante : public Expression{
         private:
 
         public:
+
+            Constante(){}
+
             //Méthodes spécifique
 
-            virtual Constante& SIGN() const;
-            virtual Constante& SQR() const;
-            virtual Constante& CUBE() const;
+            Constante& SIGN() const;
+            Constante& SQR() const;
+            Constante& CUBE() const;
 
 
             Constante& operator+(const Constante& nb){ return this->addition(nb); }
@@ -27,6 +33,8 @@ namespace Calculatrice{
             virtual Constante& soustraction(const Constante& nb) const=0;
             virtual Constante& multiplication(const Constante& nb) const=0;
             virtual Constante& division(const Constante& nb) const=0;
+
+            Expression& EVAL();
 
     };
 }
