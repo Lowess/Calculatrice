@@ -45,4 +45,4 @@ HEADERS  += mainwindow.h \
     OperateurUnaire.h \
     OperateurBinaire.h
 
-FORMS    += mainwindow.ui
+OTHER_FILES +=

@@ -17,11 +17,10 @@ namespace Calculatrice{
             Pile(const Pile& p);
             ~Pile(){}
         public:
-
             static Pile& getInstance();
             static void libereInstance();
 
-            //Méthodes agissant sur la pile
+            //MÃ©thodes agissant sur la pile
             void SWAP();
             void SUM();
             void MEAN();
@@ -29,7 +28,7 @@ namespace Calculatrice{
             void DUP();
             void DROP();
 
-            //Méthodes de sauvegarde et de chargement
+            //MÃ©thodes de sauvegarde et de chargement
             void sauvegarder();
             void charger();
     };
