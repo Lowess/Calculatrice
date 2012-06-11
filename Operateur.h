@@ -14,21 +14,16 @@ namespace Calculatrice{
     class Operateur: public Expression {
         protected:
             enumOperateurs _operateur;
-        private:
-            unsigned int _nbItems;
-            Expression** _exp;
-            bool _expEntiere;
 
         public:
             QString& afficher();
 
             QString toString() const =0;
 
-            virtual QString& getOperator() const = 0 ;
+            virtual QString getOperator() const{ return toString(); }
 
             void appliqueOperateur();
 
-            //Expression EVAL();
             void EVAL();
 
 

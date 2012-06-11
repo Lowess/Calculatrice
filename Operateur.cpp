@@ -4,14 +4,6 @@
 using namespace Calculatrice;
 using namespace std;
 
-QString& Calculatrice::Operateur::afficher() {
-    QString s("");
-    for(unsigned int i = 0; i < _nbItems ; ++i) {
-        s.append(_exp[i]->toString());
-    }
-    return s;
-}
-
 void Operateur::EVAL(){}
 
 void Calculatrice::Operateur::appliqueOperateur(){
@@ -20,13 +12,15 @@ void Calculatrice::Operateur::appliqueOperateur(){
     switch(_operateur){
         // + - * / --> On pop deux éléments et on push le résultat
         case ADD:{
+            if(p->count() < 2)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Constante* cx=dynamic_cast<Constante*>(x);
             Constante* cy=dynamic_cast<Constante*>(y);
             if(cx!=0 || cy!=0){ //Deux constantes
-                Expression& res=*cx+*cy;
+                Expression& res=*cx + *cy;
                 p->push(&res);
 
                 delete x;
@@ -35,16 +29,64 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case SOU:{
+            if(p->count() < 2)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            Expression* y=p->pop();
+            //On test ce que vaut x et y (Constantes ou Expressions?)
+            Constante* cx=dynamic_cast<Constante*>(x);
+            Constante* cy=dynamic_cast<Constante*>(y);
+            if(cx!=0 || cy!=0){ //Deux constantes
+                Expression& res=*cx - *cy;
+                p->push(&res);
+
+                delete x;
+                delete y;
+            }
             break;
         }
         case MUL:{
+            if(p->count() < 2)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            Expression* y=p->pop();
+            //On test ce que vaut x et y (Constantes ou Expressions?)
+            Constante* cx=dynamic_cast<Constante*>(x);
+            Constante* cy=dynamic_cast<Constante*>(y);
+            if(cx!=0 || cy!=0){ //Deux constantes
+                Expression& res=*cx * *cy;
+                p->push(&res);
+
+                delete x;
+                delete y;
+            }
             break;
         }
         case DIV:{
+            if(p->count() < 2)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            Expression* y=p->pop();
+            //On test ce que vaut x et y (Constantes ou Expressions?)
+            Constante* cx=dynamic_cast<Constante*>(x);
+            Constante* cy=dynamic_cast<Constante*>(y);
+            if(cx!=0 || cy!=0){ //Deux constantes
+                Expression& res=*cx / *cy;
+                p->push(&res);
+
+                delete x;
+                delete y;
+            }
             break;
         //Trigonométrie
         }
         case SIN:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -57,6 +99,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case COS:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -69,6 +114,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case TAN:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -81,6 +129,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case SINH:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -93,6 +144,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case COSH:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -105,6 +159,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case TANH:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -118,6 +175,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
         //Autres
         }
         case SQR:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Constante* nx=dynamic_cast<Constante*>(x);
@@ -130,6 +190,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case CUBE:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Constante* nx=dynamic_cast<Constante*>(x);
@@ -142,6 +205,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case SQRT:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -154,6 +220,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case INV:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -166,6 +235,9 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         }
         case SIGN:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Constante* nx=dynamic_cast<Constante*>(x);

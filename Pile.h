@@ -4,6 +4,7 @@
 #include <QStack>
 #include "Expression.h"
 
+
 /**
   * DP Singleton
   *
@@ -32,6 +33,8 @@ namespace Calculatrice{
             //Méthodes de sauvegarde et de chargement
             void sauvegarder();
             void charger();
+
+            void test();
     };
 }
 

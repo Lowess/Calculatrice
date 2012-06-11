@@ -2,11 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QDebug>
+
+#include <stdexcept>
 
 #include "Fabrique.h"
 #include "Pile.h"
 
 #include "Expression.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +29,8 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         void slotConnection();
         void rafraichirPile();
+        bool notify ( QObject * receiver, QEvent * e );
+
 
     private slots:
         //Connexion des boutons 0-9
@@ -41,6 +48,7 @@ class MainWindow : public QMainWindow
         //Connexion des boutons DEL & ENTER
         void delPressed();
         void enterPressed();
+        void spaceBarPressed();
 
         //Connexion des boutons opérateurs classiques + - * /
         void plusPressed();

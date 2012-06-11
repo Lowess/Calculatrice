@@ -4,6 +4,9 @@
 #include "Constante.h"
 #include "Nombre.h"
 
+#include <iostream>
+#include <typeinfo>
+
 #include <QString>
 
 namespace Calculatrice{

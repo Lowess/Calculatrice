@@ -11,6 +11,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
+#include "Exp.h"
 
 /**
   * Implementation du DP Singleton
@@ -18,7 +19,7 @@
 **/
 namespace Calculatrice{
 
-    enum enum_Fabrique {ENTIER, REEL, RATIONNEL, COMPLEXE, OPERATEUR_BINAIRE, OPERATEUR_UNAIRE};
+    enum enum_Fabrique {ENTIER, REEL, RATIONNEL, COMPLEXE, OPERATEUR_BINAIRE, OPERATEUR_UNAIRE, EXPRESSION};
 
     class Fabrique{
         private:
@@ -27,6 +28,8 @@ namespace Calculatrice{
             Fabrique(){}
             Fabrique(const Fabrique& f){}
             ~Fabrique(){}
+
+            QList<QString> preTraitement(QList<QString>& text) const;
         public:
             static Fabrique& getInstance();
             static void libereInstance();
@@ -42,6 +45,7 @@ namespace Calculatrice{
     bool isComplexe(const QString& s);
     bool isOperateurBinaire(const QString& s);
     bool isOperateurUnaire(const QString& s);
+    bool isExpression(const QString& s);
 }
 
 //operator<<
