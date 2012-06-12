@@ -13,7 +13,9 @@ namespace Calculatrice{
 
         public:
             //Méthodes virtuelles pures
-            virtual Expression& EVAL() =0;
+            //virtual Expression& EVAL() =0;
+
+            virtual void EVAL() = 0;
 
             virtual QString toString() const =0;
 

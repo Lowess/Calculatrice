@@ -10,12 +10,9 @@ namespace Calculatrice {
         public:
             OperateurUnaire(const QString op);
 
-            enumOperateurs getOperator() const;
-
             QString toString() const;
 
-            Expression& eval();
-
+            void EVAL();
     };
 }
 

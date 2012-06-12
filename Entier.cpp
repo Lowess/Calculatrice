@@ -1,5 +1,6 @@
 #include "Entier.h"
 #include "Rationnel.h"
+#include "Complexe.h"
 #include "CalculatriceException.h"
 
 using namespace Calculatrice;
@@ -17,8 +18,8 @@ Calculatrice::Constante& Calculatrice::Entier::addition(const Constante& nb) con
                 if(tmp_c == 0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
                 else {
-                    Constante* res = tmp_c->addition(*this);
-                    Constante& ref = *res;
+                    Constante& ref = tmp_c->addition(*this);
+                    //Constante& ref = *res;
                     return (ref);
                 }
             }
@@ -57,8 +58,7 @@ Calculatrice::Constante& Calculatrice::Entier::soustraction(const Constante& nb)
                 if(tmp_c == 0) //Si echec on throw une exception
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
                 else {
-                    Constante* res = tmp_c->soustraction(*this);
-                    Constante& ref = *res;
+                    Constante& ref = tmp_c->soustraction(*this);
                     return (ref);
                 }
             }
@@ -98,8 +98,7 @@ Calculatrice::Constante& Calculatrice::Entier::multiplication(const Constante& n
                 if(tmp_c == 0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
                 else {
-                    Constante* res = tmp_c->multiplication(*this);
-                    Constante& ref = *res;
+                    Constante& ref = tmp_c->multiplication(*this);
                     return (ref);
                 }
             }
@@ -136,8 +135,7 @@ Calculatrice::Constante& Calculatrice::Entier::division(const Constante& nb) con
                 if(tmp_c == 0)
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
                 else {
-                    Constante* res = tmp_c->division(*this);
-                    Constante& ref = *res;
+                    Constante& ref = tmp_c->division(*this);
                     return (ref);
                 }
             }
@@ -202,8 +200,8 @@ Calculatrice::Reel& Calculatrice::Entier::toReel() const{
 Calculatrice::Complexe& Calculatrice::Entier::toComplexe() const{
     //Conversion d'un entier en complexe 3 = 3 + 0i
     const Constante* a = (const Constante*)this;
-    const Constante& b = new Entier(0);
-    Complexe* res = new Complexe(*a,b);
+    const Constante* b = new Entier(0);
+    Complexe* res = new Complexe(*a,*b);
     Complexe& ref = *res;
     return (ref);
 }

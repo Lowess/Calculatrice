@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Constante.h"
 #include "Nombre.h"
+#include <typeinfo>
 #include <QString>
 
 namespace Calculatrice{
@@ -19,6 +20,7 @@ namespace Calculatrice{
             const Nombre* _b;
 
         public:
+            Complexe(const Nombre* a,const Nombre* b);
             Complexe(const Constante& a, const Constante& b);
             ~Complexe() {
                 delete _a;
@@ -26,7 +28,7 @@ namespace Calculatrice{
             }
 
             QString toString() const{
-                return (QString(_a.toString() + "+" + _b.toString() + "i"));
+                return (QString(_a->toString() + "+" + _b->toString() + "i"));
             }
 
             //MÃ©thodes publiques

@@ -29,7 +29,7 @@ namespace Calculatrice{
             virtual Constante& LOG() const;
             virtual Constante& INV() const;
             virtual Constante& SQRT() const;
-            virtual Constante& POW() const;
+            virtual Constante& POW(const Nombre& nb) const;
 
             virtual Entier& toEntier() const;
             virtual Reel& toReel() const;

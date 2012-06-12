@@ -24,13 +24,12 @@ Calculatrice::OperateurUnaire::OperateurUnaire(const QString op){
     else if (op == "SIGN")
         _operateur = SIGN;
     else //lancer erreur
-        throw CalculatriceException(typeid(this).name(), OTHER, "Operateur binaire non reconnu");
+        throw CalculatriceException(typeid(this).name(), OTHER, "Operateur unaire non reconnu");
 }
 
-
-Calculatrice::enumOperateurs Calculatrice::OperateurUnaire::getOperator() const{
+/*Calculatrice::enumOperateurs Calculatrice::OperateurUnaire::getOperator() const{
     return _operateur;
-}
+}*/
 
 QString Calculatrice::OperateurUnaire::toString() const{
     QString s;

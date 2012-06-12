@@ -3,7 +3,7 @@
 
 using namespace Calculatrice;
 
-Calculatrice::OperateurBinaire::OperateurBinaire(const QString& op){
+Calculatrice::OperateurBinaire::OperateurBinaire(const QString &op){
     if (op == "+")
         _operateur = ADD;
     else if (op == "-")
@@ -30,9 +30,9 @@ QString Calculatrice::OperateurBinaire::toString() const{
     return s;
 }
 
-Calculatrice::enumOperateurs Calculatrice::OperateurBinaire::getOperator() const{
+/*Calculatrice::enumOperateurs Calculatrice::OperateurBinaire::getOperator() const{
     return _operateur;
-}
+}*/
 
 /*
 Expression& Calculatrice::OperateurBinaire::eval(const Expression& e1, const Expression& e2) {

@@ -23,16 +23,75 @@ void Calculatrice::Fabrique::libereInstance(){
 }
 
 
+QList<QString> Calculatrice::Fabrique::preTraitement(QList<QString>& text) const{
+    bool exp=false;
+    bool exp_begin=false;
+    bool exp_middle=false;
+    bool exp_end=false;
+
+    QTextStream cout(stdout, QIODevice::WriteOnly);
+    cout << endl;
+
+    QList<QString> result;
+
+    QList<QString>::iterator it;
+
+    int index=0;
+
+
+    for(it=text.begin(); it!=text.end(); ++it){ //On parcours notre expression otée des espaces
+        //cout << *it << " " << getTypeSousChaine(*it) <<  endl;
+
+        switch (getTypeSousChaine(*it)){
+            case EXPRESSION:{
+
+                if(exp==true){//Fin d'exp
+                    result.replace(index,result.value(index)+" "+*it);
+                    exp=false;
+                }
+                else{
+                    result.append(*it);
+                    exp=true;
+                    index=result.size()-1;
+                }
+            break;
+            }
+            default:{
+                //On ne traite pas une exp alors on ajoute normalement
+                if(!exp){
+                    result.append(*it); break;
+                }
+                else{
+                    result.replace(index,result.value(index)+" "+*it);
+                }
+                break;
+            }
+        }
+    }
+
+    for(it=result.begin(); it!=result.end(); ++it) //On parcours notre expression otée des espaces
+        cout << *it <<  endl;
+
+    return result;
+}
+
+
 void Calculatrice::Fabrique::creer(const QString& text) const{
     Pile* p=&Pile::getInstance();
 
     Expression* res=0;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
+    cout << endl;
+
     QList<QString> list=text.simplified().split(" "); //Séparation des constantes et opérateur de la lineEdit par les espaces
-    QList<QString>:: iterator it;
-    for(it=list.begin(); it!=list.end(); ++it){ //On parcours notre expression otée des espaces
+    QList<QString>::iterator it;
+
+    QList<QString> result=preTraitement(list); //On réorganise la liste pour séparer les expressions des constantes
+
+    for(it=result.begin(); it!=result.end(); ++it){ //On parcours notre expression otée des espaces
         cout << *it << " " << getTypeSousChaine(*it) <<  endl;
+
         switch (getTypeSousChaine(*it)){
             case ENTIER:{
                 Expression* res=new Entier(QString(*it).toInt());
@@ -52,16 +111,16 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
                 break;
             }
             case COMPLEXE:{
-/*
-                QString tmp(*it);
-                QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
-                Nombre* re=dynamic_cast<Nombre*>(&creer(tmpl.value(0)));
-                Nombre* im=dynamic_cast<Nombre*>(&creer(tmpl.value(1)));
-                res=new Complexe(re, im);
 
-                res=new Rationnel();
-                break;
-*/
+                //QString tmp(*it);
+                //QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
+                //Nombre* re=dynamic_cast<Nombre*>(&creer(tmpl.value(0)));
+                //Nombre* im=dynamic_cast<Nombre*>(&creer(tmpl.value(1)));
+                //res=new Complexe(re, im);
+
+                //res=new Rationnel();
+                //break;
+
             }
             case OPERATEUR_BINAIRE:{
                 OperateurBinaire* res=new OperateurBinaire(*it);
@@ -72,6 +131,11 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
                 OperateurUnaire* res=new OperateurUnaire(*it);
                 res->appliqueOperateur();
                 cout << *res << endl;
+                break;
+            }
+            case EXPRESSION:{
+                Expression* res=new Exp(*it);
+                p->push(res);
                 break;
             }
             default:{
@@ -109,12 +173,17 @@ bool Calculatrice::isComplexe(const QString& s){
 }
 
 bool Calculatrice::isOperateurBinaire(const QString& s){
-    QRegExp regexp("^[+|\\-|\\*|/]$");
+    QRegExp regexp("^[\+|\\-|\*|/]$");
     return (s.contains(regexp));
 }
 
 bool Calculatrice::isOperateurUnaire(const QString& s){
     QRegExp regexp("^[\\w]{3,}$");
+    return (s.contains(regexp));
+}
+
+bool Calculatrice::isExpression(const QString& s){
+    QRegExp regexp("'");
     return (s.contains(regexp));
 }
 
@@ -125,6 +194,7 @@ Calculatrice::enum_Fabrique Calculatrice::getTypeSousChaine(const QString& ss){
     if(isComplexe(ss)){ return COMPLEXE; }
     if(isOperateurBinaire(ss)){ return OPERATEUR_BINAIRE; }
     if(isOperateurUnaire(ss)){ return OPERATEUR_UNAIRE; }
+    if(isExpression(ss)){ return EXPRESSION; }
 }
 
 
@@ -143,6 +213,8 @@ QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef){
             s << "operateur binaire"; break;
         case OPERATEUR_UNAIRE:
             s << "operateur unaire"; break;
+        case EXPRESSION:
+            s << "expression"; break;
     }
     return s;
 }

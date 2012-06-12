@@ -10,7 +10,7 @@ Calculatrice::Calculatrice* Calculatrice::Calculatrice::_calc=0;
 //Méthodes publiques
 Calculatrice::Calculatrice& Calculatrice::Calculatrice::getInstance(){
     if(_calc==0){
-        _calc=new Calculatrice::Calculatrice();
+        _calc=new Calculatrice();
     }
     return *_calc;
 }

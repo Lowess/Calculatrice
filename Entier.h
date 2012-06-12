@@ -40,6 +40,7 @@ namespace Calculatrice{
             //MÃ©thodes
             Rationnel& toRationnel() const;
             Reel& toReel() const;
+            Complexe& toComplexe() const;
 
             void MOD();
             void FACTORIELLE();

@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+using namespace Calculatrice;
+using namespace std;
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -30,6 +33,7 @@ void MainWindow::slotConnection()
     //Connexion des boutons DEL & ENTER
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(delPressed()));
     connect(ui->btnEnter, SIGNAL(clicked()), this, SLOT(enterPressed()));
+    connect(ui->btnSpace, SIGNAL(clicked()), this, SLOT(spaceBarPressed()));
 
     //Connexion des boutons opÃ©rateurs classiques + - * /
     connect(ui->btnPlus, SIGNAL(clicked()), this, SLOT(plusPressed()));
@@ -87,9 +91,18 @@ void MainWindow::num9Pressed(){ ui->lineEdit->setText(ui->lineEdit->text()+"9");
 //Connexion des boutons DEL & ENTER
 void MainWindow::delPressed(){ ui->lineEdit->setText(""); }
 void MainWindow::enterPressed(){
-    Fabrique::getInstance().creer(ui->lineEdit->text());
-    rafraichirPile();
+    try{
+        Fabrique::getInstance().creer(ui->lineEdit->text());
+        rafraichirPile();
+        ui->lineEdit->clear();
+    } catch (exception& e){
+       QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.exec();
+    }
+
 }
+void MainWindow::spaceBarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" "); }
 
 //Connexion des boutons opÃ©rateurs classiques + - * /
 void MainWindow::plusPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" + "); }
@@ -123,15 +136,43 @@ void MainWindow::sqrtPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR
 void MainWindow::sqrPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR "); }
 void MainWindow::cubePressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" CUBE "); }
 
-//Connexion des opÃ©rateurs de pile Swap Sum Mean Clear Drop Dup
-void MainWindow::swapPressed(){}
-void MainWindow::sumPressed(){}
-void MainWindow::meanPressed(){}
-void MainWindow::clearPressed(){}
-void MainWindow::dropPressed(){}
-void MainWindow::dupPressed(){}
-
-
+//Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
+void MainWindow::swapPressed(){
+    Pile::getInstance().SWAP();
+    rafraichirPile();
+}
+void MainWindow::sumPressed(){
+    Pile::getInstance().SUM();
+    rafraichirPile();
+}
+void MainWindow::meanPressed(){
+    Pile::getInstance().MEAN();
+    rafraichirPile();
+}
+void MainWindow::clearPressed(){
+    Pile::getInstance().CLEAR();
+    rafraichirPile();
+}
+void MainWindow::dropPressed(){
+    try {
+        Pile::getInstance().DROP();
+        rafraichirPile();
+    } catch (exception& e){
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.exec();
+    }
+}
+void MainWindow::dupPressed(){
+    try {
+        Pile::getInstance().DUP();
+        rafraichirPile();
+    } catch (exception& e){
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.exec();
+    }
+}
 
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();

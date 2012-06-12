@@ -35,10 +35,10 @@ Calculatrice::Constante& Calculatrice::Constante::SIGN() const{
     }
 }
 
-Calculatrice::Constante& Calculatrice::Constante::SQR() const{
+Calculatrice::Constante& Calculatrice::Constante::SQR() const {
     return (*this).multiplication(*this);
 }
 
-Calculatrice::Constante& Calculatrice::Constante::CUBE() const{
+Calculatrice::Constante& Calculatrice::Constante::CUBE() const {
     return (*this).multiplication(SQR());
 }

@@ -125,39 +125,44 @@ Calculatrice::Constante& Calculatrice::Nombre::INV() const{
     }
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::SQRT() const{}
+Calculatrice::Constante& Calculatrice::Nombre::SQRT() const{
+    Constante* res = new Entier(3);
+    Constante& ref = *res;
+    return (ref);
+}
 
 Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& power) const{
-    const Calculatrice::Entier* tmpE = dynamic_cast<const Calculatrice::Entier*>(&this);
+    int puis = power.toEntier().get_x();
+    const Calculatrice::Entier* tmpE = dynamic_cast<const Calculatrice::Entier*>(this);
     if (tmpE == 0)
         throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en entier");
     else {
-        const Calculatrice::Rationnel* tmpRa = dynamic_cast<const Calculatrice::Rationnel*>(&this);
+        const Calculatrice::Rationnel* tmpRa = dynamic_cast<const Calculatrice::Rationnel*>(this);
         if (tmpRa == 0)
             throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en rationnel");
         else {
-            const Calculatrice::Reel* tmpRe = dynamic_cast<const Calculatrice::Reel*>(&this);
+            const Calculatrice::Reel* tmpRe = dynamic_cast<const Calculatrice::Reel*>(this);
             if (tmpRe == 0)
                 throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en reel");
             else {
                 Constante* res = new Reel(tmpRe->get_x());
-                for(unsigned int i = 0; i < power-1 ; ++i) {
-                   res = res->multiplication(*tmpRe);
+                for(int i = 0; i < puis-1 ; ++i) {
+                   res = &res->multiplication(*tmpRe);
                 }
                 Constante& ref = *res;
                 return ref;
             }
         }
         Constante* res = new Rationnel(tmpRa->get_n(),tmpRa->get_d());
-        for(unsigned int i = 0; i < power-1 ; ++i) {
-           res = res->multiplication(*tmpRa);
+        for(int i = 0; i < puis-1 ; ++i) {
+           res = &res->multiplication(*tmpRa);
         }
         Constante& ref = *res;
         return ref;
     }
     Constante* res = new Entier(tmpE->get_x());
-    for(unsigned int i = 0; i < power-1 ; ++i) {
-       res = res->multiplication(*tmpE);
+    for(int i = 0; i < puis-1 ; ++i) {
+       res = &res->multiplication(*tmpE);
     }
     Constante& ref = *res;
     return ref;
@@ -166,11 +171,11 @@ Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& p
 
 Calculatrice::Entier& Calculatrice::Nombre::toEntier() const{
     //On essaye le cast en Entier
-    const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
+    const Entier* tmp_en=dynamic_cast<const Entier*>(this);
     if(tmp_en==0){ //Si echec on essaye en Reel
-        const Reel* tmp_re=dynamic_cast<const Reel*>(&*this);
+        const Reel* tmp_re=dynamic_cast<const Reel*>(this);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
-            const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&*this);
+            const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(this);
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
@@ -186,11 +191,11 @@ Calculatrice::Entier& Calculatrice::Nombre::toEntier() const{
 
 Calculatrice::Reel& Calculatrice::Nombre::toReel() const{
     //On essaye le cast en Entier
-    const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
+    const Entier* tmp_en=dynamic_cast<const Entier*>(this);
     if(tmp_en==0){ //Si echec on essaye en Reel
-        const Reel* tmp_re=dynamic_cast<const Reel*>(&*this);
+        const Reel* tmp_re=dynamic_cast<const Reel*>(this);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
-            const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&*this);
+            const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(this);
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
@@ -206,11 +211,11 @@ Calculatrice::Reel& Calculatrice::Nombre::toReel() const{
 
 Calculatrice::Rationnel& Calculatrice::Nombre::toRationnel() const{
     //On essaye le cast en Entier
-    const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
+    const Entier* tmp_en=dynamic_cast<const Entier*>(this);
     if(tmp_en==0){ //Si echec on essaye en Reel
-        const Reel* tmp_re=dynamic_cast<const Reel*>(&*this);
+        const Reel* tmp_re=dynamic_cast<const Reel*>(this);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
-            const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&*this);
+            const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(this);
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }

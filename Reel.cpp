@@ -139,7 +139,7 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
     QStringList list=str.split("."); //Séparation partie entiere et decimale
     int nbdec=list.value(1).count(); //Compte le Constante de décimale
 
-    Rationnel* res= new Rationnel(_x * pow((int)10,nbdec), pow((int)10,nbdec));
+    Rationnel* res= new Rationnel(_x * pow(10.,nbdec), pow(10.,nbdec));
     res->simplifier();
     Rationnel& ref=*res;
     return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquÃ©e

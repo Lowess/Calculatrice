@@ -24,10 +24,20 @@ int main(int argc, char *argv[])
 
     return a.exec();
 
+/*
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
     cout << endl << endl << "Début programme" << endl;
+
+    //cout << isExpression("'5 2 +' 3 +");
+    QString e("5 2 + '3 +'");
+
+    QList<QString> list=e.simplified().split("'"); //Séparation des constantes et opérateur de la lineEdit par les espaces
+    cout << list.value(1);
+*/
+
+
 /*
     Fabrique& factory=Fabrique::getInstance();
     factory.creer("1   2 +");

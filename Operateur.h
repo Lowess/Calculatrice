@@ -9,30 +9,26 @@
 #include <QStringList>
 
 namespace Calculatrice{
-    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN};    
+    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN, LN, LOG, POW};
 
     class Operateur: public Expression {
         protected:
             enumOperateurs _operateur;
-        private:
-            unsigned int _nbItems;
-            Expression** _exp;
-            bool _expEntiere;
 
         public:
-            /*Operateur(const QString expression, bool first = false);
-            Operateur(){}*/
 
             QString toString() const;
 
-            //Expression EVAL();
-            Expression& EVAL();
+            //Expression& EVAL();
+
+            virtual QString getOperator() const{ return toString(); }
+
+            void appliqueOperateur();
+
+            void EVAL();
 
             QString& afficher();
 
-            virtual enumOperateurs getOperator() const = 0 ;
-
-            void appliqueOperateur();
     };
 }
 

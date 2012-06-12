@@ -34,7 +34,8 @@ namespace Calculatrice{
             virtual Constante& multiplication(const Constante& nb) const=0;
             virtual Constante& division(const Constante& nb) const=0;
 
-            Expression& EVAL();
+            //Expression& EVAL();
+            void EVAL();
 
     };
 }
