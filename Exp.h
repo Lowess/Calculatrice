@@ -3,6 +3,7 @@
 
 
 #include "Constante.h"
+#include "Fabrique.h"
 
 namespace Calculatrice{
     class Exp: public Constante {

@@ -217,3 +217,6 @@ Calculatrice::Constante& Calculatrice::Complexe::CUBE() const {
     Constante& ref = c->multiplication(*this);
     return (ref);
 }
+
+Calculatrice::Constante& Calculatrice::Complexe::SQR() const{}
+

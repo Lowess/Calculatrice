@@ -11,8 +11,6 @@ namespace Calculatrice {
             OperateurUnaire(const QString op);
 
             QString toString() const;
-
-            void EVAL();
     };
 }
 

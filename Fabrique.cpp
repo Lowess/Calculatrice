@@ -25,9 +25,6 @@ void Calculatrice::Fabrique::libereInstance(){
 
 QList<QString> Calculatrice::Fabrique::preTraitement(QList<QString>& text) const{
     bool exp=false;
-    bool exp_begin=false;
-    bool exp_middle=false;
-    bool exp_end=false;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
     cout << endl;
@@ -62,16 +59,16 @@ QList<QString> Calculatrice::Fabrique::preTraitement(QList<QString>& text) const
                     result.append(*it); break;
                 }
                 else{
-                    result.replace(index,result.value(index)+" "+*it);
+                    result.replace(index,result.value(index).simplified()+" "+*it);
                 }
                 break;
             }
         }
     }
-
+/*
     for(it=result.begin(); it!=result.end(); ++it) //On parcours notre expression otée des espaces
         cout << *it <<  endl;
-
+*/
     return result;
 }
 
@@ -134,7 +131,9 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
                 break;
             }
             case EXPRESSION:{
-                Expression* res=new Exp(*it);
+                QString tmp(*it);
+                tmp.replace(QString("'"), QString(""));
+                Expression* res=new Exp(tmp);
                 p->push(res);
                 break;
             }
@@ -153,32 +152,32 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
 */
 
 bool Calculatrice::isEntier(const QString& s){
-    QRegExp regexp("^[\\d]+$");
+    QRegExp regexp("^\\-?[\\d]+$");
     return (s.contains(regexp));
 }
 
 bool Calculatrice::isReel(const QString& s){
-    QRegExp regexp("^[\\d]+[\.][\\d]+$");
+    QRegExp regexp("^\\-?[\\d]+[\.][\\d]+$");
     return (s.contains(regexp));
 }
 
 bool Calculatrice::isRationnel(const QString& s){
-    QRegExp regexp("^[\\d]+\/[\\d]+$");
+    QRegExp regexp("^\\-?[\\d]+\/[\\d]+$");
     return (s.contains(regexp));
 }
 
 bool Calculatrice::isComplexe(const QString& s){
-    QRegExp regexp("^[\\d]+(([\.]|[\/])[\\d]+)?[\$][\\d]+(([\.]|[\/])[\\d]+)?$");
+    QRegExp regexp("^\\-?[\\d]+(([\.]|[\/])[\\d]+)?[\$]\\-?[\\d]+(([\.]|[\/])[\\d]+)?$");
     return (s.contains(regexp));
 }
 
 bool Calculatrice::isOperateurBinaire(const QString& s){
-    QRegExp regexp("^[\+|\\-|\*|/]$");
+    QRegExp regexp("^[\+|\\-|\*|/]|MOD|POW$");
     return (s.contains(regexp));
 }
 
 bool Calculatrice::isOperateurUnaire(const QString& s){
-    QRegExp regexp("^[\\w]{3,}$");
+    QRegExp regexp("^[\\w]{1,}|\\!$");
     return (s.contains(regexp));
 }
 

@@ -1,6 +1,7 @@
 #include "Entier.h"
 #include "Rationnel.h"
 #include "Complexe.h"
+#include "Exp.h"
 #include "CalculatriceException.h"
 
 using namespace Calculatrice;
@@ -15,11 +16,19 @@ Calculatrice::Constante& Calculatrice::Entier::addition(const Constante& nb) con
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec on essaie en Complexe
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
-                if(tmp_c == 0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->addition(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
                 else {
                     Constante& ref = tmp_c->addition(*this);
-                    //Constante& ref = *res;
                     return (ref);
                 }
             }
@@ -55,8 +64,17 @@ Calculatrice::Constante& Calculatrice::Entier::soustraction(const Constante& nb)
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec on essaie en Complexe
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
-                if(tmp_c == 0) //Si echec on throw une exception
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                if(tmp_c == 0){ //Si echec on throw une exception
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->soustraction(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
                 else {
                     Constante& ref = tmp_c->soustraction(*this);
                     return (ref);
@@ -95,8 +113,17 @@ Calculatrice::Constante& Calculatrice::Entier::multiplication(const Constante& n
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec on essaie en Complexe
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
-                if(tmp_c == 0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->multiplication(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
                 else {
                     Constante& ref = tmp_c->multiplication(*this);
                     return (ref);
@@ -132,8 +159,17 @@ Calculatrice::Constante& Calculatrice::Entier::division(const Constante& nb) con
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
             if(tmp_ra==0){ //Si echec on essaie en Complexe
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
-                if(tmp_c == 0)
-                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->division(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
                 else {
                     Constante& ref = tmp_c->division(*this);
                     return (ref);
@@ -170,13 +206,23 @@ Calculatrice::Constante& Calculatrice::Entier::division(const Constante& nb) con
     }
 }
 
+Calculatrice::Entier& Calculatrice::Entier::MOD(const Entier& nb){
+    Entier* res=new Entier(_x % nb._x);
+    return *res;
+}
+
+Calculatrice::Entier& Calculatrice::Entier::FACTORIELLE(){
+    int n=_x;
+    Entier* res=new Entier(factorielle(n));
+    return *res;
+}
+
+
 QString Calculatrice::Entier::toString() const{
     QString str;
     str.setNum(_x);
     return str;
 }
-
-//Constructeurs
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -204,4 +250,10 @@ Calculatrice::Complexe& Calculatrice::Entier::toComplexe() const{
     Complexe* res = new Complexe(*a,*b);
     Complexe& ref = *res;
     return (ref);
+}
+
+
+int factorielle(int n){
+    if(n==0) return 1;
+    return n * factorielle(n-1);
 }

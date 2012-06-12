@@ -23,6 +23,15 @@ Calculatrice::OperateurUnaire::OperateurUnaire(const QString op){
         _operateur = INV;
     else if (op == "SIGN")
         _operateur = SIGN;
+    else if (op == "!")
+        _operateur = FACT;
+    else if (op == "LOG")
+        _operateur = LOG;
+    else if (op == "LN")
+        _operateur = LN;
+    else if (op == "EVAL")
+        _operateur = EVALUATION;
+
     else //lancer erreur
         throw CalculatriceException(typeid(this).name(), OTHER, "Operateur unaire non reconnu");
 }
@@ -45,6 +54,11 @@ QString Calculatrice::OperateurUnaire::toString() const{
         case SQRT: s = "SQRT"; break;
         case INV: s = "INV"; break;
         case SIGN: s = "SIGN"; break;
+        case FACT: s = "!"; break;
+        case LOG: s = "LOG"; break;
+        case LN: s = "LN"; break;
+        case EVALUATION: s = "EVAL"; break;
+
         default: //lancer erreur
             throw CalculatriceException(typeid(this).name(), OTHER, "Erreur affichage opérateur");
             break;

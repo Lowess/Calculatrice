@@ -7,7 +7,6 @@
  * \author Dambrine.F
  * \version 0.1
  */
-
 #include <iostream>
 #include <typeinfo>
 
@@ -42,8 +41,8 @@ namespace Calculatrice{
             Reel& toReel() const;
             Complexe& toComplexe() const;
 
-            void MOD();
-            void FACTORIELLE();
+            Entier& MOD(const Entier& nb);
+            Entier& FACTORIELLE();
 
             int get_x() const{ return _x;}
 
@@ -57,5 +56,6 @@ namespace Calculatrice{
     };
 }
 
+int factorielle(int n);
 
 #endif // ENTIER_H

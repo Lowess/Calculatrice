@@ -28,7 +28,7 @@ namespace Calculatrice{
             }
 
             QString toString() const{
-                return (QString(_a->toString() + "+" + _b->toString() + "i"));
+                return (QString(_a->toString() + "$" + _b->toString()));
             }
 
             //MÃ©thodes publiques

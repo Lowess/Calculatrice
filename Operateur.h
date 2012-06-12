@@ -1,15 +1,16 @@
 #ifndef OPERATEUR_H
 #define OPERATEUR_H
 
-#include "Expression.h"
-
-#include "Fabrique.h"
-#include "Pile.h"
+#include <stdexcept>
 #include <QString>
 #include <QStringList>
 
+#include "Expression.h"
+#include "Fabrique.h"
+#include "Pile.h"
+
 namespace Calculatrice{
-    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN, LN, LOG, POW};
+    enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN, LN, LOG, POW, FACT, MOD, EVALUATION};
 
     class Operateur: public Expression {
         protected:
@@ -17,11 +18,9 @@ namespace Calculatrice{
 
         public:
 
-            QString toString() const;
+            QString toString() const =0;
 
-            //Expression& EVAL();
-
-            virtual QString getOperator() const{ return toString(); }
+            QString getOperator() const{ return toString(); }
 
             void appliqueOperateur();
 

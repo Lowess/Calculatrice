@@ -4,6 +4,7 @@
 #include "Reel.h"
 #include "Rationnel.h"
 #include "Complexe.h"
+#include "Exp.h"
 
 using namespace Calculatrice;
 
@@ -26,19 +27,53 @@ void Calculatrice::Pile::libereInstance(){
     _pile=0;
 }
 
-void Calculatrice::Pile::SWAP(){
-
+void Calculatrice::Pile::SWAP(int x, int y){
+    if(x >= _pile->size() || x < 0 || y < 0 || y >= _pile->size())
+        throw CalculatriceException(typeid(this).name(),PILE,"SWAP impossible une des valeurs X ou Y est incorrecte");
+    Expression* tmp;
+    tmp=_pile->value(x);
+    _pile->replace(x, _pile->value(y));
+    _pile->replace(y, tmp);
 }
 
-void Calculatrice::Pile::SUM(){
+void Calculatrice::Pile::SUM(int n){
+    if(n >= _pile->size() || n < 0)
+        throw CalculatriceException(typeid(this).name(),PILE,"SUM impossible la valeurs X est incorrecte");
+    while(n>0){
+        Expression* x=_pile->pop();
+        Expression* y=_pile->pop();
+        //On test ce que vaut x et y (Constantes ou Expressions?)
+        Constante* cx=dynamic_cast<Constante*>(x);
+        Constante* cy=dynamic_cast<Constante*>(y);
+        if(cx!=0 || cy!=0){ //Deux constantes
+            Expression& res=*cx + *cy;
+            _pile->push(&res);
 
+            delete x;
+            delete y;
+        }
+        n=n-2;
+    }
 }
 
-void Calculatrice::Pile::MEAN(){
+void Calculatrice::Pile::MEAN(int n){
+    if(n >= _pile->size() || n < 0)
+        throw CalculatriceException(typeid(this).name(),PILE,"MEAN impossible la valeurs X est incorrecte");
+    SUM(n);
+    Entier diviseur(n+1);
 
+    Expression* x=_pile->pop();
+    Constante* cx=dynamic_cast<Constante*>(x);
+    if(cx!=0){
+        Expression& res=*cx / diviseur;
+        _pile->push(&res);
+
+        delete x;
+    }
 }
+
 void Calculatrice::Pile::CLEAR(){
-    Pile::getInstance().clear();
+    _pile->clear();
 }
 
 void Calculatrice::Pile::DUP(){
@@ -57,15 +92,23 @@ void Calculatrice::Pile::DUP(){
         } else {
             Rationnel* pt_rat=dynamic_cast<Rationnel*>(e);
             if(pt_rat != 0){
-
+                Entier n=pt_rat->get_n();
+                Entier d=pt_rat->get_d();
+                Pile::getInstance().push(new Rationnel(n,d));
             }
             else{
-                /*
-                Complexe* pt_com=dynamic_cast<Complexe*>(e);
-                if(pt_com != 0){
+                Exp* pt_exp=dynamic_cast<Exp*>(e);
+                if(pt_exp != 0){
+                    Pile::getInstance().push(new Exp(pt_exp->toString()));
                 }
-                else*/
-                    throw CalculatriceException(typeid(this).name(),PILE,"Impossible de dupliquer ce type de constante");
+                else{
+                    /*
+                    Complexe* pt_com=dynamic_cast<Complexe*>(e);
+                    if(pt_com != 0){
+                    }
+                    else*/
+                        throw CalculatriceException(typeid(this).name(),PILE,"Impossible de dupliquer ce type de constante");
+                }
             }
         }
     }

@@ -4,6 +4,8 @@
 #include "Reel.h"
 #include "Rationnel.h"
 
+void Calculatrice::Constante::EVAL(){}
+
 //Implémentation issu de la classe Constante
 Calculatrice::Constante& Calculatrice::Constante::SIGN() const{
     //On essaye le cast en Entier

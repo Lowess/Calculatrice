@@ -13,9 +13,6 @@ namespace Calculatrice{
         private:
 
         public:
-
-            Constante(){}
-
             //Méthodes spécifique
 
             Constante& SIGN() const;
@@ -34,7 +31,6 @@ namespace Calculatrice{
             virtual Constante& multiplication(const Constante& nb) const=0;
             virtual Constante& division(const Constante& nb) const=0;
 
-            //Expression& EVAL();
             void EVAL();
 
     };

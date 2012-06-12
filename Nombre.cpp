@@ -89,7 +89,7 @@ Calculatrice::Constante& Calculatrice::Nombre::LN() const{
 Calculatrice::Constante& Calculatrice::Nombre::LOG() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(log(reel->get_x())));
+    Constante& ref=*(new Reel(log10(reel->get_x())));
     return (ref);
 }
 
@@ -132,40 +132,33 @@ Calculatrice::Constante& Calculatrice::Nombre::SQRT() const{
 }
 
 Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& power) const{
-    int puis = power.toEntier().get_x();
+    double puis = power.toReel().get_x();
+
     const Calculatrice::Entier* tmpE = dynamic_cast<const Calculatrice::Entier*>(this);
-    if (tmpE == 0)
-        throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en entier");
-    else {
+    if (tmpE == 0){
         const Calculatrice::Rationnel* tmpRa = dynamic_cast<const Calculatrice::Rationnel*>(this);
-        if (tmpRa == 0)
-            throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en rationnel");
-        else {
+        if(tmpRa == 0){
             const Calculatrice::Reel* tmpRe = dynamic_cast<const Calculatrice::Reel*>(this);
             if (tmpRe == 0)
-                throw Calculatrice::CalculatriceException(typeid(this).name(), OTHER, "Nombre::POW : pas possible de cast en reel");
+                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             else {
-                Constante* res = new Reel(tmpRe->get_x());
-                for(int i = 0; i < puis-1 ; ++i) {
-                   res = &res->multiplication(*tmpRe);
-                }
+                //Reel
+                Reel* res= new Reel(pow(tmpRe->get_x(),puis));
                 Constante& ref = *res;
                 return ref;
             }
+            //Rationnels
+            Rationnel* res= new Rationnel(pow(tmpRa->get_n().get_x(), puis),pow(tmpRa->get_d().get_x(), puis));
+            Constante& ref = *res;
+            return ref;
         }
-        Constante* res = new Rationnel(tmpRa->get_n(),tmpRa->get_d());
-        for(int i = 0; i < puis-1 ; ++i) {
-           res = &res->multiplication(*tmpRa);
-        }
+    }
+    else{
+        //Entiers
+        Entier* res= new Entier(pow(tmpE->get_x(),puis));
         Constante& ref = *res;
         return ref;
     }
-    Constante* res = new Entier(tmpE->get_x());
-    for(int i = 0; i < puis-1 ; ++i) {
-       res = &res->multiplication(*tmpE);
-    }
-    Constante& ref = *res;
-    return ref;
 }
 
 

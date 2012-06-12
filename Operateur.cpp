@@ -1,10 +1,11 @@
 #include "Operateur.h"
-#include <stdexcept>
+
 
 using namespace Calculatrice;
 using namespace std;
 
-void Operateur::EVAL(){}
+void Calculatrice::Operateur::EVAL(){
+}
 
 void Calculatrice::Operateur::appliqueOperateur(){
     Pile* p=&Pile::getInstance();
@@ -75,6 +76,42 @@ void Calculatrice::Operateur::appliqueOperateur(){
             Constante* cy=dynamic_cast<Constante*>(y);
             if(cx!=0 || cy!=0){ //Deux constantes
                 Expression& res=*cx / *cy;
+                p->push(&res);
+
+                delete x;
+                delete y;
+            }
+            break;
+        }
+        case POW:{
+            if(p->count() < 2)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            Expression* y=p->pop();
+            //On test ce que vaut x et y (Constantes ou Expressions?)
+            Nombre* cx=dynamic_cast<Nombre*>(x);
+            Nombre* cy=dynamic_cast<Nombre*>(y);
+            if(cx!=0 || cy!=0){ //Deux constantes
+                Expression& res=cy->POW(*cx);
+                p->push(&res);
+
+                delete x;
+                delete y;
+            }
+            break;
+        }
+        case MOD:{
+            if(p->count() < 2)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            Expression* y=p->pop();
+            //On test ce que vaut x et y (Constantes ou Expressions?)
+            Entier* cx=dynamic_cast<Entier*>(x);
+            Entier* cy=dynamic_cast<Entier*>(y);
+            if(cx!=0 || cy!=0){ //Deux constantes
+                Expression& res=cy->MOD(*cx);
                 p->push(&res);
 
                 delete x;
@@ -174,6 +211,60 @@ void Calculatrice::Operateur::appliqueOperateur(){
             break;
         //Autres
         }
+        case FACT:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
+            Entier* nx=dynamic_cast<Entier*>(x);
+            if(nx!=0){ //C'est un entier
+                Expression& res=nx->FACTORIELLE();
+                p->push(&res);
+
+                delete x;
+            }
+            else
+                throw CalculatriceException(typeid(this).name(), MATHS, "Vous ne pouvez appliquer la fonction ! (factorielle) que sur des entiers");
+
+            break;
+        }
+        case LOG:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
+            Nombre* nx=dynamic_cast<Nombre*>(x);
+            if(nx!=0){ //C'est un nombre
+                Expression& res=nx->LOG();
+                p->push(&res);
+
+                delete x;
+            }
+            else
+                throw CalculatriceException(typeid(this).name(), MATHS, "Vous ne pouvez appliquer la fonction ! (factorielle) que sur des entiers");
+
+            break;
+        }
+        case LN:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* x=p->pop();
+            //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
+            Nombre* nx=dynamic_cast<Nombre*>(x);
+            if(nx!=0){ //C'est un nombre
+                Expression& res=nx->LN();
+                p->push(&res);
+
+                delete x;
+            }
+            else
+                throw CalculatriceException(typeid(this).name(), MATHS, "Vous ne pouvez appliquer la fonction ! (factorielle) que sur des entiers");
+
+            break;
+        }
         case SQR:{
             if(p->count() < 1)
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
@@ -247,6 +338,22 @@ void Calculatrice::Operateur::appliqueOperateur(){
 
                 delete x;
             }
+            break;
+        }
+        case EVALUATION:{
+            if(p->count() < 1)
+                throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+
+            Expression* exp=p->pop();
+            Exp* e=dynamic_cast<Exp *>(exp);
+            if(e==0){
+                p->push(exp);
+                throw CalculatriceException(typeid(this).name(), OTHER, "L'opérande n'est pas une expression, evaluation impossible");
+            }
+            e->EVAL();
+
+            delete exp;
+
             break;
         }
         default:{

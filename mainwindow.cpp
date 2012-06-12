@@ -7,6 +7,9 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->actionDegr->setChecked(true);
+    ui->actionEntiers->setChecked(true);
+
     slotConnection();
 }
 
@@ -89,18 +92,26 @@ void MainWindow::num8Pressed(){ ui->lineEdit->setText(ui->lineEdit->text()+"8");
 void MainWindow::num9Pressed(){ ui->lineEdit->setText(ui->lineEdit->text()+"9"); }
 
 //Connexion des boutons DEL & ENTER
-void MainWindow::delPressed(){ ui->lineEdit->setText(""); }
+void MainWindow::delPressed(){
+    if(ui->lineEdit->text()=="")
+        dropPressed();
+    else
+        ui->lineEdit->setText("");
+}
 void MainWindow::enterPressed(){
-    try{
-        Fabrique::getInstance().creer(ui->lineEdit->text());
-        rafraichirPile();
-        ui->lineEdit->clear();
-    } catch (exception& e){
-       QMessageBox msgBox;
-        msgBox.setText(e.what());
-        msgBox.exec();
-    }
-
+    if(ui->lineEdit->text()=="")
+        dupPressed();
+    else
+        try{
+            Fabrique::getInstance().creer(ui->lineEdit->text());
+            rafraichirPile();
+            ui->lastStack->setText(ui->lineEdit->text().simplified());
+            ui->lineEdit->clear();
+        } catch (exception& e){
+           QMessageBox msgBox;
+            msgBox.setText(e.what());
+            msgBox.exec();
+        }
 }
 void MainWindow::spaceBarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" "); }
 
@@ -113,7 +124,7 @@ void MainWindow::diviserPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" 
 //Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
 void MainWindow::powPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" POW "); }
 void MainWindow::modPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" MOD "); }
-void MainWindow::signPressed(){ ui->lineEdit->setText("SIGN "+ui->lineEdit->text()); }
+void MainWindow::signPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SIGN"); }
 
 //Connexion des opÃ©rateurs mathÃ©matiques
 //Sin Cos Tan
@@ -138,16 +149,62 @@ void MainWindow::cubePressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" CUB
 
 //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
 void MainWindow::swapPressed(){
-    Pile::getInstance().SWAP();
-    rafraichirPile();
+    QString x=ui->lineEditX->text();
+    QString y=ui->lineEditY->text();
+
+    if(x.isEmpty()||y.isEmpty()){
+        QMessageBox msgBox;
+        msgBox.setText("Vous devez saisir deux valeurs dans les zones de texte X, Y");
+        msgBox.exec();
+    }
+    else{
+        try{
+            Pile::getInstance().SWAP(x.toInt()-1,y.toInt()-1);
+            rafraichirPile();
+        } catch (exception& e){
+            QMessageBox msgBox;
+            msgBox.setText(e.what());
+            msgBox.exec();
+        }
+    }
 }
 void MainWindow::sumPressed(){
-    Pile::getInstance().SUM();
-    rafraichirPile();
+    QString x=ui->lineEditX->text();
+
+    if(x.isEmpty()){
+        QMessageBox msgBox;
+        msgBox.setText("Vous devez saisir une valeur dans la zone de texte X");
+        msgBox.exec();
+    }
+    else{
+        try{
+            Pile::getInstance().SUM(x.toInt()-1);
+            rafraichirPile();
+        } catch (exception& e){
+            QMessageBox msgBox;
+            msgBox.setText(e.what());
+            msgBox.exec();
+        }
+    }
 }
 void MainWindow::meanPressed(){
-    Pile::getInstance().MEAN();
-    rafraichirPile();
+
+    QString x=ui->lineEditX->text();
+    if(x.isEmpty()){
+        QMessageBox msgBox;
+        msgBox.setText("Vous devez saisir une valeur dans la zone de texte X");
+        msgBox.exec();
+    }
+    else{
+        try{
+            Pile::getInstance().MEAN(x.toInt()-1);
+            rafraichirPile();
+        } catch (exception& e){
+            QMessageBox msgBox;
+            msgBox.setText(e.what());
+            msgBox.exec();
+        }
+    }
 }
 void MainWindow::clearPressed(){
     Pile::getInstance().CLEAR();

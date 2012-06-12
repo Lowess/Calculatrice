@@ -10,6 +10,7 @@
 #include "Rationnel.h"
 #include "Fabrique.h"
 #include "Pile.h"
+#include "Complexe.h"
 
 using namespace std;
 using namespace Calculatrice;
@@ -24,19 +25,30 @@ int main(int argc, char *argv[])
 
     return a.exec();
 
-/*
+
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
     cout << endl << endl << "Début programme" << endl;
 
-    //cout << isExpression("'5 2 +' 3 +");
-    QString e("5 2 + '3 +'");
+    cout << isOperateurBinaire("-") << endl;
+/*
+    Nombre* n1=new Entier(1);
+    Nombre* n2=new Reel(2.5);
+    Nombre* n3=new Rationnel(4,4);
+    Nombre* n4=new Rationnel(2,3);
 
-    QList<QString> list=e.simplified().split("'"); //Séparation des constantes et opérateur de la lineEdit par les espaces
-    cout << list.value(1);
+    Complexe c(n1,n2);
+    Complexe c2(n3,n4);
+
+    cout << c << endl;
+    cout << c2 << endl;
+    cout << c+c2 << endl;
+    cout << c-c2 << endl;
+    cout << c*c2 << endl;
+    cout << c/c2 << endl;
+
 */
-
 
 /*
     Fabrique& factory=Fabrique::getInstance();

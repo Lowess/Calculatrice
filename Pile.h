@@ -22,9 +22,9 @@ namespace Calculatrice{
             static void libereInstance();
 
             //MÃ©thodes agissant sur la pile
-            void SWAP();
-            void SUM();
-            void MEAN();
+            void SWAP(int x, int y);
+            void SUM(int n);
+            void MEAN(int n);
             void CLEAR();
             void DUP();
             void DROP();
