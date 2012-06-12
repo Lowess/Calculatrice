@@ -5,7 +5,7 @@
 
 #include <stdexcept>
 
-enum CalculatriceExceptionType { MATHS, OTHER, PILE };
+enum CalculatriceExceptionType { MATHS, OTHER, PILE, OPTION };
 
 
 namespace Calculatrice{

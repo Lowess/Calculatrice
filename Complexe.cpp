@@ -220,3 +220,5 @@ Calculatrice::Constante& Calculatrice::Complexe::CUBE() const {
 
 Calculatrice::Constante& Calculatrice::Complexe::SQR() const{}
 
+
+Calculatrice::Constante& Calculatrice::Complexe::hookOperation(){}

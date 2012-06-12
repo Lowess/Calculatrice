@@ -19,6 +19,9 @@ namespace Calculatrice{
 
             void EVAL();
 
+
+            Constante& hookOperation();
+
             QString toString() const;
 
     };

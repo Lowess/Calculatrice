@@ -24,7 +24,6 @@ namespace Calculatrice{
                 cout << this->toString();
             }
     };
-
 }
 
 //operator<<

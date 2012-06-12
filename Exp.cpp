@@ -34,3 +34,5 @@ void Calculatrice::Exp::EVAL(){
 QString Calculatrice::Exp::toString() const{
     return _exp;
 }
+
+Calculatrice::Constante& Calculatrice::Exp::hookOperation(){}

@@ -126,7 +126,8 @@ Calculatrice::Constante& Calculatrice::Nombre::INV() const{
 }
 
 Calculatrice::Constante& Calculatrice::Nombre::SQRT() const{
-    Constante* res = new Entier(3);
+    double nb=toReel().get_x();
+    Constante* res = new Reel(sqrt(nb));
     Constante& ref = *res;
     return (ref);
 }
@@ -158,6 +159,31 @@ Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& p
         Entier* res= new Entier(pow(tmpE->get_x(),puis));
         Constante& ref = *res;
         return ref;
+    }
+}
+
+Calculatrice::Constante& Calculatrice::Nombre::hookOperation(){
+    QTextStream cout(stdout, QIODevice::WriteOnly);
+    cout << endl << "HOOK CAPTE" << endl;
+
+    switch (Option::getInstance().get_typeDiv()){
+        case MENU_ENTIER:{
+            Constante& ref=this->toEntier();
+            return (ref);
+            break;
+        }
+        case MENU_REEL:{
+            Constante& ref=this->toReel();
+            return (ref);
+            break;
+        }
+        case MENU_RATIONNEL:{
+            Constante& ref=this->toRationnel();
+            return (ref);
+            break;
+        }
+        default:
+            throw CalculatriceException(typeid(this).name(),OPTION,"Option de constante inexistante");
     }
 }
 

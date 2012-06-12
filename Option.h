@@ -2,10 +2,14 @@
 #define OPTION_H
 
 #include <QString>
+#include <QTextStream>
+#include <typeinfo>
+
+#include "CalculatriceException.h"
 
 /*Template method : singleton*/
 
-enum TypeDiv {ENTIER,REEL,RATIONNEL};
+enum TypeDiv {MENU_ENTIER, MENU_REEL, MENU_RATIONNEL};
 
 namespace Calculatrice{
     class Option {
@@ -17,25 +21,8 @@ namespace Calculatrice{
         Option(){
             _complexe = false;
             _degre = false;
-            _typeDiv = ENTIER;
+            _typeDiv = MENU_ENTIER;
             //connecter les slots pour le faire apparaître à l'écran
-        }
-
-        void changeTypeDiv(QString s) {
-            switch(s) {
-                case 'entier':
-                        _typeDiv = ENTIER;
-                        break;
-                case 'reel':
-                        _typeDiv = REEL;
-                        break;
-                case 'rationnel':
-                        _typeDiv = RATIONNEL;
-                        break;
-                default:
-                        _typeDiv = ENTIER;
-                        break;
-            }
         }
 
         void switchDegre(){
@@ -48,34 +35,22 @@ namespace Calculatrice{
 
     public:
 
-        /*Exécuté au chargement de l'application
+        /*
+         *Exécuté au chargement de l'application
          *Charge le log précédent
          */
-        Option& getInstance(){
-            if(_option==0){
-                _option = new Option();
-                //try fopen(log.txt)
-                //if fail : créer fichier puis attribuer valeurs de base
-            }
-            return *_option;
-        }
+        static Option& getInstance();
+        static void libereInstance();
 
 
-        /*Recoit signal pour switcher une option
-         */
-        void changeOption(QString option){
+        void set_typeDiv(TypeDiv s);
 
-        }
+        TypeDiv get_typeDiv() const{ return _typeDiv; }
 
-        void saveOptions(){
-        //à la fermeture du programme, sauver les options courantes dans le fichier log
-        }
+        void saveOptions();
 
-        void libereInstance() {
-            if (_option==0){
-                delete _option;
-            }
-        }
+        QString toString() const;
+
 
     };
 }

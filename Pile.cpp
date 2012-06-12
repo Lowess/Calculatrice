@@ -39,7 +39,7 @@ void Calculatrice::Pile::SWAP(int x, int y){
 void Calculatrice::Pile::SUM(int n){
     if(n >= _pile->size() || n < 0)
         throw CalculatriceException(typeid(this).name(),PILE,"SUM impossible la valeurs X est incorrecte");
-    while(n>0){
+    do{
         Expression* x=_pile->pop();
         Expression* y=_pile->pop();
         //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -52,15 +52,15 @@ void Calculatrice::Pile::SUM(int n){
             delete x;
             delete y;
         }
-        n=n-2;
-    }
+        n--;
+    }while(n > 0);
 }
 
 void Calculatrice::Pile::MEAN(int n){
-    if(n >= _pile->size() || n < 0)
+    if(n > _pile->size() || n < 0)
         throw CalculatriceException(typeid(this).name(),PILE,"MEAN impossible la valeurs X est incorrecte");
     SUM(n);
-    Entier diviseur(n+1);
+    Entier diviseur(n);
 
     Expression* x=_pile->pop();
     Constante* cx=dynamic_cast<Constante*>(x);

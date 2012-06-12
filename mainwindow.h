@@ -9,7 +9,7 @@
 
 #include "Fabrique.h"
 #include "Pile.h"
-
+#include "Option.h"
 #include "Expression.h"
 
 
@@ -89,6 +89,22 @@ class MainWindow : public QMainWindow
         void clearPressed();
         void dropPressed();
         void dupPressed();
+
+        //Connection des actions choix de constante
+        void actionEntiersChanged();
+        void actionReelsChanged();
+        void actionRationnelsChanged();
+
+        //Autoriser les complexes
+        void actionComplexesChanged();
+
+        //Connection du mode degrées / radians
+        void actionDegrChanged();
+        void actionRadianChanged();
+
+        //Connection des boutons dans fichier
+        void actionNouveauChanged();
+        void actionQuitterChanged();
 };
 
 #endif // MAINWINDOW_H

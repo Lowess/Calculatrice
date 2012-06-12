@@ -91,19 +91,22 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
 
         switch (getTypeSousChaine(*it)){
             case ENTIER:{
-                Expression* res=new Entier(QString(*it).toInt());
+                Nombre* nb=new Entier(QString(*it).toInt());
+                Expression* res=&nb->hookOperation();
                 p->push(res);
                 break;
             }
             case REEL:{
-                Expression* res=new Reel(QString(*it).toDouble());
+                Nombre* nb=new Reel(QString(*it).toDouble());
+                Expression* res=&nb->hookOperation();
                 p->push(res);
                 break;
             }
             case RATIONNEL:{
                 QString tmp(*it);
                 QStringList tmpl=tmp.split("/"); //Séparation num / den
-                Expression* res=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+                Nombre* nb=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
+                Expression* res=&nb->hookOperation();
                 p->push(res);
                 break;
             }

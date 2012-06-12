@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>970</width>
-    <height>539</height>
+    <height>594</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>20</y>
       <width>946</width>
-      <height>469</height>
+      <height>490</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -41,6 +41,41 @@
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Type de constantes : </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButtonEntier">
+             <property name="text">
+              <string>Entières</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButtonReel">
+             <property name="text">
+              <string>Réelles</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButtonRationnel">
+             <property name="text">
+              <string>Rationnelles</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
          <item>
           <widget class="QLineEdit" name="lineEdit">
            <property name="maximumSize">
@@ -535,7 +570,7 @@
            <item>
             <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="tab">
               <attribute name="title">
@@ -1024,19 +1059,6 @@
            </item>
           </layout>
          </item>
-         <item>
-          <spacer name="verticalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
         </layout>
        </item>
        <item>
@@ -1058,6 +1080,8 @@
    </widget>
    <zorder>verticalLayoutWidget</zorder>
    <zorder></zorder>
+   <zorder></zorder>
+   <zorder>horizontalSpacer</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1086,7 +1110,7 @@
      </property>
      <addaction name="actionEntiers"/>
      <addaction name="separator"/>
-     <addaction name="actionR_els"/>
+     <addaction name="actionReels"/>
      <addaction name="separator"/>
      <addaction name="actionRationnels"/>
     </widget>
@@ -1102,7 +1126,7 @@
     <addaction name="separator"/>
     <addaction name="menuUnit_des_degr_s"/>
     <addaction name="separator"/>
-    <addaction name="actionUtilisation_des_complexes"/>
+    <addaction name="actionComplexes"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuOptions"/>
@@ -1133,16 +1157,25 @@
    <property name="checked">
     <bool>false</bool>
    </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Entiers</string>
    </property>
   </action>
-  <action name="actionR_els">
+  <action name="actionReels">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Réels</string>
    </property>
   </action>
   <action name="actionRationnels">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Rationnels</string>
    </property>
@@ -1159,11 +1192,14 @@
    </property>
   </action>
   <action name="actionRadian">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Radian</string>
    </property>
   </action>
-  <action name="actionUtilisation_des_complexes">
+  <action name="actionComplexes">
    <property name="checkable">
     <bool>true</bool>
    </property>

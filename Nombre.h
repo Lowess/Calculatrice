@@ -5,6 +5,7 @@
 
 #include "Constante.h"
 #include "CalculatriceException.h"
+#include "Option.h"
 
 /**
   Nombre implÃ©mente le Design Pattern Template/Methode
@@ -44,18 +45,13 @@ namespace Calculatrice{
             virtual Constante& multiplication(const Constante& nb) const=0;
             virtual Constante& division(const Constante& nb) const=0;
 
-/*
-            Nombre& operator+(const Nombre& nb){ return this->addition(nb); }
-            Nombre& operator-(const Nombre& nb){ return this->soustraction(nb); }
-            Nombre& operator*(const Nombre& nb){ return this->multiplication(nb); }
-            Nombre& operator/(const Nombre& nb){ return this->division(nb); }
-*/
+            //M�thode qui va permettre d'appliquer le mode de constante utilisateur;
+            Constante& hookOperation();
+
 
             bool operator==(const Nombre& nb) const;
             bool operator==(int nb) const;
 
-            //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
-            //virtual Nombre& affectation(const Nombre& nb) =0;
     };
 }
 #endif // NOMBRE_H

@@ -77,6 +77,30 @@ void MainWindow::slotConnection()
     connect(ui->btnClear, SIGNAL(clicked()), this, SLOT(clearPressed()));
     connect(ui->btnDrop, SIGNAL(clicked()), this, SLOT(dropPressed()));
     connect(ui->btnDup, SIGNAL(clicked()), this, SLOT(dupPressed()));
+
+    ////////////
+    // MENU
+    ////////////
+
+    //Connection des actions choix de constante
+    connect(ui->radioButtonEntier, SIGNAL(clicked()), this, SLOT(actionEntiersChanged()));
+    connect(ui->radioButtonReel, SIGNAL(clicked()), this, SLOT(actionReelsChanged()));
+    connect(ui->radioButtonRationnel, SIGNAL(clicked()), this, SLOT(actionRationnelsChanged()));
+
+    //Autoriser les complexes
+    connect(ui->actionComplexes, SIGNAL(changed()), this, SLOT(actionComplexesChanged()));
+
+    //Connection du mode degrées / radians
+    connect(ui->actionDegr, SIGNAL(changed()), this, SLOT(actionDegrChanged()));
+    connect(ui->actionRadian, SIGNAL(changed()), this, SLOT(actionRadianChanged()));
+
+    //Connection des boutons dans fichier
+    connect(ui->actionNouveau, SIGNAL(changed()), this, SLOT(actionNouveauChanged()));
+    connect(ui->actionQuitter, SIGNAL(changed()), this, SLOT(actionQuitterChanged()));
+
+
+
+
 }
 
 //Connexion des boutons 0-9
@@ -242,3 +266,25 @@ void MainWindow::rafraichirPile(){
         ui->listStack->addItem(exp->toString());
     }
 }
+
+//Connection des actions choix de constante
+void MainWindow::actionEntiersChanged(){
+    Option::getInstance().set_typeDiv(MENU_ENTIER);
+}
+void MainWindow::actionReelsChanged(){
+    Option::getInstance().set_typeDiv(MENU_REEL);
+}
+void MainWindow::actionRationnelsChanged(){
+    Option::getInstance().set_typeDiv(MENU_RATIONNEL);
+}
+
+//Autoriser les complexes
+void MainWindow::actionComplexesChanged(){}
+
+//Connection du mode degrées / radians
+void MainWindow::actionDegrChanged(){}
+void MainWindow::actionRadianChanged(){}
+
+//Connection des boutons dans fichier
+void MainWindow::actionNouveauChanged(){}
+void MainWindow::actionQuitterChanged(){}

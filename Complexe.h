@@ -42,6 +42,8 @@ namespace Calculatrice{
             Constante& SQR() const;
             Constante& CUBE() const;
 
+            Constante& hookOperation();
+
     };
 }
 

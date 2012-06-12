@@ -20,16 +20,18 @@ namespace Calculatrice{
             Constante& CUBE() const;
 
 
-            Constante& operator+(const Constante& nb){ return this->addition(nb); }
-            Constante& operator-(const Constante& nb){ return this->soustraction(nb); }
-            Constante& operator*(const Constante& nb){ return this->multiplication(nb); }
-            Constante& operator/(const Constante& nb){ return this->division(nb); }
+            Constante& operator+(const Constante& nb){ return this->addition(nb).hookOperation(); }
+            Constante& operator-(const Constante& nb){ return this->soustraction(nb).hookOperation(); }
+            Constante& operator*(const Constante& nb){ return this->multiplication(nb).hookOperation(); }
+            Constante& operator/(const Constante& nb){ return this->division(nb).hookOperation(); }
 
             //Implémentation du Template/Methode
             virtual Constante& addition(const Constante& nb) const=0;
             virtual Constante& soustraction(const Constante& nb) const=0;
             virtual Constante& multiplication(const Constante& nb) const=0;
             virtual Constante& division(const Constante& nb) const=0;
+
+            virtual Constante& hookOperation()=0;
 
             void EVAL();
 
