@@ -20,7 +20,7 @@ namespace Calculatrice{
             const Nombre* _b;
 
         public:
-            Complexe(const Nombre* a,const Nombre* b);
+            //Complexe(const Nombre* a,const Nombre* b);
             Complexe(const Constante& a, const Constante& b);
             ~Complexe() {
                 delete _a;

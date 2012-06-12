@@ -8,6 +8,7 @@
 #include <QStringList>
 
 #include "Nombre.h"
+#include "Complexe.h"
 
 namespace Calculatrice{
     class Rationnel;

@@ -55,6 +55,7 @@ class MainWindow : public QMainWindow
         void moinsPressed();
         void multiplierPressed();
         void diviserPressed();
+        void dollarPressed();
 
         //Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
         void powPressed();

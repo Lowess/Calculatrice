@@ -112,14 +112,20 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
             }
             case COMPLEXE:{
 
-                //QString tmp(*it);
-                //QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
-                //Nombre* re=dynamic_cast<Nombre*>(&creer(tmpl.value(0)));
-                //Nombre* im=dynamic_cast<Nombre*>(&creer(tmpl.value(1)));
-                //res=new Complexe(re, im);
+                QString tmp(*it);
+                QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
+                creer(tmpl.value(0));
+                creer(tmpl.value(1));
+                //Expression* im=p->pop();
+                //Expression* re=p->pop();
 
-                //res=new Rationnel();
-                //break;
+                const Nombre* cy=dynamic_cast<const Nombre*>(p->pop());
+                const Nombre* cx=dynamic_cast<const Nombre*>(p->pop());
+                if(cx!=0 || cy!=0){ //Deux constantes
+                    Complexe* res=new Complexe(*cx, *cy);
+                    p->push(res);
+                }
+                break;
 
             }
             case OPERATEUR_BINAIRE:{

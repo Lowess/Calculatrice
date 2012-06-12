@@ -7,8 +7,6 @@
 
 namespace Calculatrice{
 
-    class Complexe;
-
     class Constante : public Expression{
         private:
 

@@ -43,6 +43,7 @@ void MainWindow::slotConnection()
     connect(ui->btnMoins, SIGNAL(clicked()), this, SLOT(moinsPressed()));
     connect(ui->btnMultiplier, SIGNAL(clicked()), this, SLOT(multiplierPressed()));
     connect(ui->btnDiviser, SIGNAL(clicked()), this, SLOT(diviserPressed()));
+    connect(ui->btnDollar, SIGNAL(clicked()), this, SLOT(dollarPressed()));
 
     //Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
     connect(ui->btnPow, SIGNAL(clicked()), this, SLOT(powPressed()));
@@ -144,6 +145,7 @@ void MainWindow::plusPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" + "
 void MainWindow::moinsPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" - "); }
 void MainWindow::multiplierPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" * "); }
 void MainWindow::diviserPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" / "); }
+void MainWindow::dollarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+"$"); }
 
 //Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
 void MainWindow::powPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" POW "); }

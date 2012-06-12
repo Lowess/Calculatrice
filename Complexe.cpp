@@ -8,14 +8,14 @@
 using namespace Calculatrice;
 
 //surcharger Complexe constructeur avec deux pointeurs NB
-
+/*
 Calculatrice::Complexe::Complexe(const Calculatrice::Nombre* a,const Calculatrice::Nombre* b){
     if(a == 0 || b == 0)
         throw CalculatriceException(typeid(this).name(), OTHER, "Creation de complexe impossible : pas de nombre pour instancier");
     _a = a;
     _b = b;
 }
-
+*/
 
 Calculatrice::Complexe::Complexe(const Calculatrice::Constante& a,const Calculatrice::Constante& b){
     const Nombre* tmpA = dynamic_cast<const Nombre*>(&a);
