@@ -1,6 +1,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
+#include "Complexe.h"
 
 using namespace Calculatrice;
 
@@ -20,7 +21,7 @@ Calculatrice::Constante& Calculatrice::Reel::addition(const Constante& nb) const
                 return (ref);
             }
         }
-        else{ //Si succès on réalise l'addition Reel + Reel
+        else{ //Si succÃ¨s on rÃ©alise l'addition Reel + Reel
             Reel* res= new Reel(_x + tmp_re->get_x());
             Constante& ref=*res;
             return (ref);
@@ -48,14 +49,14 @@ Calculatrice::Constante& Calculatrice::Reel::soustraction(const Constante& nb) c
                 return (ref);
             }
         }
-        else{ //Si succès on réalise la soustraction Reel - Reel
+        else{ //Si succÃ¨s on rÃ©alise la soustraction Reel - Reel
             Reel* res= new Reel(_x - tmp_re->get_x());
             Constante& ref=*res;
             return (ref);
         }
     }
     else{ //Si succès on réalise la soustraction Reel - Entier
-        Constante& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel à Entier - Reel
+        Constante& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel �  Entier - Reel
         return (ref);
     }
 }
@@ -71,13 +72,13 @@ Calculatrice::Constante& Calculatrice::Reel::multiplication(const Constante& nb)
             if(tmp_ra==0) //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
 
-            else{ //Si succès on réalise la multiplication Reel * Rationnel
+            else{ //Si succÃ¨s on rÃ©alise la multiplication Reel * Rationnel
                 Reel res(_x * tmp_ra->get_n().get_x());
                 Constante& ref=res.toRationnel();
                 return (ref);
             }
         }
-        else{ //Si succès on réalise la multiplication Reel * Reel
+        else{ //Si succÃ¨s on rÃ©alise la multiplication Reel * Reel
             Reel* res= new Reel(_x * tmp_re->get_x());
             Constante& ref=*res;
             return (ref);
@@ -105,7 +106,7 @@ Calculatrice::Constante& Calculatrice::Reel::division(const Constante& nb) const
                 return (ref);
             }
         }
-        else{ //Si succès on réalise la division Reel / Reel
+        else{ //Si succÃ¨s on rÃ©alise la division Reel / Reel
             if(tmp_re->get_x()==0) //Si division par 0 Exception
                 throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
             Reel* res=new Reel(this->_x / tmp_re->get_x());
@@ -130,31 +131,34 @@ QString Calculatrice::Reel::toString() const{
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Implementation des méthodes vituelles pures de la class "Expression"
-void Calculatrice::Reel::EVAL(){}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
-    //Conversion du réel en rationnel 3.31 = 331/100
+    //Conversion du rÃ©el en rationnel 3.31 = 331/100
     QString str;
-    str.setNum(_x); //Création d'un QString depuis le Reel
+    str.setNum(_x); //CrÃ©ation d'un QString depuis le Reel
 
     QStringList list=str.split("."); //Séparation partie entiere et decimale
     int nbdec=list.value(1).count(); //Compte le Constante de décimale
 
-    Rationnel* res= new Rationnel(_x * pow(10,nbdec), pow(10,nbdec));
+    Rationnel* res= new Rationnel(_x * pow(10.,nbdec), pow(10.,nbdec));
     res->simplifier();
     Rationnel& ref=*res;
-    return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquée
+    return (ref); //Construction du Rationnel correspondant au Reel +1 car valeur tronquÃ©e
 }
 
 
-
 Calculatrice::Entier& Calculatrice::Reel::toEntier() const{
-    //Conversion du réel en entier 3.0 = 3
+    //Conversion du rÃ©el en entier 3.0 = 3
     Entier* res= new Entier(_x);
     Entier& ref=*res;
     return (ref);
+}
+
+Calculatrice::Complexe& Calculatrice::Reel::toComplexe() const {
+    //Conversion du r�el en complexe 3.0 = 3.0 + 0.0i
+    const Constante* a = (Constante*)this;
+    const Constante* b = new Reel(0);
+    Complexe* res = new Complexe(*a,*b);
+    Complexe& ref = *res;
+    return (ref);
+
 }

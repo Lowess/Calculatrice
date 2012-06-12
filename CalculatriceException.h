@@ -23,7 +23,7 @@ namespace Calculatrice{
                     case MATHS:
                         type="MATHS"; break;
                     default:
-                        type="OTHER";
+                        type="OTHER"; break;
                 }
 
                 QString str("Exception emise par la classe: "+_class+" de type "+type+" Information: "+_info);

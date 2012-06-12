@@ -1,4 +1,5 @@
 #include "Fabrique.h"
+#include "Pile.h"
 #include "OperateurBinaire.h"
 #include "OperateurUnaire.h"
 

@@ -3,6 +3,7 @@
 
 #include "Operateur.h"
 #include "Expression.h"
+#include <iostream>
 #include <QString>
 #include <typeinfo>
 

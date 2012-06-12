@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
+    <width>906</width>
     <height>473</height>
    </rect>
   </property>
@@ -282,9 +282,6 @@
                <property name="text">
                 <string>ENTER</string>
                </property>
-               <property name="shortcut">
-                <string>Enter</string>
-               </property>
               </widget>
              </item>
              <item row="3" column="2">
@@ -459,16 +456,6 @@
                </property>
                <property name="text">
                 <string>POW</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QPushButton" name="btnSpace">
-               <property name="text">
-                <string>___</string>
-               </property>
-               <property name="shortcut">
-                <string>Space</string>
                </property>
               </widget>
              </item>

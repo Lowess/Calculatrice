@@ -1,6 +1,5 @@
 #include "Calculatrice.h"
 
-using namespace Calculatrice;
 using namespace std;
 
 //Initialisation des attributs Statics

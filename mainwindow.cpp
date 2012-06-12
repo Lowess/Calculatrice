@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
 //Connexion des slots
 void MainWindow::slotConnection()
 {
-    //Connexion des boutons 0 à 9
+    //Connexion des boutons 0 Ã  9
     connect(ui->btn0, SIGNAL(clicked()), this, SLOT(num0Pressed()));
     connect(ui->btn1, SIGNAL(clicked()), this, SLOT(num1Pressed()));
     connect(ui->btn2, SIGNAL(clicked()), this, SLOT(num2Pressed()));
@@ -35,18 +35,18 @@ void MainWindow::slotConnection()
     connect(ui->btnEnter, SIGNAL(clicked()), this, SLOT(enterPressed()));
     connect(ui->btnSpace, SIGNAL(clicked()), this, SLOT(spaceBarPressed()));
 
-    //Connexion des boutons opérateurs classiques + - * /
+    //Connexion des boutons opÃ©rateurs classiques + - * /
     connect(ui->btnPlus, SIGNAL(clicked()), this, SLOT(plusPressed()));
     connect(ui->btnMoins, SIGNAL(clicked()), this, SLOT(moinsPressed()));
     connect(ui->btnMultiplier, SIGNAL(clicked()), this, SLOT(multiplierPressed()));
     connect(ui->btnDiviser, SIGNAL(clicked()), this, SLOT(diviserPressed()));
 
-    //Connexion des boutons opérations spéciales POW MOD SIGN
+    //Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
     connect(ui->btnPow, SIGNAL(clicked()), this, SLOT(powPressed()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modPressed()));
     connect(ui->btnSign, SIGNAL(clicked()), this, SLOT(signPressed()));
 
-    //Connexion des opérateurs mathématiques
+    //Connexion des opÃ©rateurs mathÃ©matiques
     //Sin Cos Tan
     connect(ui->btnSin, SIGNAL(clicked()), this, SLOT(sinPressed()));
     connect(ui->btnCos, SIGNAL(clicked()), this, SLOT(cosPressed()));
@@ -67,7 +67,7 @@ void MainWindow::slotConnection()
     connect(ui->btnSqr, SIGNAL(clicked()), this, SLOT(sqrPressed()));
     connect(ui->btnCube, SIGNAL(clicked()), this, SLOT(cubePressed()));
 
-    //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
+    //Connexion des opÃ©rateurs de pile Swap Sum Mean Clear Drop Dup
     connect(ui->btnSwap, SIGNAL(clicked()), this, SLOT(swapPressed()));
     connect(ui->btnSum, SIGNAL(clicked()), this, SLOT(sumPressed()));
     connect(ui->btnMean, SIGNAL(clicked()), this, SLOT(meanPressed()));
@@ -104,18 +104,18 @@ void MainWindow::enterPressed(){
 }
 void MainWindow::spaceBarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" "); }
 
-//Connexion des boutons opérateurs classiques + - * /
+//Connexion des boutons opÃ©rateurs classiques + - * /
 void MainWindow::plusPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" + "); }
 void MainWindow::moinsPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" - "); }
 void MainWindow::multiplierPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" * "); }
 void MainWindow::diviserPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" / "); }
 
-//Connexion des boutons opérations spéciales POW MOD SIGN
+//Connexion des boutons opÃ©rations spÃ©ciales POW MOD SIGN
 void MainWindow::powPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" POW "); }
 void MainWindow::modPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" MOD "); }
 void MainWindow::signPressed(){ ui->lineEdit->setText("SIGN "+ui->lineEdit->text()); }
 
-//Connexion des opérateurs mathématiques
+//Connexion des opÃ©rateurs mathÃ©matiques
 //Sin Cos Tan
 void MainWindow::sinPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SIN "); }
 void MainWindow::cosPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" COS "); }
@@ -173,7 +173,6 @@ void MainWindow::dupPressed(){
         msgBox.exec();
     }
 }
-
 
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();
