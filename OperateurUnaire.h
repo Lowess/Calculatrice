@@ -12,8 +12,7 @@ namespace Calculatrice {
 
             QString toString() const;
 
-            Expression& eval(const Expression& e);
-
+            void EVAL();
     };
 }
 

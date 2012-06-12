@@ -6,10 +6,8 @@
 #include "Constante.h"
 #include "CalculatriceException.h"
 
-using namespace Calculatrice;
-
 /**
-  Nombre implémente le Design Pattern Template/Methode
+  Nombre implÃ©mente le Design Pattern Template/Methode
   **/
 namespace Calculatrice{
     class Entier;
@@ -20,31 +18,25 @@ namespace Calculatrice{
         private:
 
         public:
-            //Méthodes virtuelles
-            virtual Nombre& SIN() const;
-            virtual Nombre& COS() const;
-            virtual Nombre& TAN() const;
-            virtual Nombre& SINH() const;
-            virtual Nombre& COSH() const;
-            virtual Nombre& TANH() const;
-            virtual Nombre& LN() const;
-            virtual Nombre& LOG() const;
-            virtual Nombre& INV() const;
-            virtual Nombre& SQRT() const;
-            virtual Nombre& POW() const;
+            //M�thodes virtuelles
+            virtual Constante& SIN() const;
+            virtual Constante& COS() const;
+            virtual Constante& TAN() const;
+            virtual Constante& SINH() const;
+            virtual Constante& COSH() const;
+            virtual Constante& TANH() const;
+            virtual Constante& LN() const;
+            virtual Constante& LOG() const;
+            virtual Constante& INV() const;
+            virtual Constante& SQRT() const;
+            virtual Constante& POW(const Nombre& nb) const;
 
             virtual Entier& toEntier() const;
             virtual Reel& toReel() const;
             virtual Rationnel& toRationnel() const;
 
             QString toString() const =0;
-/*
-            Constante& SIGN() const;
-            Constante& SQR() const;
-            Constante& CUBE() const;
-*/
-            //Méthodes virtuelles pures hérité de la class "Expression"
-            void EVAL(){};
+            Nombre& SIGN() const;
 
             //Implémentation du Template/Methode
             virtual Constante& addition(const Constante& nb) const=0;
@@ -53,19 +45,16 @@ namespace Calculatrice{
             virtual Constante& division(const Constante& nb) const=0;
 
 /*
-            //Implémentation du Template/Methode
-            virtual Nombre& addition(const Nombre& nb) const=0;
-            virtual Nombre& soustraction(const Nombre& nb) const=0;
-            virtual Nombre& multiplication(const Nombre& nb) const=0;
-            virtual Nombre& division(const Nombre& nb) const=0;
-*/
-/*
             Nombre& operator+(const Nombre& nb){ return this->addition(nb); }
             Nombre& operator-(const Nombre& nb){ return this->soustraction(nb); }
             Nombre& operator*(const Nombre& nb){ return this->multiplication(nb); }
             Nombre& operator/(const Nombre& nb){ return this->division(nb); }
 */
 
+            bool operator==(const Nombre& nb) const;
+            bool operator==(int nb) const;
+
+            //Nombre& operator=(const Nombre& nb){ return this=affectation(nb); }
             //virtual Nombre& affectation(const Nombre& nb) =0;
     };
 }

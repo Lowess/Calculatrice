@@ -28,8 +28,8 @@ namespace Calculatrice{
             Fabrique(){}
             Fabrique(const Fabrique& f){}
             ~Fabrique(){}
-
             QList<QString> preTraitement(QList<QString>& text) const;
+
         public:
             static Fabrique& getInstance();
             static void libereInstance();

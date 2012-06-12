@@ -3,6 +3,7 @@
 #include "Entier.h"
 #include "Reel.h"
 #include "Rationnel.h"
+#include "Complexe.h"
 
 using namespace Calculatrice;
 
@@ -17,7 +18,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::addition(const Constante& nb) 
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise l'addition Rationnel + Rationnel
+            else{ //Si succÃ¨s on rÃ©alise l'addition Rationnel + Rationnel
                 const Entier* p_num=dynamic_cast<const Entier*>(&_n.multiplication(tmp_ra->_d).addition(_d.multiplication(tmp_ra->_n)));
                 const Entier* p_den=dynamic_cast<const Entier*>(&_d.multiplication(tmp_ra->_d));
 
@@ -52,7 +53,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::soustraction(const Constante& 
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise la soustraction Rationnel - Rationnel
+            else{ //Si succÃ¨s on rÃ©alise la soustraction Rationnel - Rationnel
                 const Reel* p_num=dynamic_cast<const Reel *>(&this->_n.multiplication(tmp_ra->_d).soustraction(tmp_ra->_n.multiplication(this->_d)));
                 const Reel* p_den=dynamic_cast<const Reel *>(&this->_d.multiplication(tmp_ra->_d));
 
@@ -66,12 +67,12 @@ Calculatrice::Constante& Calculatrice::Rationnel::soustraction(const Constante& 
             }
         }
         else{ //Si succès on réalise la soustraction :Rationnel - Reel
-            Constante& ref=tmp_re->soustraction(*this).SIGN(); //Inversion de signe car appel à Reel - Rationnel
+            Constante& ref=tmp_re->soustraction(*this).SIGN(); //Inversion de signe car appel �  Reel - Rationnel
             return (ref);
         }
     }
     else{ //Si succès on réalise la soustraction Rationnel - Entier
-        Constante& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel à Entier - Rationnel
+        Constante& ref=tmp_en->soustraction(*this).SIGN(); //Inversion de signe car appel �  Entier - Rationnel
         return (ref);
     }
 }
@@ -87,7 +88,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::multiplication(const Constante
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise la multiplication Rationnel * Rationnel
+            else{ //Si succÃ¨s on rÃ©alise la multiplication Rationnel * Rationnel
                 const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra->_n));
                 const Entier* p_den=dynamic_cast<const Entier *>(&this->_d.multiplication(tmp_ra->_d));
 
@@ -122,7 +123,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::division(const Constante& nb) 
             if(tmp_ra==0){ //Si echec erreur
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
-            else{ //Si succès on réalise la division Rationnel / Rationnel
+            else{ //Si succÃ¨s on rÃ©alise la division Rationnel / Rationnel
                 const Rationnel* tmp_ra_inv=dynamic_cast<const Rationnel*>(&tmp_ra->INV());
                 const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra_inv->_n));
                 const Entier* p_den=dynamic_cast<const Entier *>(&this->_d.multiplication(tmp_ra_inv->_d));
@@ -158,10 +159,6 @@ QString Calculatrice::Rationnel::toString() const{
     return QString(str1+"/"+str2);
 }
 
-//Implementation des méthodes vituelles pures de la class "Expression"
-void Calculatrice::Rationnel::EVAL(){}
-
-
 //Constructeurs
 /*
 //Recopie et operator=
@@ -176,7 +173,7 @@ Calculatrice::Rationnel& Calculatrice::Rationnel::operator=(const Entier& e){
 */
 
 /*
- * Méthodes
+ * MÃ©thodes
  *
 */
 void Calculatrice::Rationnel::simplifier(){
@@ -211,6 +208,15 @@ Calculatrice::Entier& Calculatrice::Rationnel::toEntier() const{
     //Conversion du rationnel en entier 3/2 = 1
     Entier* res= new Entier(_n.get_x() / _d.get_x());
     Entier& ref=*res;
+    return (ref);
+}
+
+Calculatrice::Complexe& Calculatrice::Rationnel::toComplexe() const {
+    //Conversion du rationnel en complexe 3/2 = 3/2 + 0i
+    const Constante* a = (const Constante*)this;
+    const Constante* b = new Rationnel(0);
+    Complexe* res = new Complexe(*a,*b);
+    Complexe& ref= *res;
     return (ref);
 }
 
