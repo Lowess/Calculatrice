@@ -10,7 +10,7 @@
 /**
   Nombre implÃ©mente le Design Pattern Template/Methode
   **/
-namespace Calculatrice{
+namespace LO21{
     class Entier;
     class Reel;
     class Rationnel;
@@ -52,6 +52,8 @@ namespace Calculatrice{
             bool operator==(const Nombre& nb) const;
             bool operator==(int nb) const;
 
+
+            Nombre* clone() const=0;
     };
 }
 #endif // NOMBRE_H

@@ -17,7 +17,7 @@
   * Implementation du DP Singleton
   *
 **/
-namespace Calculatrice{
+namespace LO21{
 
     enum enum_Fabrique {ENTIER, REEL, RATIONNEL, COMPLEXE, OPERATEUR_BINAIRE, OPERATEUR_UNAIRE, EXPRESSION};
 
@@ -49,6 +49,6 @@ namespace Calculatrice{
 }
 
 //operator<<
-QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef);
+QTextStream& operator<<(QTextStream& s, const LO21::enum_Fabrique& ef);
 
 #endif // FABRIQUE_H

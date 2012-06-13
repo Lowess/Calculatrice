@@ -5,7 +5,7 @@
 #include "Constante.h"
 #include "Fabrique.h"
 
-namespace Calculatrice{
+namespace LO21{
     class Exp: public Constante {
         private:
             const QString _exp;
@@ -19,11 +19,11 @@ namespace Calculatrice{
 
             void EVAL();
 
-
             Constante& hookOperation();
 
             QString toString() const;
 
+            Exp* clone() const;
     };
 }
 

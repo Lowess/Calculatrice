@@ -5,11 +5,11 @@
 
 //Implementation des m√©thodes de la class "Complexe"
 
-using namespace Calculatrice;
+using namespace LO21;
 
 //surcharger Complexe constructeur avec deux pointeurs NB
 /*
-Calculatrice::Complexe::Complexe(const Calculatrice::Nombre* a,const Calculatrice::Nombre* b){
+LO21::Complexe::Complexe(const LO21::Nombre* a,const LO21::Nombre* b){
     if(a == 0 || b == 0)
         throw CalculatriceException(typeid(this).name(), OTHER, "Creation de complexe impossible : pas de nombre pour instancier");
     _a = a;
@@ -17,7 +17,7 @@ Calculatrice::Complexe::Complexe(const Calculatrice::Nombre* a,const Calculatric
 }
 */
 
-Calculatrice::Complexe::Complexe(const Calculatrice::Constante& a,const Calculatrice::Constante& b){
+LO21::Complexe::Complexe(const LO21::Constante& a,const LO21::Constante& b){
     const Nombre* tmpA = dynamic_cast<const Nombre*>(&a);
     const Nombre* tmpB = dynamic_cast<const Nombre*>(&b);
     if(tmpA == 0 || tmpB == 0)
@@ -26,7 +26,7 @@ Calculatrice::Complexe::Complexe(const Calculatrice::Constante& a,const Calculat
     _b = tmpB;
 }
 
-Calculatrice::Constante& Calculatrice::Complexe::module() const{
+LO21::Constante& LO21::Complexe::module() const{
     Constante& tmp = _a->SQR()+_b->SQR();
     Reel* res = dynamic_cast<Reel*>(&tmp);
     res->SQRT();
@@ -35,7 +35,7 @@ Calculatrice::Constante& Calculatrice::Complexe::module() const{
 }
 
 //a+c,b+d
-Calculatrice::Constante& Calculatrice::Complexe::addition(const Calculatrice::Constante& c) const {
+LO21::Constante& LO21::Complexe::addition(const LO21::Constante& c) const {
     const Complexe* tmp = dynamic_cast<const Complexe*>(&c);
     if(tmp == 0) {
         const Entier* tmp_e = dynamic_cast<const Entier*>(&c);
@@ -72,7 +72,7 @@ Calculatrice::Constante& Calculatrice::Complexe::addition(const Calculatrice::Co
 }
 
 //a-c,b-d
-Calculatrice::Constante& Calculatrice::Complexe::soustraction(const Calculatrice::Constante& c) const {
+LO21::Constante& LO21::Complexe::soustraction(const LO21::Constante& c) const {
     const Complexe* tmp = dynamic_cast<const Complexe*>(&c);
     if(tmp == 0) {
         const Entier* tmp_e = dynamic_cast<const Entier*>(&c);
@@ -110,7 +110,7 @@ Calculatrice::Constante& Calculatrice::Complexe::soustraction(const Calculatrice
 
 
 //ac-bd,ad+bc
-Calculatrice::Constante& Calculatrice::Complexe::multiplication(const Calculatrice::Constante& c) const {
+LO21::Constante& LO21::Complexe::multiplication(const LO21::Constante& c) const {
     const Complexe* tmp = dynamic_cast<const Complexe*>(&c);
     if(tmp == 0) {
         const Entier* tmp_e = dynamic_cast<const Entier*>(&c);
@@ -151,7 +151,7 @@ Calculatrice::Constante& Calculatrice::Complexe::multiplication(const Calculatri
 }
 
 //(ac+bd+i(bc-ad))/c≤+d≤
-Calculatrice::Constante& Calculatrice::Complexe::division(const Calculatrice::Constante& c) const {
+LO21::Constante& LO21::Complexe::division(const LO21::Constante& c) const {
     const Complexe* tmp = dynamic_cast<const Complexe*>(&c);
     if(tmp == 0) {
         const Entier* tmp_e = dynamic_cast<const Entier*>(&c);
@@ -203,13 +203,13 @@ Calculatrice::Constante& Calculatrice::Complexe::division(const Calculatrice::Co
     }
 }
 
-Calculatrice::Constante& Calculatrice::Complexe::SIGN() const {
+LO21::Constante& LO21::Complexe::SIGN() const {
     Complexe* res = new Complexe(_a->SIGN(),_b->SIGN());
     Constante& ref = *res;
     return (ref);
 }
 
-Calculatrice::Constante& Calculatrice::Complexe::CUBE() const {
+LO21::Constante& LO21::Complexe::CUBE() const {
     Constante& tmp = SQR();
     const Complexe* c = dynamic_cast<const Complexe*>(&tmp);
     if(c == 0)
@@ -218,7 +218,10 @@ Calculatrice::Constante& Calculatrice::Complexe::CUBE() const {
     return (ref);
 }
 
-Calculatrice::Constante& Calculatrice::Complexe::SQR() const{}
+LO21::Constante& LO21::Complexe::SQR() const{}
 
 
-Calculatrice::Constante& Calculatrice::Complexe::hookOperation(){}
+LO21::Constante& LO21::Complexe::hookOperation(){}
+
+
+LO21::Complexe* LO21::Complexe::clone() const{ return new Complexe(*this); }

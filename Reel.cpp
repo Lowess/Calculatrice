@@ -3,10 +3,10 @@
 #include "Rationnel.h"
 #include "Complexe.h"
 
-using namespace Calculatrice;
+using namespace LO21;
 
 //Réalise l'addition d'un Reel avec un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Reel::addition(const Constante& nb) const{
+LO21::Constante& LO21::Reel::addition(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -34,7 +34,7 @@ Calculatrice::Constante& Calculatrice::Reel::addition(const Constante& nb) const
 }
 
 //Réalise la soustraction d'un Reel avec un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Reel::soustraction(const Constante& nb) const{
+LO21::Constante& LO21::Reel::soustraction(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -62,7 +62,7 @@ Calculatrice::Constante& Calculatrice::Reel::soustraction(const Constante& nb) c
 }
 
 //Réalise la multiplication d'un Reel avec un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Reel::multiplication(const Constante& nb) const{
+LO21::Constante& LO21::Reel::multiplication(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -91,7 +91,7 @@ Calculatrice::Constante& Calculatrice::Reel::multiplication(const Constante& nb)
 }
 
 //Réalise la division d'un Reel par un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Reel::division(const Constante& nb) const{
+LO21::Constante& LO21::Reel::division(const Constante& nb) const{
     //On essaye le cast en Reel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -123,15 +123,17 @@ Calculatrice::Constante& Calculatrice::Reel::division(const Constante& nb) const
 }
 
 
-QString Calculatrice::Reel::toString() const{
+QString LO21::Reel::toString() const{
     QString str;
     str.setNum(_x);
     return str;
 }
 
+LO21::Reel* LO21::Reel::clone() const{ return new Reel(*this); }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
+LO21::Rationnel& LO21::Reel::toRationnel() const{
     //Conversion du rÃ©el en rationnel 3.31 = 331/100
     QString str;
     str.setNum(_x); //CrÃ©ation d'un QString depuis le Reel
@@ -146,14 +148,14 @@ Calculatrice::Rationnel& Calculatrice::Reel::toRationnel() const{
 }
 
 
-Calculatrice::Entier& Calculatrice::Reel::toEntier() const{
+LO21::Entier& LO21::Reel::toEntier() const{
     //Conversion du rÃ©el en entier 3.0 = 3
     Entier* res= new Entier(_x);
     Entier& ref=*res;
     return (ref);
 }
 
-Calculatrice::Complexe& Calculatrice::Reel::toComplexe() const {
+LO21::Complexe& LO21::Reel::toComplexe() const {
     //Conversion du r�el en complexe 3.0 = 3.0 + 0.0i
     const Constante* a = (Constante*)this;
     const Constante* b = new Reel(0);

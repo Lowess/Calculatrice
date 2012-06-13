@@ -7,7 +7,7 @@
 #include <typeinfo>
 #include <QString>
 
-namespace Calculatrice{
+namespace LO21{
 
     class Entier;
     class Reel;
@@ -44,6 +44,8 @@ namespace Calculatrice{
 
             Constante& hookOperation();
 
+
+            Complexe* clone() const;
     };
 }
 

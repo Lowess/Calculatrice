@@ -7,11 +7,11 @@
 
 #include <stdexcept>
 
+#include "Calculatrice.h"
 #include "Fabrique.h"
 #include "Pile.h"
 #include "Option.h"
 #include "Expression.h"
-
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         void slotConnection();
         void rafraichirPile();
+        void memorisePile();
         bool notify ( QObject * receiver, QEvent * e );
 
 
@@ -106,6 +107,8 @@ class MainWindow : public QMainWindow
         //Connection des boutons dans fichier
         void actionNouveauChanged();
         void actionQuitterChanged();
+
+        void actionUndo();
 };
 
 #endif // MAINWINDOW_H

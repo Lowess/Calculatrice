@@ -13,7 +13,7 @@
 #include "Complexe.h"
 
 using namespace std;
-using namespace Calculatrice;
+using namespace LO21;
 
 
 int main(int argc, char *argv[])
@@ -25,18 +25,88 @@ int main(int argc, char *argv[])
 
     return a.exec();
 
-
-
-    QTextStream cout(stdout, QIODevice::WriteOnly);
-
-    cout << endl << endl << "Début programme" << endl;
-
-    cout << isOperateurBinaire("-") << endl;
 /*
-    Nombre* n1=new Entier(1);
-    Nombre* n2=new Reel(2.5);
-    Nombre* n3=new Rationnel(4,4);
-    Nombre* n4=new Rationnel(2,3);
+    QTextStream cout(stdout, QIODevice::WriteOnly);
+    cout << endl;
+
+    Expression* n1=new Entier(2);
+    Expression* n2=new Entier(5);
+
+    cout << n1 << endl;
+    cout << n2 << endl;
+
+
+    Pile* p=Calculatrice::getInstance().get_pile();
+    p->push(n1);
+    p->push(n2);
+
+
+    Pile* p2=p->clone();
+
+    cout << "affiche p"<<endl;
+    p->afficher();
+    cout << "affiche p2"<<endl;
+    p2->afficher();
+
+    p2->push(n2);
+    p2->push(n2);
+
+    cout << "affiche p"<<endl;
+    p->afficher();
+    cout << "affiche p2"<<endl;
+    p2->afficher();
+
+
+/*
+    QList<QStack<Expression*>*> m=p->get_memory();
+    m.append(p->clone());
+    //m.append("toto");
+
+    QStack<Expression*>* qs=m.value(0);
+    Expression* e=qs->pop();
+    cout << endl << e->toString() << endl;
+
+    e=qs->pop();
+    cout << endl << e->toString() << endl;
+
+    //cout << Calculatrice::getInstance().get_pile()->get_memory().size() << endl;
+*/
+/*
+    Expression* n2=new Reel(2.5);
+    Expression* n3=new Rationnel(4,4);
+    Expression* n4=new Rationnel(2,3);
+
+    Calculatrice::getInstance().get_pile()->push(n1);
+    Calculatrice::getInstance().get_pile()->push(n2);
+    Calculatrice::getInstance().get_pile()->push(n3);
+    Calculatrice::getInstance().get_pile()->push(n4);
+
+    QStack<Expression*>::iterator it;
+    Expression* exp=0;
+    for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
+        exp=*it;
+        cout << exp->toString() << endl;
+    }
+
+    Pile* p1=new Pile();
+    Pile* p2=Calculatrice::getInstance().get_pile()->clone();
+
+    //p1->push(n1);
+    //p1->push(n1);
+
+    Calculatrice::getInstance().get_pile()->CLEAR();
+
+    Calculatrice::getInstance().get_pile()->swap(*p2);
+
+    cout << endl;
+
+    for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
+        exp=*it;
+        cout << exp->toString() << endl;
+    }
+*/
+
+/*
 
     Complexe c(n1,n2);
     Complexe c2(n3,n4);

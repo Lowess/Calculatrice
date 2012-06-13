@@ -3,19 +3,19 @@
 #include "OperateurBinaire.h"
 #include "OperateurUnaire.h"
 
-using namespace Calculatrice;
+using namespace LO21;
 using namespace std;
 
-Calculatrice::Fabrique* Calculatrice::Fabrique::_f=0;
+LO21::Fabrique* LO21::Fabrique::_f=0;
 
-Calculatrice::Fabrique& Calculatrice::Fabrique::getInstance(){
+LO21::Fabrique& LO21::Fabrique::getInstance(){
     if(_f==0){
         _f=new Fabrique();
     }
     return *_f;
 }
 
-void Calculatrice::Fabrique::libereInstance(){
+void LO21::Fabrique::libereInstance(){
     if(_f!=0){
         delete _f;
     }
@@ -23,7 +23,7 @@ void Calculatrice::Fabrique::libereInstance(){
 }
 
 
-QList<QString> Calculatrice::Fabrique::preTraitement(QList<QString>& text) const{
+QList<QString> LO21::Fabrique::preTraitement(QList<QString>& text) const{
     bool exp=false;
 
     QTextStream cout(stdout, QIODevice::WriteOnly);
@@ -73,8 +73,8 @@ QList<QString> Calculatrice::Fabrique::preTraitement(QList<QString>& text) const
 }
 
 
-void Calculatrice::Fabrique::creer(const QString& text) const{
-    Pile* p=&Pile::getInstance();
+void LO21::Fabrique::creer(const QString& text) const{
+    Pile* p=Calculatrice::getInstance().get_pile();
 
     Expression* res=0;
 
@@ -160,42 +160,42 @@ void Calculatrice::Fabrique::creer(const QString& text) const{
  ******************
 */
 
-bool Calculatrice::isEntier(const QString& s){
+bool LO21::isEntier(const QString& s){
     QRegExp regexp("^\\-?[\\d]+$");
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isReel(const QString& s){
+bool LO21::isReel(const QString& s){
     QRegExp regexp("^\\-?[\\d]+[\.][\\d]+$");
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isRationnel(const QString& s){
+bool LO21::isRationnel(const QString& s){
     QRegExp regexp("^\\-?[\\d]+\/[\\d]+$");
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isComplexe(const QString& s){
+bool LO21::isComplexe(const QString& s){
     QRegExp regexp("^\\-?[\\d]+(([\.]|[\/])[\\d]+)?[\$]\\-?[\\d]+(([\.]|[\/])[\\d]+)?$");
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isOperateurBinaire(const QString& s){
+bool LO21::isOperateurBinaire(const QString& s){
     QRegExp regexp("^[\+|\\-|\*|/]|MOD|POW$");
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isOperateurUnaire(const QString& s){
+bool LO21::isOperateurUnaire(const QString& s){
     QRegExp regexp("^[\\w]{1,}|\\!$");
     return (s.contains(regexp));
 }
 
-bool Calculatrice::isExpression(const QString& s){
+bool LO21::isExpression(const QString& s){
     QRegExp regexp("'");
     return (s.contains(regexp));
 }
 
-Calculatrice::enum_Fabrique Calculatrice::getTypeSousChaine(const QString& ss){
+LO21::enum_Fabrique LO21::getTypeSousChaine(const QString& ss){
     if(isEntier(ss)){ return ENTIER; }
     if(isReel(ss)){ return REEL; }
     if(isRationnel(ss)){ return RATIONNEL; }
@@ -207,7 +207,7 @@ Calculatrice::enum_Fabrique Calculatrice::getTypeSousChaine(const QString& ss){
 
 
 //operator<<
-QTextStream& operator<<(QTextStream& s, const Calculatrice::enum_Fabrique& ef){
+QTextStream& operator<<(QTextStream& s, const LO21::enum_Fabrique& ef){
     switch(ef){
         case ENTIER:
             s << "entier"; break;

@@ -11,7 +11,7 @@
 
 enum TypeDiv {MENU_ENTIER, MENU_REEL, MENU_RATIONNEL};
 
-namespace Calculatrice{
+namespace LO21{
     class Option {
     private:
         TypeDiv _typeDiv;

@@ -18,7 +18,7 @@
  * espace de nommage regroupant les outils composants
  * la calculatrice
  */
-namespace Calculatrice{
+namespace LO21{
     /*! \class Entier
      * \brief classe representant un entier
      *
@@ -53,6 +53,7 @@ namespace Calculatrice{
                 return _x == e._x;
             }
 
+            Entier* clone() const;
     };
 }
 

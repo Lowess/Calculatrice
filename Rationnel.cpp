@@ -5,10 +5,10 @@
 #include "Rationnel.h"
 #include "Complexe.h"
 
-using namespace Calculatrice;
+using namespace LO21;
 
 //Réalise l'addition d'un Rationnel avec un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Rationnel::addition(const Constante& nb) const{
+LO21::Constante& LO21::Rationnel::addition(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -43,7 +43,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::addition(const Constante& nb) 
 }
 
 //Réalise la soustraction d'un Rationnel avec un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Rationnel::soustraction(const Constante& nb) const{
+LO21::Constante& LO21::Rationnel::soustraction(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -78,7 +78,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::soustraction(const Constante& 
 }
 
 //Réalise la multiplication d'un Rationnel avec un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Rationnel::multiplication(const Constante& nb) const{
+LO21::Constante& LO21::Rationnel::multiplication(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -113,7 +113,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::multiplication(const Constante
 }
 
 //Réalise la division d'un Rationnel par un Constante (Entier, Reel, Rationnel)
-Calculatrice::Constante& Calculatrice::Rationnel::division(const Constante& nb) const{
+LO21::Constante& LO21::Rationnel::division(const Constante& nb) const{
     //On essaye le cast en Rationnel
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Rationnel
@@ -152,7 +152,7 @@ Calculatrice::Constante& Calculatrice::Rationnel::division(const Constante& nb) 
     }
 }
 
-QString Calculatrice::Rationnel::toString() const{
+QString LO21::Rationnel::toString() const{
     QString str1,str2;
     str1.setNum(_n.get_x());
     str2.setNum(_d.get_x());
@@ -162,11 +162,11 @@ QString Calculatrice::Rationnel::toString() const{
 //Constructeurs
 /*
 //Recopie et operator=
-Calculatrice::Rationnel::Rationnel(const Entier& e){
+LO21::Rationnel::Rationnel(const Entier& e){
 
 }
 
-Calculatrice::Rationnel& Calculatrice::Rationnel::operator=(const Entier& e){
+LO21::Rationnel& LO21::Rationnel::operator=(const Entier& e){
 
     return *this;
 }
@@ -176,7 +176,7 @@ Calculatrice::Rationnel& Calculatrice::Rationnel::operator=(const Entier& e){
  * MÃ©thodes
  *
 */
-void Calculatrice::Rationnel::simplifier(){
+void LO21::Rationnel::simplifier(){
     //Simplification par le PGCD
     Entier vpgcd=pgcd(get_n(), get_d());
     const Reel* p_num_div=dynamic_cast<const Reel*>(&get_n().division(vpgcd));
@@ -189,10 +189,12 @@ void Calculatrice::Rationnel::simplifier(){
     _d=p_den_div->toEntier();
 }
 
+LO21::Rationnel* LO21::Rationnel::clone() const{ return new Rationnel(*this); }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Calculatrice::Reel& Calculatrice::Rationnel::toReel() const{
+LO21::Reel& LO21::Rationnel::toReel() const{
     //Conversion du rationnel en reel 3/2 = 1.5
     double n=(double)_n.get_x();
     double d=(double)_d.get_x();
@@ -204,14 +206,14 @@ Calculatrice::Reel& Calculatrice::Rationnel::toReel() const{
 
 
 
-Calculatrice::Entier& Calculatrice::Rationnel::toEntier() const{
+LO21::Entier& LO21::Rationnel::toEntier() const{
     //Conversion du rationnel en entier 3/2 = 1
     Entier* res= new Entier(_n.get_x() / _d.get_x());
     Entier& ref=*res;
     return (ref);
 }
 
-Calculatrice::Complexe& Calculatrice::Rationnel::toComplexe() const {
+LO21::Complexe& LO21::Rationnel::toComplexe() const {
     //Conversion du rationnel en complexe 3/2 = 3/2 + 0i
     const Constante* a = (const Constante*)this;
     const Constante* b = new Rationnel(0);
@@ -225,7 +227,7 @@ Calculatrice::Complexe& Calculatrice::Rationnel::toComplexe() const {
  *
 */
 
-Calculatrice::Entier Calculatrice::pgcd(const Calculatrice::Entier& a, const Calculatrice::Entier& b){
+LO21::Entier LO21::pgcd(const LO21::Entier& a, const LO21::Entier& b){
     Entier x(a.get_x()); // x=a
     Entier y(b.get_x()); // y=b
 
@@ -235,7 +237,7 @@ Calculatrice::Entier Calculatrice::pgcd(const Calculatrice::Entier& a, const Cal
         return pgcd(y,Entier(x.get_x() % y.get_x()));
 }
 
-Calculatrice::Entier Calculatrice::ppcm(const Calculatrice::Entier& a, const Calculatrice::Entier& b){
+LO21::Entier LO21::ppcm(const LO21::Entier& a, const LO21::Entier& b){
     Entier x(a.get_x()); // x=a
     Entier y(b.get_x()); // y=b
 

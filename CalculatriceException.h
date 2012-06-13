@@ -8,7 +8,7 @@
 enum CalculatriceExceptionType { MATHS, OTHER, PILE, OPTION };
 
 
-namespace Calculatrice{
+namespace LO21{
     class CalculatriceException : public std::exception{
         public:
             CalculatriceException(const QString& c, const CalculatriceExceptionType t, const QString& s) throw():_class(c),_type(t),_info(s){}

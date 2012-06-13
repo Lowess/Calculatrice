@@ -77,6 +77,13 @@
           </layout>
          </item>
          <item>
+          <widget class="QPushButton" name="undo">
+           <property name="text">
+            <string>Undo</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLineEdit" name="lineEdit">
            <property name="maximumSize">
             <size>

@@ -6,12 +6,12 @@
 #include "Nombre.h"
 #include "Entier.h"
 
-namespace Calculatrice{
+namespace LO21{
 
     class Rationnel: public Nombre {
         private:
-            Calculatrice::Entier _n;
-            Calculatrice::Entier _d;
+            LO21::Entier _n;
+            LO21::Entier _d;
         public:
             Constante& addition(const Constante& nb) const;
             Constante& soustraction(const Constante& nb) const;
@@ -46,6 +46,8 @@ namespace Calculatrice{
                     throw CalculatriceException(typeid(this).name(),MATHS,"Denominateur nul");
                 _d=Entier(y);
             }
+
+            Rationnel* clone() const;
 /*
             //Recopie et operator=
             Rationnel(const Rationnel& e);

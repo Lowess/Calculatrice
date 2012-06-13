@@ -3,19 +3,19 @@
 using namespace std;
 
 //Initialisation des attributs Statics
-Calculatrice::Calculatrice* Calculatrice::Calculatrice::_calc=0;
+LO21::Calculatrice* LO21::Calculatrice::_calc=0;
 
 //Constructeur
 
 //Méthodes publiques
-Calculatrice::Calculatrice& Calculatrice::Calculatrice::getInstance(){
+LO21::Calculatrice& LO21::Calculatrice::getInstance(){
     if(_calc==0){
         _calc=new Calculatrice();
     }
     return *_calc;
 }
 
-void Calculatrice::Calculatrice::libereInstance(){
+void LO21::Calculatrice::libereInstance(){
     if(_calc!=0){
         delete _calc;
     }

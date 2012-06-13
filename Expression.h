@@ -3,7 +3,7 @@
 
 #include <QTextStream>
 
-namespace Calculatrice{
+namespace LO21{
 
     class Constante;
     class Operateur;
@@ -23,10 +23,12 @@ namespace Calculatrice{
                 QTextStream cout(stdout, QIODevice::WriteOnly);
                 cout << this->toString();
             }
+
+            virtual Expression* clone() const=0;
     };
 }
 
 //operator<<
-QTextStream& operator<<(QTextStream& s, const Calculatrice::Expression& n);
+QTextStream& operator<<(QTextStream& s, const LO21::Expression& n);
 
 #endif // EXPRESSION_H

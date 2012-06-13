@@ -7,7 +7,7 @@
 #include <QString>
 #include <typeinfo>
 
-namespace Calculatrice {
+namespace LO21 {
     class OperateurBinaire : public Operateur{
         public:
             OperateurBinaire(const QString& op);

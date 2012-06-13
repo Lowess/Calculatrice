@@ -6,48 +6,34 @@
 #include "Complexe.h"
 #include "Exp.h"
 
-using namespace Calculatrice;
-
+using namespace LO21;
+/*
+LO21::Pile(const LO21::Pile& p){
+    qDebug()<< "pd";
+}
+*/
 //Methodes privées
-
-//Méthodes publiques
-Calculatrice::Pile* Calculatrice::Pile::_pile=0;
-
-Calculatrice::Pile& Calculatrice::Pile::getInstance(){
-    if(_pile==0){
-        _pile=new Pile();
-    }
-    return *_pile;
-}
-
-void Calculatrice::Pile::libereInstance(){
-    if(_pile!=0){
-        delete _pile;
-    }
-    _pile=0;
-}
-
-void Calculatrice::Pile::SWAP(int x, int y){
-    if(x >= _pile->size() || x < 0 || y < 0 || y >= _pile->size())
+void LO21::Pile::SWAP(int x, int y){
+    if(x >= size() || x < 0 || y < 0 || y >= size())
         throw CalculatriceException(typeid(this).name(),PILE,"SWAP impossible une des valeurs X ou Y est incorrecte");
     Expression* tmp;
-    tmp=_pile->value(x);
-    _pile->replace(x, _pile->value(y));
-    _pile->replace(y, tmp);
+    tmp=value(x);
+    replace(x, value(y));
+    replace(y, tmp);
 }
 
-void Calculatrice::Pile::SUM(int n){
-    if(n >= _pile->size() || n < 0)
+void LO21::Pile::SUM(int n){
+    if(n >= size() || n < 0)
         throw CalculatriceException(typeid(this).name(),PILE,"SUM impossible la valeurs X est incorrecte");
     do{
-        Expression* x=_pile->pop();
-        Expression* y=_pile->pop();
+        Expression* x=pop();
+        Expression* y=pop();
         //On test ce que vaut x et y (Constantes ou Expressions?)
         Constante* cx=dynamic_cast<Constante*>(x);
         Constante* cy=dynamic_cast<Constante*>(y);
         if(cx!=0 || cy!=0){ //Deux constantes
             Expression& res=*cx + *cy;
-            _pile->push(&res);
+            push(&res);
 
             delete x;
             delete y;
@@ -56,50 +42,50 @@ void Calculatrice::Pile::SUM(int n){
     }while(n > 0);
 }
 
-void Calculatrice::Pile::MEAN(int n){
-    if(n > _pile->size() || n < 0)
+void LO21::Pile::MEAN(int n){
+    if(n > size() || n < 0)
         throw CalculatriceException(typeid(this).name(),PILE,"MEAN impossible la valeurs X est incorrecte");
     SUM(n);
     Entier diviseur(n);
 
-    Expression* x=_pile->pop();
+    Expression* x=pop();
     Constante* cx=dynamic_cast<Constante*>(x);
     if(cx!=0){
         Expression& res=*cx / diviseur;
-        _pile->push(&res);
+        push(&res);
 
         delete x;
     }
 }
 
-void Calculatrice::Pile::CLEAR(){
-    _pile->clear();
+void LO21::Pile::CLEAR(){
+    clear();
 }
 
-void Calculatrice::Pile::DUP(){
-    if(Pile::getInstance().isEmpty()){
+void LO21::Pile::DUP(){
+    if(isEmpty()){
         throw CalculatriceException(typeid(this).name(),PILE,"Opération impossible la pile est vide");
     }
 
-    Expression* e=Pile::getInstance().top();
+    Expression* e=top();
     Entier* pt_ent=dynamic_cast<Entier*>(e);
     if(pt_ent!=0){
-        Pile::getInstance().push(new Entier(pt_ent->get_x()));
+        push(new Entier(pt_ent->get_x()));
     } else {
         Reel* pt_ree=dynamic_cast<Reel*>(e);
         if (pt_ree != 0){
-            Pile::getInstance().push(new Entier(pt_ent->get_x()));
+            push(new Entier(pt_ent->get_x()));
         } else {
             Rationnel* pt_rat=dynamic_cast<Rationnel*>(e);
             if(pt_rat != 0){
                 Entier n=pt_rat->get_n();
                 Entier d=pt_rat->get_d();
-                Pile::getInstance().push(new Rationnel(n,d));
+                push(new Rationnel(n,d));
             }
             else{
                 Exp* pt_exp=dynamic_cast<Exp*>(e);
                 if(pt_exp != 0){
-                    Pile::getInstance().push(new Exp(pt_exp->toString()));
+                    push(new Exp(pt_exp->toString()));
                 }
                 else{
                     /*
@@ -114,15 +100,43 @@ void Calculatrice::Pile::DUP(){
     }
 }
 
-void Calculatrice::Pile::DROP(){
-    if(Pile::getInstance().isEmpty()){
+void LO21::Pile::DROP(){
+    if(isEmpty()){
         throw CalculatriceException(typeid(this).name(),PILE,"Opération impossible la pile est vide");
     }
 
-    Expression* e=Pile::getInstance().pop();
+    Expression* e=pop();
     delete e;
 }
 
-void test(){
-    throw QString("except");
+LO21::Pile* LO21::Pile::clone() const{
+    Pile* np= new Pile();
+    //Parcours la pile pour cloner chaque éléments
+    QStack<Expression*>::const_iterator it;
+    Expression* exp=0;
+    for(it=begin(); it!=end(); ++it){ //On parcourt la liste de pile
+        exp=*it;
+        np->push(exp->clone());
+    }
+    return np;
+}
+
+void LO21::Pile::afficherPileCourante() const{
+    //Parcours la pile pour afficher ce qu'elle contient
+    QStack<Expression*>::const_iterator it;
+    Expression* exp=0;
+    for(it=begin(); it!=end(); ++it){ //On parcourt la liste de pile
+        exp=*it;
+        qDebug() << exp->toString();
+    }
+}
+
+void LO21::Pile::afficherPileMemoire() const{
+    //Parcours la pile pour afficher ce qu'elle contient
+    QStack<Expression*>::const_iterator it;
+    Expression* exp=0;
+    for(it=_etat->begin(); it!=_etat->end(); ++it){ //On parcourt la liste de pile
+        exp=*it;
+        qDebug() << exp->toString();
+    }
 }

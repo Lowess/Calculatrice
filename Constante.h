@@ -5,7 +5,7 @@
 
 #include "Expression.h"
 
-namespace Calculatrice{
+namespace LO21{
 
     class Constante : public Expression{
         private:
@@ -32,6 +32,8 @@ namespace Calculatrice{
             virtual Constante& hookOperation()=0;
 
             void EVAL();
+
+            Constante* clone() const=0;
 
     };
 }

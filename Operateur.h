@@ -8,8 +8,9 @@
 #include "Expression.h"
 #include "Fabrique.h"
 #include "Pile.h"
+#include "Calculatrice.h"
 
-namespace Calculatrice{
+namespace LO21{
     enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN, LN, LOG, POW, FACT, MOD, EVALUATION};
 
     class Operateur: public Expression {
@@ -28,6 +29,7 @@ namespace Calculatrice{
 
             QString& afficher();
 
+            Operateur* clone() const;
     };
 }
 

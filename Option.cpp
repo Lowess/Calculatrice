@@ -1,11 +1,11 @@
 #include "Option.h"
 
 using namespace std;
-using namespace Calculatrice;
+using namespace LO21;
 
-Calculatrice::Option* Calculatrice::Option::_option=0;
+LO21::Option* LO21::Option::_option=0;
 
-Calculatrice::Option& Calculatrice::Option::getInstance(){
+LO21::Option& LO21::Option::getInstance(){
     if(_option==0){
         _option = new Option();
         //try fopen(log.txt)
@@ -14,13 +14,13 @@ Calculatrice::Option& Calculatrice::Option::getInstance(){
     return *_option;
 }
 
-void Calculatrice::Option::libereInstance() {
+void LO21::Option::libereInstance() {
     if (_option==0){
         delete _option;
     }
 }
 
-void Calculatrice::Option::set_typeDiv(TypeDiv option){
+void LO21::Option::set_typeDiv(TypeDiv option){
     QTextStream cout(stdout, QIODevice::WriteOnly);
 
     cout << endl << "Changement du mode de constante en" << option << endl;
@@ -34,11 +34,11 @@ void Calculatrice::Option::set_typeDiv(TypeDiv option){
     }
 }
 
-void Calculatrice::Option::saveOptions(){
+void LO21::Option::saveOptions(){
 //à la fermeture du programme, sauver les options courantes dans le fichier log
 }
 
-QString Calculatrice::Option::toString() const{
+QString LO21::Option::toString() const{
     QString s;
     switch(_typeDiv){
         case MENU_ENTIER: s = "Entier"; break;

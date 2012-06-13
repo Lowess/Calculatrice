@@ -5,7 +5,7 @@
 #include "Expression.h"
 #include <QString>
 
-namespace Calculatrice {
+namespace LO21 {
     class OperateurUnaire : public Operateur {
         public:
             OperateurUnaire(const QString op);

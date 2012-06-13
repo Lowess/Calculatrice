@@ -4,10 +4,10 @@
 #include "Reel.h"
 #include "Rationnel.h"
 
-void Calculatrice::Constante::EVAL(){}
+void LO21::Constante::EVAL(){}
 
 //Implémentation issu de la classe Constante
-Calculatrice::Constante& Calculatrice::Constante::SIGN() const{
+LO21::Constante& LO21::Constante::SIGN() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -37,10 +37,10 @@ Calculatrice::Constante& Calculatrice::Constante::SIGN() const{
     }
 }
 
-Calculatrice::Constante& Calculatrice::Constante::SQR() const {
+LO21::Constante& LO21::Constante::SQR() const {
     return (*this).multiplication(*this);
 }
 
-Calculatrice::Constante& Calculatrice::Constante::CUBE() const {
+LO21::Constante& LO21::Constante::CUBE() const {
     return (*this).multiplication(SQR());
 }

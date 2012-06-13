@@ -1,6 +1,6 @@
 #include "OperateurUnaire.h"
 
-Calculatrice::OperateurUnaire::OperateurUnaire(const QString op){
+LO21::OperateurUnaire::OperateurUnaire(const QString op){
     if (op == "SIN")
         _operateur = SIN;
     else if (op == "COS")
@@ -36,11 +36,11 @@ Calculatrice::OperateurUnaire::OperateurUnaire(const QString op){
         throw CalculatriceException(typeid(this).name(), OTHER, "Operateur unaire non reconnu");
 }
 
-/*Calculatrice::enumOperateurs Calculatrice::OperateurUnaire::getOperator() const{
+/*LO21::enumOperateurs LO21::OperateurUnaire::getOperator() const{
     return _operateur;
 }*/
 
-QString Calculatrice::OperateurUnaire::toString() const{
+QString LO21::OperateurUnaire::toString() const{
     QString s;
     switch(_operateur){
         case SIN: s = "SIN"; break;

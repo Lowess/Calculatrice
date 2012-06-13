@@ -7,13 +7,13 @@
 
 //Implémentation issu de la classe Constante
 
-QTextStream& operator<<(QTextStream& s, const Calculatrice::Nombre& n){
+QTextStream& operator<<(QTextStream& s, const LO21::Nombre& n){
     n.afficher();
     return s;
 }
 
 //Implémentation issu de la classe Pile
-Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
+LO21::Nombre& LO21::Nombre::SIGN() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -43,57 +43,57 @@ Calculatrice::Nombre& Calculatrice::Nombre::SIGN() const{
     }
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::SIN() const{
+LO21::Constante& LO21::Nombre::SIN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(sin(reel->get_x())));
     return (ref);
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::COS() const{
+LO21::Constante& LO21::Nombre::COS() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(cos(reel->get_x())));
     return (ref);
 }
-Calculatrice::Constante& Calculatrice::Nombre::TAN() const{
+LO21::Constante& LO21::Nombre::TAN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(tan(reel->get_x())));
     return (ref);
 }
-Calculatrice::Constante& Calculatrice::Nombre::SINH() const{
+LO21::Constante& LO21::Nombre::SINH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(sinh(reel->get_x())));
     return (ref);
 }
-Calculatrice::Constante& Calculatrice::Nombre::COSH() const{
+LO21::Constante& LO21::Nombre::COSH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(cosh(reel->get_x())));
     return (ref);
 }
-Calculatrice::Constante& Calculatrice::Nombre::TANH() const{
+LO21::Constante& LO21::Nombre::TANH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(tanh(reel->get_x())));
     return (ref);
 }
-Calculatrice::Constante& Calculatrice::Nombre::LN() const{
+LO21::Constante& LO21::Nombre::LN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(log(reel->get_x())));
     return (ref);
 }
-Calculatrice::Constante& Calculatrice::Nombre::LOG() const{
+LO21::Constante& LO21::Nombre::LOG() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
     Constante& ref=*(new Reel(log10(reel->get_x())));
     return (ref);
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::INV() const{
+LO21::Constante& LO21::Nombre::INV() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&*this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -125,21 +125,21 @@ Calculatrice::Constante& Calculatrice::Nombre::INV() const{
     }
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::SQRT() const{
+LO21::Constante& LO21::Nombre::SQRT() const{
     double nb=toReel().get_x();
     Constante* res = new Reel(sqrt(nb));
     Constante& ref = *res;
     return (ref);
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& power) const{
+LO21::Constante& LO21::Nombre::POW(const LO21::Nombre& power) const{
     double puis = power.toReel().get_x();
 
-    const Calculatrice::Entier* tmpE = dynamic_cast<const Calculatrice::Entier*>(this);
+    const LO21::Entier* tmpE = dynamic_cast<const LO21::Entier*>(this);
     if (tmpE == 0){
-        const Calculatrice::Rationnel* tmpRa = dynamic_cast<const Calculatrice::Rationnel*>(this);
+        const LO21::Rationnel* tmpRa = dynamic_cast<const LO21::Rationnel*>(this);
         if(tmpRa == 0){
-            const Calculatrice::Reel* tmpRe = dynamic_cast<const Calculatrice::Reel*>(this);
+            const LO21::Reel* tmpRe = dynamic_cast<const LO21::Reel*>(this);
             if (tmpRe == 0)
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             else {
@@ -162,10 +162,7 @@ Calculatrice::Constante& Calculatrice::Nombre::POW(const Calculatrice::Nombre& p
     }
 }
 
-Calculatrice::Constante& Calculatrice::Nombre::hookOperation(){
-    QTextStream cout(stdout, QIODevice::WriteOnly);
-    cout << endl << "HOOK CAPTE" << endl;
-
+LO21::Constante& LO21::Nombre::hookOperation(){
     switch (Option::getInstance().get_typeDiv()){
         case MENU_ENTIER:{
             Constante& ref=this->toEntier();
@@ -188,7 +185,7 @@ Calculatrice::Constante& Calculatrice::Nombre::hookOperation(){
 }
 
 
-Calculatrice::Entier& Calculatrice::Nombre::toEntier() const{
+LO21::Entier& LO21::Nombre::toEntier() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -208,7 +205,7 @@ Calculatrice::Entier& Calculatrice::Nombre::toEntier() const{
     }
 }
 
-Calculatrice::Reel& Calculatrice::Nombre::toReel() const{
+LO21::Reel& LO21::Nombre::toReel() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -228,7 +225,7 @@ Calculatrice::Reel& Calculatrice::Nombre::toReel() const{
     }
 }
 
-Calculatrice::Rationnel& Calculatrice::Nombre::toRationnel() const{
+LO21::Rationnel& LO21::Nombre::toRationnel() const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(this);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -248,14 +245,14 @@ Calculatrice::Rationnel& Calculatrice::Nombre::toRationnel() const{
     }
 }
 
-bool Calculatrice::Nombre::operator==(const Calculatrice::Nombre& nb) const{
-    Calculatrice::Rationnel* a = &toRationnel();
-    Calculatrice::Rationnel* b = &nb.toRationnel();
+bool LO21::Nombre::operator==(const LO21::Nombre& nb) const{
+    LO21::Rationnel* a = &toRationnel();
+    LO21::Rationnel* b = &nb.toRationnel();
     return (a->get_n().get_x() == b->get_n().get_x()) && (a->get_d().get_x() == b->get_d().get_x());
 }
 
-bool Calculatrice::Nombre::operator==(int nb) const{
-    Calculatrice::Rationnel* a = &toRationnel();
-    Calculatrice::Rationnel* b = new Rationnel(nb,1);
+bool LO21::Nombre::operator==(int nb) const{
+    LO21::Rationnel* a = &toRationnel();
+    LO21::Rationnel* b = new Rationnel(nb,1);
     return (a->get_n().get_x() == b->get_n().get_x()) && (a->get_d().get_x() == b->get_d().get_x());
 }

@@ -1,14 +1,16 @@
 #include "Operateur.h"
 
 
-using namespace Calculatrice;
+using namespace LO21;
 using namespace std;
 
-void Calculatrice::Operateur::EVAL(){
+LO21::Operateur* LO21::Operateur::clone() const{}
+
+void LO21::Operateur::EVAL(){
 }
 
-void Calculatrice::Operateur::appliqueOperateur(){
-    Pile* p=&Pile::getInstance();
+void LO21::Operateur::appliqueOperateur(){
+    Pile* p=Calculatrice::getInstance().get_pile();
 
     switch(_operateur){
         // + - * / --> On pop deux éléments et on push le résultat

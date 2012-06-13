@@ -3,18 +3,41 @@
 
 #include "Pile.h"
 #include "Fabrique.h"
-
-namespace Calculatrice{
+#include "Gardien.h"
+namespace LO21{
     class Calculatrice{
         private:
             static Calculatrice* _calc;
+            Gardien* _gard;
+            Pile* _pile;
 
-            Calculatrice(){}
-            Calculatrice(const Calculatrice& c);
-            ~Calculatrice(){}
+            Calculatrice():_gard(Gardien::getInstance()),_pile(new Pile()){}
+
+            Calculatrice(const Calculatrice& c){
+                delete _pile;
+                _pile=c._pile->clone();
+            }
+
+            ~Calculatrice(){
+                delete _pile;
+                Gardien::libereInstance();
+            }
         public:
             static Calculatrice& getInstance();
             static void libereInstance();
+
+            Pile* get_pile() const{ return _pile; }
+            void set_pile(Pile* p) {
+                qDebug() << "_pile=" << endl;
+                _pile->afficherPileCourante();
+
+                qDebug() << "new pile=" << endl;
+                p->afficherPileMemoire();
+
+                _pile=p;
+            }
+
+            Gardien* get_gardien() const{ return _gard; }
 
     };
 }

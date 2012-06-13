@@ -1,5 +1,5 @@
 #include "CalculatriceException.h"
 
-using namespace Calculatrice;
+using namespace LO21;
 
 CalculatriceException::~CalculatriceException() throw(){}

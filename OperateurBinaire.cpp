@@ -1,9 +1,9 @@
 #include "OperateurBinaire.h"
 #include "CalculatriceException.h"
 
-using namespace Calculatrice;
+using namespace LO21;
 
-Calculatrice::OperateurBinaire::OperateurBinaire(const QString &op){
+LO21::OperateurBinaire::OperateurBinaire(const QString &op){
     if (op == "+")
         _operateur = ADD;
     else if (op == "-")
@@ -20,7 +20,7 @@ Calculatrice::OperateurBinaire::OperateurBinaire(const QString &op){
         throw CalculatriceException(typeid(this).name(), OTHER, "Operateur binaire non reconnu");
 }
 
-QString Calculatrice::OperateurBinaire::toString() const{
+QString LO21::OperateurBinaire::toString() const{
     QString s;
     switch(_operateur){
         case ADD: s = "+"; break;

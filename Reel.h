@@ -10,7 +10,7 @@
 #include "Nombre.h"
 #include "Complexe.h"
 
-namespace Calculatrice{
+namespace LO21{
     class Rationnel;
     class Entier;
 
@@ -36,6 +36,8 @@ namespace Calculatrice{
 
             //Constructeurs
             Reel(const double x=0.):_x(x){}
+
+            Reel* clone() const;
     };
 }
 

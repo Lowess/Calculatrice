@@ -2,24 +2,20 @@
 #define PILE_H
 
 #include <QStack>
+#include <QDebug>
+
 #include "Expression.h"
-
-
+#include "Rationnel.h"
 /**
   * DP Singleton
   *
 **/
-namespace Calculatrice{
+namespace LO21{
     class Pile: public QStack<Expression*>{
         private:
-            static Pile* _pile;
-
-            Pile(){}
-            Pile(const Pile& p);
-            ~Pile(){}
+            Pile* _etat;
         public:
-            static Pile& getInstance();
-            static void libereInstance();
+            Pile():_etat(this){}
 
             //MÃ©thodes agissant sur la pile
             void SWAP(int x, int y);
@@ -29,11 +25,32 @@ namespace Calculatrice{
             void DUP();
             void DROP();
 
-            //MÃ©thodes de sauvegarde et de chargement
+            //Méthodes de sauvegarde et de chargement
             void sauvegarder();
             void charger();
 
-            void test();
+            Pile* clone() const;
+
+            void afficherPileCourante() const;
+            void afficherPileMemoire() const;
+
+            //DP Memento
+            class Memento{
+                private:
+                    Pile* _etat;
+                public:
+                    Memento(const Pile* petat):_etat(petat->clone()){}
+
+                    Pile* get_etat() const {return _etat; }
+            };
+
+            void mementoSuivant(){
+
+            }
+
+            Memento* sauverDansMemento(){ return new Memento(_etat); }
+            void restaurerDepuisMemento(const Memento* m){ _etat=m->get_etat(); }
+            Pile* get_etat()const{ return _etat; }
     };
 }
 

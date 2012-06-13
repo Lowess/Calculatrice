@@ -4,10 +4,10 @@
 #include "Exp.h"
 #include "CalculatriceException.h"
 
-using namespace Calculatrice;
+using namespace LO21;
 
 //Réalise l'addition d'un Entier avec un Constante (Entier,Reel,Rationnel)
-Calculatrice::Constante& Calculatrice::Entier::addition(const Constante& nb) const{
+LO21::Constante& LO21::Entier::addition(const Constante& nb) const{
     //On essaie le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaie en Reel
@@ -55,7 +55,7 @@ Calculatrice::Constante& Calculatrice::Entier::addition(const Constante& nb) con
 }
 
 //Réalise la soustraction d'un Entier avec un Constante (Entier,Reel,Rationnel)
-Calculatrice::Constante& Calculatrice::Entier::soustraction(const Constante& nb) const{
+LO21::Constante& LO21::Entier::soustraction(const Constante& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -104,7 +104,7 @@ Calculatrice::Constante& Calculatrice::Entier::soustraction(const Constante& nb)
 }
 
 //Réalise la multiplication d'un Entier avec un Constante (Entier,Reel,Rationnel)
-Calculatrice::Constante& Calculatrice::Entier::multiplication(const Constante& nb) const{
+LO21::Constante& LO21::Entier::multiplication(const Constante& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -150,7 +150,7 @@ Calculatrice::Constante& Calculatrice::Entier::multiplication(const Constante& n
 }
 
 //Réalise la division d'un Entier par un Constante (Entier,Reel,Rationnel)
-Calculatrice::Constante& Calculatrice::Entier::division(const Constante& nb) const{
+LO21::Constante& LO21::Entier::division(const Constante& nb) const{
     //On essaye le cast en Entier
     const Entier* tmp_en=dynamic_cast<const Entier*>(&nb);
     if(tmp_en==0){ //Si echec on essaye en Reel
@@ -206,29 +206,31 @@ Calculatrice::Constante& Calculatrice::Entier::division(const Constante& nb) con
     }
 }
 
-Calculatrice::Entier& Calculatrice::Entier::MOD(const Entier& nb){
+LO21::Entier& LO21::Entier::MOD(const Entier& nb){
     Entier* res=new Entier(_x % nb._x);
     return *res;
 }
 
-Calculatrice::Entier& Calculatrice::Entier::FACTORIELLE(){
+LO21::Entier& LO21::Entier::FACTORIELLE(){
     int n=_x;
     Entier* res=new Entier(factorielle(n));
     return *res;
 }
 
 
-QString Calculatrice::Entier::toString() const{
+QString LO21::Entier::toString() const{
     QString str;
     str.setNum(_x);
     return str;
 }
 
+LO21::Entier* LO21::Entier::clone() const{ return new Entier(*this); }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Calculatrice::Rationnel& Calculatrice::Entier::toRationnel() const{
+LO21::Rationnel& LO21::Entier::toRationnel() const{
     //Conversion de l'entier en rationnel 3 = 3/1
     Rationnel* res= new Rationnel(_x,1);
     Rationnel& ref=*res;
@@ -236,14 +238,14 @@ Calculatrice::Rationnel& Calculatrice::Entier::toRationnel() const{
 }
 
 
-Calculatrice::Reel& Calculatrice::Entier::toReel() const{
+LO21::Reel& LO21::Entier::toReel() const{
     //Conversion d'un entier en reel 3.0 = 3
     Reel* res= new Reel(_x);
     Reel& ref=*res;
     return (ref);
 }
 
-Calculatrice::Complexe& Calculatrice::Entier::toComplexe() const{
+LO21::Complexe& LO21::Entier::toComplexe() const{
     //Conversion d'un entier en complexe 3 = 3 + 0i
     const Constante* a = (const Constante*)this;
     const Constante* b = new Entier(0);
