@@ -102,7 +102,7 @@ void MainWindow::slotConnection()
     connect(ui->undo, SIGNAL(clicked()), this, SLOT(actionUndo()));
     connect(ui->redo, SIGNAL(clicked()), this, SLOT(actionRedo()));
 
-
+    memorisePileUndo();
 
 }
 
@@ -130,9 +130,8 @@ void MainWindow::enterPressed(){
         dupPressed();
     else
         try{
-            memorisePileUndo();
             Fabrique::getInstance().creer(ui->lineEdit->text());
-            memorisePileRedo();
+            memorisePileUndo();
 
             rafraichirPile();
             ui->lastStack->setText(ui->lineEdit->text().simplified());
@@ -290,6 +289,11 @@ void MainWindow::actionUndo(){
 
         //Remplace la pile par une pile sauvegardée
         Calculatrice::getInstance().set_pile(p);
+        qDebug() << "Affichage de la pile mémoire restaurée" << endl;
+        p->afficherPileMemoire();
+
+        qDebug() << "Affichage de la pile restaurée" << endl;
+        p->afficherPileCourante();
 
 
         ui->listStack->clear();
@@ -308,7 +312,8 @@ void MainWindow::actionRedo(){
 
         //Remplace la pile par une pile sauvegardée
         Calculatrice::getInstance().set_pile(p);
-
+        qDebug() << "Affichage de la pile restaurée" << endl;
+        p->afficherPileMemoire();
 
         ui->listStack->clear();
 

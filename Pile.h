@@ -10,7 +10,10 @@
   * DP Singleton
   *
 **/
+//class Gardien;
+
 namespace LO21{
+    class Gardien;
     class Pile: public QStack<Expression*>{
         private:
             Pile* _etat;
@@ -38,17 +41,17 @@ namespace LO21{
             class Memento{
                 private:
                     Pile* _etat;
+
                 public:
                     Memento(const Pile* petat):_etat(petat->clone()){}
-
                     Pile* get_etat() const {return _etat; }
             };
 
             //void mementoSuivant(){}
 
-            Memento* sauverDansMemento(){ return new Memento(_etat); }
-            void restaurerDepuisMemento(const Memento* m){ _etat=m->get_etat(); }
-            Pile* get_etat()const{ return _etat; }
+            Memento* sauverDansMemento();
+            void restaurerDepuisMemento(const Memento* m);
+            Pile* get_etat()const;
     };
 }
 

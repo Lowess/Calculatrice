@@ -2,25 +2,24 @@
 #define GARDIEN_H
 
 #include <QString>
-#include <QList>
-#include <QQueue>
+#include <QStack>
 #include "Pile.h"
-
 /*
  * Implémente le DP Memento
  *
 */
-using namespace LO21;
 
 namespace LO21{
+    //class Pile;
+    //class Pile::Memento;
+
     class Gardien{
         private:
             static Gardien* _gard;
+            int _index;
+            QStack<Pile::Memento*> _liste;
 
-            QStack<Pile::Memento*> _listeUndo;
-            QQueue<Pile::Memento*> _listeRedo;
-
-            Gardien(){}
+            Gardien():_index(0){}
             Gardien(const Gardien&){}
             ~Gardien(){}
 
@@ -28,38 +27,15 @@ namespace LO21{
             static Gardien* getInstance();
             static void libereInstance();
 
+            void ajouterMementoUndo(Pile::Memento* pMemento);
+            void ajouterMementoRedo(Pile::Memento* pMemento);
 
-            void ajouterMementoUndo(Pile::Memento* pMemento){
-                _listeUndo.push(pMemento);
-            }
-            void ajouterMementoRedo(Pile::Memento* pMemento){
-                _listeRedo.enqueue(pMemento);
-            }
+            Pile::Memento* getMementoUndo();
+            Pile::Memento* getMementoRedo();
 
-            Pile::Memento* getMementoUndo(){
-                if(!_listeUndo.isEmpty()){
-                    qDebug() << "Taille de liste "  << _listeUndo.size() << endl;
-                    return _listeUndo.pop();
-                }
-                throw CalculatriceException(typeid(this).name(),PILE,"Opération de undo impossible pile vide");
-            }
-            Pile::Memento* getMementoRedo(){
-                if(!_listeRedo.isEmpty()){
-                    qDebug() << "Taille de liste "  << _listeRedo.size() << endl;
-                    return _listeRedo.dequeue();
-                }
-                throw CalculatriceException(typeid(this).name(),PILE,"Opération de redo impossible pile vide");
-            }
-            void afficher(){
-                QStack<Pile::Memento*>::iterator it;
-                Pile::Memento* m;
-                for(it=_listeUndo.begin(); it!=_listeUndo.end(); ++it){
-                    m=*it;
-                    m->get_etat()->afficherPileMemoire();
-                }
-            }
+            void afficher();
 
-            //int get_index()const{ qDebug() << "index:" << _index << endl; return _index; }
+            void set_index(int i){ _index=i; }
     };
 }
 
