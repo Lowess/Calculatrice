@@ -13,6 +13,8 @@
 #include "Option.h"
 #include "Expression.h"
 
+#include "LogSystem.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -93,6 +95,8 @@ class MainWindow : public QMainWindow
         void dropPressed();
         void dupPressed();
 
+        void spinChanged(int i);
+
         //Connection des actions choix de constante
         void actionEntiersChanged();
         void actionReelsChanged();
@@ -109,8 +113,13 @@ class MainWindow : public QMainWindow
         void actionNouveauChanged();
         void actionQuitterChanged();
 
+        //Connection des boutons dans fichier
+        void actionMasquerOptionsAvancees();
+        void actionMasquerPile();
+
         void actionUndo();
         void actionRedo();
+
 };
 
 #endif // MAINWINDOW_H

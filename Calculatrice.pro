@@ -28,7 +28,9 @@ SOURCES += main.cpp\
     OperateurUnaire.cpp \
     OperateurBinaire.cpp \
     Exp.cpp \
-    Gardien.cpp
+    Gardien.cpp \
+    LogMessage.cpp \
+    LogSystem.cpp
 
 HEADERS  += mainwindow.h \
     Expression.h \
@@ -47,6 +49,8 @@ HEADERS  += mainwindow.h \
     OperateurUnaire.h \
     OperateurBinaire.h \
     Exp.h \
-    Gardien.h
+    Gardien.h \
+    LogMessage.h \
+    LogSystem.h
 
 FORMS    += mainwindow.ui

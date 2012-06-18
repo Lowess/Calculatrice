@@ -4,6 +4,8 @@
 #include "Pile.h"
 #include "Fabrique.h"
 #include "Gardien.h"
+#include "LogSystem.h"
+
 namespace LO21{
     class Calculatrice{
         private:

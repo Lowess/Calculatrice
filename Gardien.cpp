@@ -36,7 +36,7 @@ void LO21::Gardien::ajouterMementoRedo(Pile::Memento* pMemento){
 LO21::Pile::Memento* LO21::Gardien::getMementoUndo(){
     if(!_liste.isEmpty() && _index > 1){
         //qDebug() << "Taille de liste "  << _liste.size() << endl;
-        qDebug() << "index "  << _index << endl;
+        //qDebug() << "index "  << _index << endl;
         //afficher();
         _index--;
         qDebug() << "index "  << _index << endl;
@@ -46,10 +46,10 @@ LO21::Pile::Memento* LO21::Gardien::getMementoUndo(){
 }
 LO21::Pile::Memento* LO21::Gardien::getMementoRedo(){
     if(!_liste.isEmpty() && _index < _liste.size()){
-         //qDebug() << "Taille de liste "  << _liste.size() << endl;
-         qDebug() << "index "  << _index << endl;
-         _index++;
-         //afficher();
+        //qDebug() << "Taille de liste "  << _liste.size() << endl;
+        //qDebug() << "index "  << _index << endl;
+        _index++;
+        //afficher();
         Pile::Memento* m=_liste.value(_index-1);
         return m;
 

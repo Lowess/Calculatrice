@@ -6,7 +6,7 @@
 #include "Constante.h"
 #include "CalculatriceException.h"
 #include "Option.h"
-
+#include "LogSystem.h"
 /**
   Nombre implÃ©mente le Design Pattern Template/Methode
   **/

@@ -2,6 +2,7 @@
 #include "Pile.h"
 #include "OperateurBinaire.h"
 #include "OperateurUnaire.h"
+#include "LogSystem.h"
 
 using namespace LO21;
 using namespace std;
@@ -94,12 +95,16 @@ void LO21::Fabrique::creer(const QString& text) const{
                 Nombre* nb=new Entier(QString(*it).toInt());
                 Expression* res=&nb->hookOperation();
                 p->push(res);
+
+                LogSystem::ecrireLog(LogMessage("Creation d'une constante de type Entier de valeur " + res->toString()));
                 break;
             }
             case REEL:{
                 Nombre* nb=new Reel(QString(*it).toDouble());
                 Expression* res=&nb->hookOperation();
                 p->push(res);
+
+                LogSystem::ecrireLog(LogMessage("Creation d'une constante de type Reel de valeur " + res->toString()));
                 break;
             }
             case RATIONNEL:{
@@ -108,6 +113,8 @@ void LO21::Fabrique::creer(const QString& text) const{
                 Nombre* nb=new Rationnel(tmpl.value(0).toInt(), tmpl.value(1).toInt());
                 Expression* res=&nb->hookOperation();
                 p->push(res);
+
+                LogSystem::ecrireLog(LogMessage("Creation d'une constante de type Rationnel de valeur " + res->toString()));
                 break;
             }
             case COMPLEXE:{
@@ -124,6 +131,7 @@ void LO21::Fabrique::creer(const QString& text) const{
                 if(cx!=0 || cy!=0){ //Deux constantes
                     Complexe* res=new Complexe(*cx, *cy);
                     p->push(res);
+                    LogSystem::ecrireLog(LogMessage("Creation d'une constante de type Complexe de valeur " + res->toString()));
                 }
                 break;
 
@@ -131,12 +139,13 @@ void LO21::Fabrique::creer(const QString& text) const{
             case OPERATEUR_BINAIRE:{
                 OperateurBinaire* res=new OperateurBinaire(*it);
                 res->appliqueOperateur();
+                LogSystem::ecrireLog(LogMessage("Application d'un operateur binaire de valeur " + res->toString()));
                 break;
             }
             case OPERATEUR_UNAIRE:{
                 OperateurUnaire* res=new OperateurUnaire(*it);
                 res->appliqueOperateur();
-                cout << *res << endl;
+                LogSystem::ecrireLog(LogMessage("Application d'un operateur unaire de valeur " + res->toString()));
                 break;
             }
             case EXPRESSION:{
@@ -144,9 +153,11 @@ void LO21::Fabrique::creer(const QString& text) const{
                 tmp.replace(QString("'"), QString(""));
                 Expression* res=new Exp(tmp);
                 p->push(res);
+                LogSystem::ecrireLog(LogMessage("Creation d'une constante de type Expression de valeur " + res->toString()));
                 break;
             }
             default:{
+                LogSystem::ecrireLog(LogMessage("Construction d'objet invalide",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Construction d'objet invalide");
                 break;
             }
