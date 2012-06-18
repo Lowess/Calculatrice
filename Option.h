@@ -1,3 +1,8 @@
+/** \file Option.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Option
+  */
+
 #ifndef OPTION_H
 #define OPTION_H
 

@@ -1,3 +1,8 @@
+/** \file Pile.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Pile
+  */
+
 #ifndef PILE_H
 #define PILE_H
 

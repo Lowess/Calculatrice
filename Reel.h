@@ -1,3 +1,8 @@
+/** \file Reel.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Reel
+  */
+
 #ifndef REEL_H
 #define REEL_H
 

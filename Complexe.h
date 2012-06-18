@@ -1,3 +1,8 @@
+/** \file Complexe.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Complexe
+  */
+
 #ifndef COMPLEXE_H
 #define COMPLEXE_H
 

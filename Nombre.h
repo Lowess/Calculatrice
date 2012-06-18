@@ -1,3 +1,8 @@
+/** \file Nombre.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Nombre
+  */
+
 #ifndef NOMBRE_H
 #define NOMBRE_H
 

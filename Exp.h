@@ -1,3 +1,8 @@
+/** \file Exp.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Exp
+  */
+
 #ifndef EXP_H
 #define EXP_H
 

@@ -1,3 +1,8 @@
+/** \file Calculatrice.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Fabrique
+  */
+
 #ifndef FABRIQUE_H
 #define FABRIQUE_H
 

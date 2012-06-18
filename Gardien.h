@@ -1,3 +1,8 @@
+/** \file Gardien.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Gardien
+  */
+
 #ifndef GARDIEN_H
 #define GARDIEN_H
 

@@ -1,3 +1,8 @@
+/** \file Entier.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Entier
+  */
+
 #ifndef ENTIER_H
 #define ENTIER_H
 

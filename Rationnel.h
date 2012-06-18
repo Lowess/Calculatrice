@@ -1,3 +1,8 @@
+/** \file Rationnel.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe Rationnel
+  */
+
 #ifndef RATIONNEL_H
 #define RATIONNEL_H
 
