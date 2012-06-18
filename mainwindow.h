@@ -29,7 +29,8 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         void slotConnection();
         void rafraichirPile();
-        void memorisePile();
+        void memorisePileUndo();
+        void memorisePileRedo();
         bool notify ( QObject * receiver, QEvent * e );
 
 
@@ -109,6 +110,7 @@ class MainWindow : public QMainWindow
         void actionQuitterChanged();
 
         void actionUndo();
+        void actionRedo();
 };
 
 #endif // MAINWINDOW_H

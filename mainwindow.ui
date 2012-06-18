@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>946</width>
-      <height>490</height>
+      <width>1142</width>
+      <height>557</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -77,11 +77,28 @@
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="undo">
-           <property name="text">
-            <string>Undo</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QPushButton" name="undo">
+             <property name="text">
+              <string>Undo</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+Z</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="redo">
+             <property name="text">
+              <string>Redo</string>
+             </property>
+             <property name="shortcut">
+              <string>Ctrl+Y</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
           <widget class="QLineEdit" name="lineEdit">
@@ -721,11 +738,6 @@
                 </item>
                </layout>
               </widget>
-              <zorder>gridLayoutWidget</zorder>
-              <zorder>btnSin</zorder>
-              <zorder></zorder>
-              <zorder></zorder>
-              <zorder>gridLayoutWidget</zorder>
              </widget>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
@@ -1107,10 +1119,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder></zorder>
-   <zorder></zorder>
-   <zorder>horizontalSpacer</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -14,8 +14,18 @@ LO21::Constante& LO21::Constante::SIGN() const{
         const Reel* tmp_re=dynamic_cast<const Reel*>(&*this);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&*this);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){ //Si echec on essaye en Complexe
+                const Complexe* tmp_comp=dynamic_cast<const Complexe*>(&*this);
+                if(tmp_comp==0){ //Si echec erreur
+                    throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                }
+                else{
+                    Nombre& sig_a=dynamic_cast<Nombre&>(tmp_comp->get_a()->SIGN());
+                    Nombre& sig_b=dynamic_cast<Nombre&>(tmp_comp->get_b()->SIGN());
+                    Complexe* res=new Complexe(sig_a,sig_b);
+                    Constante& ref=*res;
+                    return (ref);
+                }
             }
             else{ //Si succès on réalise SIGN Rationnel
                 const Entier* inv=dynamic_cast<const Entier*>(&tmp_ra->get_n().SIGN());

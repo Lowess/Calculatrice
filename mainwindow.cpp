@@ -100,6 +100,7 @@ void MainWindow::slotConnection()
     connect(ui->actionQuitter, SIGNAL(changed()), this, SLOT(actionQuitterChanged()));
 
     connect(ui->undo, SIGNAL(clicked()), this, SLOT(actionUndo()));
+    connect(ui->redo, SIGNAL(clicked()), this, SLOT(actionRedo()));
 
 
 
@@ -129,8 +130,9 @@ void MainWindow::enterPressed(){
         dupPressed();
     else
         try{
-            memorisePile();
+            memorisePileUndo();
             Fabrique::getInstance().creer(ui->lineEdit->text());
+            memorisePileRedo();
 
             rafraichirPile();
             ui->lastStack->setText(ui->lineEdit->text().simplified());
@@ -188,7 +190,9 @@ void MainWindow::swapPressed(){
     }
     else{
         try{
+            memorisePileUndo();
             Calculatrice::getInstance().get_pile()->SWAP(x.toInt()-1,y.toInt()-1);
+            memorisePileRedo();
 
             rafraichirPile();
         } catch (exception& e){
@@ -208,8 +212,10 @@ void MainWindow::sumPressed(){
     }
     else{
         try{
-            memorisePile();
+            memorisePileUndo();
             Calculatrice::getInstance().get_pile()->SUM(x.toInt()-1);
+            memorisePileRedo();
+
             rafraichirPile();
         } catch (exception& e){
             QMessageBox msgBox;
@@ -228,8 +234,10 @@ void MainWindow::meanPressed(){
     }
     else{
         try{
-            memorisePile();
+            memorisePileUndo();
             Calculatrice::getInstance().get_pile()->MEAN(x.toInt()-1);
+            memorisePileRedo();
+
             rafraichirPile();
         } catch (exception& e){
             QMessageBox msgBox;
@@ -239,14 +247,18 @@ void MainWindow::meanPressed(){
     }
 }
 void MainWindow::clearPressed(){
-    memorisePile();
+    memorisePileUndo();
     Calculatrice::getInstance().get_pile()->CLEAR();
+    memorisePileRedo();
+
     rafraichirPile();
 }
 void MainWindow::dropPressed(){
     try {
-        memorisePile();
+        memorisePileUndo();
         Calculatrice::getInstance().get_pile()->DROP();
+        memorisePileRedo();
+
         rafraichirPile();
     } catch (exception& e){
         QMessageBox msgBox;
@@ -256,8 +268,10 @@ void MainWindow::dropPressed(){
 }
 void MainWindow::dupPressed(){
     try {
-        memorisePile();
+        memorisePileUndo();
         Calculatrice::getInstance().get_pile()->DUP();
+        memorisePileRedo();
+
         rafraichirPile();
     } catch (exception& e){
         QMessageBox msgBox;
@@ -270,12 +284,31 @@ void MainWindow::actionUndo(){
     try{
         Gardien* g=Calculatrice::getInstance().get_gardien();
 
-        //Restaure la pile à l'index
-        Calculatrice::getInstance().get_pile()->restaurerDepuisMemento(g->getMemento());
+        Calculatrice::getInstance().get_pile()->restaurerDepuisMemento(g->getMementoUndo());
         Pile* p=Calculatrice::getInstance().get_pile()->get_etat();
+
 
         //Remplace la pile par une pile sauvegardée
         Calculatrice::getInstance().set_pile(p);
+
+
+        ui->listStack->clear();
+
+        rafraichirPile();
+    }catch (exception& e){ qDebug() << e.what(); }
+}
+
+void MainWindow::actionRedo(){
+    try{
+        Gardien* g=Calculatrice::getInstance().get_gardien();
+
+        Calculatrice::getInstance().get_pile()->restaurerDepuisMemento(g->getMementoRedo());
+        Pile* p=Calculatrice::getInstance().get_pile()->get_etat();
+
+
+        //Remplace la pile par une pile sauvegardée
+        Calculatrice::getInstance().set_pile(p);
+
 
         ui->listStack->clear();
 
@@ -295,12 +328,20 @@ void MainWindow::rafraichirPile(){
     }
 }
 
-void MainWindow::memorisePile(){
+void MainWindow::memorisePileUndo(){
     //Mémorise la pile pour permettre le undo
     Gardien* g=Calculatrice::getInstance().get_gardien();
     //Mémorise la pile courante
-    g->ajouterMemento(Calculatrice::getInstance().get_pile()->sauverDansMemento());
-    Calculatrice::getInstance().get_pile()->mementoSuivant();
+    g->ajouterMementoUndo(Calculatrice::getInstance().get_pile()->sauverDansMemento());
+    //Calculatrice::getInstance().get_pile()->mementoSuivant();
+}
+
+void MainWindow::memorisePileRedo(){
+    //Mémorise la pile pour permettre le undo
+    Gardien* g=Calculatrice::getInstance().get_gardien();
+    //Mémorise la pile courante
+    g->ajouterMementoRedo(Calculatrice::getInstance().get_pile()->sauverDansMemento());
+    //Calculatrice::getInstance().get_pile()->mementoSuivant();
 }
 
 //Connection des actions choix de constante

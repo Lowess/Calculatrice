@@ -25,21 +25,23 @@ void LO21::Pile::SWAP(int x, int y){
 void LO21::Pile::SUM(int n){
     if(n >= size() || n < 0)
         throw CalculatriceException(typeid(this).name(),PILE,"SUM impossible la valeurs X est incorrecte");
-    do{
-        Expression* x=pop();
-        Expression* y=pop();
-        //On test ce que vaut x et y (Constantes ou Expressions?)
-        Constante* cx=dynamic_cast<Constante*>(x);
-        Constante* cy=dynamic_cast<Constante*>(y);
-        if(cx!=0 || cy!=0){ //Deux constantes
-            Expression& res=*cx + *cy;
-            push(&res);
+    if(n >= 1){
+        do{
+            Expression* x=pop();
+            Expression* y=pop();
+            //On test ce que vaut x et y (Constantes ou Expressions?)
+            Constante* cx=dynamic_cast<Constante*>(x);
+            Constante* cy=dynamic_cast<Constante*>(y);
+            if(cx!=0 || cy!=0){ //Deux constantes
+                Expression& res=*cx + *cy;
+                push(&res);
 
-            delete x;
-            delete y;
-        }
-        n--;
-    }while(n > 0);
+                delete x;
+                delete y;
+            }
+            n--;
+        }while(n > 0);
+    }
 }
 
 void LO21::Pile::MEAN(int n){
@@ -78,9 +80,7 @@ void LO21::Pile::DUP(){
         } else {
             Rationnel* pt_rat=dynamic_cast<Rationnel*>(e);
             if(pt_rat != 0){
-                Entier n=pt_rat->get_n();
-                Entier d=pt_rat->get_d();
-                push(new Rationnel(n,d));
+                push(new Rationnel(*pt_rat));
             }
             else{
                 Exp* pt_exp=dynamic_cast<Exp*>(e);
@@ -88,11 +88,11 @@ void LO21::Pile::DUP(){
                     push(new Exp(pt_exp->toString()));
                 }
                 else{
-                    /*
                     Complexe* pt_com=dynamic_cast<Complexe*>(e);
                     if(pt_com != 0){
+                        push(new Complexe(*pt_com));
                     }
-                    else*/
+                    else
                         throw CalculatriceException(typeid(this).name(),PILE,"Impossible de dupliquer ce type de constante");
                 }
             }

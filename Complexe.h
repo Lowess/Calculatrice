@@ -26,6 +26,8 @@ namespace LO21{
                 delete _a;
                 delete _b;
             }
+            const Nombre* get_a() const{ return _a; }
+            const Nombre* get_b() const{ return _b; }
 
             QString toString() const{
                 return (QString(_a->toString() + "$" + _b->toString()));

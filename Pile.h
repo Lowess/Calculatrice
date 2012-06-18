@@ -44,9 +44,7 @@ namespace LO21{
                     Pile* get_etat() const {return _etat; }
             };
 
-            void mementoSuivant(){
-
-            }
+            //void mementoSuivant(){}
 
             Memento* sauverDansMemento(){ return new Memento(_etat); }
             void restaurerDepuisMemento(const Memento* m){ _etat=m->get_etat(); }
