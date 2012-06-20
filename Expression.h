@@ -33,12 +33,12 @@ namespace LO21{
             virtual QString toString() const =0;
 
             /*! \fn void afficher() const
-             * \brief Affiche l'expression (pour debug)
+             * \brief Affiche l'expression
              */
-            /*void afficher() const{
+            void afficher() const{
                 QTextStream cout(stdout, QIODevice::WriteOnly);
                 cout << this->toString();
-            }*/
+            }
 
             /*! \fn virtual Expression* clone() const
              * \brief Duplique un objet Expression

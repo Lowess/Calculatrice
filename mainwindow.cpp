@@ -105,13 +105,7 @@ void MainWindow::slotConnection()
     connect(ui->actionUndo, SIGNAL(triggered()), this, SLOT(actionUndo()));
     connect(ui->actionRedo, SIGNAL(triggered()), this, SLOT(actionRedo()));
 
-<<<<<<< HEAD
-    //connect(ui->chkDegre, SIGNAL(triggered()), this, SLOT(changeDegre()));
-    //connect(ui->chkComplexe, SIGNAL(triggered()), this, SLOT(changeComplexe()));
-=======
-
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinChanged(int)));
->>>>>>> d185c98c462ba10aa067a3689a678560fbeed857
 
     connect(ui->actionMasquerOptionsAvancees, SIGNAL(triggered()), this, SLOT(actionMasquerOptionsAvancees()));
     connect(ui->actionMasquerTrigo, SIGNAL(triggered()), this, SLOT(actionMasquerTrigo()));
@@ -150,7 +144,7 @@ void MainWindow::delPressed(){
         dropPressed();
     else
         ui->lineEdit->setText("");
-    save();
+
 }
 void MainWindow::enterPressed(){
     if(ui->lineEdit->text()=="")
@@ -169,7 +163,7 @@ void MainWindow::enterPressed(){
             msgBox.setText(e.what());
             msgBox.exec();
         }
-    save();
+
 }
 void MainWindow::spaceBarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" "); }
 
@@ -242,7 +236,7 @@ void MainWindow::swapPressed(){
         }
     }
 
-    save();
+
 }
 void MainWindow::sumPressed(){
     QString x=ui->lineEditX->text();
@@ -268,7 +262,7 @@ void MainWindow::sumPressed(){
         }
     }
 
-    save();
+
 }
 void MainWindow::meanPressed(){
 
@@ -294,7 +288,7 @@ void MainWindow::meanPressed(){
         }
     }
 
-    save();
+
 }
 void MainWindow::clearPressed(){
     memorisePileUndo();
@@ -303,7 +297,7 @@ void MainWindow::clearPressed(){
 
     rafraichirPile();
 
-    save();
+
 }
 void MainWindow::dropPressed(){
     try {
@@ -319,7 +313,7 @@ void MainWindow::dropPressed(){
         msgBox.exec();
     }
 
-    save();
+
 }
 void MainWindow::dupPressed(){
     try {
@@ -335,7 +329,7 @@ void MainWindow::dupPressed(){
         msgBox.exec();
     }
 
-    save();
+
 }
 
 void MainWindow::spinChanged(int i){
@@ -366,7 +360,7 @@ void MainWindow::actionUndo(){
         LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
     }
 
-    save();
+
 }
 
 void MainWindow::actionRedo(){
@@ -389,12 +383,13 @@ void MainWindow::actionRedo(){
         LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
     }
 
-    save();
+
 }
 
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     //Mise �  jour de l'affichage
     QStack<Expression*>::iterator it;
@@ -402,6 +397,8 @@ void MainWindow::rafraichirPile(){
 =======
     //Mise à jour de l'affichage
 >>>>>>> 27e2f0ee8755fb9e00f110ca859eaf103f30bab1
+=======
+>>>>>>> cbc07810f3c5eba16c7213ac27161f6f3b5f81f4
     /*
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
         exp=*it;
@@ -513,7 +510,7 @@ void MainWindow::actionNouveauChanged(){
 
     rafraichirPile();
 
-    save();
+
 }
 void MainWindow::actionQuitterChanged(){
     save();

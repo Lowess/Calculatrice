@@ -32,7 +32,7 @@ namespace LO21{
      * le design pattern Singleton
      */
     class Option {
-    private:
+    private:        
         TypeDiv _typeDiv; /*! Le type des constantes sélectionné */
         bool _complexe; /*! Détermine si le mode complexe est activé */
         bool _degre; /*! Détermine si le mode degré est activé */
@@ -96,6 +96,12 @@ namespace LO21{
          * \brief Sauvegarde dans un fichier les options sélectionnées à la fermeture de la calculatrice
          */
         void saveOptions();
+
+        /*! \class Complexe
+         * \brief Classe permettant de gérer les nombres complexes
+         */
+        QString toString() const;
+
     };
 }
 
