@@ -61,36 +61,33 @@ namespace LO21{
 
     public:
 
-        /*! \fn void switchComplexe(bool c)
-         * \brief Permet de changer le mode des complexes pour permettre leur création et leur stockage dans la pile
-         * \param c est true si le mode complexe est activé, false sinon
+        /*! \fn static Option& getInstance()
+         * \brief Récupère l'instance créée de la classe Option, si celle-ci n'existe pas, la créé
+         * \return Option& une référence vers l'instance de la classe Option
          */
         static Option& getInstance();
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn static void libereInstance()
+         * \brief Demande la destruction de la classe Option
          */
         static void libereInstance();
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn void set_typeDiv(TypeDiv s)
+         * \brief Modifie le type de constante sélectionné par l'utilisateur
+         * \param s le type de constante sélectionné
          */
         void set_typeDiv(TypeDiv s);
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn TypeDiv get_typeDiv() const
+         * \brief Retourne le type de constante sélectionné
+         * \return TypeDiv le type de constante
          */
         TypeDiv get_typeDiv() const{ return _typeDiv; }
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn void saveOptions()
+         * \brief Sauvegarde dans un fichier les options sélectionnées à la fermeture de la calculatrice
          */
         void saveOptions();
-
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
-         */
-        QString toString() const;
 
     };
 }

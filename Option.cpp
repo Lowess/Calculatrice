@@ -35,18 +35,5 @@ void LO21::Option::set_typeDiv(TypeDiv option){
 }
 
 void LO21::Option::saveOptions(){
-//Ã  la fermeture du programme, sauver les options courantes dans le fichier log
-}
-
-QString LO21::Option::toString() const{
-    QString s;
-    switch(_typeDiv){
-        case MENU_ENTIER: s = "Entier"; break;
-        case MENU_REEL: s = "Reel"; break;
-        case MENU_RATIONNEL: s = "Rationnel"; break;
-        default: //lancer erreur
-            throw CalculatriceException(typeid(this).name(), OTHER, "Erreur affichage option");
-            break;
-    }
-    return s;
+//Ã  la fermeture du programme, sauver les options courantes dans le fichier log
 }

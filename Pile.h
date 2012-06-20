@@ -17,110 +17,114 @@
  */
 namespace LO21{
     class Gardien;
-    /*! \class Complexe
-     * \brief Classe permettant de gérer les nombres complexes
+
+    /*! \class Pile
+     * \brief Classe stockant et manipulant les Expressions pour calcul
      */
     class Pile: public QStack<Expression*>{
         private:
-            Pile* _etat; /*! */
+            Pile* _etat; /*! La pile affichée */
         public:
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Pile()
+             * \brief Constructeur par défaut de la classe Pile
              */
             Pile():_etat(this){}
 
-            //MÃƒÂ©thodes agissant sur la pile
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void SWAP(int x, int y)
+             * \brief Permet d'échanger la place de deux éléments dans la pile
+             * \param x l'indice du premier élément à échanger
+             * \param y l'indice du deuxième élément à échanger
              */
             void SWAP(int x, int y);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void SUM(int n)
+             * \brief Calculer la somme des n premiers éléments de la pile
              */
             void SUM(int n);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void MEAN(int n)
+             * \brief Calcule la moyenne des n premiers éléments de la pile
              */
             void MEAN(int n);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void CLEAR()
+             * \brief Efface toutes les Expressions présentes dans la pile
              */
             void CLEAR();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void DUP()
+             * \brief Duplique l'élément au sommet de la pile
              */
             void DUP();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void DROP()
+             * \brief Ote l'élément au sommet de la pile
              */
             void DROP();
 
-            //MÃ©thodes de sauvegarde et de chargement
-
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void sauvegarder()
+             * \brief Sauvegarde l'état actuel de la pile
              */
             void sauvegarder();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void charger()
+             * \brief Charge un état donné de la pile
              */
             void charger();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Pile* clone() const
+             * \brief Duplique la pile actuellement utilisée
+             * \return Pile* un pointeur vers la pile créée par la pile appelante
              */
             Pile* clone() const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void afficherPileCourante() const
+             * \brief Affiche les éléments présents dans la pile
              */
             void afficherPileCourante() const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void afficherPileMemoire() const
+             * \brief Affiche les éléments présents dans la pile étant sauvegardée en mémoire
              */
             void afficherPileMemoire() const;
 
             //DP Memento
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \class Memento
+             * \brief Classe permettant de gérer divers états d'un même objet
              */
             class Memento{
                 private:
-                    Pile* _etat; /*! */
+                    Pile* _etat; /*! La pile dont on veut garder l'état en mémoire */
 
                 public:
-                    /*! \class Complexe
-                     * \brief Classe permettant de gérer les nombres complexes
+                    /*! \fn Memento(const Pile* petat)
+                     * \brief Constructeur de la classe Memento
+                     * \param petat pointeur vers la pile actuelle à sauver en mémoire
                      */
                     Memento(const Pile* petat):_etat(petat->clone()){}
 
-                    /*! \class Complexe
-                     * \brief Classe permettant de gérer les nombres complexes
+                    /*! \fn Pile* get_etat() const
+                     * \brief Retourne l'état sauvegardé de la pile
+                     * \return Pile* pointeur vers la pile sauvegardée
                      */
                     Pile* get_etat() const {return _etat; }
             };
 
-            //void mementoSuivant(){}
-
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Memento* sauverDansMemento()
+             * \brief Permet de sauver l'état de la pile actuelle
+             * \return Memento* pile vers la structure permettant de sauvegarder l'étaat
              */
             Memento* sauverDansMemento();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void restaurerDepuisMemento(const Memento* m)
+             * \brief Permet de restaurer la pile à un état antérieur sauvé dans l'objet Memento
+             * \param m pointeur vers l'objet Memento contenant l'état à restaurer
              */
             void restaurerDepuisMemento(const Memento* m);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Pile* get_etat() const
+             * \brief Retourne l'état actuel de la pile
+             * \return Pile* pointeur vers la pile actuelle
              */
             Pile* get_etat()const;
     };
