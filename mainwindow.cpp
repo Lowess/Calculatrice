@@ -200,15 +200,6 @@ void MainWindow::sqrtPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR
 void MainWindow::sqrPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR "); }
 void MainWindow::cubePressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" CUBE "); }
 
-/*void MainWindow::changeDegre() {
-    bool degre = ui->chkDegre->checked();
-    Option.getInstance().switchDegre(degre);
-}
-
-void MainWindow::changeComplexe() {
-    bool complexe = ui->chkComplexe->checked();
-    Option.getInstance().switchComplexe(complexe);
-}*/
 
 //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
 void MainWindow::swapPressed(){
