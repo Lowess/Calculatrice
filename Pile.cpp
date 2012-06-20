@@ -15,8 +15,10 @@ LO21::Pile(const LO21::Pile& p){
 */
 //Methodes privées
 void LO21::Pile::SWAP(int x, int y){
-    if(x >= size() || x < 0 || y < 0 || y >= size())
+    if(x >= size() || x < 0 || y < 0 || y >= size()){
+        LogSystem::ecrireLog(LogMessage("Erreur classe pile ",ERREUR));
         throw CalculatriceException(typeid(this).name(),PILE,"SWAP impossible une des valeurs X ou Y est incorrecte");
+    }
     Expression* tmp;
     tmp=value(x);
     replace(x, value(y));
@@ -24,8 +26,10 @@ void LO21::Pile::SWAP(int x, int y){
 }
 
 void LO21::Pile::SUM(int n){
-    if(n >= size() || n < 0)
+    if(n >= size() || n < 0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe pile ",ERREUR));
         throw CalculatriceException(typeid(this).name(),PILE,"SUM impossible la valeurs X est incorrecte");
+    }
     if(n >= 1){
         do{
             Expression* x=pop();
@@ -46,8 +50,10 @@ void LO21::Pile::SUM(int n){
 }
 
 void LO21::Pile::MEAN(int n){
-    if(n > size() || n < 0)
+    if(n > size() || n < 0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe pile ",ERREUR));
         throw CalculatriceException(typeid(this).name(),PILE,"MEAN impossible la valeurs X est incorrecte");
+    }
     SUM(n);
     Entier diviseur(n);
 
@@ -67,6 +73,7 @@ void LO21::Pile::CLEAR(){
 
 void LO21::Pile::DUP(){
     if(isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur classe pile ",ERREUR));
         throw CalculatriceException(typeid(this).name(),PILE,"Opération impossible la pile est vide");
     }
 
@@ -77,7 +84,7 @@ void LO21::Pile::DUP(){
     } else {
         Reel* pt_ree=dynamic_cast<Reel*>(e);
         if (pt_ree != 0){
-            push(new Entier(pt_ent->get_x()));
+            push(new Reel(pt_ree->get_x()));
         } else {
             Rationnel* pt_rat=dynamic_cast<Rationnel*>(e);
             if(pt_rat != 0){
@@ -93,8 +100,10 @@ void LO21::Pile::DUP(){
                     if(pt_com != 0){
                         push(new Complexe(*pt_com));
                     }
-                    else
+                    else{
+                        LogSystem::ecrireLog(LogMessage("Erreur classe pile ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),PILE,"Impossible de dupliquer ce type de constante");
+                    }
                 }
             }
         }
@@ -103,6 +112,7 @@ void LO21::Pile::DUP(){
 
 void LO21::Pile::DROP(){
     if(isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur classe pile ",ERREUR));
         throw CalculatriceException(typeid(this).name(),PILE,"Opération impossible la pile est vide");
     }
 

@@ -20,8 +20,10 @@ LO21::Constante& LO21::Rationnel::addition(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->addition(nb);
@@ -38,9 +40,10 @@ LO21::Constante& LO21::Rationnel::addition(const Constante& nb) const{
                 const Entier* p_num=dynamic_cast<const Entier*>(&_n.multiplication(tmp_ra->_d).addition(_d.multiplication(tmp_ra->_n)));
                 const Entier* p_den=dynamic_cast<const Entier*>(&_d.multiplication(tmp_ra->_d));
 
-                if(p_num==0 || p_den==0)
+                if(p_num==0 || p_den==0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
-
+                }
                 Rationnel* res= new Rationnel(*p_num, *p_den);
                 res->simplifier();
                 Constante& ref=*res;
@@ -70,8 +73,10 @@ LO21::Constante& LO21::Rationnel::soustraction(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->soustraction(nb);
@@ -88,9 +93,10 @@ LO21::Constante& LO21::Rationnel::soustraction(const Constante& nb) const{
                 const Reel* p_num=dynamic_cast<const Reel *>(&this->_n.multiplication(tmp_ra->_d).soustraction(tmp_ra->_n.multiplication(this->_d)));
                 const Reel* p_den=dynamic_cast<const Reel *>(&this->_d.multiplication(tmp_ra->_d));
 
-                if(p_num==0 || p_den==0)
+                if(p_num==0 || p_den==0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
-
+                }
                 Rationnel* res= new Rationnel(p_num->toEntier(), p_den->toEntier());
                 res->simplifier();
                 Constante& ref=*res;
@@ -120,8 +126,10 @@ LO21::Constante& LO21::Rationnel::multiplication(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->multiplication(nb);
@@ -138,8 +146,10 @@ LO21::Constante& LO21::Rationnel::multiplication(const Constante& nb) const{
                 const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra->_n));
                 const Entier* p_den=dynamic_cast<const Entier *>(&this->_d.multiplication(tmp_ra->_d));
 
-                if(p_num==0 || p_den==0)
+                if(p_num==0 || p_den==0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
+                }
 
                 Rationnel* res= new Rationnel(*p_num, *p_den);
                 res->simplifier();
@@ -170,8 +180,10 @@ LO21::Constante& LO21::Rationnel::division(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->division(nb);
@@ -189,8 +201,10 @@ LO21::Constante& LO21::Rationnel::division(const Constante& nb) const{
                 const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra_inv->_n));
                 const Entier* p_den=dynamic_cast<const Entier *>(&this->_d.multiplication(tmp_ra_inv->_d));
 
-                if(p_num==0 || p_den==0)
+                if(p_num==0 || p_den==0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
+                }
 
                 Rationnel* res= new Rationnel(*p_num, *p_den);
                 res->simplifier();
@@ -220,19 +234,6 @@ QString LO21::Rationnel::toString() const{
     return QString(str1+"/"+str2);
 }
 
-//Constructeurs
-/*
-//Recopie et operator=
-LO21::Rationnel::Rationnel(const Entier& e){
-
-}
-
-LO21::Rationnel& LO21::Rationnel::operator=(const Entier& e){
-
-    return *this;
-}
-*/
-
 /*
  * MÃ©thodes
  *
@@ -243,8 +244,10 @@ void LO21::Rationnel::simplifier(){
     const Reel* p_num_div=dynamic_cast<const Reel*>(&get_n().division(vpgcd));
     const Reel* p_den_div=dynamic_cast<const Reel*>(&get_d().division(vpgcd));
 
-    if(p_num_div==0 || p_den_div==0)
+    if(p_num_div==0 || p_den_div==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe rationnel ",ERREUR));
         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast<const Entier*>");
+    }
 
     _n=p_num_div->toEntier();
     _d=p_den_div->toEntier();

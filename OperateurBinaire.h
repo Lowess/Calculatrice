@@ -1,10 +1,10 @@
-/** \file OperateurBinaire.h
+#ifndef OPERATEURBINAIRE_H
+#define OPERATEURBINAIRE_H
+
+/*! \file OperateurBinaire.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe OperateurBinaire
   */
-
-#ifndef OPERATEURBINAIRE_H
-#define OPERATEURBINAIRE_H
 
 #include "Operateur.h"
 #include "Expression.h"

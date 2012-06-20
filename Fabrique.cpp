@@ -118,7 +118,9 @@ void LO21::Fabrique::creer(const QString& text) const{
                 break;
             }
             case COMPLEXE:{
-
+                if(!Option::getInstance().get_complexe()){
+                    throw CalculatriceException(typeid(this).name(),OPTION,"Le mode complexe n'est pas activé, autorisez le mode complexe dans les options pour utiliser ce type de constante");
+                }
                 QString tmp(*it);
                 QStringList tmpl=tmp.split("$"); //Séparation Re $ Im
                 creer(tmpl.value(0));

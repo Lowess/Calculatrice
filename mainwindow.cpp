@@ -90,14 +90,17 @@ void MainWindow::slotConnection()
 
     //Autoriser les complexes
     connect(ui->actionComplexes, SIGNAL(changed()), this, SLOT(actionComplexesChanged()));
+    ui->btnDollar->setEnabled(false);
 
     //Connection du mode degrées / radians
     connect(ui->actionDegr, SIGNAL(changed()), this, SLOT(actionDegrChanged()));
     connect(ui->actionRadian, SIGNAL(changed()), this, SLOT(actionRadianChanged()));
+    ui->actionRadian->setChecked(true);
 
     //Connection des boutons dans fichier
-    connect(ui->actionNouveau, SIGNAL(changed()), this, SLOT(actionNouveauChanged()));
-    connect(ui->actionQuitter, SIGNAL(changed()), this, SLOT(actionQuitterChanged()));
+    connect(ui->actionNouveau, SIGNAL(triggered()), this, SLOT(actionNouveauChanged()));
+    connect(ui->actionSauvegarder, SIGNAL(triggered()), this, SLOT(actionSave()));
+    connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(actionQuitterChanged()));
 
     connect(ui->actionUndo, SIGNAL(triggered()), this, SLOT(actionUndo()));
     connect(ui->actionRedo, SIGNAL(triggered()), this, SLOT(actionRedo()));
@@ -111,12 +114,22 @@ void MainWindow::slotConnection()
 >>>>>>> d185c98c462ba10aa067a3689a678560fbeed857
 
     connect(ui->actionMasquerOptionsAvancees, SIGNAL(triggered()), this, SLOT(actionMasquerOptionsAvancees()));
+    connect(ui->actionMasquerTrigo, SIGNAL(triggered()), this, SLOT(actionMasquerTrigo()));
     connect(ui->actionMasquerPile, SIGNAL(triggered()), this, SLOT(actionMasquerPile()));
+    connect(ui->actionMasquerClavier, SIGNAL(triggered()), this, SLOT(actionMasquerClavier()));
 
     ui->label_lastRes->setVisible(false);
     ui->lineEdit_lastRes->setVisible(false);
 
     memorisePileUndo();
+
+    try{
+        load();
+    } catch (exception& e){
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.exec();
+    }
 }
 
 //Connexion des boutons 0-9
@@ -137,6 +150,7 @@ void MainWindow::delPressed(){
         dropPressed();
     else
         ui->lineEdit->setText("");
+    save();
 }
 void MainWindow::enterPressed(){
     if(ui->lineEdit->text()=="")
@@ -150,10 +164,12 @@ void MainWindow::enterPressed(){
             ui->lastStack->setText(ui->lineEdit->text().simplified());
             ui->lineEdit->clear();
         } catch (exception& e){
-           QMessageBox msgBox;
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
+            QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
         }
+    save();
 }
 void MainWindow::spaceBarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" "); }
 
@@ -206,6 +222,7 @@ void MainWindow::swapPressed(){
     QString y=ui->lineEditY->text();
 
     if(x.isEmpty()||y.isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur de saisie classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText("Vous devez saisir deux valeurs dans les zones de texte X, Y");
         msgBox.exec();
@@ -218,16 +235,20 @@ void MainWindow::swapPressed(){
 
             rafraichirPile();
         } catch (exception& e){
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
             QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
         }
     }
+
+    save();
 }
 void MainWindow::sumPressed(){
     QString x=ui->lineEditX->text();
 
     if(x.isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur de saisie classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText("Vous devez saisir une valeur dans la zone de texte X");
         msgBox.exec();
@@ -240,16 +261,20 @@ void MainWindow::sumPressed(){
 
             rafraichirPile();
         } catch (exception& e){
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
             QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
         }
     }
+
+    save();
 }
 void MainWindow::meanPressed(){
 
     QString x=ui->lineEditX->text();
     if(x.isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur de saisie classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText("Vous devez saisir une valeur dans la zone de texte X");
         msgBox.exec();
@@ -262,11 +287,14 @@ void MainWindow::meanPressed(){
 
             rafraichirPile();
         } catch (exception& e){
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
             QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
         }
     }
+
+    save();
 }
 void MainWindow::clearPressed(){
     memorisePileUndo();
@@ -274,6 +302,8 @@ void MainWindow::clearPressed(){
     memorisePileRedo();
 
     rafraichirPile();
+
+    save();
 }
 void MainWindow::dropPressed(){
     try {
@@ -283,10 +313,13 @@ void MainWindow::dropPressed(){
 
         rafraichirPile();
     } catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText(e.what());
         msgBox.exec();
     }
+
+    save();
 }
 void MainWindow::dupPressed(){
     try {
@@ -296,10 +329,13 @@ void MainWindow::dupPressed(){
 
         rafraichirPile();
     } catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText(e.what());
         msgBox.exec();
     }
+
+    save();
 }
 
 void MainWindow::spinChanged(int i){
@@ -326,7 +362,11 @@ void MainWindow::actionUndo(){
         ui->listStack->clear();
 
         rafraichirPile();
-    }catch (exception& e){ qDebug() << e.what(); }
+    }catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
+    }
+
+    save();
 }
 
 void MainWindow::actionRedo(){
@@ -345,15 +385,23 @@ void MainWindow::actionRedo(){
         ui->listStack->clear();
 
         rafraichirPile();
-    }catch (exception& e){ qDebug() << e.what(); }
+    }catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
+    }
+
+    save();
 }
 
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();
 
+<<<<<<< HEAD
     //Mise �  jour de l'affichage
     QStack<Expression*>::iterator it;
     Expression* exp=0;
+=======
+    //Mise à jour de l'affichage
+>>>>>>> 27e2f0ee8755fb9e00f110ca859eaf103f30bab1
     /*
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
         exp=*it;
@@ -363,6 +411,8 @@ void MainWindow::rafraichirPile(){
 
     int afficheur=ui->spinBox->value();
 
+    QStack<Expression*>::iterator it;
+    Expression* exp=0;
     //Affiche la pile avec sommet vers le haut
     it=Calculatrice::getInstance().get_pile()->end();
     while ((it != Calculatrice::getInstance().get_pile()->begin()) && afficheur>0) {
@@ -405,26 +455,121 @@ void MainWindow::actionRationnelsChanged(){
 }
 
 //Autoriser les complexes
-void MainWindow::actionComplexesChanged(){}
+void MainWindow::actionComplexesChanged(){
+    if(ui->actionComplexes->isChecked()) {
+        Option::getInstance().set_complexe(true);
+        ui->btnDollar->setEnabled(true);
+    }
+    else {
+        Option::getInstance().set_complexe(false);
+        ui->btnDollar->setEnabled(false);
+    }
+}
 
 //Connection du mode degrées / radians
-void MainWindow::actionDegrChanged(){}
-void MainWindow::actionRadianChanged(){}
+void MainWindow::actionDegrChanged(){
+
+    if(ui->actionDegr->isChecked()){
+        Option::getInstance().set_degre(true);
+        if(ui->actionRadian->isChecked()){
+           ui->actionRadian->setChecked(false);
+        }
+    }
+}
+void MainWindow::actionRadianChanged(){
+    if(ui->actionRadian->isChecked()){
+        Option::getInstance().set_degre(false);
+        if(ui->actionRadian->isChecked()){
+           ui->actionDegr->setChecked(false);
+        }
+    }
+}
 
 //Connection des boutons dans fichier
-void MainWindow::actionNouveauChanged(){}
-void MainWindow::actionQuitterChanged(){}
+void MainWindow::actionNouveauChanged(){
+    qDebug() << "New" << endl;
+
+    ui->radioButtonEntier->setChecked(true);
+    actionEntiersChanged();
+    ui->lineEdit_lastRes->setText("");
+    ui->lastStack->setText("");
+
+    ui->actionComplexes->setChecked(false);
+    actionComplexesChanged();
+
+    ui->actionMasquerOptionsAvancees->setChecked(false);
+    actionMasquerOptionsAvancees();
+    ui->actionMasquerTrigo->setChecked(false);
+    actionMasquerTrigo();
+    ui->actionMasquerPile->setChecked(false);
+    actionMasquerPile();
+    ui->actionMasquerClavier->setChecked(false);
+    actionMasquerClavier();
+
+    ui->actionDegr->setChecked(false);
+    actionDegrChanged();
+
+    Calculatrice::getInstance().get_pile()->CLEAR();
+
+    rafraichirPile();
+
+    save();
+}
+void MainWindow::actionQuitterChanged(){
+    save();
+    close();
+}
 
 void MainWindow::actionMasquerOptionsAvancees(){
     if(ui->actionMasquerOptionsAvancees->isChecked()){
-        ui->tabWidget->setVisible(false);
+        ui->labelAvance->setVisible(false);
+        ui->btnMod->setVisible(false);
+        ui->btnLn->setVisible(false);
+        ui->btnLog->setVisible(false);
+        ui->btnFactorielle->setVisible(false);
+        ui->btnInv->setVisible(false);
+        ui->btnSign->setVisible(false);
+        ui->btnPow->setVisible(false);
         ui->line_3->setVisible(false);
     }
     else{
-        ui->tabWidget->setVisible(true);
+        ui->labelAvance->setVisible(true);
+        ui->btnMod->setVisible(true);
+        ui->btnLn->setVisible(true);
+        ui->btnLog->setVisible(true);
+        ui->btnFactorielle->setVisible(true);
+        ui->btnInv->setVisible(true);
+        ui->btnSign->setVisible(true);
+        ui->btnPow->setVisible(true);
         ui->line_3->setVisible(true);
     }
+    adjustSize();
 }
+
+void MainWindow::actionMasquerTrigo(){
+    if(ui->actionMasquerTrigo->isChecked()){
+        ui->labelTrigo->setVisible(false);
+        ui->btnSin->setVisible(false);
+        ui->btnCos->setVisible(false);
+        ui->btnTan->setVisible(false);
+        ui->btnSinh->setVisible(false);
+        ui->btnCosh->setVisible(false);
+        ui->btnTanh->setVisible(false);
+        ui->line_7->setVisible(false);
+    }
+    else{
+        ui->labelTrigo->setVisible(true);
+        ui->btnSin->setVisible(true);
+        ui->btnCos->setVisible(true);
+        ui->btnTan->setVisible(true);
+        ui->btnSinh->setVisible(true);
+        ui->btnCosh->setVisible(true);
+        ui->btnTanh->setVisible(true);
+        ui->line_7->setVisible(true);
+    }
+    adjustSize();
+}
+
 void MainWindow::actionMasquerPile(){
     if(ui->actionMasquerPile->isChecked()){
         ui->lastStack->setVisible(false);
@@ -485,4 +630,174 @@ void MainWindow::actionMasquerPile(){
         ui->lineEdit_lastRes->setVisible(false);
     }
     adjustSize();
+}
+
+void MainWindow::actionMasquerClavier(){
+    if(ui->actionMasquerClavier->isChecked()){
+        ui->btn0->setVisible(false);
+        ui->btn1->setVisible(false);
+        ui->btn2->setVisible(false);
+        ui->btn3->setVisible(false);
+        ui->btn4->setVisible(false);
+        ui->btn5->setVisible(false);
+        ui->btn6->setVisible(false);
+        ui->btn7->setVisible(false);
+        ui->btn8->setVisible(false);
+        ui->btn9->setVisible(false);
+
+        ui->btnPlus->setVisible(false);
+        ui->btnMoins->setVisible(false);
+        ui->btnMultiplier->setVisible(false);
+        ui->btnDiviser->setVisible(false);
+        ui->btnEval->setVisible(false);
+        ui->btnDollar->setVisible(false);
+        ui->btnSpace->setVisible(false);
+        ui->btnSqr->setVisible(false);
+        ui->btnCube->setVisible(false);
+        ui->btnSqrt->setVisible(false);
+
+        ui->line_5->setVisible(false);
+    }
+    else{
+        ui->btn0->setVisible(true);
+        ui->btn1->setVisible(true);
+        ui->btn2->setVisible(true);
+        ui->btn3->setVisible(true);
+        ui->btn4->setVisible(true);
+        ui->btn5->setVisible(true);
+        ui->btn6->setVisible(true);
+        ui->btn7->setVisible(true);
+        ui->btn8->setVisible(true);
+        ui->btn9->setVisible(true);
+
+        ui->btnPlus->setVisible(true);
+        ui->btnMoins->setVisible(true);
+        ui->btnMultiplier->setVisible(true);
+        ui->btnDiviser->setVisible(true);
+        ui->btnEval->setVisible(true);
+        ui->btnDollar->setVisible(true);
+        ui->btnSpace->setVisible(true);
+        ui->btnSqr->setVisible(true);
+        ui->btnCube->setVisible(true);
+        ui->btnSqrt->setVisible(true);
+
+        ui->line_5->setVisible(true);
+    }
+    adjustSize();
+}
+
+void MainWindow::save(){
+    //QFile file("/home/florian/Documents/UTC/LO21/Qt/Calculatrice/Options.save");
+    QFile file(QDir::currentPath() + "Option.save");
+
+
+    //Ecriture
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de log en ecriture");
+
+
+    QDataStream out(&file);
+    //Enregistre les options
+    out << Option::getInstance().get_degre();
+    out << Option::getInstance().get_complexe();
+    out << Option::getInstance().get_typeDiv();
+
+    //Affichage
+    out << ui->actionMasquerOptionsAvancees->isChecked();
+    out << ui->actionMasquerTrigo->isChecked();
+    out << ui->actionMasquerPile->isChecked();
+    out << ui->actionMasquerClavier->isChecked();
+
+    QStack<Expression*>::iterator it;
+    Expression* exp=0;
+
+    //Recopie la pile
+    it=Calculatrice::getInstance().get_pile()->begin();
+    for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
+        exp=*it;
+        out << exp->toString();
+        qDebug() << exp->toString();
+    }
+
+    file.close();
+    LogSystem::ecrireLog(LogMessage("Sauvegarde de contexte effectuée classe mainWindow ",INFO));
+
+}
+
+
+void MainWindow::load(){
+    //QFile file("/home/florian/Documents/UTC/LO21/Qt/Calculatrice/Options.save");
+    QFile file(QDir::currentPath() + "Option.save");
+    //Lecture
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de save en lecture");
+
+
+    QDataStream in(&file);
+    //Enregistre les options
+    bool deg,comp,avance,trigo,pile,clav;
+    int type;
+
+    in >> deg;
+    in >> comp;
+    in >> type;
+    in >> avance;
+    in >> trigo;
+    in >> pile;
+    in >> clav;
+
+    if(deg){
+        ui->actionDegr->setChecked(true);
+        actionDegrChanged();
+    }
+    if(comp){
+        ui->actionComplexes->setChecked(true);
+        actionComplexesChanged();
+    }
+    switch(type){
+        case 1:{
+            actionReelsChanged();
+            ui->radioButtonReel->setChecked(true);
+            break;
+        }
+        case 2:{
+            actionRationnelsChanged();
+            ui->radioButtonRationnel->setChecked(true);
+            break;
+        }
+        default: break;
+    }
+    //Affichage
+    if(avance){
+        ui->actionMasquerOptionsAvancees->setChecked(true);
+        actionMasquerOptionsAvancees();
+    }
+    if(trigo){
+        ui->actionMasquerTrigo->setChecked(true);
+        actionMasquerTrigo();
+    }
+    if(pile){
+        ui->actionMasquerPile->setChecked(true);
+        actionMasquerPile();
+    }
+    if(clav){
+        ui->actionMasquerClavier->setChecked(true);
+        actionMasquerClavier();
+    }
+
+    //On ré-insert les éléments sauvegardés dans la pile
+    QString buf;
+    while(!in.atEnd()){
+        in >> buf;
+        Fabrique::getInstance().creer(buf);
+    }
+    file.close();
+
+    rafraichirPile();
+
+    LogSystem::ecrireLog(LogMessage("Restauration de contexte effectuée classe mainWindow ",INFO));
+}
+
+void MainWindow::actionSave(){
+    save();
 }

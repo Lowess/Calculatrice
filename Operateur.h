@@ -1,10 +1,10 @@
-/** \file Operateur.h
+#ifndef OPERATEUR_H
+#define OPERATEUR_H
+
+/*! \file Operateur.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Operateur
   */
-
-#ifndef OPERATEUR_H
-#define OPERATEUR_H
 
 #include <stdexcept>
 #include <QString>

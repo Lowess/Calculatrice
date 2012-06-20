@@ -4,6 +4,9 @@
 #include "Reel.h"
 #include "Rationnel.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 using namespace LO21;
 
 //Implémentation issu de la classe Constante
@@ -22,6 +25,7 @@ LO21::Nombre& LO21::Nombre::SIGN() const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&*this);
             if(tmp_ra==0){ //Si echec erreur
+                LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succÃ¨s on rÃ©alise SIGN Rationnel
@@ -46,50 +50,110 @@ LO21::Nombre& LO21::Nombre::SIGN() const{
 
 LO21::Constante& LO21::Nombre::SIN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(sin(reel->get_x())));
-    return (ref);
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(sin( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(sin(reel->get_x())));
+        return (ref);
+    }
 }
 
 LO21::Constante& LO21::Nombre::COS() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(cos(reel->get_x())));
-    return (ref);
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(cos( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(cos(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::TAN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(tan(reel->get_x())));
-    return (ref);
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(tan( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(tan(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::SINH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(sinh(reel->get_x())));
-    return (ref);
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(sinh( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(sinh(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::COSH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(cosh(reel->get_x())));
-    return (ref);
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(cosh( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(cosh(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::TANH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(tanh(reel->get_x())));
-    return (ref);
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(tanh( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(tanh(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::LN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
     Constante& ref=*(new Reel(log(reel->get_x())));
     return (ref);
 }
 LO21::Constante& LO21::Nombre::LOG() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
-    if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
+    if(reel==0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+    }
     Constante& ref=*(new Reel(log10(reel->get_x())));
     return (ref);
 }
@@ -102,6 +166,7 @@ LO21::Constante& LO21::Nombre::INV() const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&*this);
             if(tmp_ra==0){ //Si echec erreur
+                LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succÃ¨s on rÃ©alise INV Rationnel
@@ -141,8 +206,10 @@ LO21::Constante& LO21::Nombre::POW(const LO21::Nombre& power) const{
         const LO21::Rationnel* tmpRa = dynamic_cast<const LO21::Rationnel*>(this);
         if(tmpRa == 0){
             const LO21::Reel* tmpRe = dynamic_cast<const LO21::Reel*>(this);
-            if (tmpRe == 0)
+            if (tmpRe == 0){
+                LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            }
             else {
                 //Reel
                 Reel* res= new Reel(pow(tmpRe->get_x(),puis));
@@ -198,6 +265,7 @@ LO21::Entier& LO21::Nombre::toEntier() const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(this);
             if(tmp_ra==0){ //Si echec erreur
+                LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succÃ¨s on rÃ©alise la conversion rationnel en entier
@@ -218,6 +286,7 @@ LO21::Reel& LO21::Nombre::toReel() const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(this);
             if(tmp_ra==0){ //Si echec erreur
+                LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
             else{ //Si succÃ¨s on rÃ©alise la conversion rationnel en reel
@@ -238,6 +307,7 @@ LO21::Rationnel& LO21::Nombre::toRationnel() const{
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(this);
             if(tmp_ra==0){ //Si echec erreur
+                LogSystem::ecrireLog(LogMessage("Erreur classe nombre ",ERREUR));
                 throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
             }
         }

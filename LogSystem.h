@@ -7,6 +7,7 @@
   */
 
 #include <QFile>
+#include <QDir>
 #include "CalculatriceException.h"
 #include "LogMessage.h"
 

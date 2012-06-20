@@ -78,12 +78,6 @@ namespace LO21{
              * \param Pile* p, un pointeur vers la pile qu'on veut utiliser dans la calculatrice
              */
             void set_pile(Pile* p) {
-                //qDebug() << "_pile=" << endl;
-                //_pile->afficherPileCourante();
-
-                //qDebug() << "new pile=" << endl;
-                //p->afficherPileMemoire();
-
                 _pile=p;
                 qDebug() << "Taille de la pile courante" << _pile->size();
             }

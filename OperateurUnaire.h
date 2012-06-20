@@ -1,10 +1,10 @@
-/** \file OperateurUnaire.h
+#ifndef OPERATEURUNAIRE_H
+#define OPERATEURUNAIRE_H
+
+/*! \file OperateurUnaire.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe OperateurUnaire
   */
-
-#ifndef OPERATEURUNAIRE_H
-#define OPERATEURUNAIRE_H
 
 #include "Operateur.h"
 #include "Expression.h"

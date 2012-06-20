@@ -7,23 +7,26 @@ void LO21::LogSystem::ecrireConsole(const LogMessage& m){
 }
 
 void LO21::LogSystem::ecrireFichier(const LogMessage& m){
-    QFile file("/home/florian/Documents/UTC/LO21/Qt/Calculatrice/Calculatrice.log");
+    QFile file(QDir::currentPath() + "Calculatrice.log");
 
     QString old;
 
     //Lecture
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de log en lecture");
+    try{
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+            LogSystem::ecrireLog(LogMessage("Erreur d'ouvertur fichier classe logSystem ",ERREUR));
+            throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de log en lecture");
+        }
+    } catch (std::exception& e) {}
 
     old=file.readAll();
     file.close();
 
     //Ecriture
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        LogSystem::ecrireLog(LogMessage("Erreur d'ouvertur fichier classe logSystem ",ERREUR));
         throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de log en ecriture");
-
-
-    qDebug() << "ecriture" << endl;
+    }
     QTextStream out(&file);
     out << old << "\n";
     out << m.info();

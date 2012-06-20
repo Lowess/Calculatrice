@@ -18,8 +18,10 @@ LO21::Constante& LO21::Entier::addition(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe entier ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->addition(nb);
@@ -66,8 +68,10 @@ LO21::Constante& LO21::Entier::soustraction(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){ //Si echec on throw une exception
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe entier ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->soustraction(nb);
@@ -115,8 +119,10 @@ LO21::Constante& LO21::Entier::multiplication(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe entier ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->multiplication(nb);
@@ -161,8 +167,10 @@ LO21::Constante& LO21::Entier::division(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe entier ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->division(nb);
@@ -176,8 +184,10 @@ LO21::Constante& LO21::Entier::division(const Constante& nb) const{
                 }
             }
             else{ //Si succÃ¨s on rÃ©alise la division Entier / Rationnel
-                if(tmp_ra->get_n().get_x()/tmp_ra->get_d().get_x()==0) //Si division par 0 Exception
+                if(tmp_ra->get_n().get_x()/tmp_ra->get_d().get_x()==0){ //Si division par 0 Exception
+                    LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe entier ",ERREUR));
                     throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
+                }
 
                 Entier num=Entier(this->_x  * tmp_ra->get_d().get_x());
                 Entier den=Entier(tmp_ra->get_n().get_x());
@@ -189,17 +199,20 @@ LO21::Constante& LO21::Entier::division(const Constante& nb) const{
             }
         }
         else{ //Si succÃ¨s on rÃ©alise la division Entier / Reel
-            if(tmp_re->get_x()==0) //Si division par 0 Exception
+            if(tmp_re->get_x()==0){ //Si division par 0 Exception
+                LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe entier ",ERREUR));
                 throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
+            }
 
             Constante& ref=division(tmp_re->toRationnel()); // 3 / 2.5 <=> 3 / 5/2
             return (ref);
         }
     }
     else{ //Si succÃ¨s on rÃ©alise la division Entier / Entier
-        if(tmp_en->get_x()==0) //Si division par 0 Exception
+        if(tmp_en->get_x()==0){ //Si division par 0 Exception
+            LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe entier ",ERREUR));
             throw CalculatriceException(typeid(nb).name(),MATHS,"Division par 0");
-
+        }
         Reel* res=new Reel(this->_x / tmp_en->_x);
         Constante& ref=*res;
         return (ref);

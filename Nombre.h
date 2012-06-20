@@ -1,13 +1,12 @@
-/** \file Nombre.h
+#ifndef NOMBRE_H
+#define NOMBRE_H
+
+/*! \file Nombre.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Nombre
   */
 
-#ifndef NOMBRE_H
-#define NOMBRE_H
-
 #include <QString>
-
 #include "Constante.h"
 #include "CalculatriceException.h"
 #include "Option.h"
@@ -151,8 +150,6 @@ namespace LO21{
          * \return Constante& une référence vers la constante créée à partir du résultat
          */
         virtual Constante& division(const Constante& nb) const=0;
-
-            //Méthode qui va permettre d'appliquer le mode de constante utilisateur;
 
         /*! \fn Constante& hookOperation()
          * \brief

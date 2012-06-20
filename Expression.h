@@ -1,10 +1,10 @@
-/** \file Expression.h
+#ifndef EXPRESSION_H
+#define EXPRESSION_H
+
+/*! \file Expression.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Expression
   */
-
-#ifndef EXPRESSION_H
-#define EXPRESSION_H
 
 #include <QTextStream>
 

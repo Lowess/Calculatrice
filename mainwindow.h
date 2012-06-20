@@ -9,6 +9,8 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QDebug>
+#include <QFile>
+#include <QDir>
 #include <stdexcept>
 
 #include "Calculatrice.h"
@@ -36,8 +38,9 @@ class MainWindow : public QMainWindow
         void rafraichirPile();
         void memorisePileUndo();
         void memorisePileRedo();
+        void save();
+        void load();
         bool notify ( QObject * receiver, QEvent * e );
-
 
     private slots:
         //Connexion des boutons 0-9
@@ -114,11 +117,14 @@ class MainWindow : public QMainWindow
 
         //Connection des boutons dans fichier
         void actionNouveauChanged();
+        void actionSave();
         void actionQuitterChanged();
 
         //Connection des boutons dans fichier
         void actionMasquerOptionsAvancees();
+        void actionMasquerTrigo();
         void actionMasquerPile();
+        void actionMasquerClavier();
 
         void actionUndo();
         void actionRedo();
