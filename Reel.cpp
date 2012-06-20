@@ -18,8 +18,10 @@ LO21::Constante& LO21::Reel::addition(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe reel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->addition(nb);
@@ -61,8 +63,10 @@ LO21::Constante& LO21::Reel::soustraction(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe reel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->soustraction(nb);
@@ -104,8 +108,10 @@ LO21::Constante& LO21::Reel::multiplication(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe reel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->multiplication(nb);
@@ -148,8 +154,10 @@ LO21::Constante& LO21::Reel::division(const Constante& nb) const{
                 const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
                 if(tmp_c == 0){
                     const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
-                    if(tmp_exp == 0)
+                    if(tmp_exp == 0){
+                        LogSystem::ecrireLog(LogMessage("Erreur classe reel ",ERREUR));
                         throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    }
                     else{
                         Constante* res=new Exp(toString());
                         Constante& ref=res->soustraction(nb);

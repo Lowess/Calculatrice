@@ -20,8 +20,10 @@ LO21::Complexe::Complexe(const LO21::Nombre* a,const LO21::Nombre* b){
 LO21::Complexe::Complexe(const LO21::Constante& a,const LO21::Constante& b){
     const Nombre* tmpA = dynamic_cast<const Nombre*>(&a);
     const Nombre* tmpB = dynamic_cast<const Nombre*>(&b);
-    if(tmpA == 0 || tmpB == 0)
+    if(tmpA == 0 || tmpB == 0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe complexe ",ERREUR));
         throw CalculatriceException(typeid(this).name(), OTHER, "Creation de complexe impossible : pas de nombre pour instancier");
+    }
     _a = tmpA;
     _b = tmpB;
 }
@@ -43,8 +45,10 @@ LO21::Constante& LO21::Complexe::addition(const LO21::Constante& c) const {
             const Reel* tmp_re = dynamic_cast<const Reel*>(&c);
             if (tmp_re == 0) {
                 const Rationnel* tmp_ra = dynamic_cast<const Rationnel*>(&c);
-                if (tmp_ra == 0)
+                if (tmp_ra == 0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe complexe ",ERREUR));
                     throw CalculatriceException(typeid(this).name(), OTHER, "Complexe::Addition : impossible de cast Constante en Rationnel");
+                }
                 Complexe& tmp = tmp_ra->toComplexe();
                 Complexe* res = new Complexe( _a->addition(*tmp._a) , _b->addition(*tmp._b));
                 Constante& ref = *res;
@@ -80,8 +84,10 @@ LO21::Constante& LO21::Complexe::soustraction(const LO21::Constante& c) const {
             const Reel* tmp_re = dynamic_cast<const Reel*>(&c);
             if (tmp_re == 0) {
                 const Rationnel* tmp_ra = dynamic_cast<const Rationnel*>(&c);
-                if (tmp_ra == 0)
+                if (tmp_ra == 0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe complexe ",ERREUR));
                     throw CalculatriceException(typeid(this).name(), OTHER, "Complexe::soustraction : impossible de cast Constante en Rationnel");
+                }
                 Complexe& tmp = tmp_ra->toComplexe();
                 Complexe* res = new Complexe( _a->soustraction(*tmp._a) , _b->soustraction(*tmp._b));
                 Constante& ref = *res;
@@ -118,8 +124,10 @@ LO21::Constante& LO21::Complexe::multiplication(const LO21::Constante& c) const 
             const Reel* tmp_re = dynamic_cast<const Reel*>(&c);
             if (tmp_re == 0) {
                 const Rationnel* tmp_ra = dynamic_cast<const Rationnel*>(&c);
-                if (tmp_ra == 0)
+                if (tmp_ra == 0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe complexe ",ERREUR));
                     throw CalculatriceException(typeid(this).name(), OTHER, "Complexe::Addition : impossible de cast Constante en Rationnel");
+                }
                 Complexe& tmp = tmp_ra->toComplexe();
                 Complexe* res = new Complexe((_a->multiplication(*tmp._a))-(_b->multiplication(*tmp._b)),
                                              (_a->multiplication(*tmp._b))+(_b->multiplication(*tmp._a)));
@@ -159,11 +167,15 @@ LO21::Constante& LO21::Complexe::division(const LO21::Constante& c) const {
             const Reel* tmp_re = dynamic_cast<const Reel*>(&c);
             if (tmp_re == 0) {
                 const Rationnel* tmp_ra = dynamic_cast<const Rationnel*>(&c);
-                if (tmp_ra == 0)
+                if (tmp_ra == 0){
+                    LogSystem::ecrireLog(LogMessage("Erreur classe complexe ",ERREUR));
                     throw CalculatriceException(typeid(this).name(), OTHER, "Complexe::Addition : impossible de cast Constante en Rationnel");
+                }
                 Complexe& tmp = tmp_ra->toComplexe();
-                if(tmp._a == 0 && tmp._b == 0)
+                if(tmp._a == 0 && tmp._b == 0){
+                    LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe complexe ",ERREUR));
                     throw CalculatriceException(typeid(this).name(), MATHS, "Complexe::Divison : essai de division par 0 (vous voulez vraiment détruire l'univers?)!");
+                }
                 Constante& aBis = ((_a->multiplication(*tmp._a)).addition(_b->multiplication(*tmp._b))).division((tmp._a->SQR()).addition(tmp._b->SQR()));
                 Constante& bBis = ((_b->multiplication(*tmp._a)).addition(_a->multiplication(*tmp._b))).division((tmp._a->SQR()).addition(tmp._b->SQR()));
                 Complexe* res = new Complexe(aBis, bBis);
@@ -172,8 +184,10 @@ LO21::Constante& LO21::Complexe::division(const LO21::Constante& c) const {
             }
             else {
                 Complexe& tmp = tmp_re->toComplexe();
-                if(tmp._a == 0 && tmp._b == 0)
+                if(tmp._a == 0 && tmp._b == 0){
+                    LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe complexe ",ERREUR));
                     throw CalculatriceException(typeid(this).name(), MATHS, "Complexe::Divison : essai de division par 0 (vous voulez vraiment détruire l'univers?)!");
+                }
                 Constante& aBis = ((_a->multiplication(*tmp._a)).addition(_b->multiplication(*tmp._b))).division((tmp._a->SQR()).addition(tmp._b->SQR()));
                 Constante& bBis = ((_b->multiplication(*tmp._a)).addition(_a->multiplication(*tmp._b))).division((tmp._a->SQR()).addition(tmp._b->SQR()));
                 Complexe* res = new Complexe(aBis, bBis);
@@ -183,8 +197,10 @@ LO21::Constante& LO21::Complexe::division(const LO21::Constante& c) const {
         }
         else {
             Complexe& tmp = tmp_e->toComplexe();
-            if(tmp._a == 0 && tmp._b == 0)
+            if(tmp._a == 0 && tmp._b == 0){
+                LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe complexe ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Complexe::Divison : essai de division par 0 (vous voulez vraiment détruire l'univers?)!");
+            }
             Constante& aBis = ((_a->multiplication(*tmp._a)).addition(_b->multiplication(*tmp._b))).division((tmp._a->SQR()).addition(tmp._b->SQR()));
             Constante& bBis = ((_b->multiplication(*tmp._a)).addition(_a->multiplication(*tmp._b))).division((tmp._a->SQR()).addition(tmp._b->SQR()));
             Complexe* res = new Complexe(aBis, bBis);
@@ -193,8 +209,10 @@ LO21::Constante& LO21::Complexe::division(const LO21::Constante& c) const {
         }
     }
     else {
-        if(tmp->_a == 0 && tmp->_b == 0)
+        if(tmp->_a == 0 && tmp->_b == 0){
+            LogSystem::ecrireLog(LogMessage("Erreur division par zéro classe complexe ",ERREUR));
             throw CalculatriceException(typeid(this).name(), MATHS, "Complexe::Divison : essai de division par 0 (vous voulez vraiment détruire l'univers?)!");
+        }
         Constante& aBis = ((_a->multiplication(*tmp->_a)).addition(_b->multiplication(*tmp->_b))).division((tmp->_a->SQR()).addition(tmp->_b->SQR()));
         Constante& bBis = ((_b->multiplication(*tmp->_a)).addition(_a->multiplication(*tmp->_b))).division((tmp->_a->SQR()).addition(tmp->_b->SQR()));
         Complexe* res = new Complexe(aBis, bBis);
@@ -212,8 +230,10 @@ LO21::Constante& LO21::Complexe::SIGN() const {
 LO21::Constante& LO21::Complexe::CUBE() const {
     Constante& tmp = SQR();
     const Complexe* c = dynamic_cast<const Complexe*>(&tmp);
-    if(c == 0)
+    if(c == 0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe complexe ",ERREUR));
         throw CalculatriceException(typeid(this).name(), OTHER, "Impossible de cast Constante* en Complexe* dans Complexe::CUBE()");
+    }
     Constante& ref = c->multiplication(*this);
     return (ref);
 }

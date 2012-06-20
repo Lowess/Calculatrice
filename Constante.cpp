@@ -17,6 +17,7 @@ LO21::Constante& LO21::Constante::SIGN() const{
             if(tmp_ra==0){ //Si echec on essaye en Complexe
                 const Complexe* tmp_comp=dynamic_cast<const Complexe*>(&*this);
                 if(tmp_comp==0){ //Si echec erreur
+                    LogSystem::ecrireLog(LogMessage("Erreur classe constante ",ERREUR));
                     throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
                 }
                 else{

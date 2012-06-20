@@ -15,8 +15,10 @@ void LO21::Operateur::appliqueOperateur(){
     switch(_operateur){
         // + - * / --> On pop deux éléments et on push le résultat
         case ADD:{
-            if(p->count() < 2)
+            if(p->count() < 2){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
+            }
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -32,14 +34,16 @@ void LO21::Operateur::appliqueOperateur(){
             else{
                 p->push(x);
                 p->push(y);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case SOU:{
-            if(p->count() < 2)
+            if(p->count() < 2){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -55,14 +59,16 @@ void LO21::Operateur::appliqueOperateur(){
             else{
                 p->push(x);
                 p->push(y);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case MUL:{
-            if(p->count() < 2)
+            if(p->count() < 2){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -78,14 +84,16 @@ void LO21::Operateur::appliqueOperateur(){
             else{
                 p->push(x);
                 p->push(y);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case DIV:{
-            if(p->count() < 2)
+            if(p->count() < 2){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -101,14 +109,16 @@ void LO21::Operateur::appliqueOperateur(){
             else{
                 p->push(x);
                 p->push(y);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case POW:{
-            if(p->count() < 2)
+            if(p->count() < 2){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -124,14 +134,15 @@ void LO21::Operateur::appliqueOperateur(){
             else{
                 p->push(x);
                 p->push(y);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case MOD:{
-            if(p->count() < 2)
+            if(p->count() < 2){
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             Expression* y=p->pop();
             //On test ce que vaut x et y (Constantes ou Expressions?)
@@ -147,15 +158,17 @@ void LO21::Operateur::appliqueOperateur(){
             else{
                 p->push(x);
                 p->push(y);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         //Trigonométrie
         }
         case SIN:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -167,14 +180,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case COS:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -186,14 +201,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case TAN:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -205,14 +222,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case SINH:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -224,14 +243,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case COSH:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -243,14 +264,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case TANH:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -262,15 +285,17 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         //Autres
         }
         case FACT:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Entier* nx=dynamic_cast<Entier*>(x);
@@ -282,14 +307,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case LOG:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -301,14 +328,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case LN:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -320,14 +349,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case SQR:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Constante* nx=dynamic_cast<Constante*>(x);
@@ -339,14 +370,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case CUBE:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Constante* nx=dynamic_cast<Constante*>(x);
@@ -358,14 +391,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case SQRT:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -377,14 +412,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case INV:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
@@ -396,14 +433,16 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case SIGN:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* x=p->pop();
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Constante* nx=dynamic_cast<Constante*>(x);
@@ -415,18 +454,21 @@ void LO21::Operateur::appliqueOperateur(){
             }
             else{
                 p->push(x);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
         case EVALUATION:{
-            if(p->count() < 1)
+            if(p->count() < 1){
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "La pile ne contient pas assez d'opérande pour évaluer l'opération");
-
+            }
             Expression* exp=p->pop();
             Exp* e=dynamic_cast<Exp *>(exp);
             if(e==0){
                 p->push(exp);
+                LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
                 throw CalculatriceException(typeid(this).name(), OTHER, "L'opérande n'est pas une expression, evaluation impossible");
             }
             e->EVAL();
@@ -436,6 +478,7 @@ void LO21::Operateur::appliqueOperateur(){
             break;
         }
         default:{
+            LogSystem::ecrireLog(LogMessage("Erreur classe operateur ",ERREUR));
             throw CalculatriceException(typeid(this).name(), OTHER, "Operateur non reconnu");
             break;
         }

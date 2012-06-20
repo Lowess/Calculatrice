@@ -32,8 +32,10 @@ LO21::OperateurUnaire::OperateurUnaire(const QString op){
     else if (op == "EVAL")
         _operateur = EVALUATION;
 
-    else //lancer erreur
+    else {//lancer erreur
+        LogSystem::ecrireLog(LogMessage("Erreur classe operateurUnaire ",ERREUR));
         throw CalculatriceException(typeid(this).name(), OTHER, "Operateur unaire non reconnu");
+    }
 }
 
 /*LO21::enumOperateurs LO21::OperateurUnaire::getOperator() const{
@@ -60,6 +62,7 @@ QString LO21::OperateurUnaire::toString() const{
         case EVALUATION: s = "EVAL"; break;
 
         default: //lancer erreur
+            LogSystem::ecrireLog(LogMessage("Erreur classe operateurUnaire ",ERREUR));
             throw CalculatriceException(typeid(this).name(), OTHER, "Erreur affichage opérateur");
             break;
     }

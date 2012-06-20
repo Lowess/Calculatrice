@@ -7,7 +7,7 @@
 #include <QFile>
 
 #include "CalculatriceException.h"
-
+#include "LogSystem.h"
 /*Template method : singleton*/
 
 enum TypeDiv {MENU_ENTIER, MENU_REEL, MENU_RATIONNEL};

@@ -30,12 +30,6 @@ namespace LO21{
 
             Pile* get_pile() const{ return _pile; }
             void set_pile(Pile* p) {
-                //qDebug() << "_pile=" << endl;
-                //_pile->afficherPileCourante();
-
-                //qDebug() << "new pile=" << endl;
-                //p->afficherPileMemoire();
-
                 _pile=p;
                 qDebug() << "Taille de la pile courante" << _pile->size();
             }

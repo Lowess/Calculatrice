@@ -16,8 +16,10 @@ LO21::OperateurBinaire::OperateurBinaire(const QString &op){
         _operateur = MOD;
     else if (op == "POW")
         _operateur = POW;
-    else //lancer erreur
+    else{ //lancer erreur
+        LogSystem::ecrireLog(LogMessage("Erreur classe operateurBinaire ",ERREUR));
         throw CalculatriceException(typeid(this).name(), OTHER, "Operateur binaire non reconnu");
+    }
 }
 
 QString LO21::OperateurBinaire::toString() const{
@@ -31,6 +33,7 @@ QString LO21::OperateurBinaire::toString() const{
         case POW: s = "POW"; break;
 
         default: //lancer erreur
+            LogSystem::ecrireLog(LogMessage("Erreur classe operateurBinaire ",ERREUR));
             throw CalculatriceException(typeid(this).name(), OTHER, "Erreur affichage opérateur");
             break;
     }

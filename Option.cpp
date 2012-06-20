@@ -43,6 +43,7 @@ QString LO21::Option::toString() const{
         case MENU_REEL: s = "Reel"; break;
         case MENU_RATIONNEL: s = "Rationnel"; break;
         default: //lancer erreur
+            LogSystem::ecrireLog(LogMessage("Erreur classe option ",ERREUR));
             throw CalculatriceException(typeid(this).name(), OTHER, "Erreur affichage option");
             break;
     }

@@ -159,7 +159,8 @@ void MainWindow::enterPressed(){
             ui->lastStack->setText(ui->lineEdit->text().simplified());
             ui->lineEdit->clear();
         } catch (exception& e){
-           QMessageBox msgBox;
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
+            QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
         }
@@ -206,6 +207,7 @@ void MainWindow::swapPressed(){
     QString y=ui->lineEditY->text();
 
     if(x.isEmpty()||y.isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur de saisie classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText("Vous devez saisir deux valeurs dans les zones de texte X, Y");
         msgBox.exec();
@@ -218,6 +220,7 @@ void MainWindow::swapPressed(){
 
             rafraichirPile();
         } catch (exception& e){
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
             QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
@@ -230,6 +233,7 @@ void MainWindow::sumPressed(){
     QString x=ui->lineEditX->text();
 
     if(x.isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur de saisie classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText("Vous devez saisir une valeur dans la zone de texte X");
         msgBox.exec();
@@ -242,6 +246,7 @@ void MainWindow::sumPressed(){
 
             rafraichirPile();
         } catch (exception& e){
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
             QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
@@ -254,6 +259,7 @@ void MainWindow::meanPressed(){
 
     QString x=ui->lineEditX->text();
     if(x.isEmpty()){
+        LogSystem::ecrireLog(LogMessage("Erreur de saisie classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText("Vous devez saisir une valeur dans la zone de texte X");
         msgBox.exec();
@@ -266,6 +272,7 @@ void MainWindow::meanPressed(){
 
             rafraichirPile();
         } catch (exception& e){
+            LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
             QMessageBox msgBox;
             msgBox.setText(e.what());
             msgBox.exec();
@@ -291,6 +298,7 @@ void MainWindow::dropPressed(){
 
         rafraichirPile();
     } catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText(e.what());
         msgBox.exec();
@@ -306,6 +314,7 @@ void MainWindow::dupPressed(){
 
         rafraichirPile();
     } catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
         QMessageBox msgBox;
         msgBox.setText(e.what());
         msgBox.exec();
@@ -338,7 +347,9 @@ void MainWindow::actionUndo(){
         ui->listStack->clear();
 
         rafraichirPile();
-    }catch (exception& e){ qDebug() << e.what(); }
+    }catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
+    }
 
     save();
 }
@@ -359,7 +370,9 @@ void MainWindow::actionRedo(){
         ui->listStack->clear();
 
         rafraichirPile();
-    }catch (exception& e){ qDebug() << e.what(); }
+    }catch (exception& e){
+        LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
+    }
 
     save();
 }
@@ -686,6 +699,8 @@ void MainWindow::save(){
     }
 
     file.close();
+    LogSystem::ecrireLog(LogMessage("Sauvegarde de contexte effectuée classe mainWindow ",INFO));
+
 }
 
 
@@ -758,6 +773,8 @@ void MainWindow::load(){
     file.close();
 
     rafraichirPile();
+
+    LogSystem::ecrireLog(LogMessage("Restauration de contexte effectuée classe mainWindow ",INFO));
 }
 
 void MainWindow::actionSave(){
