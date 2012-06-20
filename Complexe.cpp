@@ -7,16 +7,6 @@
 
 using namespace LO21;
 
-//surcharger Complexe constructeur avec deux pointeurs NB
-/*
-LO21::Complexe::Complexe(const LO21::Nombre* a,const LO21::Nombre* b){
-    if(a == 0 || b == 0)
-        throw CalculatriceException(typeid(this).name(), OTHER, "Creation de complexe impossible : pas de nombre pour instancier");
-    _a = a;
-    _b = b;
-}
-*/
-
 LO21::Complexe::Complexe(const LO21::Constante& a,const LO21::Constante& b){
     const Nombre* tmpA = dynamic_cast<const Nombre*>(&a);
     const Nombre* tmpB = dynamic_cast<const Nombre*>(&b);

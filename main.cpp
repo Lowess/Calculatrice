@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-    MainWindow w;
+    Ui::MainWindow w;
     w.show();
     w.adjustSize();
     return a.exec();

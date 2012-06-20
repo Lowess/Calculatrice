@@ -200,16 +200,6 @@ void MainWindow::sqrtPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR
 void MainWindow::sqrPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR "); }
 void MainWindow::cubePressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" CUBE "); }
 
-/*void MainWindow::changeDegre() {
-    bool degre = ui->chkDegre->checked();
-    Option.getInstance().switchDegre(degre);
-}
-
-void MainWindow::changeComplexe() {
-    bool complexe = ui->chkComplexe->checked();
-    Option.getInstance().switchComplexe(complexe);
-}*/
-
 //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
 void MainWindow::swapPressed(){
     QString x=ui->lineEditX->text();
@@ -287,18 +277,15 @@ void MainWindow::meanPressed(){
             msgBox.exec();
         }
     }
-
-
 }
+
 void MainWindow::clearPressed(){
     memorisePileUndo();
     Calculatrice::getInstance().get_pile()->CLEAR();
     memorisePileRedo();
-
     rafraichirPile();
-
-
 }
+
 void MainWindow::dropPressed(){
     try {
         memorisePileUndo();
@@ -312,9 +299,8 @@ void MainWindow::dropPressed(){
         msgBox.setText(e.what());
         msgBox.exec();
     }
-
-
 }
+
 void MainWindow::dupPressed(){
     try {
         memorisePileUndo();
@@ -389,16 +375,10 @@ void MainWindow::actionRedo(){
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     //Mise �  jour de l'affichage
     QStack<Expression*>::iterator it;
     Expression* exp=0;
-=======
-    //Mise à jour de l'affichage
->>>>>>> 27e2f0ee8755fb9e00f110ca859eaf103f30bab1
-=======
->>>>>>> cbc07810f3c5eba16c7213ac27161f6f3b5f81f4
+
     /*
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
         exp=*it;
@@ -728,7 +708,6 @@ void MainWindow::load(){
     //Lecture
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de save en lecture");
-
 
     QDataStream in(&file);
     //Enregistre les options
