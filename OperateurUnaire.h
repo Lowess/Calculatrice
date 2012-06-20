@@ -14,10 +14,18 @@
  *  \brief Désigne les classes définies dans le but du projet de LO21 P12
  */
 namespace LO21 {
+/*! \class Complexe
+ * \brief Classe permettant de gérer les nombres complexes
+ */
     class OperateurUnaire : public Operateur {
         public:
+        /*! \class Complexe
+         * \brief Classe permettant de gérer les nombres complexes
+         */
             OperateurUnaire(const QString op);
-
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             QString toString() const;
     };
 }

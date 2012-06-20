@@ -4,6 +4,7 @@
 #include "Reel.h"
 #include "Rationnel.h"
 
+using namespace LO21;
 
 //Implémentation issu de la classe Constante
 
@@ -166,20 +167,24 @@ LO21::Constante& LO21::Nombre::hookOperation(){
     switch (Option::getInstance().get_typeDiv()){
         case MENU_ENTIER:{
             Constante& ref=this->toEntier();
+            LogSystem::ecrireLog(LogMessage("Conversion d'une constante en Entier: " + this->toString() + " --> " + ref.toString()));
             return (ref);
             break;
         }
         case MENU_REEL:{
             Constante& ref=this->toReel();
+            LogSystem::ecrireLog(LogMessage("Conversion d'une constante en Reel: " + this->toString() + " --> " + ref.toString()));
             return (ref);
             break;
         }
         case MENU_RATIONNEL:{
             Constante& ref=this->toRationnel();
+            LogSystem::ecrireLog(LogMessage("Conversion d'une constante en Rationnel: " + this->toString() + " --> " + ref.toString()));
             return (ref);
             break;
         }
         default:
+            LogSystem::ecrireLog(LogMessage("Option de constante inexistante",ERREUR));
             throw CalculatriceException(typeid(this).name(),OPTION,"Option de constante inexistante");
     }
 }

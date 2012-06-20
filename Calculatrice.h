@@ -9,6 +9,7 @@
 #include "Pile.h"
 #include "Fabrique.h"
 #include "Gardien.h"
+#include "LogSystem.h"
 
 /*! \namespace LO21
  *  \brief Désigne les classes définies dans le but du projet de LO21 P12
@@ -77,13 +78,14 @@ namespace LO21{
              * \param Pile* p, un pointeur vers la pile qu'on veut utiliser dans la calculatrice
              */
             void set_pile(Pile* p) {
-                qDebug() << "_pile=" << endl;
-                _pile->afficherPileCourante();
+                //qDebug() << "_pile=" << endl;
+                //_pile->afficherPileCourante();
 
-                qDebug() << "new pile=" << endl;
-                p->afficherPileMemoire();
+                //qDebug() << "new pile=" << endl;
+                //p->afficherPileMemoire();
 
                 _pile=p;
+                qDebug() << "Taille de la pile courante" << _pile->size();
             }
 
             /*! \fn Gardien* get_gardien() const

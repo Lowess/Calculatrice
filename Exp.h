@@ -14,23 +14,56 @@
  *  \brief Désigne les classes définies dans le but du projet de LO21 P12
  */
 namespace LO21{
+    /*! \class Complexe
+     * \brief Classe permettant de gérer les nombres complexes
+     */
     class Exp: public Constante {
         private:
-            const QString _exp;
+            const QString _exp; /*! */
         public:
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Exp(const QString& s):_exp(s){}
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Constante& addition(const Constante& nb) const;
+
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Constante& soustraction(const Constante& nb) const;
+
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Constante& multiplication(const Constante& nb) const;
+
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Constante& division(const Constante& nb) const;
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             void EVAL();
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Constante& hookOperation();
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             QString toString() const;
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             Exp* clone() const;
     };
 }

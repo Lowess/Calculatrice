@@ -99,12 +99,24 @@ void MainWindow::slotConnection()
     connect(ui->actionNouveau, SIGNAL(changed()), this, SLOT(actionNouveauChanged()));
     connect(ui->actionQuitter, SIGNAL(changed()), this, SLOT(actionQuitterChanged()));
 
-    connect(ui->undo, SIGNAL(clicked()), this, SLOT(actionUndo()));
-    connect(ui->redo, SIGNAL(clicked()), this, SLOT(actionRedo()));
+    connect(ui->actionUndo, SIGNAL(triggered()), this, SLOT(actionUndo()));
+    connect(ui->actionRedo, SIGNAL(triggered()), this, SLOT(actionRedo()));
 
+<<<<<<< HEAD
     //connect(ui->chkDegre, SIGNAL(triggered()), this, SLOT(changeDegre()));
     //connect(ui->chkComplexe, SIGNAL(triggered()), this, SLOT(changeComplexe()));
+=======
 
+    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinChanged(int)));
+>>>>>>> d185c98c462ba10aa067a3689a678560fbeed857
+
+    connect(ui->actionMasquerOptionsAvancees, SIGNAL(triggered()), this, SLOT(actionMasquerOptionsAvancees()));
+    connect(ui->actionMasquerPile, SIGNAL(triggered()), this, SLOT(actionMasquerPile()));
+
+    ui->label_lastRes->setVisible(false);
+    ui->lineEdit_lastRes->setVisible(false);
+
+    memorisePileUndo();
 }
 
 //Connexion des boutons 0-9
@@ -131,9 +143,8 @@ void MainWindow::enterPressed(){
         dupPressed();
     else
         try{
-            memorisePileUndo();
             Fabrique::getInstance().creer(ui->lineEdit->text());
-            memorisePileRedo();
+            memorisePileUndo();
 
             rafraichirPile();
             ui->lastStack->setText(ui->lineEdit->text().simplified());
@@ -291,6 +302,10 @@ void MainWindow::dupPressed(){
     }
 }
 
+void MainWindow::spinChanged(int i){
+    rafraichirPile();
+}
+
 void MainWindow::actionUndo(){
     try{
         Gardien* g=Calculatrice::getInstance().get_gardien();
@@ -301,6 +316,11 @@ void MainWindow::actionUndo(){
 
         //Remplace la pile par une pile sauvegardée
         Calculatrice::getInstance().set_pile(p);
+        qDebug() << "Affichage de la pile mémoire restaurée" << endl;
+        p->afficherPileMemoire();
+
+        qDebug() << "Affichage de la pile restaurée" << endl;
+        p->afficherPileCourante();
 
 
         ui->listStack->clear();
@@ -319,7 +339,8 @@ void MainWindow::actionRedo(){
 
         //Remplace la pile par une pile sauvegardée
         Calculatrice::getInstance().set_pile(p);
-
+        qDebug() << "Affichage de la pile restaurée" << endl;
+        p->afficherPileMemoire();
 
         ui->listStack->clear();
 
@@ -333,10 +354,27 @@ void MainWindow::rafraichirPile(){
     //Mise �  jour de l'affichage
     QStack<Expression*>::iterator it;
     Expression* exp=0;
+    /*
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
         exp=*it;
         ui->listStack->addItem(exp->toString());
     }
+    */
+
+    int afficheur=ui->spinBox->value();
+
+    //Affiche la pile avec sommet vers le haut
+    it=Calculatrice::getInstance().get_pile()->end();
+    while ((it != Calculatrice::getInstance().get_pile()->begin()) && afficheur>0) {
+        --it;
+        afficheur--;
+        exp=*it;
+        ui->listStack->addItem(exp->toString());
+    }
+    if(ui->listStack->count()!=0)
+        ui->lineEdit_lastRes->setText(ui->listStack->item(0)->text());
+    else
+        ui->lineEdit_lastRes->setText("");
 }
 
 void MainWindow::memorisePileUndo(){
@@ -376,3 +414,75 @@ void MainWindow::actionRadianChanged(){}
 //Connection des boutons dans fichier
 void MainWindow::actionNouveauChanged(){}
 void MainWindow::actionQuitterChanged(){}
+
+void MainWindow::actionMasquerOptionsAvancees(){
+    if(ui->actionMasquerOptionsAvancees->isChecked()){
+        ui->tabWidget->setVisible(false);
+        ui->line_3->setVisible(false);
+    }
+    else{
+        ui->tabWidget->setVisible(true);
+        ui->line_3->setVisible(true);
+    }
+}
+void MainWindow::actionMasquerPile(){
+    if(ui->actionMasquerPile->isChecked()){
+        ui->lastStack->setVisible(false);
+
+        ui->label_X->setVisible(false);
+        ui->label_Y->setVisible(false);
+
+        ui->line->setVisible(false);
+        ui->line_4->setVisible(false);
+        ui->line_2->setVisible(false);
+
+        ui->lineEditX->setVisible(false);
+        ui->lineEditY->setVisible(false);
+
+        ui->listStack->setVisible(false);
+
+        ui->btnSwap->setVisible(false);
+        ui->btnSum->setVisible(false);
+        ui->btnMean->setVisible(false);
+        ui->btnDrop->setVisible(false);
+        ui->btnDup->setVisible(false);
+        ui->btnClear->setVisible(false);
+
+        ui->line_6->setVisible(false);
+
+        ui->spinBox->setVisible(false);
+
+        ui->label_lastRes->setVisible(true);
+        ui->lineEdit_lastRes->setVisible(true);
+    }
+    else{
+        ui->lastStack->setVisible(true);
+
+        ui->label_X->setVisible(true);
+        ui->label_Y->setVisible(true);
+
+        ui->line->setVisible(true);
+        ui->line_4->setVisible(true);
+        ui->line_2->setVisible(true);
+
+        ui->lineEditX->setVisible(true);
+        ui->lineEditY->setVisible(true);
+
+        ui->listStack->setVisible(true);
+
+        ui->btnSwap->setVisible(true);
+        ui->btnSum->setVisible(true);
+        ui->btnMean->setVisible(true);
+        ui->btnDrop->setVisible(true);
+        ui->btnDup->setVisible(true);
+        ui->btnClear->setVisible(true);
+
+        ui->line_6->setVisible(true);
+
+        ui->spinBox->setVisible(true);
+
+        ui->label_lastRes->setVisible(false);
+        ui->lineEdit_lastRes->setVisible(false);
+    }
+    adjustSize();
+}

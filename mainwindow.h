@@ -18,9 +18,14 @@
 #include "Option.h"
 #include "Expression.h"
 
+<<<<<<< HEAD
 /*! \namespace Ui
  *  \brief Désigne les classes définies dans le but du projet de LO21 P12, concernant l'affichage de la calculatrice
  */
+=======
+#include "LogSystem.h"
+
+>>>>>>> d185c98c462ba10aa067a3689a678560fbeed857
 namespace Ui {
 class MainWindow;
 }
@@ -101,6 +106,8 @@ class MainWindow : public QMainWindow
         void dropPressed();
         void dupPressed();
 
+        void spinChanged(int i);
+
         //Connection des actions choix de constante
         void actionEntiersChanged();
         void actionReelsChanged();
@@ -117,8 +124,13 @@ class MainWindow : public QMainWindow
         void actionNouveauChanged();
         void actionQuitterChanged();
 
+        //Connection des boutons dans fichier
+        void actionMasquerOptionsAvancees();
+        void actionMasquerPile();
+
         void actionUndo();
         void actionRedo();
+
 };
 
 #endif // MAINWINDOW_H

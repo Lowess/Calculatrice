@@ -1,4 +1,5 @@
 #include "Pile.h"
+#include "Gardien.h"
 
 #include "Entier.h"
 #include "Reel.h"
@@ -140,3 +141,12 @@ void LO21::Pile::afficherPileMemoire() const{
         qDebug() << exp->toString();
     }
 }
+
+LO21::Pile::Memento* LO21::Pile::sauverDansMemento(){ return new Pile::Memento(_etat); }
+
+void LO21::Pile::restaurerDepuisMemento(const Pile::Memento* m){
+    _etat=m->get_etat();
+    //Gardien::getInstance()->set_index(_etat->size()+1);
+}
+
+LO21::Pile* LO21::Pile::get_etat()const{ return _etat; }

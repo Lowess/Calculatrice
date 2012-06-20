@@ -16,6 +16,9 @@ namespace LO21{
     class Constante;
     class Operateur;
 
+    /*! \class Complexe
+     * \brief Classe permettant de gérer les nombres complexes
+     */
     class Expression {
         private:
 
@@ -23,20 +26,34 @@ namespace LO21{
             //MÃ©thodes virtuelles pures
             //virtual Expression& EVAL() =0;
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             virtual void EVAL() = 0;
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             virtual QString toString() const =0;
 
+        /*! \class Complexe
+         * \brief Classe permettant de gérer les nombres complexes
+         */
             void afficher() const{
                 QTextStream cout(stdout, QIODevice::WriteOnly);
                 cout << this->toString();
             }
 
+            /*! \class Complexe
+             * \brief Classe permettant de gérer les nombres complexes
+             */
             virtual Expression* clone() const=0;
     };
 }
 
-//operator<<
+/*! \class Complexe
+ * \brief Classe permettant de gérer les nombres complexes
+ */
 QTextStream& operator<<(QTextStream& s, const LO21::Expression& n);
 
 #endif // EXPRESSION_H
