@@ -1067,9 +1067,9 @@
     </property>
     <addaction name="actionNouveau"/>
     <addaction name="separator"/>
-    <addaction name="actionQuitter"/>
-    <addaction name="separator"/>
     <addaction name="actionSauvegarder"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuOptions">

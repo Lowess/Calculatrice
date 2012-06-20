@@ -144,7 +144,7 @@ void MainWindow::delPressed(){
         dropPressed();
     else
         ui->lineEdit->setText("");
-    save();
+
 }
 void MainWindow::enterPressed(){
     if(ui->lineEdit->text()=="")
@@ -163,7 +163,7 @@ void MainWindow::enterPressed(){
             msgBox.setText(e.what());
             msgBox.exec();
         }
-    save();
+
 }
 void MainWindow::spaceBarPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" "); }
 
@@ -236,7 +236,7 @@ void MainWindow::swapPressed(){
         }
     }
 
-    save();
+
 }
 void MainWindow::sumPressed(){
     QString x=ui->lineEditX->text();
@@ -262,7 +262,7 @@ void MainWindow::sumPressed(){
         }
     }
 
-    save();
+
 }
 void MainWindow::meanPressed(){
 
@@ -288,7 +288,7 @@ void MainWindow::meanPressed(){
         }
     }
 
-    save();
+
 }
 void MainWindow::clearPressed(){
     memorisePileUndo();
@@ -297,7 +297,7 @@ void MainWindow::clearPressed(){
 
     rafraichirPile();
 
-    save();
+
 }
 void MainWindow::dropPressed(){
     try {
@@ -313,7 +313,7 @@ void MainWindow::dropPressed(){
         msgBox.exec();
     }
 
-    save();
+
 }
 void MainWindow::dupPressed(){
     try {
@@ -329,7 +329,7 @@ void MainWindow::dupPressed(){
         msgBox.exec();
     }
 
-    save();
+
 }
 
 void MainWindow::spinChanged(int i){
@@ -360,7 +360,7 @@ void MainWindow::actionUndo(){
         LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
     }
 
-    save();
+
 }
 
 void MainWindow::actionRedo(){
@@ -383,7 +383,7 @@ void MainWindow::actionRedo(){
         LogSystem::ecrireLog(LogMessage("Erreur impossible d'effectuer l'opération demandée classe mainWindow ",ERREUR));
     }
 
-    save();
+
 }
 
 void MainWindow::rafraichirPile(){
@@ -500,7 +500,7 @@ void MainWindow::actionNouveauChanged(){
 
     rafraichirPile();
 
-    save();
+
 }
 void MainWindow::actionQuitterChanged(){
     save();

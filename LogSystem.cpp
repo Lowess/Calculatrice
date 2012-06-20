@@ -14,7 +14,6 @@ void LO21::LogSystem::ecrireFichier(const LogMessage& m){
     //Lecture
     try{
         if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-            LogSystem::ecrireLog(LogMessage("Erreur d'ouvertur fichier classe logSystem ",ERREUR));
             throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de log en lecture");
         }
     } catch (std::exception& e) {}
@@ -24,7 +23,6 @@ void LO21::LogSystem::ecrireFichier(const LogMessage& m){
 
     //Ecriture
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
-        LogSystem::ecrireLog(LogMessage("Erreur d'ouvertur fichier classe logSystem ",ERREUR));
         throw CalculatriceException("LogSystem",OTHER,"Echec d'ouverture de fichier de log en ecriture");
     }
     QTextStream out(&file);

@@ -30,15 +30,7 @@ namespace LO21{
      * le design pattern Singleton
      */
     class Option {
-    private:
-<<<<<<< HEAD
-        TypeDiv _typeDiv;
-        bool _complexe;
-        bool _degre;
-        static Option* _option;
-
-        Option():_complexe(false), _degre(false), _typeDiv(MENU_ENTIER){}
-=======
+    private:        
         TypeDiv _typeDiv; /*! Le type des constantes sélectionné */
         bool _complexe, _degre; /*! Si les modes complexe et degré sont actifs ou pas */
         static Option* _option; /*! L'instance de la classe Option */
@@ -46,11 +38,7 @@ namespace LO21{
         /*! \fn Option()
          * \brief Constructeur de la classe
          */
-        Option(){
-            _complexe = false;
-            _degre = false;
-            _typeDiv = MENU_ENTIER;
-        }
+        Option():_complexe(false), _degre(false), _typeDiv(MENU_ENTIER){}
 
         /*! \fn void switchDegre(bool d)
          * \brief Permet de changer le mode des degrés pour les opérations trigonométriques
@@ -67,7 +55,6 @@ namespace LO21{
         void switchComplexe(bool c){
             _complexe = c;
         }
->>>>>>> Olivia
 
     public:
 
@@ -100,13 +87,6 @@ namespace LO21{
         bool get_degre() const{ return _degre; }
         bool get_complexe() const{ return _complexe; }
 
-<<<<<<< HEAD
-=======
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
-         */
-        void saveOptions();
->>>>>>> Olivia
 
         /*! \class Complexe
          * \brief Classe permettant de gérer les nombres complexes
