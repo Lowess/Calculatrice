@@ -74,18 +74,21 @@ namespace LO21{
          */
         virtual Constante& POW(const Nombre& nb) const;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Entier& toEntier() const
+         * \brief Transforme un Nombre en entier
+         * \return Entier& une référence vers l'Entier créé
          */
         virtual Entier& toEntier() const;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Reel& toReel() const
+         * \brief Transforme un Nombre en reel
+         * \return Réel& une référence vers le réel créé
          */
         virtual Reel& toReel() const;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Rationnel& toRationnel() const
+         * \brief Transforme un Nombre en rationnel
+         * \return Rationnel& une référence vers le rationnel créé
          */
         virtual Rationnel& toRationnel() const;
 
@@ -99,48 +102,61 @@ namespace LO21{
          */
         Nombre& SIGN() const;
 
-            //ImplÃ©mentation du Template/Methode
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Constante& addition(const Constante& nb) const
+         * \brief Gère l'addition entre deux constantes quelles qu'elles soient
+         * \param nb une référence vers une constante
+         * \return Constante& une référence vers la constante créée à partir du résultat
          */
         virtual Constante& addition(const Constante& nb) const=0;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Constante& soustraction(const Constante& nb) const
+         * \brief Gère la soustraction entre deux constantes quelles qu'elles soient
+         * \param nb une référence vers une constante
+         * \return Constante& une référence vers la constante créée à partir du résultat
          */
         virtual Constante& soustraction(const Constante& nb) const=0;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Constante& multiplication(const Constante& nb) const
+         * \brief Gère la multiplication entre deux constantes quelles qu'elles soient
+         * \param nb une référence vers une constante
+         * \return Constante& une référence vers la constante créée à partir du résultat
          */
         virtual Constante& multiplication(const Constante& nb) const=0;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn virtual Constante& division(const Constante& nb) const
+         * \brief Gère la division entre deux constantes quelles qu'elles soient
+         * \param nb une référence vers une constante
+         * \return Constante& une référence vers la constante créée à partir du résultat
          */
         virtual Constante& division(const Constante& nb) const=0;
 
             //Méthode qui va permettre d'appliquer le mode de constante utilisateur;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn Constante& hookOperation()
+         * \brief
+         * \return Constante& Une référence vers une constante instanciée
          */
         Constante& hookOperation();
 
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn bool operator==(const Nombre& e) const
+         * \brief Teste si la valeur d'un Nombre est égale à la valeur d'un autre Nombre
+         * \param nb le Nombre à comparer avec l'objet appelant
+         * \return bool déterminant la véracité de la proposition logique
          */
         bool operator==(const Nombre& nb) const;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn bool operator==(int nb) const
+         * \brief Teste si la valeur d'un Nombre est égale à la valeur d'un entier
+         * \param nb l'entier à tester avec l'objet appelant
+         * \return bool déterminant la véracité de la proposition logique
          */
         bool operator==(int nb) const;
 
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn Nombre* clone() const
+         * \brief Recopie le nombre appelant
+         * \return Nombre* un pointeur vers le nombre créé par recopie
          */
         Nombre* clone() const=0;
     };

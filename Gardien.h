@@ -1,10 +1,10 @@
-/** \file Gardien.h
+#ifndef GARDIEN_H
+#define GARDIEN_H
+
+/*! \file Gardien.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Gardien
   */
-
-#ifndef GARDIEN_H
-#define GARDIEN_H
 
 #include <QString>
 #include <QStack>
@@ -19,18 +19,17 @@ namespace LO21{
     //class Pile;
     //class Pile::Memento;
 
-    /*! \class Complexe
-     * \brief Classe permettant de gérer les nombres complexes
+    /*! \class Gardien
+     * \brief Classe qui s'occupe de gérer les opérations d'undo redo grâce
+     * à l'implémentation d'un design pattern Memento
      */
     class Gardien{
         private:
-            static Gardien* _gard; /*! */
-            int _index; /*! */
-            QStack<Pile::Memento*> _liste; /*! */
+            static Gardien* _gard; /*! L'instance du gardien */
+            int _index; /*!  */
+            QStack<Pile::Memento*> _liste; /*!  */
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
-             */
+
             Gardien():_index(0){}
 
             /*! \class Complexe

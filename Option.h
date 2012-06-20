@@ -1,53 +1,59 @@
+#ifndef OPTION_H
+#define OPTION_H
+
 /** \file Option.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Option
   */
 
-#ifndef OPTION_H
-#define OPTION_H
-
 #include <QString>
 #include <QTextStream>
 #include <typeinfo>
-
+#include "MainWindow.h"
 #include "CalculatriceException.h"
 
 /*Template method : singleton*/
 
+/*! \enum TypeDiv
+ * \brief Définit les différents types de constantes à créer par la Fabrique
+ * et le type de retour des divisions
+ */
 enum TypeDiv {MENU_ENTIER, MENU_REEL, MENU_RATIONNEL};
 
 /*! \namespace LO21
  *  \brief Désigne les classes définies dans le but du projet de LO21 P12
  */
 namespace LO21{
-/*! \class Complexe
- * \brief Classe permettant de gérer les nombres complexes
- */
+    /*! \class Option
+     * \brief Classe permettant de gérer les options gérées par l'utilisateur, implémentant
+     * le design pattern Singleton
+     */
     class Option {
     private:
-        TypeDiv _typeDiv; /*! */
-        bool _complexe, _degre; /*! */
-        static Option* _option; /*! */
+        TypeDiv _typeDiv; /*! Le type des constantes sélectionné */
+        bool _complexe, _degre; /*! Si les modes complexe et degré sont actifs ou pas */
+        static Option* _option; /*! L'instance de la classe Option */
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn Option()
+         * \brief Constructeur de la classe
          */
         Option(){
             _complexe = false;
             _degre = false;
             _typeDiv = MENU_ENTIER;
-            //connecter les slots pour le faire apparaître à l'écran
         }
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn void switchDegre(bool d)
+         * \brief Permet de changer le mode des degrés pour les opérations trigonométriques
+         * \param d est true si le mode Degre est activé, false sinon
          */
         void switchDegre(bool d){
             _degre = d;
         }
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn void switchComplexe(bool c)
+         * \brief Permet de changer le mode des complexes pour permettre leur création et leur stockage dans la pile
+         * \param c est true si le mode complexe est activé, false sinon
          */
         void switchComplexe(bool c){
             _complexe = c;
@@ -55,8 +61,9 @@ namespace LO21{
 
     public:
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn void switchComplexe(bool c)
+         * \brief Permet de changer le mode des complexes pour permettre leur création et leur stockage dans la pile
+         * \param c est true si le mode complexe est activé, false sinon
          */
         static Option& getInstance();
 

@@ -24,85 +24,107 @@ namespace LO21{
             int _x; /*! L'entier */
         public:
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Constante& addition(const Constante& nb) const
+             * \brief Gère l'addition entre un entier et une constante quelle qu'elle soit
+             * \param nb une référence vers une constante
+             * \return Constante& une référence vers la constante créée à partir du résultat
              */
             Constante& addition(const Constante& nb) const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Constante& soustraction(const Constante& nb) const
+             * \brief Gère la soustraction entre un entier et une constante quelle qu'elle soit
+             * \param nb une référence vers une constante
+             * \return Constante& une référence vers la constante créée à partir du résultat
              */
             Constante& soustraction(const Constante& nb) const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Constante& multiplication(const Constante& nb) const
+             * \brief Gère la multiplication entre un entier et une constante quelle qu'elle soit
+             * \param nb une référence vers une constante
+             * \return Constante& une référence vers la constante créée à partir du résultat
              */
             Constante& multiplication(const Constante& nb) const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Constante& division(const Constante& nb) const
+             * \brief Gère la division entre un entier et une constante quelle qu'elle soit
+             * \param nb une référence vers une constante
+             * \return Constante& une référence vers la constante créée à partir du résultat
              */
             Constante& division(const Constante& nb) const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn QString toString() const
+             * \brief Permet d'afficher sous forme textuelle un objet Entier
+             * \return QString contenant le texte représentant l'Entier
              */
             QString toString() const;
 
             //MÃƒÂ©thodes
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Rationnel& toRationnel() const
+             * \brief Transforme un entier en rationnel
+             * \return Rationnel& une référence vers le rationnel créé
              */
             Rationnel& toRationnel() const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Reel& toReel() const
+             * \brief Transforme un entier en reel
+             * \return Reel& une référence vers le réel créé
              */
             Reel& toReel() const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Complexe& toComplexe() const
+             * \brief Transforme un entier en complexe
+             * \return Complexe& une référence vers le complexe créé
              */
             Complexe& toComplexe() const;
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Entier& MOD(const Entier& nb) const
+             * \brief Permet d'appliquer l'opérateur modulo sur un entier
+             * \param nb l'entier paramètre du modulo
+             * \return Entier& une référence vers l'entier résultant du modulo
              */
             Entier& MOD(const Entier& nb);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Entier& FACTORIELLE()
+             * \brief Permet de calculer la factorielle d'un entier
+             * \return Entier& une référence vers l'entier créé à partir du résultat
              */
             Entier& FACTORIELLE();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn int get_x() const
+             * \brief Retourne l'entier utilisé dans l'objet Entier
+             * \return int l'entier utilisé comme attribut de l'objet Entier
              */
             int get_x() const{ return _x;}
 
             //Constructeurs
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Entier(int x)
+             * \brief Constructeur de la classe Entier
+             * \param x l'entier dont on veut la correspondance dans notre classe Entier
              */
             Entier(int x=0):Reel(x),_x(x){}
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn bool operator==(const Entier& e)
+             * \brief Teste si la valeur d'un Entier est égale à la valeur d'un autre Entier
+             * \param e l'Entier dont la valeur est à tester
+             * \return bool déterminant la véracité de la proposition logique
              */
-            bool operator==(const Entier& e) {
+            bool operator==(const Entier& e){
                 return _x == e._x;
             }
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Entier* clone() const
+             * \brief Recopie l'objet Entier appelant
+             * \return Entier* un pointeur vers l'objet Entier créé
              */
             Entier* clone() const;
     };
 }
 
-/*! \class Complexe
- * \brief Classe permettant de gérer les nombres complexes
+/*! \fn int factorielle(int n)
+ * \brief Exécute la factorielle du nombre n passé en argument
+ * \param n Entier à partir duquel la factorielle va être calculée
+ * \return int le résultat de la factorielle
  */
 int factorielle(int n);
 

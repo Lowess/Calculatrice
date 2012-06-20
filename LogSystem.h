@@ -1,28 +1,39 @@
 #ifndef LOGSYSTEM_H
 #define LOGSYSTEM_H
 
+/*! \file Entier.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe LogSystem
+  */
+
 #include <QFile>
 #include "CalculatriceException.h"
 #include "LogMessage.h"
 
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
-    /*! \class Complexe
+    /*! \class LogSystem
      * \brief Classe permettant de gérer les nombres complexes
      */
     class LogSystem{
         public:
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn static void ecrireConsole(const LogMessage& m)
+         * \brief Ecrire le message sur la console
+         * \param m le message à afficher
          */
         static void ecrireConsole(const LogMessage& m);
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn static void ecrireFichier(const LogMessage& m)
+         * \brief Ecrire le message dans un fichier
+         * \param m le message à afficher
          */
         static void ecrireFichier(const LogMessage& m);
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn static void ecrireLog(const LogMessage& m)
+         * \brief Permet l'appel aux deux fonctions pour écrire dans un fichier et sur la console
+         * \param m le message à afficher
          */
         static void ecrireLog(const LogMessage& m);
 
