@@ -34,9 +34,7 @@ void LO21::Option::set_typeDiv(TypeDiv option){
     }
 }
 
-void LO21::Option::saveOptions(){
-//à la fermeture du programme, sauver les options courantes dans le fichier log
-}
+//void LO21::Option::saveOptions(){}
 
 QString LO21::Option::toString() const{
     QString s;

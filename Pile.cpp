@@ -77,7 +77,7 @@ void LO21::Pile::DUP(){
     } else {
         Reel* pt_ree=dynamic_cast<Reel*>(e);
         if (pt_ree != 0){
-            push(new Entier(pt_ent->get_x()));
+            push(new Reel(pt_ree->get_x()));
         } else {
             Rationnel* pt_rat=dynamic_cast<Rationnel*>(e);
             if(pt_rat != 0){

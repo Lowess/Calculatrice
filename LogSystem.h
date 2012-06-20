@@ -2,6 +2,7 @@
 #define LOGSYSTEM_H
 
 #include <QFile>
+#include <QDir>
 #include "CalculatriceException.h"
 #include "LogMessage.h"
 

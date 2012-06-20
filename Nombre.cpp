@@ -4,6 +4,9 @@
 #include "Reel.h"
 #include "Rationnel.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 using namespace LO21;
 
 //Implémentation issu de la classe Constante
@@ -47,39 +50,75 @@ LO21::Nombre& LO21::Nombre::SIGN() const{
 LO21::Constante& LO21::Nombre::SIN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(sin(reel->get_x())));
-    return (ref);
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(sin( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(sin(reel->get_x())));
+        return (ref);
+    }
 }
 
 LO21::Constante& LO21::Nombre::COS() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(cos(reel->get_x())));
-    return (ref);
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(cos( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(cos(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::TAN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(tan(reel->get_x())));
-    return (ref);
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(tan( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(tan(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::SINH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(sinh(reel->get_x())));
-    return (ref);
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(sinh( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(sinh(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::COSH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(cosh(reel->get_x())));
-    return (ref);
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(cosh( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(cosh(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::TANH() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());
     if(reel==0){ throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");}
-    Constante& ref=*(new Reel(tanh(reel->get_x())));
-    return (ref);
+
+    if(Option::getInstance().get_degre()) {// En degree
+        Constante& ref=*(new Reel(tanh( (M_PI * reel->get_x()) / 180)));
+        return (ref);
+    } else {
+        Constante& ref=*(new Reel(tanh(reel->get_x())));
+        return (ref);
+    }
 }
 LO21::Constante& LO21::Nombre::LN() const{
     const Reel* reel=dynamic_cast<const Reel*>(&toReel());

@@ -21,12 +21,18 @@ namespace LO21{
                 QString type;
                 switch (_type){
                     case MATHS:
-                        type="MATHS"; break;
+                        type="maths"; break;
+                    case PILE:
+                        type="pile"; break;
+                    case OPTION:
+                        type="option"; break;
                     default:
-                        type="OTHER"; break;
+                        type="autre"; break;
                 }
 
-                QString str("Exception emise par la classe: "+_class+" de type "+type+" Information: "+_info);
+                QString str("Oups... Une exception de type "+ type +" a ete captee:\n\n");
+                str += "Message d'information:\n\n"+_info;
+                str.toUtf8();
                 return str.toStdString().c_str();
             }
 

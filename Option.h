@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTextStream>
 #include <typeinfo>
+#include <QFile>
 
 #include "CalculatriceException.h"
 
@@ -15,23 +16,11 @@ namespace LO21{
     class Option {
     private:
         TypeDiv _typeDiv;
-        bool _complexe, _degre;
+        bool _complexe;
+        bool _degre;
         static Option* _option;
 
-        Option(){
-            _complexe = false;
-            _degre = false;
-            _typeDiv = MENU_ENTIER;
-            //connecter les slots pour le faire apparaître à l'écran
-        }
-
-        void switchDegre(){
-            _degre = !_degre;
-        }
-
-        void switchComplexe(){
-            _complexe = !_complexe;
-        }
+        Option():_complexe(false), _degre(false), _typeDiv(MENU_ENTIER){}
 
     public:
 
@@ -44,10 +33,17 @@ namespace LO21{
 
 
         void set_typeDiv(TypeDiv s);
+        void set_complexe(bool b){
+            _complexe = b;
+        }
+        void set_degre(bool b){
+            _degre= b;
+        }
 
         TypeDiv get_typeDiv() const{ return _typeDiv; }
+        bool get_degre() const{ return _degre; }
+        bool get_complexe() const{ return _complexe; }
 
-        void saveOptions();
 
         QString toString() const;
 
