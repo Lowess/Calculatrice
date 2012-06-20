@@ -100,8 +100,10 @@ void MainWindow::slotConnection()
     connect(ui->actionQuitter, SIGNAL(changed()), this, SLOT(actionQuitterChanged()));
 
     connect(ui->undo, SIGNAL(clicked()), this, SLOT(actionUndo()));
+    connect(ui->redo, SIGNAL(clicked()), this, SLOT(actionRedo()));
 
-
+    //connect(ui->chkDegre, SIGNAL(triggered()), this, SLOT(changeDegre()));
+    //connect(ui->chkComplexe, SIGNAL(triggered()), this, SLOT(changeComplexe()));
 
 }
 
@@ -129,8 +131,9 @@ void MainWindow::enterPressed(){
         dupPressed();
     else
         try{
-            memorisePile();
+            memorisePileUndo();
             Fabrique::getInstance().creer(ui->lineEdit->text());
+            memorisePileRedo();
 
             rafraichirPile();
             ui->lastStack->setText(ui->lineEdit->text().simplified());
@@ -176,6 +179,16 @@ void MainWindow::sqrtPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR
 void MainWindow::sqrPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR "); }
 void MainWindow::cubePressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" CUBE "); }
 
+/*void MainWindow::changeDegre() {
+    bool degre = ui->chkDegre->checked();
+    Option.getInstance().switchDegre(degre);
+}
+
+void MainWindow::changeComplexe() {
+    bool complexe = ui->chkComplexe->checked();
+    Option.getInstance().switchComplexe(complexe);
+}*/
+
 //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
 void MainWindow::swapPressed(){
     QString x=ui->lineEditX->text();
@@ -188,7 +201,9 @@ void MainWindow::swapPressed(){
     }
     else{
         try{
+            memorisePileUndo();
             Calculatrice::getInstance().get_pile()->SWAP(x.toInt()-1,y.toInt()-1);
+            memorisePileRedo();
 
             rafraichirPile();
         } catch (exception& e){
@@ -208,8 +223,10 @@ void MainWindow::sumPressed(){
     }
     else{
         try{
-            memorisePile();
+            memorisePileUndo();
             Calculatrice::getInstance().get_pile()->SUM(x.toInt()-1);
+            memorisePileRedo();
+
             rafraichirPile();
         } catch (exception& e){
             QMessageBox msgBox;
@@ -228,8 +245,10 @@ void MainWindow::meanPressed(){
     }
     else{
         try{
-            memorisePile();
+            memorisePileUndo();
             Calculatrice::getInstance().get_pile()->MEAN(x.toInt()-1);
+            memorisePileRedo();
+
             rafraichirPile();
         } catch (exception& e){
             QMessageBox msgBox;
@@ -239,14 +258,18 @@ void MainWindow::meanPressed(){
     }
 }
 void MainWindow::clearPressed(){
-    memorisePile();
+    memorisePileUndo();
     Calculatrice::getInstance().get_pile()->CLEAR();
+    memorisePileRedo();
+
     rafraichirPile();
 }
 void MainWindow::dropPressed(){
     try {
-        memorisePile();
+        memorisePileUndo();
         Calculatrice::getInstance().get_pile()->DROP();
+        memorisePileRedo();
+
         rafraichirPile();
     } catch (exception& e){
         QMessageBox msgBox;
@@ -256,8 +279,10 @@ void MainWindow::dropPressed(){
 }
 void MainWindow::dupPressed(){
     try {
-        memorisePile();
+        memorisePileUndo();
         Calculatrice::getInstance().get_pile()->DUP();
+        memorisePileRedo();
+
         rafraichirPile();
     } catch (exception& e){
         QMessageBox msgBox;
@@ -270,12 +295,31 @@ void MainWindow::actionUndo(){
     try{
         Gardien* g=Calculatrice::getInstance().get_gardien();
 
-        //Restaure la pile à l'index
-        Calculatrice::getInstance().get_pile()->restaurerDepuisMemento(g->getMemento());
+        Calculatrice::getInstance().get_pile()->restaurerDepuisMemento(g->getMementoUndo());
         Pile* p=Calculatrice::getInstance().get_pile()->get_etat();
+
 
         //Remplace la pile par une pile sauvegardée
         Calculatrice::getInstance().set_pile(p);
+
+
+        ui->listStack->clear();
+
+        rafraichirPile();
+    }catch (exception& e){ qDebug() << e.what(); }
+}
+
+void MainWindow::actionRedo(){
+    try{
+        Gardien* g=Calculatrice::getInstance().get_gardien();
+
+        Calculatrice::getInstance().get_pile()->restaurerDepuisMemento(g->getMementoRedo());
+        Pile* p=Calculatrice::getInstance().get_pile()->get_etat();
+
+
+        //Remplace la pile par une pile sauvegardée
+        Calculatrice::getInstance().set_pile(p);
+
 
         ui->listStack->clear();
 
@@ -286,7 +330,7 @@ void MainWindow::actionUndo(){
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();
 
-    //Mise à jour de l'affichage
+    //Mise �  jour de l'affichage
     QStack<Expression*>::iterator it;
     Expression* exp=0;
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
@@ -295,12 +339,20 @@ void MainWindow::rafraichirPile(){
     }
 }
 
-void MainWindow::memorisePile(){
+void MainWindow::memorisePileUndo(){
     //Mémorise la pile pour permettre le undo
     Gardien* g=Calculatrice::getInstance().get_gardien();
     //Mémorise la pile courante
-    g->ajouterMemento(Calculatrice::getInstance().get_pile()->sauverDansMemento());
-    Calculatrice::getInstance().get_pile()->mementoSuivant();
+    g->ajouterMementoUndo(Calculatrice::getInstance().get_pile()->sauverDansMemento());
+    //Calculatrice::getInstance().get_pile()->mementoSuivant();
+}
+
+void MainWindow::memorisePileRedo(){
+    //Mémorise la pile pour permettre le undo
+    Gardien* g=Calculatrice::getInstance().get_gardien();
+    //Mémorise la pile courante
+    g->ajouterMementoRedo(Calculatrice::getInstance().get_pile()->sauverDansMemento());
+    //Calculatrice::getInstance().get_pile()->mementoSuivant();
 }
 
 //Connection des actions choix de constante

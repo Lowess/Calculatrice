@@ -12,9 +12,9 @@
 #include "CalculatriceException.h"
 #include "Option.h"
 
-/**
-  Nombre implÃƒÂ©mente le Design Pattern Template/Methode
-  **/
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
     class Entier;
     class Reel;

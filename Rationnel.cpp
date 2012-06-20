@@ -4,6 +4,7 @@
 #include "Reel.h"
 #include "Rationnel.h"
 #include "Complexe.h"
+#include "Exp.h"
 
 using namespace LO21;
 
@@ -15,8 +16,23 @@ LO21::Constante& LO21::Rationnel::addition(const Constante& nb) const{
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->addition(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
+                else {
+                    Constante& ref = tmp_c->addition(*this);
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise l'addition Rationnel + Rationnel
                 const Entier* p_num=dynamic_cast<const Entier*>(&_n.multiplication(tmp_ra->_d).addition(_d.multiplication(tmp_ra->_n)));
@@ -50,8 +66,23 @@ LO21::Constante& LO21::Rationnel::soustraction(const Constante& nb) const{
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->soustraction(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
+                else {
+                    Constante& ref = tmp_c->soustraction(*this);
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise la soustraction Rationnel - Rationnel
                 const Reel* p_num=dynamic_cast<const Reel *>(&this->_n.multiplication(tmp_ra->_d).soustraction(tmp_ra->_n.multiplication(this->_d)));
@@ -85,8 +116,23 @@ LO21::Constante& LO21::Rationnel::multiplication(const Constante& nb) const{
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->multiplication(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
+                else {
+                    Constante& ref = tmp_c->multiplication(*this);
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise la multiplication Rationnel * Rationnel
                 const Entier* p_num=dynamic_cast<const Entier *>(&this->_n.multiplication(tmp_ra->_n));
@@ -120,8 +166,23 @@ LO21::Constante& LO21::Rationnel::division(const Constante& nb) const{
         const Reel* tmp_re=dynamic_cast<const Reel*>(&nb);
         if(tmp_re==0){ //Si echec on essaye en Rationnel
             const Rationnel* tmp_ra=dynamic_cast<const Rationnel*>(&nb);
-            if(tmp_ra==0){ //Si echec erreur
-                throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+            if(tmp_ra==0){
+                const Complexe* tmp_c = dynamic_cast<const Complexe*>(&nb);
+                if(tmp_c == 0){
+                    const Exp* tmp_exp = dynamic_cast<const Exp*>(&nb);
+                    if(tmp_exp == 0)
+                        throw CalculatriceException(typeid(this).name(),OTHER,"Echec dynamic_cast");
+                    else{
+                        Constante* res=new Exp(toString());
+                        Constante& ref=res->division(nb);
+                        delete res;
+                        return(ref);
+                    }
+                }
+                else {
+                    Constante& ref = tmp_c->division(*this);
+                    return (ref);
+                }
             }
             else{ //Si succÃ¨s on rÃ©alise la division Rationnel / Rationnel
                 const Rationnel* tmp_ra_inv=dynamic_cast<const Rationnel*>(&tmp_ra->INV());

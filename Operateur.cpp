@@ -22,12 +22,17 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Constante* cx=dynamic_cast<Constante*>(x);
             Constante* cy=dynamic_cast<Constante*>(y);
-            if(cx!=0 || cy!=0){ //Deux constantes
+            if(cx!=0 && cy!=0){ //Deux constantes
                 Expression& res=*cx + *cy;
                 p->push(&res);
 
                 delete x;
                 delete y;
+            }
+            else{
+                p->push(x);
+                p->push(y);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -40,12 +45,17 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Constante* cx=dynamic_cast<Constante*>(x);
             Constante* cy=dynamic_cast<Constante*>(y);
-            if(cx!=0 || cy!=0){ //Deux constantes
+            if(cx!=0 && cy!=0){ //Deux constantes
                 Expression& res=*cx - *cy;
                 p->push(&res);
 
                 delete x;
                 delete y;
+            }
+            else{
+                p->push(x);
+                p->push(y);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -58,12 +68,17 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Constante* cx=dynamic_cast<Constante*>(x);
             Constante* cy=dynamic_cast<Constante*>(y);
-            if(cx!=0 || cy!=0){ //Deux constantes
+            if(cx!=0 && cy!=0){ //Deux constantes
                 Expression& res=*cx * *cy;
                 p->push(&res);
 
                 delete x;
                 delete y;
+            }
+            else{
+                p->push(x);
+                p->push(y);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -76,12 +91,17 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Constante* cx=dynamic_cast<Constante*>(x);
             Constante* cy=dynamic_cast<Constante*>(y);
-            if(cx!=0 || cy!=0){ //Deux constantes
+            if(cx!=0 && cy!=0){ //Deux constantes
                 Expression& res=*cx / *cy;
                 p->push(&res);
 
                 delete x;
                 delete y;
+            }
+            else{
+                p->push(x);
+                p->push(y);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -94,12 +114,17 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Nombre* cx=dynamic_cast<Nombre*>(x);
             Nombre* cy=dynamic_cast<Nombre*>(y);
-            if(cx!=0 || cy!=0){ //Deux constantes
+            if(cx!=0 && cy!=0){ //Deux constantes
                 Expression& res=cy->POW(*cx);
                 p->push(&res);
 
                 delete x;
                 delete y;
+            }
+            else{
+                p->push(x);
+                p->push(y);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -112,12 +137,17 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x et y (Constantes ou Expressions?)
             Entier* cx=dynamic_cast<Entier*>(x);
             Entier* cy=dynamic_cast<Entier*>(y);
-            if(cx!=0 || cy!=0){ //Deux constantes
+            if(cx!=0 && cy!=0){ //Deux constantes
                 Expression& res=cy->MOD(*cx);
                 p->push(&res);
 
                 delete x;
                 delete y;
+            }
+            else{
+                p->push(x);
+                p->push(y);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         //Trigonométrie
@@ -135,6 +165,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case COS:{
@@ -149,6 +183,10 @@ void LO21::Operateur::appliqueOperateur(){
                 p->push(&res);
 
                 delete x;
+            }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -165,6 +203,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case SINH:{
@@ -179,6 +221,10 @@ void LO21::Operateur::appliqueOperateur(){
                 p->push(&res);
 
                 delete x;
+            }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -195,6 +241,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case TANH:{
@@ -209,6 +259,10 @@ void LO21::Operateur::appliqueOperateur(){
                 p->push(&res);
 
                 delete x;
+            }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         //Autres
@@ -226,9 +280,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
-            else
-                throw CalculatriceException(typeid(this).name(), MATHS, "Vous ne pouvez appliquer la fonction ! (factorielle) que sur des entiers");
-
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case LOG:{
@@ -244,9 +299,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
-            else
-                throw CalculatriceException(typeid(this).name(), MATHS, "Vous ne pouvez appliquer la fonction ! (factorielle) que sur des entiers");
-
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case LN:{
@@ -262,9 +318,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
-            else
-                throw CalculatriceException(typeid(this).name(), MATHS, "Vous ne pouvez appliquer la fonction ! (factorielle) que sur des entiers");
-
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case SQR:{
@@ -279,6 +336,10 @@ void LO21::Operateur::appliqueOperateur(){
                 p->push(&res);
 
                 delete x;
+            }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -295,6 +356,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case SQRT:{
@@ -309,6 +374,10 @@ void LO21::Operateur::appliqueOperateur(){
                 p->push(&res);
 
                 delete x;
+            }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }
@@ -325,6 +394,10 @@ void LO21::Operateur::appliqueOperateur(){
 
                 delete x;
             }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
+            }
             break;
         }
         case SIGN:{
@@ -339,6 +412,10 @@ void LO21::Operateur::appliqueOperateur(){
                 p->push(&res);
 
                 delete x;
+            }
+            else{
+                p->push(x);
+                throw CalculatriceException(typeid(this).name(), MATHS, "Opération non définie pour ce type de constante");
             }
             break;
         }

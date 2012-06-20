@@ -15,6 +15,9 @@
 #include "Pile.h"
 #include "Calculatrice.h"
 
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
     enum enumOperateurs {ADD, MUL, SOU, DIV, COS, SIN, TAN, COSH, SINH, TANH, SQR, CUBE, SQRT, INV, SIGN, LN, LOG, POW, FACT, MOD, EVALUATION};
 

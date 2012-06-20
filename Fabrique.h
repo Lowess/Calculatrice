@@ -18,10 +18,9 @@
 #include "Rationnel.h"
 #include "Exp.h"
 
-/**
-  * Implementation du DP Singleton
-  *
-**/
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
 
     enum enum_Fabrique {ENTIER, REEL, RATIONNEL, COMPLEXE, OPERATEUR_BINAIRE, OPERATEUR_UNAIRE, EXPRESSION};

@@ -11,10 +11,10 @@
 
 #include "Expression.h"
 #include "Rationnel.h"
-/**
-  * DP Singleton
-  *
-**/
+
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
     class Pile: public QStack<Expression*>{
         private:
@@ -49,9 +49,7 @@ namespace LO21{
                     Pile* get_etat() const {return _etat; }
             };
 
-            void mementoSuivant(){
-
-            }
+            //void mementoSuivant(){}
 
             Memento* sauverDansMemento(){ return new Memento(_etat); }
             void restaurerDepuisMemento(const Memento* m){ _etat=m->get_etat(); }

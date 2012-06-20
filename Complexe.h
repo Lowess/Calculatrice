@@ -12,6 +12,9 @@
 #include <typeinfo>
 #include <QString>
 
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
 
     class Entier;
@@ -31,6 +34,8 @@ namespace LO21{
                 delete _a;
                 delete _b;
             }
+            const Nombre* get_a() const{ return _a; }
+            const Nombre* get_b() const{ return _b; }
 
             QString toString() const{
                 return (QString(_a->toString() + "$" + _b->toString()));

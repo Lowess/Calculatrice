@@ -18,6 +18,9 @@
 #include "Option.h"
 #include "Expression.h"
 
+/*! \namespace Ui
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12, concernant l'affichage de la calculatrice
+ */
 namespace Ui {
 class MainWindow;
 }
@@ -34,7 +37,8 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         void slotConnection();
         void rafraichirPile();
-        void memorisePile();
+        void memorisePileUndo();
+        void memorisePileRedo();
         bool notify ( QObject * receiver, QEvent * e );
 
 
@@ -114,6 +118,7 @@ class MainWindow : public QMainWindow
         void actionQuitterChanged();
 
         void actionUndo();
+        void actionRedo();
 };
 
 #endif // MAINWINDOW_H

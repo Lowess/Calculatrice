@@ -16,6 +16,9 @@
 
 enum TypeDiv {MENU_ENTIER, MENU_REEL, MENU_RATIONNEL};
 
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
     class Option {
     private:
@@ -30,12 +33,12 @@ namespace LO21{
             //connecter les slots pour le faire apparaître à l'écran
         }
 
-        void switchDegre(){
-            _degre = !_degre;
+        void switchDegre(bool d){
+            _degre = d;
         }
 
-        void switchComplexe(){
-            _complexe = !_complexe;
+        void switchComplexe(bool c){
+            _complexe = c;
         }
 
     public:
@@ -46,7 +49,6 @@ namespace LO21{
          */
         static Option& getInstance();
         static void libereInstance();
-
 
         void set_typeDiv(TypeDiv s);
 

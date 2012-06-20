@@ -8,6 +8,9 @@
 
 #include <QTextStream>
 
+/*! \namespace LO21
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12
+ */
 namespace LO21{
 
     class Constante;
