@@ -1,3 +1,8 @@
+/** \file mainwindow.h
+  * \author Florian Dambrine, Olivia Reaney
+  * \brief Fichier d'en-tête pour déclaration de la classe mainwindow
+  */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -15,8 +20,14 @@
 #include "Option.h"
 #include "Expression.h"
 
+<<<<<<< HEAD
+/*! \namespace Ui
+ *  \brief Désigne les classes définies dans le but du projet de LO21 P12, concernant l'affichage de la calculatrice
+ */
+=======
 #include "LogSystem.h"
 
+>>>>>>> d185c98c462ba10aa067a3689a678560fbeed857
 namespace Ui {
 class MainWindow;
 }

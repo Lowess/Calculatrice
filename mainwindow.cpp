@@ -105,7 +105,6 @@ void MainWindow::slotConnection()
     connect(ui->actionUndo, SIGNAL(triggered()), this, SLOT(actionUndo()));
     connect(ui->actionRedo, SIGNAL(triggered()), this, SLOT(actionRedo()));
 
-
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(spinChanged(int)));
 
     connect(ui->actionMasquerOptionsAvancees, SIGNAL(triggered()), this, SLOT(actionMasquerOptionsAvancees()));
@@ -200,6 +199,16 @@ void MainWindow::evalPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" EVA
 void MainWindow::sqrtPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQRT "); }
 void MainWindow::sqrPressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" SQR "); }
 void MainWindow::cubePressed(){ ui->lineEdit->setText(ui->lineEdit->text()+" CUBE "); }
+
+/*void MainWindow::changeDegre() {
+    bool degre = ui->chkDegre->checked();
+    Option.getInstance().switchDegre(degre);
+}
+
+void MainWindow::changeComplexe() {
+    bool complexe = ui->chkComplexe->checked();
+    Option.getInstance().switchComplexe(complexe);
+}*/
 
 //Connexion des opérateurs de pile Swap Sum Mean Clear Drop Dup
 void MainWindow::swapPressed(){
@@ -380,7 +389,6 @@ void MainWindow::actionRedo(){
 void MainWindow::rafraichirPile(){
     ui->listStack->clear();
 
-    //Mise à jour de l'affichage
     /*
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
         exp=*it;
