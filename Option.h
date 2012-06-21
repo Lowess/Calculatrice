@@ -1,7 +1,7 @@
 #ifndef OPTION_H
 #define OPTION_H
 
-/** \file Option.h
+/*! \file Option.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Option
   */
@@ -10,6 +10,7 @@
 #include <QTextStream>
 #include <typeinfo>
 #include <QFile>
+
 #include "CalculatriceException.h"
 #include "LogSystem.h"
 
@@ -32,7 +33,8 @@ namespace LO21{
     class Option {
     private:        
         TypeDiv _typeDiv; /*! Le type des constantes sélectionné */
-        bool _complexe, _degre; /*! Si les modes complexe et degré sont actifs ou pas */
+        bool _complexe; /*! Détermine si le mode complexe est activé */
+        bool _degre; /*! Détermine si le mode degré est activé */
         static Option* _option; /*! L'instance de la classe Option */
 
         /*! \fn Option()
@@ -44,19 +46,20 @@ namespace LO21{
 
     public:
 
-        /*! \fn void switchComplexe(bool c)
-         * \brief Permet de changer le mode des complexes pour permettre leur création et leur stockage dans la pile
-         * \param c est true si le mode complexe est activé, false sinon
+        /*! \fn static Option& getInstance()
+         * \brief Récupère l'instance créée de la classe Option, si celle-ci n'existe pas, la créé
+         * \return Option& une référence vers l'instance de la classe Option
          */
         static Option& getInstance();
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn static void libereInstance()
+         * \brief Demande la destruction de la classe Option
          */
         static void libereInstance();
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn void set_typeDiv(TypeDiv s)
+         * \brief Modifie le type de constante sélectionné par l'utilisateur
+         * \param s le type de constante sélectionné
          */
         void set_typeDiv(TypeDiv s);
         void set_complexe(bool b){
@@ -66,13 +69,18 @@ namespace LO21{
             _degre= b;
         }
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn TypeDiv get_typeDiv() const
+         * \brief Retourne le type de constante sélectionné
+         * \return TypeDiv le type de constante
          */
         TypeDiv get_typeDiv() const{ return _typeDiv; }
         bool get_degre() const{ return _degre; }
         bool get_complexe() const{ return _complexe; }
 
+        /*! \fn void saveOptions()
+         * \brief Sauvegarde dans un fichier les options sélectionnées à la fermeture de la calculatrice
+         */
+        void saveOptions();
 
         /*! \class Complexe
          * \brief Classe permettant de gérer les nombres complexes

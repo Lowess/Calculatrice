@@ -1,10 +1,10 @@
-/** \file Complexe.h
+#ifndef COMPLEXE_H
+#define COMPLEXE_H
+
+/*! \file Complexe.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Complexe
   */
-
-#ifndef COMPLEXE_H
-#define COMPLEXE_H
 
 #include <iostream>
 #include "Constante.h"
@@ -31,8 +31,6 @@ namespace LO21{
             const Nombre* _b; /*! Pointeur vers un nombre (Entier, Reel ou Rationnel) représentant la partie imaginaire du complexe */
 
         public:
-            //Complexe(const Nombre* a,const Nombre* b);
-
             /*! \fn Constante& addition(const Constante& nb) const
              * \brief Gère l'addition entre un complexe et une constante quelle qu'elle soit
              * \param a une référence vers une constante (avec vérification que celle-ci est un nombre et pas un complexe)

@@ -1,13 +1,12 @@
-/** \file Constante.h
+#ifndef CONSTANTE_H
+#define CONSTANTE_H
+
+/*! \file Constante.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Constante
   */
 
-#ifndef CONSTANTE_H
-#define CONSTANTE_H
-
 #include <QDebug>
-
 #include "Expression.h"
 
 /*! \namespace LO21

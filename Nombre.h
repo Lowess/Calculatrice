@@ -1,13 +1,12 @@
-/** \file Nombre.h
+#ifndef NOMBRE_H
+#define NOMBRE_H
+
+/*! \file Nombre.h
   * \author Florian Dambrine, Olivia Reaney
   * \brief Fichier d'en-tête pour déclaration de la classe Nombre
   */
 
-#ifndef NOMBRE_H
-#define NOMBRE_H
-
 #include <QString>
-
 #include "Constante.h"
 #include "CalculatriceException.h"
 #include "Option.h"
@@ -21,56 +20,76 @@ namespace LO21{
     class Reel;
     class Rationnel;
 
-    /*! \class Complexe
-     * \brief Classe permettant de gérer les nombres complexes
+    /*! \class Nombre
+     * \brief Classe encapsulant les classes Entier, Rationnel et Réel
      */
     class Nombre: public Constante {
-        private:
-
         public:
-            //Méthodes virtuelles
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& SIN() const
+         * \brief Calcule le sinus du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
-            virtual Constante& SIN() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        virtual Constante& SIN() const;
+
+        /*! \fn virtual Constante& COS() const
+         * \brief Calcule le cosinus du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& COS() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& TAN() const
+         * \brief Calcule la tangente du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& TAN() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& SINH() const
+         * \brief Calcule le sinus hyperbolique du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& SINH() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& COSH() const
+         * \brief Calcule le cosinus hyperbolique du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& COSH() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& TANH() const
+         * \brief Calcule la tangente hyperbolique du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& TANH() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& LN() const
+         * \brief Calcule le logarithme népérien du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& LN() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& LOG() const
+         * \brief Calcule le logarithme du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& LOG() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& INV() const
+         * \brief Calcule l'inverse du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& INV() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& SQRT() const
+         * \brief Calcule la racine carré du nombre
+         * \return Constante& une référence vers la constante issue du résultat
          */
         virtual Constante& SQRT() const;
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+
+        /*! \fn virtual Constante& POW(const Nombre& nb) const
+         * \brief Calcule le nombre à la puissance passée en argument
+         * \param nb un nombre représentant la puissance associé au Nombre appelant
+         * \return Constante& une référence vers la constante résultant du calcul de la puissance
          */
         virtual Constante& POW(const Nombre& nb) const;
 
@@ -92,13 +111,15 @@ namespace LO21{
          */
         virtual Rationnel& toRationnel() const;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn QString toString() const
+         * \brief Méthode virtuelle servant à donner une représentation textuelle d'un nombre
+         * \return QString contenant le texte décrivant le nombre
          */
         QString toString() const =0;
 
-        /*! \class Complexe
-         * \brief Classe permettant de gérer les nombres complexes
+        /*! \fn Nombre& SIGN() const
+         * \brief Inverse le signe d'un nombre
+         * \return Nombre& la référence vers le Nombre créé à partir de l'opposé de l'objet appelant
          */
         Nombre& SIGN() const;
 
@@ -129,8 +150,6 @@ namespace LO21{
          * \return Constante& une référence vers la constante créée à partir du résultat
          */
         virtual Constante& division(const Constante& nb) const=0;
-
-            //Méthode qui va permettre d'appliquer le mode de constante utilisateur;
 
         /*! \fn Constante& hookOperation()
          * \brief

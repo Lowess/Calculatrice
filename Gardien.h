@@ -26,60 +26,70 @@ namespace LO21{
     class Gardien{
         private:
             static Gardien* _gard; /*! L'instance du gardien */
-            int _index; /*!  */
-            QStack<Pile::Memento*> _liste; /*!  */
+            int _index; /*! Index permettant de situer la pile actuellement affichée dans la pile des états des piles */
+            QStack<Pile::Memento*> _liste; /*! Pile contenant les différents états de la pile utilisée par la calculatrice */
 
-
+            /*! \fn Gardien()
+             * \brief Constructeur de la classe Gardien
+             */
             Gardien():_index(0){}
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Gardien(const Gardien&)
+             * \brief Constructeur par recopie de la classe Gardien
+             * \param g Une instance de la classe gardien
              */
-            Gardien(const Gardien&){}
+            Gardien(const Gardien& g){}
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn ~Gardien()
+             * \brief Destructeur de la classe Gardien
              */
             ~Gardien(){}
 
         public:
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn static Gardien* getInstance()
+             * \brief Récupère l'instance de l'objet Gardien, et s'il n'en existe pas, en créé une
+             * \return Gardien* un pointeur vers l'objet Gardien surveillant l'état de la calculatrice
              */
             static Gardien* getInstance();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn static void libereInstance()
+             * \brief Demande la destruction de l'instance de la classe Gardien
              */
             static void libereInstance();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void ajouterMementoUndo(Pile::Memento* pMemento)
+             * \brief Constructeur de la classe Memento
+             * \param petat pointeur vers la pile actuelle à sauver en mémoire
              */
             void ajouterMementoUndo(Pile::Memento* pMemento);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void ajouterMementoRedo(Pile::Memento* pMemento)
+             * \brief Constructeur de la classe Memento
+             * \param petat pointeur vers la pile actuelle à sauver en mémoire
              */
             void ajouterMementoRedo(Pile::Memento* pMemento);
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Pile::Memento* getMementoUndo()
+             * \brief Constructeur de la classe Memento
+             * \param petat pointeur vers la pile actuelle à sauver en mémoire
              */
             Pile::Memento* getMementoUndo();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Pile::Memento* getMementoRedo()
+             * \brief Constructeur de la classe Memento
+             * \param petat pointeur vers la pile actuelle à sauver en mémoire
              */
             Pile::Memento* getMementoRedo();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn Memento(const Pile* petat)
+             * \brief Constructeur de la classe Memento
+             * \param petat pointeur vers la pile actuelle à sauver en mémoire
              */
             void afficher();
 
-            /*! \class Complexe
-             * \brief Classe permettant de gérer les nombres complexes
+            /*! \fn void set_index(int i)
+             * \brief Permet de modifier l'attribut index du Gardien
+             * \param i l'indice de la pile actuellement utilisée
              */
             void set_index(int i){ _index=i; }
     };

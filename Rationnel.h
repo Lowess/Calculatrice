@@ -20,8 +20,8 @@ namespace LO21{
      */
     class Rationnel: public Nombre {
         private:
-            LO21::Entier _n; /*! Le numérateur de la fraction */
-            LO21::Entier _d; /*! Le dénominateur de la fraction */
+            Entier _n; /*! Le numérateur de la fraction */
+            Entier _d; /*! Le dénominateur de la fraction */
         public:
             /*! \fn Constante& addition(const Constante& nb) const
              * \brief Gère l'addition entre un rationnel et une constante quelle qu'elle soit
