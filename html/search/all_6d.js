@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['mainwindow',['MainWindow',['../class_main_window.html',1,'']]],
+  ['mainwindow',['MainWindow',['../class_main_window.html',1,'MainWindow'],['../class_main_window.html#a8b244be8b7b7db1b08de2a2acb9409db',1,'MainWindow::MainWindow()']]],
   ['mainwindow_2eh',['mainwindow.h',['../mainwindow_8h.html',1,'']]],
   ['mean',['MEAN',['../class_l_o21_1_1_pile.html#adea674770f7f3957c0ba6368ca61e302',1,'LO21::Pile']]],
   ['memento',['Memento',['../class_l_o21_1_1_pile_1_1_memento.html',1,'LO21::Pile']]],
