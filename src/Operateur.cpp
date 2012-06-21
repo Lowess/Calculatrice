@@ -405,10 +405,15 @@ void LO21::Operateur::appliqueOperateur(){
             //On test ce que vaut x (Il faut que ce soit soit une Expression soit un Nombre)
             Nombre* nx=dynamic_cast<Nombre*>(x);
             if(nx!=0){ //C'est un nombre
-                Expression& res=nx->SQRT();
-                p->push(&res);
-
-                delete x;
+                try{
+                    Expression& res=nx->SQRT();
+                    p->push(&res);
+                    delete x;
+                }catch(exception& e){
+                    LogSystem::ecrireLog(LogMessage("Erreur racine d'un nombre négatif ",ERREUR));
+                    throw CalculatriceException(typeid(this).name(), OTHER, "Erreur racine d'un nombre négatif ");
+                    p->push(x);
+                }
             }
             else{
                 p->push(x);

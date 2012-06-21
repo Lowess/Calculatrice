@@ -193,6 +193,11 @@ LO21::Constante& LO21::Nombre::INV() const{
 
 LO21::Constante& LO21::Nombre::SQRT() const{
     double nb=toReel().get_x();
+    if(nb < 0){
+        LogSystem::ecrireLog(LogMessage("Erreur classe nombre racine d'un nombre negative ",ERREUR));
+        throw CalculatriceException(typeid(this).name(),OTHER,"Erreur classe nombre racine d'un nombre negative");
+    }
+
     Constante* res = new Reel(sqrt(nb));
     Constante& ref = *res;
     return (ref);
