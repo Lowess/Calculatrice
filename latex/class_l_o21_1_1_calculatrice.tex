@@ -1,0 +1,94 @@
+\hypertarget{class_l_o21_1_1_calculatrice}{\section{\-L\-O21\-:\-:\-Calculatrice \-Class \-Reference}
+\label{class_l_o21_1_1_calculatrice}\index{\-L\-O21\-::\-Calculatrice@{\-L\-O21\-::\-Calculatrice}}
+}
+
+
+{\ttfamily \#include $<$\-Calculatrice.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_l_o21_1_1_pile}{\-Pile} $\ast$ \hyperlink{class_l_o21_1_1_calculatrice_ae5c36b1f514aa5a96ec6e1ace304ab29}{get\-\_\-pile} () const 
+\begin{DoxyCompactList}\small\item\em \-Retourne un pointeur vers la pile utilisee par la calculatrice. \end{DoxyCompactList}\item 
+void \hyperlink{class_l_o21_1_1_calculatrice_aed7f35595b674041e659b45cf6eff68d}{set\-\_\-pile} (\hyperlink{class_l_o21_1_1_pile}{\-Pile} $\ast$p)
+\begin{DoxyCompactList}\small\item\em \-Modifie l'attribut \-\_\-pile de la calculatrice en lui donnant le pointeur vers la nouvelle pile a utiliser. \end{DoxyCompactList}\item 
+\hyperlink{class_l_o21_1_1_gardien}{\-Gardien} $\ast$ \hyperlink{class_l_o21_1_1_calculatrice_a4884e6d8c85b8b9fe9eed0fa96242538}{get\-\_\-gardien} () const 
+\begin{DoxyCompactList}\small\item\em \-Retourne un pointeur vers le gardien surveillant la calculatrice. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_l_o21_1_1_calculatrice}{\-Calculatrice} \& \hyperlink{class_l_o21_1_1_calculatrice_a8132cbddcb40fe750cce270f32c2fbd5}{get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em \-Fonction qui permet de recuperer l'instance d'une calculatrice, et s'il n'en existe pas une existante, en cree une. \-Permet d'empecher la construction d'une calculatrice par l'utilisateur. \end{DoxyCompactList}\item 
+\hypertarget{class_l_o21_1_1_calculatrice_aa4535b0b3f9dfbd7e01037c108786185}{static void \hyperlink{class_l_o21_1_1_calculatrice_aa4535b0b3f9dfbd7e01037c108786185}{libere\-Instance} ()}\label{class_l_o21_1_1_calculatrice_aa4535b0b3f9dfbd7e01037c108786185}
+
+\begin{DoxyCompactList}\small\item\em \-Fonction qui permet de supprimer l'instance d'une calculatrice \-Empeche l'utilisateur de faire directement appel au destructeur de la classe \hyperlink{class_l_o21_1_1_calculatrice}{\-Calculatrice}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Implementant le design pattern \-Singleton, la calculatrice est une classe unique servant a faire les operations sur les valeurs entrees. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_l_o21_1_1_calculatrice_a4884e6d8c85b8b9fe9eed0fa96242538}{\index{\-L\-O21\-::\-Calculatrice@{\-L\-O21\-::\-Calculatrice}!get\-\_\-gardien@{get\-\_\-gardien}}
+\index{get\-\_\-gardien@{get\-\_\-gardien}!LO21::Calculatrice@{\-L\-O21\-::\-Calculatrice}}
+\subsubsection[{get\-\_\-gardien}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Gardien} $\ast$ {\bf \-L\-O21\-::\-Calculatrice\-::get\-\_\-gardien} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{class_l_o21_1_1_calculatrice_a4884e6d8c85b8b9fe9eed0fa96242538}
+
+
+\-Retourne un pointeur vers le gardien surveillant la calculatrice. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Gardien$\ast$, un pointeur vers le gardien surveillant actuellement la pile 
+\end{DoxyReturn}
+\hypertarget{class_l_o21_1_1_calculatrice_ae5c36b1f514aa5a96ec6e1ace304ab29}{\index{\-L\-O21\-::\-Calculatrice@{\-L\-O21\-::\-Calculatrice}!get\-\_\-pile@{get\-\_\-pile}}
+\index{get\-\_\-pile@{get\-\_\-pile}!LO21::Calculatrice@{\-L\-O21\-::\-Calculatrice}}
+\subsubsection[{get\-\_\-pile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Pile} $\ast$ {\bf \-L\-O21\-::\-Calculatrice\-::get\-\_\-pile} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{class_l_o21_1_1_calculatrice_ae5c36b1f514aa5a96ec6e1ace304ab29}
+
+
+\-Retourne un pointeur vers la pile utilisee par la calculatrice. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Pile$\ast$, un pointeur vers la pile actuellement utilisee par la calculatrice 
+\end{DoxyReturn}
+\hypertarget{class_l_o21_1_1_calculatrice_a8132cbddcb40fe750cce270f32c2fbd5}{\index{\-L\-O21\-::\-Calculatrice@{\-L\-O21\-::\-Calculatrice}!get\-Instance@{get\-Instance}}
+\index{get\-Instance@{get\-Instance}!LO21::Calculatrice@{\-L\-O21\-::\-Calculatrice}}
+\subsubsection[{get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Calculatrice} \& {\bf \-L\-O21\-::\-Calculatrice\-::get\-Instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{class_l_o21_1_1_calculatrice_a8132cbddcb40fe750cce270f32c2fbd5}
+
+
+\-Fonction qui permet de recuperer l'instance d'une calculatrice, et s'il n'en existe pas une existante, en cree une. \-Permet d'empecher la construction d'une calculatrice par l'utilisateur. 
+
+\begin{DoxyReturn}{\-Returns}
+\hyperlink{class_l_o21_1_1_calculatrice}{\-Calculatrice}\&, une reference vers la calculatrice actuellement utilisee 
+\end{DoxyReturn}
+\hypertarget{class_l_o21_1_1_calculatrice_aed7f35595b674041e659b45cf6eff68d}{\index{\-L\-O21\-::\-Calculatrice@{\-L\-O21\-::\-Calculatrice}!set\-\_\-pile@{set\-\_\-pile}}
+\index{set\-\_\-pile@{set\-\_\-pile}!LO21::Calculatrice@{\-L\-O21\-::\-Calculatrice}}
+\subsubsection[{set\-\_\-pile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-L\-O21\-::\-Calculatrice\-::set\-\_\-pile} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-Pile} $\ast$}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{class_l_o21_1_1_calculatrice_aed7f35595b674041e659b45cf6eff68d}
+
+
+\-Modifie l'attribut \-\_\-pile de la calculatrice en lui donnant le pointeur vers la nouvelle pile a utiliser. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-Pile$\ast$} & p, un pointeur vers la pile qu'on veut utiliser dans la calculatrice \\
+\hline
+\end{DoxyParams}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_calculatrice_8h}{\-Calculatrice.\-h}\item 
+\-Calculatrice.\-cpp\end{DoxyCompactItemize}

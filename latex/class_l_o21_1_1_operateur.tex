@@ -1,0 +1,123 @@
+\hypertarget{class_l_o21_1_1_operateur}{\section{\-L\-O21\-:\-:\-Operateur \-Class \-Reference}
+\label{class_l_o21_1_1_operateur}\index{\-L\-O21\-::\-Operateur@{\-L\-O21\-::\-Operateur}}
+}
+
+
+\-Classe permettant de gerer les differents types d'operateurs.  
+
+
+
+
+{\ttfamily \#include $<$\-Operateur.\-h$>$}
+
+\-Inheritance diagram for \-L\-O21\-:\-:\-Operateur\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_l_o21_1_1_operateur}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\-Q\-String \hyperlink{class_l_o21_1_1_operateur_a145a86591719c4c74043b05b21722b6e}{to\-String} () const =0
+\begin{DoxyCompactList}\small\item\em \-Renvoie une forme textuelle de l'operateur pour affichage. \end{DoxyCompactList}\item 
+\-Q\-String \hyperlink{class_l_o21_1_1_operateur_a67c0aa762a71a3dbdb7da4bd8c2ec91d}{get\-Operator} () const 
+\begin{DoxyCompactList}\small\item\em \-Retourne le type de l'operateur sous une forme textuelle. \end{DoxyCompactList}\item 
+\hypertarget{class_l_o21_1_1_operateur_a93fba96ab13c5c65a426d717fbe6a3ae}{void \hyperlink{class_l_o21_1_1_operateur_a93fba96ab13c5c65a426d717fbe6a3ae}{applique\-Operateur} ()}\label{class_l_o21_1_1_operateur_a93fba96ab13c5c65a426d717fbe6a3ae}
+
+\begin{DoxyCompactList}\small\item\em \-Permet d'appeler la fonction correspondant a un operateur. \end{DoxyCompactList}\item 
+\hypertarget{class_l_o21_1_1_operateur_ad82cb92a05c6a0479f05369c5a33121b}{void \hyperlink{class_l_o21_1_1_operateur_ad82cb92a05c6a0479f05369c5a33121b}{\-E\-V\-A\-L} ()}\label{class_l_o21_1_1_operateur_ad82cb92a05c6a0479f05369c5a33121b}
+
+\begin{DoxyCompactList}\small\item\em \-Evalue un operateur. \end{DoxyCompactList}\item 
+\-Q\-String \& \hyperlink{class_l_o21_1_1_operateur_a8104fb7f3d740dde10c2e7c4bb2ba660}{afficher} ()
+\begin{DoxyCompactList}\small\item\em \-Sert a l'affichage de l'operateur. \end{DoxyCompactList}\item 
+\hyperlink{class_l_o21_1_1_operateur}{\-Operateur} $\ast$ \hyperlink{class_l_o21_1_1_operateur_aabf23ebda8447811b12db2f2e174b9d1}{clone} () const 
+\begin{DoxyCompactList}\small\item\em \-Permet de dupliquer un objet \hyperlink{class_l_o21_1_1_operateur}{\-Operateur}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_l_o21_1_1_operateur_a137931be758a4f6e199d599301bc6b36}{\hyperlink{namespace_l_o21_ad50ab07e90eb3964a086c2f7d95fb8d2}{enum\-Operateurs} {\bfseries \-\_\-operateur}}\label{class_l_o21_1_1_operateur_a137931be758a4f6e199d599301bc6b36}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Classe permettant de gerer les differents types d'operateurs. 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_l_o21_1_1_operateur_a8104fb7f3d740dde10c2e7c4bb2ba660}{\index{\-L\-O21\-::\-Operateur@{\-L\-O21\-::\-Operateur}!afficher@{afficher}}
+\index{afficher@{afficher}!LO21::Operateur@{\-L\-O21\-::\-Operateur}}
+\subsubsection[{afficher}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-String \& {\bf \-L\-O21\-::\-Operateur\-::afficher} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_l_o21_1_1_operateur_a8104fb7f3d740dde10c2e7c4bb2ba660}
+
+
+\-Sert a l'affichage de l'operateur. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-String\& une reference vers le \-Q\-String contenant l'affichage textuel de l'operateur 
+\end{DoxyReturn}
+\hypertarget{class_l_o21_1_1_operateur_aabf23ebda8447811b12db2f2e174b9d1}{\index{\-L\-O21\-::\-Operateur@{\-L\-O21\-::\-Operateur}!clone@{clone}}
+\index{clone@{clone}!LO21::Operateur@{\-L\-O21\-::\-Operateur}}
+\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Operateur} $\ast$ {\bf \-L\-O21\-::\-Operateur\-::clone} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_l_o21_1_1_operateur_aabf23ebda8447811b12db2f2e174b9d1}
+
+
+\-Permet de dupliquer un objet \hyperlink{class_l_o21_1_1_operateur}{\-Operateur}. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Operateur$\ast$ un pointeur vers l'operateur nouvellement cree 
+\end{DoxyReturn}
+
+
+\-Implements \hyperlink{class_l_o21_1_1_expression_ad2c9e5301c976f9a2d40edaff0332715}{\-L\-O21\-::\-Expression}.
+
+\hypertarget{class_l_o21_1_1_operateur_a67c0aa762a71a3dbdb7da4bd8c2ec91d}{\index{\-L\-O21\-::\-Operateur@{\-L\-O21\-::\-Operateur}!get\-Operator@{get\-Operator}}
+\index{get\-Operator@{get\-Operator}!LO21::Operateur@{\-L\-O21\-::\-Operateur}}
+\subsubsection[{get\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-String {\bf \-L\-O21\-::\-Operateur\-::get\-Operator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{class_l_o21_1_1_operateur_a67c0aa762a71a3dbdb7da4bd8c2ec91d}
+
+
+\-Retourne le type de l'operateur sous une forme textuelle. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-String qui est le texte de l'operateur 
+\end{DoxyReturn}
+\hypertarget{class_l_o21_1_1_operateur_a145a86591719c4c74043b05b21722b6e}{\index{\-L\-O21\-::\-Operateur@{\-L\-O21\-::\-Operateur}!to\-String@{to\-String}}
+\index{to\-String@{to\-String}!LO21::Operateur@{\-L\-O21\-::\-Operateur}}
+\subsubsection[{to\-String}]{\setlength{\rightskip}{0pt plus 5cm}\-Q\-String {\bf \-L\-O21\-::\-Operateur\-::to\-String} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}pure virtual\mbox{]}}}}\label{class_l_o21_1_1_operateur_a145a86591719c4c74043b05b21722b6e}
+
+
+\-Renvoie une forme textuelle de l'operateur pour affichage. 
+
+\-Le type de l'operateur
+
+\begin{DoxyReturn}{\-Returns}
+\-Q\-String contenant le texte correspondant a l'operateur 
+\end{DoxyReturn}
+
+
+\-Implements \hyperlink{class_l_o21_1_1_expression}{\-L\-O21\-::\-Expression}.
+
+
+
+\-Implemented in \hyperlink{class_l_o21_1_1_operateur_binaire_a7a25e004beb162f80873002759b4310e}{\-L\-O21\-::\-Operateur\-Binaire}, and \hyperlink{class_l_o21_1_1_operateur_unaire_a5b54c985de0fc559337f914771779185}{\-L\-O21\-::\-Operateur\-Unaire}.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_operateur_8h}{\-Operateur.\-h}\item 
+\-Operateur.\-cpp\end{DoxyCompactItemize}
