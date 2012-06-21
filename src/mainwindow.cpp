@@ -337,12 +337,6 @@ void MainWindow::actionUndo(){
 
         //Remplace la pile par une pile sauvegardee
         Calculatrice::getInstance().set_pile(p);
-        qDebug() << "Affichage de la pile memoire restauree" << endl;
-        p->afficherPileMemoire();
-
-        qDebug() << "Affichage de la pile restauree" << endl;
-        p->afficherPileCourante();
-
 
         ui->listStack->clear();
 
@@ -364,8 +358,6 @@ void MainWindow::actionRedo(){
 
         //Remplace la pile par une pile sauvegardee
         Calculatrice::getInstance().set_pile(p);
-        qDebug() << "Affichage de la pile restauree" << endl;
-        p->afficherPileMemoire();
 
         ui->listStack->clear();
 
@@ -465,8 +457,6 @@ void MainWindow::actionRadianChanged(){
 
 //Connection des boutons dans fichier
 void MainWindow::actionNouveauChanged(){
-    qDebug() << "New" << endl;
-
     ui->radioButtonEntier->setChecked(true);
     actionEntiersChanged();
     ui->lineEdit_lastRes->setText("");
@@ -694,7 +684,6 @@ void MainWindow::save(){
     for(it=Calculatrice::getInstance().get_pile()->begin(); it!=Calculatrice::getInstance().get_pile()->end(); ++it){ //On parcourt la pile
         exp=*it;
         out << exp->toString();
-        qDebug() << exp->toString();
     }
 
     file.close();

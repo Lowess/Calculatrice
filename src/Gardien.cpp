@@ -25,31 +25,22 @@ void LO21::Gardien::libereInstance(){
 void LO21::Gardien::ajouterMementoUndo(Pile::Memento* pMemento){
     _liste.push(pMemento);
     _index++;
-    afficher();
 }
 void LO21::Gardien::ajouterMementoRedo(Pile::Memento* pMemento){
     _liste.push(pMemento);
     _index++;
-    afficher();
 }
 
 LO21::Pile::Memento* LO21::Gardien::getMementoUndo(){
     if(!_liste.isEmpty() && _index > 1){
-        //qDebug() << "Taille de liste "  << _liste.size() << endl;
-        //qDebug() << "index "  << _index << endl;
-        //afficher();
         _index--;
-        qDebug() << "index "  << _index << endl;
         return _liste.value(_index-1);
     }
     throw CalculatriceException(typeid(this).name(),PILE,"Operation de undo impossible pile vide");
 }
 LO21::Pile::Memento* LO21::Gardien::getMementoRedo(){
     if(!_liste.isEmpty() && _index < _liste.size()){
-        //qDebug() << "Taille de liste "  << _liste.size() << endl;
-        //qDebug() << "index "  << _index << endl;
         _index++;
-        //afficher();
         Pile::Memento* m=_liste.value(_index-1);
         return m;
 

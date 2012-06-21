@@ -8,7 +8,7 @@
 
 #include <QString>
 #include <stdexcept>
-
+#include <QDebug>
 /*! \namespace LO21
  *  \brief Designe les classes definies dans le but du projet de LO21 P12
  */
@@ -71,7 +71,6 @@ namespace LO21{
 
                 QString str("Oups... Une exception de type "+ type +" a ete captee:\n\n");
                 str += "Message d'information:\n\n"+_info;
-                str.toUtf8();
                 return str.toStdString().c_str();
             }
 

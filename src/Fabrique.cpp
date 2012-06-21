@@ -27,9 +27,6 @@ void LO21::Fabrique::libereInstance(){
 QList<QString> LO21::Fabrique::preTraitement(QList<QString>& text) const{
     bool exp=false;
 
-    QTextStream cout(stdout, QIODevice::WriteOnly);
-    cout << endl;
-
     QList<QString> result;
 
     QList<QString>::iterator it;
@@ -38,7 +35,6 @@ QList<QString> LO21::Fabrique::preTraitement(QList<QString>& text) const{
 
 
     for(it=text.begin(); it!=text.end(); ++it){ //On parcours notre expression otee des espaces
-        //cout << *it << " " << getTypeSousChaine(*it) <<  endl;
 
         switch (getTypeSousChaine(*it)){
             case EXPRESSION:{
@@ -66,10 +62,6 @@ QList<QString> LO21::Fabrique::preTraitement(QList<QString>& text) const{
             }
         }
     }
-/*
-    for(it=result.begin(); it!=result.end(); ++it) //On parcours notre expression otee des espaces
-        cout << *it <<  endl;
-*/
     return result;
 }
 
@@ -79,8 +71,6 @@ void LO21::Fabrique::creer(const QString& text) const{
 
     Expression* res=0;
 
-    QTextStream cout(stdout, QIODevice::WriteOnly);
-    cout << endl;
 
     QList<QString> list=text.simplified().split(" "); //Separation des constantes et operateur de la lineEdit par les espaces
     QList<QString>::iterator it;
@@ -88,7 +78,6 @@ void LO21::Fabrique::creer(const QString& text) const{
     QList<QString> result=preTraitement(list); //On reorganise la liste pour separer les expressions des constantes
 
     for(it=result.begin(); it!=result.end(); ++it){ //On parcours notre expression otee des espaces
-        cout << *it << " " << getTypeSousChaine(*it) <<  endl;
 
         switch (getTypeSousChaine(*it)){
             case ENTIER:{
