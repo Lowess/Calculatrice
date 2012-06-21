@@ -39,22 +39,8 @@ namespace LO21{
          * \brief Constructeur de la classe
          */
         Option():_complexe(false), _degre(false), _typeDiv(MENU_ENTIER){}
-
-        /*! \fn void switchDegre(bool d)
-         * \brief Permet de changer le mode des degrés pour les opérations trigonométriques
-         * \param d est true si le mode Degre est activé, false sinon
-         */
-        void switchDegre(bool d){
-            _degre = d;
-        }
-
-        /*! \fn void switchComplexe(bool c)
-         * \brief Permet de changer le mode des complexes pour permettre leur création et leur stockage dans la pile
-         * \param c est true si le mode complexe est activé, false sinon
-         */
-        void switchComplexe(bool c){
-            _complexe = c;
-        }
+        ~Option(){}
+        Option(const Option&){}
 
     public:
 
